@@ -10,7 +10,7 @@ class Courses extends Component {
   }
   componentDidMount() {
     console.log("componentDidLoad")
-    fetch("/courses").then((res) => {
+    fetch("http://localhost:3001/courses").then((res) => {
       return res.json()
     }).then((response) => {
       console.log(response)
@@ -19,7 +19,7 @@ class Courses extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="container">
         <div className="row">
           <div className="col-12">
             <h1>Courses</h1>

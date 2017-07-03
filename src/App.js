@@ -3,12 +3,19 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      courses: []
+    }
+  }
   componentDidMount() {
     console.log("componentDidLoad")
     fetch("http://localhost:3001/courses").then((res) => {
       return res.json()
     }).then((response) => {
       console.log(response)
+      this.setState({courses: response})
     })
   }
   render() {
@@ -21,6 +28,11 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        {
+          this.state.courses.map((course, index) => {
+            return <p key={index}>{course.title}</p>
+          })
+        }
       </div>
     );
   }

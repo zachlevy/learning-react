@@ -19,7 +19,7 @@ class Courses extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="container">
         <div className="row">
           <div className="col-12">
             <h1>Courses</h1>

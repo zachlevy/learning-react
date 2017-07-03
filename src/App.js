@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
-import './App.css';
+import './App.css'
 import Courses from './Courses'
 
 class App extends Component {
@@ -9,8 +9,8 @@ class App extends Component {
       <div className="container">
         <Courses />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

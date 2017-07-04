@@ -21,7 +21,8 @@ class Course extends Component {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <h1>Course {this.state.course.title}</h1>
+            <h1>{this.state.course.title}</h1>
+            <p>{this.state.course.description}</p>
           </div>
         </div>
         <div className="row">

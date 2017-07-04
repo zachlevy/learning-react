@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
 import Home from '../Home'
 import Courses from '../Courses'
+import Course from '../Courses/show'
 import Counter from '../Counter'
 
 class App extends Component {
@@ -16,11 +17,12 @@ class App extends Component {
           <Link to="/counter">Counter</Link>
         </header>
 
-        <main>
+        <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/courses" component={Courses} />
+          <Route exact path="/courses/:courseId" component={Course} />
           <Route exact path="/counter" component={Counter} />
-        </main>
+        </Switch>
       </div>
     )
   }

@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
-import Course from './Course'
+import CourseRow from './CourseRow'
+import { push } from 'react-router-redux'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
 
 class Courses extends Component {
   constructor() {
@@ -9,7 +13,7 @@ class Courses extends Component {
     }
   }
   componentDidMount() {
-    console.log("componentDidLoad")
+    console.log("componentDidMount")
     fetch("http://localhost:3001/courses").then((res) => {
       return res.json()
     }).then((response) => {
@@ -17,9 +21,11 @@ class Courses extends Component {
       this.setState({courses: response})
     })
   }
+
   render() {
     return (
       <div className="container">
+
         <div className="row">
           <div className="col-12">
             <h1>Courses</h1>
@@ -29,7 +35,10 @@ class Courses extends Component {
           {
             this.state.courses.map((course, index) => {
               return (
-                <Course key={index} course={course} />
+                <div>
+                  <CourseRow key={index} course={course} />
+                  <button onClick={() => this.props.changePage(course.id)}>Go to course page via redux</button>
+                </div>
               )
             })
           }
@@ -40,4 +49,11 @@ class Courses extends Component {
   }
 }
 
-export default Courses
+const mapDispatchToProps = dispatch => bindActionCreators({
+  changePage: (courseId) => push(`/courses/${courseId}`)
+}, dispatch)
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Courses)

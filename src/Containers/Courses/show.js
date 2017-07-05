@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import { push } from 'react-router-redux'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { setCourse, clearCourse } from '../../modules/course'
 
 class Course extends Component {
   constructor() {
@@ -13,8 +17,12 @@ class Course extends Component {
       return res.json()
     }).then((response) => {
       console.log(response)
-      this.setState({course: response})
+      // this.setState({course: response})
+      this.props.setCourse(response)
     })
+  }
+  handleClearCourse() {
+    this.props.clearCourse()
   }
   render() {
     return (
@@ -23,6 +31,7 @@ class Course extends Component {
           <div className="col-12">
             <h1>{this.state.course.title}</h1>
             <p>{this.state.course.description}</p>
+            <button onClick={this.handleClearCourse.bind(this)}>Clear Course</button>
           </div>
         </div>
         <div className="row">
@@ -41,4 +50,16 @@ class Course extends Component {
   }
 }
 
-export default Course
+const mapStateToProps = state => ({
+  course: state.course
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  setCourse,
+  clearCourse
+}, dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Course)

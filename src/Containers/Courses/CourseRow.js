@@ -9,6 +9,11 @@ class CourseRow extends Component {
       <div className="col-4">
         <p>{this.props.course.title}</p>
         <Link className="btn btn-primary" to={`/courses/${this.props.course.id}`}>Course {this.props.course.id}</Link>
+        <ul>
+        {
+          this.props.course.tags.map((tag, index) => <li key={index}>{tag}</li>)
+        }
+        </ul>
       </div>
     )
   }

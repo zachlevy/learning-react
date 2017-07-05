@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { setCourse } from '../../modules/course'
@@ -20,11 +21,18 @@ class Course extends Component {
   handleNextClick() {
     console.log("handleNextClick")
     // find the current index in flow
-    console.log("challenge", this.props.challenge)
-    console.log("flow", this.props.course)
-    // get the next object
-    // push into history the next object id with proper url
-    // `/courses/${this.props.course.id}/challenges/${challenge.id}`
+    const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
+    // get the next challenge index in the course flow array
+    let nextChallengeIndex
+    if (currentChallengeIndex <= this.props.course.flow.length) {
+      nextChallengeIndex = currentChallengeIndex + 1
+    } else {
+      nextChallengeIndex = 0
+    }
+    // get the next challenge id from the array
+    const nextChallengeId = this.props.course.flow[nextChallengeIndex].id
+    // redirect
+    this.props.changeCourseChallenge(this.props.course.id, nextChallengeId)
   }
 
   handleSkipClick() {
@@ -70,7 +78,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setCourse
+  setCourse,
+  changeCourseChallenge: (courseId, challengeId) => push(`/courses/${courseId}/challenges/${challengeId}`)
 }, dispatch)
 
 export default connect(

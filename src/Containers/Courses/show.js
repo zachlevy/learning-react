@@ -24,7 +24,7 @@ class Course extends Component {
     const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
     // get the next challenge index in the course flow array
     let nextChallengeIndex
-    if (currentChallengeIndex <= this.props.course.flow.length) {
+    if (currentChallengeIndex < this.props.course.flow.length - 1) {
       nextChallengeIndex = currentChallengeIndex + 1
     } else {
       nextChallengeIndex = 0

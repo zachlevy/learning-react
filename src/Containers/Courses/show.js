@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { setCourse } from '../../modules/course'
 import { Switch, Route, Link } from 'react-router-dom'
 import Challenge from '../Challenge/show'
+import FontAwesome from 'react-fontawesome'
+import { getIcon } from '../../modules/icons'
 
 class Course extends Component {
   componentDidMount() {
@@ -58,8 +60,7 @@ class Course extends Component {
                 this.props.course.flow && this.props.course.flow.map((challenge, index) => {
                   return (
                     <div>
-                      <li key={index}>{JSON.stringify(challenge)}</li>
-                      <Link to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}>{challenge.type}</Link>
+                      <Link to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
                     </div>
                   )
                 })

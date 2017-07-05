@@ -42,6 +42,10 @@ class Course extends Component {
   }
 
   render() {
+    let challengeWidth
+    if (this.props.course.flow) {
+      challengeWidth = Math.floor(100 / this.props.course.flow.length)
+    }
     return (
       <div className="container">
         <div className="row">
@@ -54,19 +58,15 @@ class Course extends Component {
           <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleSkipClick={this.handleSkipClick.bind(this)} handleNextClick={this.handleNextClick.bind(this)} />}} />
         </Switch>
         <div className="row">
-          <div className="col-12">
-            <ul>
-              {
-                this.props.course.flow && this.props.course.flow.map((challenge, index) => {
-                  return (
-                    <div>
-                      <Link to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
-                    </div>
-                  )
-                })
-              }
-            </ul>
-          </div>
+          {
+            this.props.course.flow && this.props.course.flow.map((challenge, index) => {
+              return (
+                <div style={{width: challengeWidth + "%"}} className="text-center">
+                  <Link to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
+                </div>
+              )
+            })
+          }
         </div>
       </div>
     )

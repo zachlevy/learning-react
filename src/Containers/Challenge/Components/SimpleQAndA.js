@@ -16,8 +16,6 @@ class SimpleQAndA extends Component {
   }
 
   render() {
-    console.log("ok")
-    const { question, answer } = this.props
     return (
       <div className="container">
         <p>Question: {this.props.question}</p>

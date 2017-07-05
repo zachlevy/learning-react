@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { setCourse } from '../../modules/course'
 import { Switch, Route, Link } from 'react-router-dom'
-import Content from '../Content/show'
 import Challenge from '../Challenge/show'
 
 class Course extends Component {
@@ -18,6 +17,18 @@ class Course extends Component {
     })
   }
 
+  handleNextClick() {
+    console.log("handleNextClick")
+    // find the current index in flow
+    console.log("challenge", this.props.challenge)
+    // get the next object
+    // push into history the next object id with proper url
+  }
+
+  handleSkipClick() {
+    console.log("handleSkipClick")
+  }
+
   render() {
     return (
       <div className="container">
@@ -28,18 +39,17 @@ class Course extends Component {
           </div>
         </div>
         <Switch>
-          <Route path="/courses/:courseId/contents/:contentId" render={(props) => {return <Content {...props} handleSkipClick={() => {}} handleNextClick={() => {}} />}} />
-          <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleSkipClick={() => {}} handleNextClick={() => {}} />}} />
+          <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleSkipClick={this.handleSkipClick} handleNextClick={this.handleNextClick} />}} />
         </Switch>
         <div className="row">
           <div className="col-12">
             <ul>
               {
-                this.props.course.flow && this.props.course.flow.map((item, index) => {
+                this.props.course.flow && this.props.course.flow.map((challenge, index) => {
                   return (
                     <div>
-                      <li key={index}>{JSON.stringify(item)}</li>
-                      <Link to={`/courses/${this.props.course.id}/${item.type}s/${item.id}`}>{item.type}</Link>
+                      <li key={index}>{JSON.stringify(challenge)}</li>
+                      <Link to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}>{challenge.type}</Link>
                     </div>
                   )
                 })
@@ -53,7 +63,8 @@ class Course extends Component {
 }
 
 const mapStateToProps = state => ({
-  course: state.course
+  course: state.course,
+  challenge: state.challenge,
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

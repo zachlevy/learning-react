@@ -6,6 +6,7 @@ import Home from '../Home'
 import Courses from '../Courses'
 import Course from '../Courses/show'
 import Counter from '../Counter'
+import Challenge from '../Challenge/show'
 
 class App extends Component {
   render() {
@@ -15,12 +16,14 @@ class App extends Component {
           <Link to="/">Home</Link>
           <Link to="/courses">Courses</Link>
           <Link to="/counter">Counter</Link>
+          <Link to="/challenges/1">Challenge 1</Link>
         </header>
 
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/courses" component={Courses} />
           <Route exact path="/courses/:courseId" component={Course} />
+          <Route exact path="/challenges/:challengeId" component={Challenge} />
           <Route exact path="/counter" component={Counter} />
         </Switch>
       </div>

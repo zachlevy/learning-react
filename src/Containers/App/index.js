@@ -24,7 +24,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/courses" component={Courses} />
-          <Route exact path="/courses/:courseId" component={Course} />
+          <Route path="/courses/:courseId" component={Course} />
           <Route exact path="/challenges/:challengeId" component={Challenge} />
           <Route exact path="/contents/:contentId" render={(props) => {return <Content {...props} handleSkipClick={() => {}} handleNextClick={() => {}} />}} />
           <Route exact path="/counter" component={Counter} />
@@ -33,5 +33,4 @@ class App extends Component {
     )
   }
 }
-
 export default App

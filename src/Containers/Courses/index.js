@@ -30,8 +30,8 @@ class Courses extends Component {
           {
             this.props.courses && this.props.courses.map((course, index) => {
               return (
-                <div>
-                  <CourseRow key={index} course={course} />
+                <div key={index}>
+                  <CourseRow course={course} />
                   <button onClick={() => this.props.changePage(course.id)}>Go to course page via redux</button>
                 </div>
               )

@@ -3,15 +3,9 @@ import CourseRow from './CourseRow'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
+import { setCourses } from '../../modules/courses'
 
 class Courses extends Component {
-  constructor() {
-    super()
-    this.state = {
-      courses: []
-    }
-  }
   componentDidMount() {
     console.log("componentDidMount")
     fetch("http://localhost:3001/courses").then((res) => {
@@ -19,6 +13,7 @@ class Courses extends Component {
     }).then((response) => {
       console.log(response)
       this.setState({courses: response})
+      this.props.setCourses(response)
     })
   }
 
@@ -33,7 +28,7 @@ class Courses extends Component {
         </div>
         <div className="row">
           {
-            this.state.courses.map((course, index) => {
+            this.props.courses && this.props.courses.map((course, index) => {
               return (
                 <div>
                   <CourseRow key={index} course={course} />
@@ -49,11 +44,16 @@ class Courses extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  courses: state.courses
+})
+
 const mapDispatchToProps = dispatch => bindActionCreators({
+  setCourses,
   changePage: (courseId) => push(`/courses/${courseId}`)
 }, dispatch)
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Courses)

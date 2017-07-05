@@ -5,12 +5,6 @@ import { connect } from 'react-redux'
 import { setCourse, clearCourse } from '../../modules/course'
 
 class Course extends Component {
-  constructor() {
-    super()
-    this.state = {
-      course: {}
-    }
-  }
   componentDidMount() {
     console.log("componentDidMount")
     fetch(`http://localhost:3001/courses/${this.props.match.params.courseId}`).then((res) => {
@@ -29,8 +23,8 @@ class Course extends Component {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <h1>{this.state.course.title}</h1>
-            <p>{this.state.course.description}</p>
+            <h1>{this.props.course.title}</h1>
+            <p>{this.props.course.description}</p>
             <button onClick={this.handleClearCourse.bind(this)}>Clear Course</button>
           </div>
         </div>
@@ -38,7 +32,7 @@ class Course extends Component {
           <div className="col-12">
             <ul>
               {
-                this.state.course.flow && this.state.course.flow.map((item, index) => {
+                this.props.course.flow && this.props.course.flow.map((item, index) => {
                   return <li key={index}>{JSON.stringify(item)}</li>
                 })
               }

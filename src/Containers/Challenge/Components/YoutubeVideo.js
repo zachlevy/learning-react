@@ -1,25 +1,21 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { setContent } from '../../modules/content'
-import { secondsToMinutes } from '../../modules/time'
+import { secondsToMinutes } from '../../../modules/time'
 
-class Content extends Component {
-  componentDidMount() {
-    console.log("componentDidMount")
-    // load the content details
-    fetch(`http://localhost:3001/contents/${this.props.match.params.contentId}`).then((res) => {
-      return res.json()
-    }).then((response) => {
-      console.log(response)
+class YoutubeVideo extends Component {
+  constructor() {
+    super()
+    this.state = {
 
-      this.props.setContent(response)
-    })
+    }
+  }
+  assert(event) {
+    console.log("assert")
   }
 
   render() {
-    const content = this.props.content
+    console.log("ok")
+    const content = this.props
     return (
       <div className="container">
         <div className="row">
@@ -50,21 +46,12 @@ class Content extends Component {
   }
 }
 
-
-Content.propTypes = {
+YoutubeVideo.propTypes = {
+  embed_url: PropTypes.string,
+  title: PropTypes.string,
+  est_duration: PropTypes.number,
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func
 }
 
-const mapStateToProps = state => ({
-  content: state.content
-})
-
-const mapDispatchToProps = dispatch => bindActionCreators({
-  setContent
-}, dispatch)
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Content)
+export default YoutubeVideo

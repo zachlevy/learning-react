@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { setContent } from '../../modules/content'
+import { secondsToMinutes } from '../../modules/time'
 
 class Content extends Component {
   componentDidMount() {
@@ -22,15 +23,15 @@ class Content extends Component {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <h1>Content {content.id}</h1>
-            <p>{content.title}</p>
-            <p>{content.est_duration}</p>
+            <h2 className="text-center">{content.title}</h2>
+            <p className="text-center">{secondsToMinutes(content.est_duration)} min</p>
           </div>
         </div>
         <div className="row">
-          <div className="col-12">
-            <p>{content.embed_url}</p>
-            <iframe width="560" height="315" src={content.embed_url} frameBorder="0" allowFullScreen></iframe>
+          <div className="col-12 col-sm-8 offset-sm-2">
+            <div className="embed-responsive embed-responsive-16by9">
+              <iframe className="embed-responsive-item" src={content.embed_url} frameBorder="0" allowFullScreen></iframe>
+            </div>
           </div>
         </div>
       </div>

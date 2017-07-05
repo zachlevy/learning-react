@@ -13,19 +13,6 @@ class YoutubeVideo extends Component {
     console.log("assert")
   }
 
-
-  handleNextClick() {
-    console.log("handleNextClick")
-    // find the current index in flow
-    // get the next object
-    // push into history the next object id with proper url
-  }
-
-  handleSkipClick() {
-    console.log("handleSkipClick")
-  }
-
-
   render() {
     console.log("ok")
     const content = this.props
@@ -48,9 +35,9 @@ class YoutubeVideo extends Component {
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button className="btn btn-secondary" onClick={this.handleSkipClick.bind(this)}>Skip</button>
+              <button className="btn btn-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
               &nbsp;
-              <button className="btn btn-primary" onClick={this.handleNextClick.bind(this)}>Next</button>
+              <button className="btn btn-primary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
             </div>
           </div>
         </div>

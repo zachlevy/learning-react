@@ -21,8 +21,10 @@ class Course extends Component {
     console.log("handleNextClick")
     // find the current index in flow
     console.log("challenge", this.props.challenge)
+    console.log("flow", this.props.course)
     // get the next object
     // push into history the next object id with proper url
+    // `/courses/${this.props.course.id}/challenges/${challenge.id}`
   }
 
   handleSkipClick() {
@@ -39,7 +41,7 @@ class Course extends Component {
           </div>
         </div>
         <Switch>
-          <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleSkipClick={this.handleSkipClick} handleNextClick={this.handleNextClick} />}} />
+          <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleSkipClick={this.handleSkipClick.bind(this)} handleNextClick={this.handleNextClick.bind(this)} />}} />
         </Switch>
         <div className="row">
           <div className="col-12">

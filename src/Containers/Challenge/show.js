@@ -41,7 +41,15 @@ class Challenge extends Component {
         </div>
         <div className="row">
           <div className="col-12">
-            { challenge.body && getChallengeComponent(challenge.challenge_type.name, challenge.body) }
+            { challenge.body && getChallengeComponent(
+              challenge.challenge_type.name,
+              Object.assign(
+                {},
+                challenge.body,
+                {
+                  handleNextClick: this.props.handleNextClick.bind(this),
+                  handleSkipClick: this.props.handleSkipClick.bind(this)
+                })) }
           </div>
         </div>
       </div>

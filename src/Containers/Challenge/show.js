@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { setChallenge } from '../../modules/challenge'
 import { snakeCaseToPascalCase } from '../../modules/strings'
-import SimpleQAndA from './SimpleQAndA'
+import getChallengeComponent from './Components'
 
 class Challenge extends Component {
   componentDidMount() {
@@ -18,14 +18,6 @@ class Challenge extends Component {
     })
   }
 
-  // hacky solution for dynamic components
-  challengeComponents(name, props) {
-    console.log(name, props)
-    return {
-      "simple_q_and_a": (<SimpleQAndA {...props} />)
-    }[name]
-  }
-
   render() {
     const challenge = this.props.challenge
     return (
@@ -38,7 +30,7 @@ class Challenge extends Component {
         </div>
         <div className="row">
           <div className="col-12">
-            { challenge.body && this.challengeComponents(challenge.challenge_type.name, challenge.body) }
+            { challenge.body && getChallengeComponent(challenge.challenge_type.name, challenge.body) }
           </div>
         </div>
       </div>

@@ -29,9 +29,9 @@ class SimpleQAndA extends Component {
   }
 }
 
-// SimpleQAndA.propTypes = {
-//   question: PropTypes.string,
-//   answer: PropTypes.string
-// }
+SimpleQAndA.propTypes = {
+  question: PropTypes.string,
+  answer: PropTypes.string
+}
 
 export default SimpleQAndA

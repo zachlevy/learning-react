@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { setContent } from '../../modules/content'
 import { secondsToMinutes } from '../../modules/time'
 
@@ -34,9 +35,25 @@ class Content extends Component {
             </div>
           </div>
         </div>
+        <div className="row">
+          <div className="col-12 col-md-10">
+            <div className="float-md-right">
+              <br />
+              <button className="btn btn-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
+              &nbsp;
+              <button className="btn btn-primary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
+            </div>
+          </div>
+        </div>
       </div>
     )
   }
+}
+
+
+Content.propTypes = {
+  handleNextClick: PropTypes.func,
+  handleSkipClick: PropTypes.func
 }
 
 const mapStateToProps = state => ({

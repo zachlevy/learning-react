@@ -35,7 +35,6 @@ class Challenge extends Component {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <h1>Challenge {challenge.id}</h1>
             <p>{challenge.description}</p>
           </div>
         </div>

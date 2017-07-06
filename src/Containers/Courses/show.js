@@ -50,8 +50,7 @@ class Course extends Component {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <h4>Course {this.props.course.title}</h4>
-            <p>{this.props.course.description}</p>
+            <p>{this.props.course.title}</p>
           </div>
         </div>
         <Switch>
@@ -67,6 +66,11 @@ class Course extends Component {
               )
             })
           }
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <hr className="course-timeline" />
+          </div>
         </div>
       </div>
     )

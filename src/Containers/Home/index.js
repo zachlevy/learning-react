@@ -5,9 +5,13 @@ import { connect } from 'react-redux'
 
 const Home = props => (
   <div className="container">
-    <h1>Home</h1>
-    <p>Welcome home!</p>
-    <button onClick={() => props.changePage()}>Go to about page via redux</button>
+    <div className="row">
+      <div className="col-12">
+        <h1>Home</h1>
+        <p>Welcome home!</p>
+        <button className="btn btn-primary" onClick={() => props.changePage()}>Go to about page via redux</button>
+      </div>
+    </div>
   </div>
 )
 

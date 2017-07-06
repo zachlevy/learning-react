@@ -39,6 +39,7 @@ class Course extends Component {
 
   handleSkipClick() {
     console.log("handleSkipClick")
+    this.handleNextClick()
   }
 
   render() {

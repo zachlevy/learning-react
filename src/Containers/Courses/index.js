@@ -17,6 +17,10 @@ class Courses extends Component {
     })
   }
 
+  handleCourseClick() {
+    this.props.changePage(this.props.course.id)
+  }
+
   render() {
     return (
       <div className="container">
@@ -28,14 +32,7 @@ class Courses extends Component {
         </div>
         <div className="row">
           {
-            this.props.courses && this.props.courses.map((course, index) => {
-              return (
-                <div key={index}>
-                  <CourseRow course={course} />
-                  <button onClick={() => this.props.changePage(course.id)}>Go to course page via redux</button>
-                </div>
-              )
-            })
+            this.props.courses && this.props.courses.map((course, index) => <CourseRow key={index} course={course} handleCourseClick={this.handleCourseClick.bind(this)} />)
           }
 
         </div>

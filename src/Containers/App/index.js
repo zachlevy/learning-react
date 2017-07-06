@@ -16,11 +16,14 @@ class App extends Component {
       isOpen: false
     }
   }
+  toggle() {
+    this.setState({isOpen: !this.state.isOpen})
+  }
   render() {
     return (
       <div>
         <Navbar color="faded" light toggleable>
-          <NavbarToggler right onClick={this.toggle} />
+          <NavbarToggler right onClick={this.toggle.bind(this)} />
           <NavbarBrand tag={Link} to="/">reactstrap</NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

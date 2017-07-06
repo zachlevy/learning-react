@@ -62,7 +62,7 @@ class Course extends Component {
             this.props.course.flow && this.props.course.flow.map((challenge, index) => {
               return (
                 <div style={{width: challengeWidth + "%"}} className="text-center">
-                  <Link to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
+                  <Link className={"btn btn-outline-primary" + (challenge.id === this.props.challenge.id ? " active" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
                 </div>
               )
             })

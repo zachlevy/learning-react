@@ -32,10 +32,9 @@ class Challenge extends Component {
   render() {
     const challenge = this.props.challenge
     return (
-      <div className="container">
+      <div>
         <div className="row">
           <div className="col-12">
-            <h1>Challenge {challenge.id}</h1>
             <p>{challenge.description}</p>
           </div>
         </div>

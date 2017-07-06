@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { setCourse } from '../../modules/course'
 import { Switch, Route, Link } from 'react-router-dom'
 import Challenge from '../Challenge/show'
+import FontAwesome from 'react-fontawesome'
+import { getIcon } from '../../modules/icons'
 
 class Course extends Component {
   componentDidMount() {
@@ -37,34 +39,38 @@ class Course extends Component {
 
   handleSkipClick() {
     console.log("handleSkipClick")
+    this.handleNextClick()
   }
 
   render() {
+    let challengeWidth
+    if (this.props.course.flow) {
+      challengeWidth = Math.floor(100 / this.props.course.flow.length)
+    }
     return (
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <h4>Course {this.props.course.title}</h4>
-            <p>{this.props.course.description}</p>
+            <p>{this.props.course.title}</p>
           </div>
         </div>
         <Switch>
           <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleSkipClick={this.handleSkipClick.bind(this)} handleNextClick={this.handleNextClick.bind(this)} />}} />
         </Switch>
         <div className="row">
+          {
+            this.props.course.flow && this.props.course.flow.map((challenge, index) => {
+              return (
+                <div style={{width: challengeWidth + "%"}} className="text-center">
+                  <Link className={"btn btn-outline-primary" + (challenge.id === this.props.challenge.id ? " active" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
+                </div>
+              )
+            })
+          }
+        </div>
+        <div className="row">
           <div className="col-12">
-            <ul>
-              {
-                this.props.course.flow && this.props.course.flow.map((challenge, index) => {
-                  return (
-                    <div>
-                      <li key={index}>{JSON.stringify(challenge)}</li>
-                      <Link to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}>{challenge.type}</Link>
-                    </div>
-                  )
-                })
-              }
-            </ul>
+            <hr className="course-timeline" />
           </div>
         </div>
       </div>

@@ -9,8 +9,44 @@ class SimpleQAndA extends Component {
     }
   }
   assert(event) {
-    console.log(this.state.input === this.props.answer)
+    console.log()
+    let answered
+    answered = this.state.input === this.props.answer
+    // if (answered) {
+    //   this.props.handleShowNextButton()
+    // }
+
+    // check if answer is correct
+    this.submitChallengeResponse(this.state.input)
   }
+
+  // submit to api for analysis
+  submitChallengeResponse(inputText) {
+    fetch(`http://localhost:3001/challenge_responses`, {
+      method: 'post',
+      body: JSON.stringify({
+        challenge_response: {
+          input: {
+            analysis: "sentiment",
+            text: inputText
+          },
+          challenge_id: this.props.challengeId,
+          user_id: 1
+        }
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((res) => {
+      return res.json()
+    }).then((response) => {
+      console.log(response)
+      if (response.input.result === "negative") {
+        this.props.handleShowNextButton()
+      }
+    })
+  }
+
   handleKeyUp(e) {
     this.setState({input: e.target.value})
   }
@@ -32,7 +68,7 @@ class SimpleQAndA extends Component {
               <br />
               <button className="btn btn-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
               &nbsp;
-              <button className="btn btn-primary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
+              <button className={"btn btn-primary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
             </div>
           </div>
         </div>
@@ -43,7 +79,10 @@ class SimpleQAndA extends Component {
 
 SimpleQAndA.propTypes = {
   question: PropTypes.string,
-  answer: PropTypes.string
+  answer: PropTypes.string,
+  showNextButton: PropTypes.bool,
+  handleShowNextButton: PropTypes.func,
+  challengeId: PropTypes.number
 }
 
 export default SimpleQAndA

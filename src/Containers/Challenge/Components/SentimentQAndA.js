@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class SimpleQAndA extends Component {
+class SentimentQAndA extends Component {
   constructor() {
     super()
     this.state = {
@@ -10,11 +10,6 @@ class SimpleQAndA extends Component {
   }
   assert(event) {
     console.log()
-    let answered
-    answered = this.state.input === this.props.answer
-    if (answered) {
-      this.props.handleShowNextButton()
-    }
 
     // check if answer is correct
     this.submitChallengeResponse(this.state.input)
@@ -27,7 +22,7 @@ class SimpleQAndA extends Component {
       body: JSON.stringify({
         challenge_response: {
           input: {
-            analysis: "none",
+            analysis: "sentiment",
             text: inputText
           },
           challenge_id: this.props.challengeId,
@@ -41,6 +36,9 @@ class SimpleQAndA extends Component {
       return res.json()
     }).then((response) => {
       console.log(response)
+      if (response.input.result === this.props.sentiment) {
+        this.props.handleShowNextButton()
+      }
     })
   }
 
@@ -54,7 +52,6 @@ class SimpleQAndA extends Component {
         <div className="row">
           <div className="col-12">
             <p>Question: {this.props.question}</p>
-            <p>Answer: {this.props.answer}</p>
             <input onKeyUp={this.handleKeyUp.bind(this)} />
             <button onClick={this.assert.bind(this)}>Check</button>
           </div>
@@ -74,12 +71,12 @@ class SimpleQAndA extends Component {
   }
 }
 
-SimpleQAndA.propTypes = {
+SentimentQAndA.propTypes = {
   question: PropTypes.string,
-  answer: PropTypes.string,
+  sentiment: PropTypes.string,
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
   challengeId: PropTypes.number
 }
 
-export default SimpleQAndA
+export default SentimentQAndA

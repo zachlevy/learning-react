@@ -5,6 +5,12 @@ import { setChallenge } from '../../modules/challenge'
 import getChallengeComponent from './Components'
 
 class Challenge extends Component {
+  constructor() {
+    super()
+    this.state = {
+      showNextButton: false
+    }
+  }
   componentDidMount() {
     console.log("componentDidMount")
     // load the challenge data
@@ -26,7 +32,12 @@ class Challenge extends Component {
     if (this.props.match.params.challengeId !== nextProps.match.params.challengeId) {
       // reload challenge data
       this.getChallengeData(nextProps.match.params.challengeId)
+      this.setState({showNextButton: false})
     }
+  }
+
+  handleShowNextButton() {
+    this.setState({showNextButton: true})
   }
 
   render() {
@@ -47,7 +58,9 @@ class Challenge extends Component {
                 challenge.body,
                 {
                   handleNextClick: this.props.handleNextClick.bind(this),
-                  handleSkipClick: this.props.handleSkipClick.bind(this)
+                  handleSkipClick: this.props.handleSkipClick.bind(this),
+                  showNextButton: this.state.showNextButton,
+                  handleShowNextButton: this.handleShowNextButton.bind(this)
                 })) }
           </div>
         </div>

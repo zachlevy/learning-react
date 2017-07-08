@@ -9,7 +9,12 @@ class SimpleQAndA extends Component {
     }
   }
   assert(event) {
-    console.log(this.state.input === this.props.answer)
+    console.log()
+    let answered
+    answered = this.state.input === this.props.answer
+    if (answered) {
+      this.props.handleShowNextButton()
+    }
   }
   handleKeyUp(e) {
     this.setState({input: e.target.value})
@@ -32,7 +37,7 @@ class SimpleQAndA extends Component {
               <br />
               <button className="btn btn-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
               &nbsp;
-              <button className="btn btn-primary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
+              <button className={"btn btn-primary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.handleNextClick.bind(this)}>Next</button>
             </div>
           </div>
         </div>
@@ -43,7 +48,9 @@ class SimpleQAndA extends Component {
 
 SimpleQAndA.propTypes = {
   question: PropTypes.string,
-  answer: PropTypes.string
+  answer: PropTypes.string,
+  showNextButton: PropTypes.bool,
+  handleShowNextButton: PropTypes.func
 }
 
 export default SimpleQAndA

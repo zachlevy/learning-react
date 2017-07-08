@@ -60,7 +60,8 @@ class Challenge extends Component {
                   handleNextClick: this.props.handleNextClick.bind(this),
                   handleSkipClick: this.props.handleSkipClick.bind(this),
                   showNextButton: this.state.showNextButton,
-                  handleShowNextButton: this.handleShowNextButton.bind(this)
+                  handleShowNextButton: this.handleShowNextButton.bind(this),
+                  challengeId: challenge.id
                 })) }
           </div>
         </div>

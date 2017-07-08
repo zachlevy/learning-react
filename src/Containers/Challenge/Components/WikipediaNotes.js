@@ -2,15 +2,24 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { secondsToMinutes } from '../../../modules/time'
 
-class YoutubeVideo extends Component {
+class WikipediaNotes extends Component {
   constructor() {
     super()
     this.state = {
 
     }
   }
-  assert(event) {
+  assert() {
     console.log("assert")
+    console.log(this.state.input)
+    if (this.state.input && this.state.input.length >= 10) {
+      this.props.handleShowNextButton()
+    }
+  }
+
+  handleKeyUp(e) {
+    this.setState({input: e.target.value})
+    this.assert()
   }
 
   render() {
@@ -25,9 +34,15 @@ class YoutubeVideo extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-12 col-sm-8 offset-sm-2">
-            <div className="embed-responsive embed-responsive-16by9">
-              <iframe className="embed-responsive-item" src={content.embed_url} frameBorder="0" allowFullScreen></iframe>
+          <div className="col-12 col-sm-6">
+            <div className="">
+              <iframe className="wikipedia wikpedia-notes" src={content.embed_url} frameBorder="0" allowFullScreen></iframe>
+            </div>
+          </div>
+          <div className="col-12 col-sm-6">
+            <div className="form-group">
+              <label htmlFor="notes">Your Notes</label>
+              <textarea className="form-control" id="notes" rows="15" onKeyUp={this.handleKeyUp.bind(this)}></textarea>
             </div>
           </div>
         </div>
@@ -37,7 +52,8 @@ class YoutubeVideo extends Component {
               <br />
               <button className="btn btn-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
               &nbsp;
-              <button className="btn btn-primary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
+              <button className={"btn btn-primary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
+              <pre>{this.props.showNextButton}</pre>
             </div>
           </div>
         </div>
@@ -46,7 +62,7 @@ class YoutubeVideo extends Component {
   }
 }
 
-YoutubeVideo.propTypes = {
+WikipediaNotes.propTypes = {
   embed_url: PropTypes.string,
   title: PropTypes.string,
   est_duration: PropTypes.number,
@@ -58,4 +74,4 @@ YoutubeVideo.propTypes = {
   challengeId: PropTypes.number
 }
 
-export default YoutubeVideo
+export default WikipediaNotes

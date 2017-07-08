@@ -77,6 +77,9 @@ class SimpleQAndA extends Component {
 SimpleQAndA.propTypes = {
   question: PropTypes.string,
   answer: PropTypes.string,
+
+  handleNextClick: PropTypes.func,
+  handleSkipClick: PropTypes.func,
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
   challengeId: PropTypes.number

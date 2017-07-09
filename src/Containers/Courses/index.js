@@ -8,7 +8,7 @@ import { setCourses } from '../../modules/courses'
 class Courses extends Component {
   componentDidMount() {
     console.log("componentDidMount")
-    fetch("${process.env.REACT_APP_API_URL}/courses").then((res) => {
+    fetch(`${process.env.REACT_APP_API_URL}/courses`).then((res) => {
       return res.json()
     }).then((response) => {
       console.log(response)

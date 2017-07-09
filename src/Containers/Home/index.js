@@ -13,10 +13,10 @@ const Home = props => (
           <br />
           <br />
           <br />
-          <h2>You can learn anything.</h2>
-          <h2>For free. For everyone. Forever.</h2>
+          <h2>Learn more. Retain more.</h2>
+          <h4>And help science while doing it</h4>
           <br />
-          <button className="btn btn-primary">Let's do it</button>
+          <button className="btn btn-primary" onClick={props.changePage}>Let's do it</button>
           <br />
           <br />
           <br />

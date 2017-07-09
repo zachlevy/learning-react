@@ -24,7 +24,7 @@ class App extends Component {
       <div>
         <Navbar color="faded" light toggleable>
           <NavbarToggler right onClick={this.toggle.bind(this)} />
-          <NavbarBrand tag={Link} to="/">reactstrap</NavbarBrand>
+          <NavbarBrand tag={Link} to="/">Vora</NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>

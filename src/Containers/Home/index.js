@@ -14,7 +14,7 @@ const Home = props => (
           <br />
           <br />
           <br />
-          <h2>Learn more. Retain more.</h2>
+          <h2>Gain Perspective. Find your passion.</h2>
           <h4>And help science while doing it</h4>
           <br />
           <button className="btn btn-primary" onClick={props.changePage}>Let's do it</button>

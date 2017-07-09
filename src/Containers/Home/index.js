@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Courses from '../Courses'
 import Footer from '../Footer'
+import { Link } from 'react-router-dom'
 
 const Home = props => (
   <div>
@@ -17,7 +18,7 @@ const Home = props => (
           <h2>Gain Perspective. Find your passion.</h2>
           <h4>And help science while doing it</h4>
           <br />
-          <button className="btn btn-primary" onClick={props.changePage}>Let's do it</button>
+          <Link className="btn btn-primary" to={`/courses`}>Let's do it</Link>
           <br />
           <br />
           <br />

@@ -11,7 +11,7 @@ import { getIcon } from '../../modules/icons'
 class Course extends Component {
   componentDidMount() {
     console.log("componentDidMount")
-    fetch(`http://localhost:3001/courses/${this.props.match.params.courseId}`).then((res) => {
+    fetch(`${process.env.REACT_APP_API_URL}/courses/${this.props.match.params.courseId}`).then((res) => {
       return res.json()
     }).then((response) => {
       console.log(response)

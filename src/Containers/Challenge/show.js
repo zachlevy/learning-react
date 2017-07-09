@@ -19,7 +19,7 @@ class Challenge extends Component {
 
   // hits the api and updates redux with challenge data
   getChallengeData(challengeId) {
-    fetch(`http://localhost:3001/challenges/${challengeId}?include=challenge_type`).then((res) => {
+    fetch(`${process.env.REACT_APP_API_URL}/challenges/${challengeId}?include=challenge_type`).then((res) => {
       return res.json()
     }).then((response) => {
       console.log(response)

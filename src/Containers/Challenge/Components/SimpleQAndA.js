@@ -22,7 +22,7 @@ class SimpleQAndA extends Component {
 
   // submit to api for analysis
   submitChallengeResponse(inputText) {
-    fetch(`http://localhost:3001/challenge_responses`, {
+    fetch(`${process.env.REACT_APP_API_URL}/challenge_responses`, {
       method: 'post',
       body: JSON.stringify({
         challenge_response: {

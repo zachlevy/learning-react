@@ -5,7 +5,6 @@ import './App.css'
 import Home from '../Home'
 import Courses from '../Courses'
 import Course from '../Courses/show'
-import Counter from '../Counter'
 import Challenge from '../Challenge/show'
 import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Collapse } from 'reactstrap'
 
@@ -30,9 +29,6 @@ class App extends Component {
               <NavItem>
                 <NavLink tag={Link} to="/courses">Course</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to="/counter">Counter</NavLink>
-              </NavItem>
             </Nav>
           </Collapse>
         </Navbar>
@@ -41,7 +37,6 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/courses" component={Courses} />
           <Route path="/courses/:courseId" component={Course} />
-          <Route exact path="/counter" component={Counter} />
         </Switch>
       </div>
     )

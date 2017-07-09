@@ -17,7 +17,7 @@ class CourseThumb extends Component {
         </div>
         <h5>{course.title}</h5>
         <p>{secondsToMinutes(course.est_duration)} min</p>
-        <Link className="btn btn-primary" to={`/courses/${course.id}`}>Start</Link>
+        <Link className="btn btn-primary" to={`/courses/${course.id}/challenges/${course.flow[0].id}`}>Start</Link>
         <ul className="list-inline">
         {
           course.tags.map((tag, index) => <li key={index} className="list-inline-item"><Badge color="default">{tag}</Badge></li>)

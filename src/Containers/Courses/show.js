@@ -49,11 +49,6 @@ class Course extends Component {
     }
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <p>{this.props.course.title}</p>
-          </div>
-        </div>
         <Switch>
           <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleSkipClick={this.handleSkipClick.bind(this)} handleNextClick={this.handleNextClick.bind(this)} />}} />
         </Switch>
@@ -71,6 +66,12 @@ class Course extends Component {
         <div className="row">
           <div className="col-12">
             <hr className="course-timeline" />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <br />
+            <p className="text-center">{this.props.course.title}</p>
           </div>
         </div>
       </div>

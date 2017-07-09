@@ -9,3 +9,11 @@ iframe.wikipedia {
   min-height: 70vh;
   width: 100%;
 }
+.bg-gradient {
+  background: #963c3c; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, #b2eaff, #963c3c); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #b2eaff, #963c3c); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #b2eaff, #963c3c); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #b2eaff, #963c3c); /* Standard syntax */
+  color: white;
+}

@@ -52,11 +52,20 @@ class SimpleQAndA extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-12">
-            <p>Question: {this.props.question}</p>
-            <p>Answer: {this.props.answer}</p>
-            <input onKeyUp={this.handleKeyUp.bind(this)} />
-            <button onClick={this.assert.bind(this)}>Check</button>
+          <div className="col-12 col-sm-8 offset-sm-2 text-center">
+            <br />
+            <br />
+            <h1>{this.props.question}</h1>
+            <div class="form-group">
+              <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} />
+            </div>
+            <br />
+            <button className="btn btn-primary" onClick={this.assert.bind(this)}>Check</button>
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
           </div>
         </div>
         <div className="row">

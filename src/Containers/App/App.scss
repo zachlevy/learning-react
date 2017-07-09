@@ -17,3 +17,10 @@ iframe.wikipedia {
   background: linear-gradient(to bottom right, #b2eaff, #963c3c); /* Standard syntax */
   color: white;
 }
+input.form-control.border-bottom {
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0;
+  border-bottom-width: 2px;
+}

@@ -21,17 +21,21 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar color="faded" light toggleable>
-          <NavbarToggler right onClick={this.toggle.bind(this)} />
-          <NavbarBrand tag={Link} to="/">Vora</NavbarBrand>
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink tag={Link} to="/courses">Course</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
+        <div className="bg-faded">
+          <div className="container">
+            <Navbar color="faded" light toggleable>
+              <NavbarToggler right onClick={this.toggle.bind(this)} />
+              <NavbarBrand tag={Link} to="/">Vora</NavbarBrand>
+              <Collapse isOpen={this.state.isOpen} navbar>
+                <Nav className="ml-auto" navbar>
+                  <NavItem>
+                    <NavLink tag={Link} to="/courses">Mini Courses</NavLink>
+                  </NavItem>
+                </Nav>
+              </Collapse>
+            </Navbar>
+          </div>
+        </div>
 
         <Switch>
           <Route exact path="/" component={Home} />

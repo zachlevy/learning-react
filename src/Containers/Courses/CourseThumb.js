@@ -11,7 +11,7 @@ class CourseThumb extends Component {
   render() {
     const course = this.props.course
     return (
-      <div className="col-3">
+      <div className="col-12 col-sm-3">
         <div>
           <img className="img-fluid" src={course.image_url} />
         </div>

@@ -11,11 +11,11 @@ class CourseThumb extends Component {
   render() {
     const course = this.props.course
     return (
-      <div className="col-4">
+      <div className="col-3">
         <div>
           <img className="img-fluid" src={course.image_url} />
         </div>
-        <h4>{course.title}</h4>
+        <h5>{course.title}</h5>
         <p>{secondsToMinutes(course.est_duration)} min</p>
         <Link className="btn btn-primary" to={`/courses/${course.id}`}>Start</Link>
         <ul className="list-inline">

@@ -28,26 +28,26 @@ class YoutubeVideo extends Component {
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm-2">
             <div className="embed-responsive embed-responsive-16by9">
-              <iframe className="embed-responsive-item" src={content.embed_url} frameBorder="0" allowFullScreen></iframe>
-                <YouTube
-                  videoId={"M3hFN8UrBPw"}
-                  id={""}
-                  className={"embed-responsive-item"}
-                  opts={{ playerVars: {
-                    autoplay: 0,
-                    modestbranding: 1,
-                    showinfo: 0,
-                    controls: 0
-                  }}}
-                  onReady={() => {console.log("onReady")}}
-                  onPlay={() => {console.log("onPlay")}}
-                  onPause={() => {console.log("onPause")}}
-                  onEnd={() => {console.log("onEnd")}}
-                  onError={() => {console.log("onError")}}
-                  onStateChange={() => {console.log("onStateChange")}}
-                  onPlaybackRateChange={() => {console.log("onPlaybackRateChange")}}
-                  onPlaybackQualityChange={() => {console.log("onPlaybackQualityChange")}}
-                />
+              <YouTube
+                videoId={content.youtube_id}
+                id={""}
+                className={"embed-responsive-item"}
+                opts={{ playerVars: {
+                  autoplay: 0,
+                  modestbranding: 1,
+                  showinfo: 0,
+                  controls: 0,
+                  iv_load_policy: 3
+                }}}
+                onReady={() => {console.log("onReady")}}
+                onPlay={() => {console.log("onPlay")}}
+                onPause={() => {console.log("onPause")}}
+                onEnd={() => {console.log("onEnd")}}
+                onError={() => {console.log("onError")}}
+                onStateChange={() => {console.log("onStateChange")}}
+                onPlaybackRateChange={() => {console.log("onPlaybackRateChange")}}
+                onPlaybackQualityChange={() => {console.log("onPlaybackQualityChange")}}
+              />
             </div>
           </div>
         </div>

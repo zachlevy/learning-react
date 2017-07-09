@@ -5,7 +5,7 @@ class SimpleQAndA extends Component {
   constructor() {
     super()
     this.state = {
-
+      input: ""
     }
   }
   assert(event) {
@@ -49,6 +49,7 @@ class SimpleQAndA extends Component {
   }
 
   render() {
+    const remainingCharacters = this.props.maxLength - this.state.input.length
     return (
       <div className="container">
         <div className="row">
@@ -58,6 +59,7 @@ class SimpleQAndA extends Component {
             <h1>{this.props.question}</h1>
             <div class="form-group">
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} />
+              <span className={"pull-right" + (remainingCharacters < 0 ? " color-red" : "")}>{remainingCharacters}</span>
             </div>
             <br />
             <button className="btn btn-primary" onClick={this.assert.bind(this)}>Check</button>
@@ -86,6 +88,7 @@ class SimpleQAndA extends Component {
 SimpleQAndA.propTypes = {
   question: PropTypes.string,
   answer: PropTypes.string,
+  maxLength: PropTypes.integer,
 
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,

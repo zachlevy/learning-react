@@ -6,6 +6,9 @@ Currently hosted on Heroku app `learning-react-production`.
 
 `$ git push heroku master`
 
+## Analytics
+Use `track` method from the `analytics` module as a wrapper for analytics libraries. See `track` method for details.
+
 # Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

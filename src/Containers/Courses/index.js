@@ -32,7 +32,7 @@ class Courses extends Component {
         </div>
         <div className="row">
           {
-            this.props.courses && this.props.courses.map((course, index) => <CourseThumb key={index} course={course} handleCourseClick={this.handleCourseClick.bind(this)} />)
+            this.props.courses && this.props.courses.map((course, index) => <CourseThumb className="col-12 col-sm-3" key={index} course={course} handleCourseClick={this.handleCourseClick.bind(this)} />)
           }
 
         </div>

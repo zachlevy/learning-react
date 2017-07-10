@@ -1,6 +1,7 @@
 // wrapper for analytics libraries
 export const track = (name, properties) => {
   // mixpanel
+  console.log("track", name, properties)
   window.mixpanel.track(name, properties)
   window.ga('send', 'event', {
     eventCategory: properties.name || name, // Typically the object that was interacted with (e.g. 'Video')

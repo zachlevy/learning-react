@@ -5,7 +5,6 @@ import './App.css'
 import Home from '../Home'
 import Courses from '../Courses'
 import Course from '../Courses/show'
-import Challenge from '../Challenge/show'
 import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Collapse } from 'reactstrap'
 
 class App extends Component {

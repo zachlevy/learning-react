@@ -6,7 +6,7 @@ class WikipediaNotes extends Component {
   constructor() {
     super()
     this.state = {
-
+      input: ""
     }
   }
   assert() {
@@ -20,6 +20,32 @@ class WikipediaNotes extends Component {
   handleKeyUp(e) {
     this.setState({input: e.target.value})
     this.assert()
+  }
+
+  // intercept next button click
+  handleNextClick() {
+    // submit to api
+    fetch(`${process.env.REACT_APP_API_URL}/challenge_responses`, {
+      method: 'post',
+      body: JSON.stringify({
+        challenge_response: {
+          input: {
+            analysis: "none",
+            text: this.state.input
+          },
+          challenge_id: this.props.challengeId,
+          user_id: 1
+        }
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then((res) => {
+      return res.json()
+    }).then((response) => {
+      console.log(response)
+    })
+    this.props.handleNextClick()
   }
 
   render() {
@@ -52,7 +78,7 @@ class WikipediaNotes extends Component {
               <br />
               <button className="btn btn-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
               &nbsp;
-              <button className={"btn btn-primary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
+              <button className={"btn btn-primary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.handleNextClick.bind(this)}>Next</button>
               <pre>{this.props.showNextButton}</pre>
             </div>
           </div>
@@ -66,6 +92,7 @@ WikipediaNotes.propTypes = {
   embed_url: PropTypes.string,
   title: PropTypes.string,
   est_duration: PropTypes.number,
+  max_length: PropTypes.number,
 
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,

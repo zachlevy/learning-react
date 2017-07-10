@@ -13,7 +13,7 @@ class CourseThumb extends Component {
     return (
       <div className="col-12 col-sm-3">
         <div>
-          <img className="img-fluid" src={course.image_url} />
+          <img className="img-fluid" src={course.image_url} alt="course preview" />
         </div>
         <h5>{course.title}</h5>
         <p>{secondsToMinutes(course.est_duration)} min</p>

@@ -1,7 +1,31 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { push } from 'react-router-redux'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import CourseThumb from '../../Courses/CourseThumb'
 
 class SuggestionEnd extends Component {
+  constructor() {
+    super()
+    this.state = {
+      courses: []
+    }
+  }
+  componentDidMount() {
+    fetch(`${process.env.REACT_APP_API_URL}/courses?ids=${this.props.courses.join(",")}`, {
+      method: 'get'
+    }).then((res) => {
+      return res.json()
+    }).then((response) => {
+      console.log(response)
+      this.setState({courses: response})
+    })
+  }
+  handleCourseClick() {
+    this.props.changePage(this.props.course.id)
+  }
   render() {
     const content = this.props
     return (
@@ -13,7 +37,12 @@ class SuggestionEnd extends Component {
         </div>
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm-2">
-            <h1>End</h1>
+            <h1>Suggested Courses</h1>
+            {
+              this.state.courses.map((course, index) => {
+                return <CourseThumb className="col-12 col-sm-6" key={index} course={course} handleCourseClick={this.handleCourseClick.bind(this)}  />
+              })
+            }
           </div>
         </div>
         <div className="row">
@@ -40,4 +69,12 @@ SuggestionEnd.propTypes = {
   challengeId: PropTypes.number
 }
 
-export default SuggestionEnd
+const mapDispatchToProps = dispatch => bindActionCreators({
+  changePage: (courseId) => push(`/courses/${courseId}`)
+}, dispatch)
+
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SuggestionEnd)

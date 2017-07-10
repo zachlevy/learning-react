@@ -39,14 +39,14 @@ class YoutubeVideo extends Component {
                   controls: 0,
                   iv_load_policy: 3
                 }}}
-                onReady={() => {console.log("onReady")}}
-                onPlay={() => {console.log("onPlay")}}
-                onPause={() => {console.log("onPause")}}
-                onEnd={() => {console.log("onEnd")}}
-                onError={() => {console.log("onError")}}
-                onStateChange={() => {console.log("onStateChange")}}
-                onPlaybackRateChange={() => {console.log("onPlaybackRateChange")}}
-                onPlaybackQualityChange={() => {console.log("onPlaybackQualityChange")}}
+                onReady={(e) => {window.mixpanel.track("Ready YouTube Video", {challengeId: this.props.challengeId, content: content})}}
+                onPlay={(e) => {window.mixpanel.track("Play YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onPause={(e) => {window.mixpanel.track("Pause YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onEnd={(e) => {window.mixpanel.track("End YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onError={(e) => {window.mixpanel.track("Error YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onStateChange={(e) => {console.log("onStateChange")}}
+                onPlaybackRateChange={(e) => {window.mixpanel.track("PlaybackRateChange YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onPlaybackQualityChange={(e) => {window.mixpanel.track("PlaybackQualityChange YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
               />
             </div>
           </div>

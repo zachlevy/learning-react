@@ -24,7 +24,10 @@ class SuggestionEnd extends Component {
     })
   }
   handleCourseClick() {
-    this.props.changePage(this.props.course.id)
+    this.props.changePage(`/courses/${this.props.course.id}`)
+  }
+  handleFinishClick() {
+    this.props.changePage(`/courses`)
   }
   render() {
     const content = this.props
@@ -49,9 +52,7 @@ class SuggestionEnd extends Component {
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button className="btn btn-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
-              &nbsp;
-              <button className="btn btn-primary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
+              <button className="btn btn-primary" onClick={this.handleFinishClick.bind(this)}>Finish Course</button>
             </div>
           </div>
         </div>
@@ -70,7 +71,8 @@ SuggestionEnd.propTypes = {
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  changePage: (courseId) => push(`/courses/${courseId}`)
+  changePage: (url) => push(url),
+
 }, dispatch)
 
 

@@ -22,7 +22,7 @@
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
-    "local": "REACT_APP_API_URL=http://localhost:3001 npm-run-all -p watch-css start-js",
+    "local": "REACT_APP_GA_ID=UA-102293534-2 REACT_APP_API_URL=http://localhost:3001 npm-run-all -p watch-css start-js",
     "start": "react-scripts start",
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",

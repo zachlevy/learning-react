@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { secondsToMinutes } from '../../../modules/time'
 import YouTube from 'react-youtube'
+import { track } from '../../../modules/analytics'
 
 class YoutubeVideo extends Component {
   constructor() {
@@ -39,14 +40,14 @@ class YoutubeVideo extends Component {
                   controls: 0,
                   iv_load_policy: 3
                 }}}
-                onReady={(e) => {window.mixpanel.track("Ready YouTube Video", {challengeId: this.props.challengeId, content: content})}}
-                onPlay={(e) => {window.mixpanel.track("Play YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
-                onPause={(e) => {window.mixpanel.track("Pause YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
-                onEnd={(e) => {window.mixpanel.track("End YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
-                onError={(e) => {window.mixpanel.track("Error YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onReady={(e) => {track("Ready YouTube Video", {challengeId: this.props.challengeId, content: content})}}
+                onPlay={(e) => {track("Play YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onPause={(e) => {track("Pause YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onEnd={(e) => {track("End YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onError={(e) => {track("Error YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
                 onStateChange={(e) => {console.log("onStateChange")}}
-                onPlaybackRateChange={(e) => {window.mixpanel.track("PlaybackRateChange YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
-                onPlaybackQualityChange={(e) => {window.mixpanel.track("PlaybackQualityChange YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onPlaybackRateChange={(e) => {track("PlaybackRateChange YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onPlaybackQualityChange={(e) => {track("PlaybackQualityChange YouTube Video", {challengeId: this.props.challengeId, content: content, data: e.data})}}
               />
             </div>
           </div>

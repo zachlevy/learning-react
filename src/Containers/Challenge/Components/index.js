@@ -4,6 +4,8 @@ import React from 'react'
 import SimpleQAndA from './SimpleQAndA'
 import YoutubeVideo from './YoutubeVideo'
 import WikipediaNotes from './WikipediaNotes'
+import SuggestionEnd from './SuggestionEnd'
+import SimpleStart from './SimpleStart'
 
 // add components to the components object
 export default function getChallengeComponent (name, props) {
@@ -11,6 +13,8 @@ export default function getChallengeComponent (name, props) {
   return {
     "simple_q_and_a": (<SimpleQAndA {...props} />),
     "youtube_video": (<YoutubeVideo {...props} />),
-    "wikipedia_notes": (<WikipediaNotes {...props} />)
+    "wikipedia_notes": (<WikipediaNotes {...props} />),
+    "suggestion_end": (<SuggestionEnd {...props} />),
+    "simple_start": (<SimpleStart {...props} />),
   }[name]
 }

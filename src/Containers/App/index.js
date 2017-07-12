@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
-import Home from '../Home'
+import Home from '../Static/Home'
 import Courses from '../Courses'
+import Feedback from '../Static/Feedback'
 import Course from '../Courses/show'
 import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Collapse } from 'reactstrap'
 
@@ -30,6 +31,9 @@ class App extends Component {
                   <NavItem>
                     <NavLink tag={Link} to="/courses">Mini Courses</NavLink>
                   </NavItem>
+                  <NavItem>
+                    <NavLink tag={Link} to="/feedback">Feedback</NavLink>
+                  </NavItem>
                 </Nav>
               </Collapse>
             </Navbar>
@@ -39,6 +43,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/courses" component={Courses} />
+          <Route exact path="/feedback" component={Feedback} />
           <Route path="/courses/:courseId" component={Course} />
         </Switch>
       </div>

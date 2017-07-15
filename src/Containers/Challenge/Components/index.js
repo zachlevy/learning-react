@@ -6,6 +6,7 @@ import YoutubeVideo from './YoutubeVideo'
 import WikipediaNotes from './WikipediaNotes'
 import SuggestionEnd from './SuggestionEnd'
 import SimpleStart from './SimpleStart'
+import SimpleSignup from './SimpleSignup'
 
 // add components to the components object
 export default function getChallengeComponent (name, props) {
@@ -16,5 +17,6 @@ export default function getChallengeComponent (name, props) {
     "wikipedia_notes": (<WikipediaNotes {...props} />),
     "suggestion_end": (<SuggestionEnd {...props} />),
     "simple_start": (<SimpleStart {...props} />),
+    "simple_signup": (<SimpleSignup {...props} />),
   }[name]
 }

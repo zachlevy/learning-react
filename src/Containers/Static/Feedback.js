@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { Form, FormGroup, Label, Input, Alert } from 'reactstrap'
 
 class Feedback extends Component {

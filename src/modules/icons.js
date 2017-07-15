@@ -4,7 +4,8 @@ export const getIcon = (machineName) => {
     youtube_video: "play-circle",
     simple_q_and_a: "question-circle",
     wikipedia_notes: "info-circle",
-    suggestion_end: "circle",
-    simple_start: "circle"
+    // suggestion_end: "circle",
+    // simple_start: "circle",
+    // simple_signup: "circle"
   }[machineName] || "circle"
 }

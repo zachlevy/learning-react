@@ -5,12 +5,13 @@ import { connect } from 'react-redux'
 import Courses from '../Courses'
 import Footer from '../Footer'
 import { Link } from 'react-router-dom'
+import { gradientBackground } from '../../modules/styles'
 
 const Home = props => (
   <div>
     <div className="container-fluid">
       <div className="row">
-        <div className="col-12 text-center bg-gradient">
+        <div className="col-12 text-center bg-gradient" style={gradientBackground("#34e89e", "#0f3443")}>
           <br />
           <br />
           <br />

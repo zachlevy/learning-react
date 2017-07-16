@@ -7,6 +7,7 @@ import { Switch, Route, Link } from 'react-router-dom'
 import Challenge from '../Challenge/show'
 import FontAwesome from 'react-fontawesome'
 import { getIcon } from '../../modules/icons'
+import { gradientBackground } from '../../modules/styles'
 
 class Course extends Component {
   componentDidMount() {
@@ -48,7 +49,7 @@ class Course extends Component {
       challengeWidth = Math.floor(100 / this.props.course.flow.length)
     }
     return (
-      <div id="course-show" className="course-show bg-gradient">
+      <div id="course-show" className="course-show bg-gradient" style={gradientBackground("#000046", "#1CB5E0")}>
         <div className="bg-pattern full-height">
           <div className="container full-height">
             <Switch>

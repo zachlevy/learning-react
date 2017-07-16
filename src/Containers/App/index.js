@@ -22,7 +22,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <div className="bg-faded">
+        <div className="bg-faded navbar-wrapper">
           <div className="container">
             <Navbar color="faded" light toggleable>
               <NavbarToggler right onClick={this.toggle.bind(this)} />

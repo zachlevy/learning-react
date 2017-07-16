@@ -1,3 +1,10 @@
+$color-green-primary: #34e89e;
+$color-green-secondary: #0f3443;
+
+.navbar-wrapper {
+  border-bottom: 1px solid #999999;
+}
+
 .iframe {
   width: 100%;
   height: auto;
@@ -10,7 +17,6 @@ iframe.wikipedia {
   width: 100%;
 }
 .bg-gradient {
-  background: #963c3c; /* For browsers that do not support gradients */
   background: -webkit-linear-gradient(left top, #b2eaff, #963c3c); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(bottom right, #b2eaff, #963c3c); /* For Opera 11.1 to 12.0 */
   background: -moz-linear-gradient(bottom right, #b2eaff, #963c3c); /* For Firefox 3.6 to 15 */

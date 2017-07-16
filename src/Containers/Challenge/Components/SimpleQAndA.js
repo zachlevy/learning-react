@@ -62,7 +62,7 @@ class SimpleQAndA extends Component {
               <span className={"pull-right" + (remainingCharacters < 0 ? " color-red" : "")}>{remainingCharacters}</span>
             </div>
             <br />
-            <button className="btn btn-primary" onClick={this.assert.bind(this)}>Check</button>
+            <button className="btn btn-outline-secondary" onClick={this.assert.bind(this)}>Check</button>
             <br />
             <br />
             <br />

@@ -48,30 +48,37 @@ class Course extends Component {
       challengeWidth = Math.floor(100 / this.props.course.flow.length)
     }
     return (
-      <div className="container">
-        <Switch>
-          <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleSkipClick={this.handleSkipClick.bind(this)} handleNextClick={this.handleNextClick.bind(this)} />}} />
-        </Switch>
-        <div className="row">
-          {
-            this.props.course.flow && this.props.course.flow.map((challenge, index) => {
-              return (
-                <div key={index} style={{width: challengeWidth + "%"}} className="text-center">
-                  <Link className={"btn btn-outline-primary" + (challenge.id === this.props.challenge.id ? " active" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
+      <div id="course-show" className="course-show bg-gradient">
+        <div className="bg-pattern full-height">
+          <div className="container full-height">
+            <Switch>
+              <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleSkipClick={this.handleSkipClick.bind(this)} handleNextClick={this.handleNextClick.bind(this)} />}} />
+            </Switch>
+            <div className="course-progress">
+              <div className="row">
+                {
+                  this.props.course.flow && this.props.course.flow.map((challenge, index) => {
+                    return (
+                      <div key={index} style={{width: challengeWidth + "%"}} className="text-center">
+                        <Link className={"btn btn-outline-secondary" + (challenge.id === this.props.challenge.id ? " active" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+              <div className="row">
+                <div className="col-12">
+                  <hr className="course-timeline" />
                 </div>
-              )
-            })
-          }
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <hr className="course-timeline" />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12">
-            <br />
-            <p className="text-center">{this.props.course.title}</p>
+              </div>
+              <br />
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <br />
+                <p className="text-center">{this.props.course.title}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

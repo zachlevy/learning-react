@@ -17,11 +17,28 @@ iframe.wikipedia {
   width: 100%;
 }
 .bg-gradient {
-  background: -webkit-linear-gradient(left top, #b2eaff, #963c3c); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom right, #b2eaff, #963c3c); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom right, #b2eaff, #963c3c); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, #b2eaff, #963c3c); /* Standard syntax */
+  background: $color-green-secondary; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left top, $color-green-primary, $color-green-secondary); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, $color-green-primary, $color-green-secondary); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, $color-green-primary, $color-green-secondary); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, $color-green-primary, $color-green-secondary); /* Standard syntax */
   color: white;
+}
+// .bg-pattern {
+//   background-image: url("/subtle-1.png");
+//   height: 100%;
+//
+// }
+.bg-gradient:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    opacity: 0.03;
+    background-image: url("/subtle-1.png");
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 input.form-control.border-bottom {
   border-top: 0;
@@ -32,6 +49,22 @@ input.form-control.border-bottom {
 }
 .color-red {
   color: red;
+}
+.bg-gradient input.form-control {
+  background: none;
+  border-bottom-color: white;
+}
+.course-show {
+  height: 100vh;
+  position: relative;
+}
+.course-progress {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.full-height {
+  height: 100%;
 }
 .course-show .course-title {
   font-family: 'Montserrat', sans-serif;

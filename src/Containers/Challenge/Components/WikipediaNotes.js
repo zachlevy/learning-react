@@ -76,9 +76,9 @@ class WikipediaNotes extends Component {
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button className="btn btn-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
+              <button className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
               &nbsp;
-              <button className={"btn btn-primary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.handleNextClick.bind(this)}>Next</button>
+              <button className={"btn btn-secondary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.handleNextClick.bind(this)}>Next</button>
               <pre>{this.props.showNextButton}</pre>
             </div>
           </div>

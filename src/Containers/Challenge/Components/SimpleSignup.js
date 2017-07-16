@@ -52,7 +52,7 @@ class SimpleSignup extends Component {
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} placeholder="email@example.com" />
             </div>
             <br />
-            <button className="btn btn-primary" onClick={this.assert.bind(this)}>{this.props.buttonText}</button>
+            <button className="btn btn-secondary" onClick={this.assert.bind(this)}>{this.props.buttonText}</button>
             <br />
             <br />
             <br />
@@ -64,9 +64,9 @@ class SimpleSignup extends Component {
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button className="btn btn-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
+              <button className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
               &nbsp;
-              <button className={"btn btn-primary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
+              <button className={"btn btn-secondary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
             </div>
           </div>
         </div>

@@ -52,7 +52,7 @@ class SuggestionEnd extends Component {
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button className="btn btn-primary" onClick={this.handleFinishClick.bind(this)}>Finish Course</button>
+              <button className="btn btn-secondary" onClick={this.handleFinishClick.bind(this)}>Done</button>
             </div>
           </div>
         </div>

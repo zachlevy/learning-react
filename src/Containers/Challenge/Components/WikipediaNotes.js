@@ -68,18 +68,18 @@ class WikipediaNotes extends Component {
           <div className="col-12 col-sm-6">
             <div className="form-group">
               <label htmlFor="notes">Your Notes</label>
-              <textarea className="form-control" id="notes" rows="15" onKeyUp={this.handleKeyUp.bind(this)}></textarea>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-md-10">
-            <div className="float-md-right">
-              <br />
-              <button role="button" className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
-              &nbsp;
-              <button role="button" className={"btn btn-secondary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.handleNextClick.bind(this)}>Next</button>
-              <pre>{this.props.showNextButton}</pre>
+              <textarea className="form-control" id="notes" rows="15" onKeyUp={this.handleKeyUp.bind(this)} placeholder="..."></textarea>
+              <div className="row">
+                <div className="col-12">
+                  <div className="float-md-right">
+                    <br />
+                    <button role="button" className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
+                    &nbsp;
+                    <button role="button" className={"btn btn-secondary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.handleNextClick.bind(this)}>Next</button>
+                    <pre>{this.props.showNextButton}</pre>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

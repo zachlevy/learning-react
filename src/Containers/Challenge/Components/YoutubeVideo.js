@@ -56,9 +56,9 @@ class YoutubeVideo extends Component {
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
+              <button role="button" className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
               &nbsp;
-              <button className="btn btn-secondary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
+              <button role="button" className="btn btn-secondary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
             </div>
           </div>
         </div>

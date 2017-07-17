@@ -62,7 +62,7 @@ class SimpleQAndA extends Component {
               <span className={"pull-right" + (remainingCharacters < 0 ? " color-red" : "")}>{remainingCharacters}</span>
             </div>
             <br />
-            <button className="btn btn-secondary" onClick={this.assert.bind(this)}>Check</button>
+            <button role="button" className="btn btn-secondary" onClick={this.assert.bind(this)}>Check</button>
             <br />
             <br />
             <br />
@@ -74,9 +74,9 @@ class SimpleQAndA extends Component {
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
+              <button role="button" className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
               &nbsp;
-              <button className={"btn btn-secondary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
+              <button role="button" className={"btn btn-secondary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
             </div>
           </div>
         </div>

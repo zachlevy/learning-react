@@ -8,6 +8,7 @@ import Challenge from '../Challenge/show'
 import FontAwesome from 'react-fontawesome'
 import { getIcon } from '../../modules/icons'
 import { gradientBackground } from '../../modules/styles'
+import { secondsToMinutes } from '../../modules/time'
 
 class Course extends Component {
   componentDidMount() {
@@ -57,11 +58,16 @@ class Course extends Component {
             </Switch>
             <div className="course-progress">
               <div className="row">
+                <div className="col-12">
+                  <hr className="course-timeline" />
+                </div>
+              </div>
+              <div className="row">
                 {
                   this.props.course.flow && this.props.course.flow.map((challenge, index) => {
                     return (
                       <div key={index} style={{width: challengeWidth + "%"}} className="text-center">
-                        <Link className={"btn btn-outline-secondary" + (challenge.id === this.props.challenge.id ? " active" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
+                        <Link className={"btn btn-timeline btn-outline-secondary" + (challenge.id === this.props.challenge.id ? " active" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
                       </div>
                     )
                   })
@@ -69,15 +75,8 @@ class Course extends Component {
               </div>
               <div className="row">
                 <div className="col-12">
-                  <hr className="course-timeline" />
+                  <p className="course-title-timeline text-center">Mini Course: {this.props.course.title} ~{secondsToMinutes(this.props.course.est_duration)} min</p>
                 </div>
-              </div>
-              <br />
-            </div>
-            <div className="row">
-              <div className="col-12">
-                <br />
-                <p className="text-center">{this.props.course.title}</p>
               </div>
             </div>
           </div>

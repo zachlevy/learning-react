@@ -1,5 +1,6 @@
 $color-green-primary: #34e89e;
 $color-green-secondary: #0f3443;
+$color-gray: #999999;
 
 .navbar-wrapper {
   border-bottom: 1px solid #999999;
@@ -10,7 +11,7 @@ $color-green-secondary: #0f3443;
   height: auto;
 }
 .course-timeline {
-  margin: -1.2em;
+  margin-bottom: -1em;
 }
 iframe.wikipedia {
   min-height: 70vh;
@@ -66,11 +67,19 @@ input.form-control {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
 }
+.course-title-timeline {
+  margin: 0.2em;
+  opacity: 0.6;
+}
 .navbar-logo {
   max-height: 1.6em;
   max-width: 1.6em;
   fill: red;
   vertical-align: middle;
+}
+.btn-timeline {
+  display: inline-block;
+  position:relative;
 }
 // bootstrap button
 .btn-outline-secondary {

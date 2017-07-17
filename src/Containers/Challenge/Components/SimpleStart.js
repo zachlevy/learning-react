@@ -20,7 +20,7 @@ class SimpleStart extends Component {
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button className="btn btn-secondary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
+              <button role="button" className="btn btn-secondary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
             </div>
           </div>
         </div>

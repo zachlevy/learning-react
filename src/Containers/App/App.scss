@@ -43,6 +43,10 @@ input.form-control {
     border-radius: 0;
     border-bottom-width: 2px;
   }
+  &::placeholder {
+    color: white;
+    opacity: 0.5;
+  }
 }
 .color-red {
   color: red;
@@ -63,6 +67,15 @@ input.form-control {
 }
 .challenge-description {
   padding-right: 1em;
+}
+.simple_q_and_a-question {
+  margin-top: 25vh;
+}
+.simple_signup-callToActionText {
+  margin-top: 25vh;
+}
+.simple_start-start {
+  margin-top: 25vh;
 }
 .full-height {
   height: 100%;

@@ -54,29 +54,28 @@ class SimpleQAndA extends Component {
       <div className="container">
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm-2 text-center">
-            <br />
-            <br />
-            <h1>{this.props.question}</h1>
+            <h1 className="simple_q_and_a-question">{this.props.question}</h1>
             <div className="form-group">
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} />
               <span className={"pull-right" + (remainingCharacters < 0 ? " color-red" : "")}>{remainingCharacters}</span>
             </div>
             <br />
-            <button role="button" className="btn btn-secondary" onClick={this.assert.bind(this)}>Check</button>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            <button role="button" className="btn btn-secondary" onClick={this.assert.bind(this)}>Check Answer</button>
           </div>
         </div>
         <div className="row">
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button role="button" className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
-              &nbsp;
-              <button role="button" className={"btn btn-secondary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
+              <ul className="list-inline">
+                <li className="list-inline-item challenge-description">{this.props.challengeDescription}</li>
+                <li className="list-inline-item">
+                  <button role="button" className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
+                </li>
+                <li className="list-inline-item">
+                  <button role="button" className={"btn btn-secondary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import FontAwesome from 'react-fontawesome'
 
 class SimpleStart extends Component {
   render() {
@@ -13,14 +16,24 @@ class SimpleStart extends Component {
         </div>
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm-2">
-            <h1>Start</h1>
+            <div className="simple_start-start text-center">
+              <br />
+              <h1>{this.props.course.title}</h1>
+              <br />
+              <h1><FontAwesome name="microchip" /></h1>
+            </div>
           </div>
         </div>
         <div className="row">
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button role="button" className="btn btn-secondary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
+              <ul className="list-inline">
+                <li className="list-inline-item challenge-description">Start</li>
+                <li className="list-inline-item">
+                  <button role="button" className="btn btn-secondary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -28,6 +41,10 @@ class SimpleStart extends Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  course: state.course
+})
 
 SimpleStart.propTypes = {
 
@@ -39,4 +56,7 @@ SimpleStart.propTypes = {
   challengeDescription: PropTypes.string
 }
 
-export default SimpleStart
+
+export default connect(
+  mapStateToProps
+)(SimpleStart)

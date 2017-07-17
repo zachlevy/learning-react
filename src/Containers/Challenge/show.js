@@ -46,7 +46,7 @@ class Challenge extends Component {
       <div>
         <div className="row">
           <div className="col-12">
-            <p className="text-center">{challenge.description}</p>
+            <p className="text-center challenge-description">{challenge.description}</p>
           </div>
         </div>
         <div className="row">

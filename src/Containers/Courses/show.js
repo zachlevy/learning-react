@@ -49,6 +49,7 @@ class Course extends Component {
     if (this.props.course.flow) {
       challengeWidth = Math.floor(100 / this.props.course.flow.length)
     }
+    let disableButtonsAtIndex = false
     return (
       <div id="course-show" className="course-show bg-gradient" style={gradientBackground("#000046", "#1CB5E0")}>
         <div className="bg-pattern full-height">
@@ -67,7 +68,7 @@ class Course extends Component {
                   this.props.course.flow && this.props.course.flow.map((challenge, index) => {
                     return (
                       <div key={index} style={{width: challengeWidth + "%"}} className="text-center">
-                        <Link className={"btn btn-timeline btn-outline-secondary" + (challenge.id === this.props.challenge.id ? " active" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
+                        <Link className={"btn btn-timeline btn-outline-secondary" + (disableButtonsAtIndex ? " disabled" : "") + (challenge.id === this.props.challenge.id ? disableButtonsAtIndex = true && " active" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
                       </div>
                     )
                   })

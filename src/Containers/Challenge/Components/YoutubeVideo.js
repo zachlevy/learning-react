@@ -56,9 +56,15 @@ class YoutubeVideo extends Component {
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button role="button" className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
-              &nbsp;
-              <button role="button" className="btn btn-secondary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
+              <ul className="list-inline">
+                <li className="list-inline-item challenge-description">{this.props.challengeDescription}</li>
+                <li className="list-inline-item">
+                  <button role="button" className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
+                </li>
+                <li className="list-inline-item">
+                  <button role="button" className="btn btn-secondary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -76,7 +82,8 @@ YoutubeVideo.propTypes = {
   handleSkipClick: PropTypes.func,
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
-  challengeId: PropTypes.number
+  challengeId: PropTypes.number,
+  challengeDescription: PropTypes.string
 }
 
 export default YoutubeVideo

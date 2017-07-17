@@ -94,7 +94,8 @@ SimpleQAndA.propTypes = {
   handleSkipClick: PropTypes.func,
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
-  challengeId: PropTypes.number
+  challengeId: PropTypes.number,
+  challengeDescription: PropTypes.string
 }
 
 export default SimpleQAndA

@@ -76,7 +76,8 @@ SentimentQAndA.propTypes = {
   sentiment: PropTypes.string,
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
-  challengeId: PropTypes.number
+  challengeId: PropTypes.number,
+  challengeDescription: PropTypes.string
 }
 
 export default SentimentQAndA

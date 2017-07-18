@@ -26,16 +26,10 @@ class SimpleStart extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-12 col-md-10">
-            <div className="float-md-right">
-              <br />
-              <ul className="list-inline">
-                <li className="list-inline-item challenge-description">Start</li>
-                <li className="list-inline-item">
-                  <button role="button" className="btn btn-secondary" onClick={this.props.handleNextClick.bind(this)}>Next</button>
-                </li>
-              </ul>
-            </div>
+          <div className="col-12 text-center">
+            <br />
+            <br />
+            <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.props.handleNextClick.bind(this)}>Start</button>
           </div>
         </div>
       </div>

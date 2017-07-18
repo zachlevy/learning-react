@@ -11,7 +11,10 @@ $color-gray: #999999;
   height: auto;
 }
 .course-timeline {
-  margin-bottom: -1em;
+  bottom: -2.23em;
+  position: absolute;
+  width: 100%;
+  background-color: rgba(255,255,255,0.4)
 }
 iframe.wikipedia {
   min-height: 70vh;
@@ -65,10 +68,22 @@ input.form-control {
   position: relative;
 }
 .course-progress {
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  width: 100%;
-  opacity: 0.7;
+  left: 10%;
+  right: -10%;
+  width: 80%;
+
+
+  .btn-link {
+    color: black;
+  }
+  .progress-bar {
+    background-color: #aaaaaa;
+  }
+  .timeline-icon {
+    display: inline-block;
+  }
 }
 .challenge-description {
   padding-right: 1em;

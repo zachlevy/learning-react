@@ -47,9 +47,11 @@ class Course extends Component {
   render() {
     let challengeWidth
     if (this.props.course.flow) {
-      challengeWidth = Math.floor(100 / this.props.course.flow.length)
+      challengeWidth = Math.floor(10000 / this.props.course.flow.length) / 100
     }
-    let disableButtonsAtIndex = false
+    const challengeIndex = this.props.course.flow && this.props.course.flow.findIndex((challenge) => {return this.props.challenge.id === challenge.id})
+    const progressWidth = challengeIndex * challengeWidth + "%"
+    console.log("challengeIndex", challengeIndex)
     return (
       <div id="course-show" className="course-show bg-gradient" style={gradientBackground(this.props.course.ui && this.props.course.ui.primaryColor, this.props.course.ui && this.props.course.ui.secondaryColor)}>
         <div className="bg-pattern full-height">
@@ -60,19 +62,23 @@ class Course extends Component {
             <div className="course-progress">
               <div className="row">
                 <div className="col-12">
-                  <hr className="course-timeline" />
+                  <div className="progress course-timeline">
+                    <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: progressWidth}}></div>
+                  </div>
                 </div>
               </div>
               <div className="row">
-                {
-                  this.props.course.flow && this.props.course.flow.map((challenge, index) => {
-                    return (
-                      <div key={index} style={{width: challengeWidth + "%"}} className="text-center">
-                        <Link className={"btn btn-timeline btn-outline-secondary" + (disableButtonsAtIndex ? " disabled" : "") + (challenge.id === this.props.challenge.id ? disableButtonsAtIndex = true && " active" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
-                      </div>
-                    )
-                  })
-                }
+                <div className="col-12">
+                  {
+                    this.props.course.flow && this.props.course.flow.map((challenge, index) => {
+                      return (
+                        <div key={index} style={{width: challengeWidth + "%"}} className="text-center timeline-icon">
+                          <Link className={"btn btn-timeline btn-link" + (index > challengeIndex ? " disabled" : "") + (index === challengeIndex ? " active" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
               </div>
               <div className="row">
                 <div className="col-12">

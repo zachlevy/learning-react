@@ -31,16 +31,24 @@ iframe.wikipedia {
 .bg-white {
   background-color: white;
 }
-.bg-gradient:before {
+.bg-subtle:before {
     content: "";
     width: 100%;
     height: 100%;
     opacity: 0.03;
-    background-image: url("/subtle-1.png");
     display: block;
     position: absolute;
     left: 0;
     top: 0;
+}
+.bg-subtle-diamond:before {
+  background-image: url("/diamond-subtle.png");
+}
+.bg-subtle-hex:before {
+  background-image: url("/hex-subtle.png");
+}
+.bg-subtle-swirls:before {
+  background-image: url("/swirls-subtle.png");
 }
 input.form-control {
   color: white;

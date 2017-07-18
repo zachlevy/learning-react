@@ -26,7 +26,7 @@ class Home extends Component {
       <div>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-12 text-center bg-gradient" style={gradientBackground("#34e89e", "#0f3443")}>
+            <div className="col-12 text-center bg-gradient bg-subtle bg-subtle-diamond" style={gradientBackground("#e52d27", "#b31217")}>
               <br />
               <br />
               <br />
@@ -56,7 +56,7 @@ class Home extends Component {
           <br />
         </div>
         <br />
-        <div className="container-fluid bg-gradient" style={gradientBackground("#34e89e", "#0f3443")}>
+        <div className="container-fluid bg-gradient bg-subtle bg-subtle-hex" style={gradientBackground("#AA076B", "#61045F")}>
           <div className="row">
             <div className="col-12 col-sm-8 offset-sm-2 text-center">
               <br />

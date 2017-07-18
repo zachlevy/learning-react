@@ -105,6 +105,16 @@ input.form-control {
 .simple_q_and_a-question {
   margin-top: 25vh;
 }
+.simple_q_and_a-feedback {
+  text-align: left;
+  background-color: white;
+  padding: 0.5em 1em;
+  opacity: 0.8;
+  color: #222222;
+  p {
+    margin-bottom: 0;
+  }
+}
 .simple_signup-callToActionText {
   margin-top: 25vh;
 }

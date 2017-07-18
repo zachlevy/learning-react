@@ -7,7 +7,8 @@ class SimpleQAndA extends Component {
     super()
     this.state = {
       input: "",
-      showHelp: false
+      showHelp: false,
+      feedback: ""
     }
   }
   assert(event) {
@@ -15,7 +16,10 @@ class SimpleQAndA extends Component {
     let answered
     answered = this.state.input === this.props.answer
     if (answered) {
+      this.setState({feedback: "Correct!"})
       this.props.handleShowNextButton()
+    } else {
+      this.setState({feedback: "Incorrect answer, try again!"})
     }
 
     // check if answer is correct
@@ -47,7 +51,7 @@ class SimpleQAndA extends Component {
   }
 
   handleKeyUp(e) {
-    this.setState({input: e.target.value})
+    this.setState({input: e.target.value, feedback: ""})
   }
 
   render() {
@@ -66,6 +70,14 @@ class SimpleQAndA extends Component {
         </li>
       )
     }
+    let feedback
+    if (this.state.feedback) {
+      feedback = (
+        <div className="simple_q_and_a-feedback">
+          <p>{this.state.feedback}</p>
+        </div>
+      )
+    }
     return (
       <div className="container">
         <div className="row">
@@ -73,7 +85,14 @@ class SimpleQAndA extends Component {
             <h1 className="simple_q_and_a-question">{this.props.question}</h1>
             <div className="form-group">
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} />
-              <span className={"pull-right" + (remainingCharacters < 0 ? " color-red" : "")}>{remainingCharacters}</span>
+              <div className="row">
+                <div className="col-12 col-sm-6">
+                  {feedback}
+                </div>
+                <div className="col-12 col-sm-6">
+                  <span className={"pull-right" + (remainingCharacters < 0 ? " color-red" : "")}>{remainingCharacters}</span>
+                </div>
+              </div>
             </div>
             <br />
             <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.assert.bind(this)}>Check Answer</button>

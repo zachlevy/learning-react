@@ -20,6 +20,11 @@ iframe.wikipedia {
 .bg-gradient {
   color: white;
 }
+.bg-gradient {
+  .course-thumb {
+    color: black;
+  }
+}
 .bg-gradient:before {
     content: "";
     width: 100%;

@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { secondsToMinutes } from '../../../modules/time'
+import FontAwesome from 'react-fontawesome'
 
 class WikipediaNotes extends Component {
   constructor() {
     super()
     this.state = {
-      input: ""
+      input: "",
+      showHelp: false
     }
   }
   assert() {
@@ -51,6 +53,20 @@ class WikipediaNotes extends Component {
   render() {
     console.log("ok")
     const content = this.props
+    let help
+    if (this.state.showHelp) {
+      help = (
+        <li className="list-inline-item">
+          <p className="challenge-description">{this.props.challengeDescription}</p>
+        </li>
+      )
+    } else {
+      help = (
+        <li className="list-inline-item">
+          <button role="button" className="btn btn-link" onClick={e => this.setState({showHelp: true})}>help <FontAwesome name="question-circle" /></button>
+        </li>
+      )
+    }
     return (
       <div className="container">
         <div className="row">
@@ -74,12 +90,12 @@ class WikipediaNotes extends Component {
                   <div className="float-md-right">
                     <br />
                     <ul className="list-inline">
-                      <li className="list-inline-item challenge-description">{this.props.challengeDescription}</li>
+                      {help}
                       <li className="list-inline-item">
-                        <button role="button" className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
+                        <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
                       </li>
                       <li className="list-inline-item">
-                        <button role="button" className={"btn btn-secondary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.handleNextClick.bind(this)}>Next</button>
+                        <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.handleNextClick.bind(this)}>Next</button>
                       </li>
                     </ul>
                   </div>

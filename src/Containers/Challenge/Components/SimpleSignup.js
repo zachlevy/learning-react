@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import FontAwesome from 'react-fontawesome'
 
 class SimpleSignup extends Component {
   constructor() {
     super()
     this.state = {
-      email: ""
+      email: "",
+      showHelp: false
     }
   }
   assert(event) {
@@ -41,32 +43,46 @@ class SimpleSignup extends Component {
   }
 
   render() {
+    let help
+    if (this.state.showHelp) {
+      help = (
+        <li className="list-inline-item">
+          <p className="challenge-description">{this.props.challengeDescription}</p>
+        </li>
+      )
+    } else {
+      help = (
+        <li className="list-inline-item">
+          <button role="button" className="btn btn-link" onClick={e => this.setState({showHelp: true})}>help <FontAwesome name="question-circle" /></button>
+        </li>
+      )
+    }
     return (
       <div className="container">
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm-2 text-center">
+            <h4 className="simple_signup-callToActionText">{this.props.callToActionText}</h4>
             <br />
-            <br />
-            <p>{this.props.question}</p>
             <div className="form-group">
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} placeholder="email@example.com" />
             </div>
             <br />
-            <button className="btn btn-primary" onClick={this.assert.bind(this)}>{this.props.buttonText}</button>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            <button className="btn btn-outline-secondary btn-lg" onClick={this.assert.bind(this)}>{this.props.buttonText}</button>
           </div>
         </div>
         <div className="row">
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button className="btn btn-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
-              &nbsp;
-              <button className={"btn btn-primary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
+              <ul className="list-inline">
+                {help}
+                <li className="list-inline-item">
+                  <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
+                </li>
+                <li className="list-inline-item">
+                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -76,14 +92,15 @@ class SimpleSignup extends Component {
 }
 
 SimpleSignup.propTypes = {
-  question: PropTypes.string,
+  callToActionText: PropTypes.string,
   buttonText: PropTypes.string,
 
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
-  challengeId: PropTypes.number
+  challengeId: PropTypes.number,
+  challengeDescription: PropTypes.string
 }
 
 export default SimpleSignup

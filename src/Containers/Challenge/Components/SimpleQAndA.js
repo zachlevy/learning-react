@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import FontAwesome from 'react-fontawesome'
 
 class SimpleQAndA extends Component {
   constructor() {
     super()
     this.state = {
-      input: ""
+      input: "",
+      showHelp: false
     }
   }
   assert(event) {
@@ -50,20 +52,31 @@ class SimpleQAndA extends Component {
 
   render() {
     const remainingCharacters = this.props.max_length - this.state.input.length
+    let help
+    if (this.state.showHelp) {
+      help = (
+        <li className="list-inline-item">
+          <p className="challenge-description">{this.props.challengeDescription}</p>
+        </li>
+      )
+    } else {
+      help = (
+        <li className="list-inline-item">
+          <button role="button" className="btn btn-link" onClick={e => this.setState({showHelp: true})}>help <FontAwesome name="question-circle" /></button>
+        </li>
+      )
+    }
     return (
       <div className="container">
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm-2 text-center">
-            <br />
-            <br />
-            <h1>{this.props.question}</h1>
+            <h1 className="simple_q_and_a-question">{this.props.question}</h1>
             <div className="form-group">
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} />
               <span className={"pull-right" + (remainingCharacters < 0 ? " color-red" : "")}>{remainingCharacters}</span>
             </div>
             <br />
-            <button className="btn btn-primary" onClick={this.assert.bind(this)}>Check</button>
-            <br />
+            <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.assert.bind(this)}>Check Answer</button>
             <br />
             <br />
             <br />
@@ -74,9 +87,15 @@ class SimpleQAndA extends Component {
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button className="btn btn-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
-              &nbsp;
-              <button className={"btn btn-primary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
+              <ul className="list-inline">
+                {help}
+                <li className="list-inline-item">
+                  <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this)}>skip</button>
+                </li>
+                <li className="list-inline-item">
+                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -94,7 +113,8 @@ SimpleQAndA.propTypes = {
   handleSkipClick: PropTypes.func,
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
-  challengeId: PropTypes.number
+  challengeId: PropTypes.number,
+  challengeDescription: PropTypes.string
 }
 
 export default SimpleQAndA

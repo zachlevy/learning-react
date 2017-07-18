@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { secondsToMinutes } from '../../../modules/time'
+import FontAwesome from 'react-fontawesome'
 
 class WikipediaNotes extends Component {
   constructor() {
     super()
     this.state = {
-      input: ""
+      input: "",
+      showHelp: false
     }
   }
   assert() {
@@ -51,6 +53,20 @@ class WikipediaNotes extends Component {
   render() {
     console.log("ok")
     const content = this.props
+    let help
+    if (this.state.showHelp) {
+      help = (
+        <li className="list-inline-item">
+          <p className="challenge-description">{this.props.challengeDescription}</p>
+        </li>
+      )
+    } else {
+      help = (
+        <li className="list-inline-item">
+          <button role="button" className="btn btn-link" onClick={e => this.setState({showHelp: true})}>help <FontAwesome name="question-circle" /></button>
+        </li>
+      )
+    }
     return (
       <div className="container">
         <div className="row">
@@ -68,18 +84,23 @@ class WikipediaNotes extends Component {
           <div className="col-12 col-sm-6">
             <div className="form-group">
               <label htmlFor="notes">Your Notes</label>
-              <textarea className="form-control" id="notes" rows="15" onKeyUp={this.handleKeyUp.bind(this)}></textarea>
-            </div>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-md-10">
-            <div className="float-md-right">
-              <br />
-              <button className="btn btn-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
-              &nbsp;
-              <button className={"btn btn-primary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.handleNextClick.bind(this)}>Next</button>
-              <pre>{this.props.showNextButton}</pre>
+              <textarea className="form-control" id="notes" rows="15" onKeyUp={this.handleKeyUp.bind(this)} placeholder="..."></textarea>
+              <div className="row">
+                <div className="col-12">
+                  <div className="float-md-right">
+                    <br />
+                    <ul className="list-inline">
+                      {help}
+                      <li className="list-inline-item">
+                        <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
+                      </li>
+                      <li className="list-inline-item">
+                        <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.handleNextClick.bind(this)}>Next</button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -98,7 +119,8 @@ WikipediaNotes.propTypes = {
   handleSkipClick: PropTypes.func,
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
-  challengeId: PropTypes.number
+  challengeId: PropTypes.number,
+  challengeDescription: PropTypes.string
 }
 
 export default WikipediaNotes

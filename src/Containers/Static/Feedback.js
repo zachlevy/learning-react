@@ -78,7 +78,7 @@ class Feedback extends Component {
                   </Label>
                 </FormGroup>
 
-                <button className="btn btn-primary" onClick={this.handleFormSubmit.bind(this)}>Submit</button>
+                <button role="button" className="btn btn-primary" onClick={this.handleFormSubmit.bind(this)}>Submit</button>
               </Form>
             </div>
           </div>

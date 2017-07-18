@@ -46,11 +46,6 @@ class Challenge extends Component {
       <div>
         <div className="row">
           <div className="col-12">
-            <p className="text-center">{challenge.description}</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12">
             { challenge.body && getChallengeComponent(
               challenge.challenge_type.name,
               Object.assign(
@@ -61,7 +56,8 @@ class Challenge extends Component {
                   handleSkipClick: this.props.handleSkipClick.bind(this),
                   showNextButton: this.state.showNextButton,
                   handleShowNextButton: this.handleShowNextButton.bind(this),
-                  challengeId: challenge.id
+                  challengeId: challenge.id,
+                  challengeDescription: challenge.description
                 })) }
           </div>
         </div>

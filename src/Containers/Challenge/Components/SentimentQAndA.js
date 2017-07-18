@@ -53,16 +53,16 @@ class SentimentQAndA extends Component {
           <div className="col-12">
             <p>Question: {this.props.question}</p>
             <input onKeyUp={this.handleKeyUp.bind(this)} />
-            <button onClick={this.assert.bind(this)}>Check</button>
+            < role="button" onClick={this.assert.bind(this)}>Check</button>
           </div>
         </div>
         <div className="row">
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button className="btn btn-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
+              <button role="button" className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
               &nbsp;
-              <button className={"btn btn-primary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
+              <button role="button" className={"btn btn-secondary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
             </div>
           </div>
         </div>
@@ -76,7 +76,8 @@ SentimentQAndA.propTypes = {
   sentiment: PropTypes.string,
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
-  challengeId: PropTypes.number
+  challengeId: PropTypes.number,
+  challengeDescription: PropTypes.string
 }
 
 export default SentimentQAndA

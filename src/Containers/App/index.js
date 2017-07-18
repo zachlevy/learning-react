@@ -7,6 +7,7 @@ import Courses from '../Courses'
 import Feedback from '../Static/Feedback'
 import Course from '../Courses/show'
 import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Collapse } from 'reactstrap'
+import Logo from '../../vora_logo_20170717.svg'
 
 class App extends Component {
   constructor() {
@@ -21,11 +22,15 @@ class App extends Component {
   render() {
     return (
       <div>
-        <div className="bg-faded">
+        <div className="bg-faded navbar-wrapper">
           <div className="container">
             <Navbar color="faded" light toggleable>
               <NavbarToggler right onClick={this.toggle.bind(this)} />
-              <NavbarBrand tag={Link} to="/">Vora</NavbarBrand>
+              <NavbarBrand tag={Link} to="/">
+                <svg className="navbar-logo">
+                  <use xlinkHref={Logo + "#logo-layer"}></use>
+                </svg> Vora
+              </NavbarBrand>
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <NavItem>

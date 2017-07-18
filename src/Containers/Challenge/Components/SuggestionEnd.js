@@ -35,12 +35,14 @@ class SuggestionEnd extends Component {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <h2 className="text-center">{content.title}</h2>
+            <h4 className="text-center">{content.title}</h4>
           </div>
         </div>
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm-2">
-            <h1>Suggested Courses</h1>
+            <br />
+            <h3 className="text-center">Suggested Courses</h3>
+            <br />
             {
               this.state.courses.map((course, index) => {
                 return <CourseThumb className="col-12 col-sm-6" key={index} course={course} handleCourseClick={this.handleCourseClick.bind(this)}  />
@@ -52,7 +54,7 @@ class SuggestionEnd extends Component {
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button className="btn btn-primary" onClick={this.handleFinishClick.bind(this)}>Finish Course</button>
+              <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.handleFinishClick.bind(this)}>All Mini Courses</button>
             </div>
           </div>
         </div>
@@ -67,7 +69,8 @@ SuggestionEnd.propTypes = {
   handleSkipClick: PropTypes.func,
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
-  challengeId: PropTypes.number
+  challengeId: PropTypes.number,
+  challengeDescription: PropTypes.string
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({

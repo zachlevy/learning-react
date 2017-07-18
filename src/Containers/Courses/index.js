@@ -24,7 +24,7 @@ class Courses extends Component {
 
   render() {
     return (
-      <div className="courses-index container-fluid bg-gradient bg-subtle bg-subtle-swirls" style={gradientBackground("#000046", "#1CB5E0")}>
+      <div className="courses-index container-fluid">
         <div className="container">
 
           <div className="row">

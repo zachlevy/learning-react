@@ -24,9 +24,9 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="container-fluid bg-gradient bg-subtle bg-subtle-diamond" style={gradientBackground("#e52d27", "#b31217")}>
           <div className="row">
-            <div className="col-12 text-center bg-gradient bg-subtle bg-subtle-diamond" style={gradientBackground("#e52d27", "#b31217")}>
+            <div className="col-12 text-center">
               <br />
               <br />
               <br />
@@ -34,7 +34,7 @@ class Home extends Component {
               <h2>Gain Perspective. Find your passion.</h2>
               <h4>And help science while doing it</h4>
               <br />
-              <Link role="button" className="btn btn-outline-secondary btn-lg" to={`/courses`}>Let's do it</Link>
+              <Link className="btn btn-outline-secondary btn-lg" to={`/courses`}>Let's do it</Link>
               <br />
               <br />
               <br />

@@ -20,7 +20,8 @@ class SimpleStart extends Component {
               <br />
               <h1>{this.props.course.title}</h1>
               <br />
-              <h1><FontAwesome name="microchip" /></h1>
+              <br />
+              <h1 className="simple_start-icon"><FontAwesome name={this.props.course.ui && this.props.course.ui.icon} /></h1>
             </div>
           </div>
         </div>

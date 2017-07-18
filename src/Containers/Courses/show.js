@@ -51,7 +51,7 @@ class Course extends Component {
     }
     let disableButtonsAtIndex = false
     return (
-      <div id="course-show" className="course-show bg-gradient" style={gradientBackground("#000046", "#1CB5E0")}>
+      <div id="course-show" className="course-show bg-gradient" style={gradientBackground(this.props.course.ui && this.props.course.ui.primaryColor, this.props.course.ui && this.props.course.ui.secondaryColor)}>
         <div className="bg-pattern full-height">
           <div className="container full-height">
             <Switch>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import CourseThumb from './CourseThumb'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { setCourses } from '../../modules/courses'
+import { gradientBackground } from '../../modules/styles'
+import CourseList from './list'
 
 class Courses extends Component {
   componentDidMount() {
@@ -23,20 +24,17 @@ class Courses extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="courses-index container-fluid bg-gradient" style={gradientBackground("#000046", "#1CB5E0")}>
+        <div className="container">
 
-        <div className="row">
-          <div className="col-12">
-            <br />
-            <h3 className="text-center">Mini Courses are the smartest way to learn</h3>
-            <br />
+          <div className="row">
+            <div className="col-12">
+              <br />
+              <h3 className="text-center">Mini Courses are the smartest way to learn</h3>
+              <br />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          {
-            this.props.courses && this.props.courses.map((course, index) => <CourseThumb className="col-12 col-sm-4" key={index} course={course} handleCourseClick={this.handleCourseClick.bind(this)} />)
-          }
-
+          <CourseList courses={this.props.courses} handleCourseClick={this.handleCourseClick.bind(this)} />
         </div>
       </div>
     )

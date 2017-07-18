@@ -3,7 +3,7 @@ $color-green-secondary: #0f3443;
 $color-gray: #999999;
 
 .navbar-wrapper {
-  border-bottom: 1px solid #999999;
+  border-bottom: 1px solid #cccccc;
 }
 
 .iframe {
@@ -27,6 +27,9 @@ iframe.wikipedia {
   .course-thumb {
     color: black;
   }
+}
+.bg-white {
+  background-color: white;
 }
 .bg-gradient:before {
     content: "";
@@ -66,6 +69,9 @@ input.form-control {
 .course-show {
   height: 100vh;
   position: relative;
+}
+.courses-index {
+  padding-bottom: 3em;
 }
 .course-progress {
   position: fixed;

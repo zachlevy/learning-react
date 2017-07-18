@@ -33,8 +33,7 @@ class CourseThumb extends Component {
 }
 
 CourseThumb.propTypes = {
-  course: PropTypes.object,
-  handleCourseClick: PropTypes.func
+  course: PropTypes.object
 }
 
 export default CourseThumb

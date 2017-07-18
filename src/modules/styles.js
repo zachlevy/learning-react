@@ -8,3 +8,15 @@ export const gradientBackground = (primaryColor, secondaryColor) => {
     background: `linear-gradient(to bottom right, ${primaryColor}, ${secondaryColor})`, /* Standard syntax */
   }
 }
+
+export const arrayChunk = (array, groupSize) => {
+  let sets = []
+  let chunks
+  let i = 0
+  chunks = array.length / groupSize
+  while(i < chunks){
+    sets[i] = array.splice(0, groupSize)
+    i++
+  }
+  return sets
+}

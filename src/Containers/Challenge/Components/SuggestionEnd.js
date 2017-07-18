@@ -41,7 +41,7 @@ class SuggestionEnd extends Component {
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm-2">
             <br />
-            <h3 className="text-center">Suggested Courses</h3>
+            <h3 className="text-center">Recommended Mini Courses</h3>
             <br />
             {
               this.state.courses.map((course, index) => {

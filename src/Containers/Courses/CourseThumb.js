@@ -27,6 +27,7 @@ class CourseThumb extends Component {
             </ul>
           </div>
         </div>
+        <br />
       </div>
     )
   }

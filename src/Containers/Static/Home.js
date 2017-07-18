@@ -46,11 +46,14 @@ class Home extends Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-12">
-              <h4 className="text-center">Featured Mini Courses</h4>
+              <br />
+              <h3 className="text-center">Featured Mini Courses</h3>
+              <h5 className="text-center">Mini Courses are the smartest way to learn</h5>
               <br />
             </div>
           </div>
           <CourseList courses={this.props.featuredCourses} />
+          <br />
         </div>
         <br />
         <div className="container-fluid bg-gradient" style={gradientBackground("#34e89e", "#0f3443")}>
@@ -60,7 +63,8 @@ class Home extends Component {
               <br />
               <br />
               <br />
-              <p><em>Vora is finding the smartest way to learn. We see lots of room for improvment in how humans learn. We&#39;re running thousands of experiments on how people learn to improve the learning process for everyone.</em></p>
+              <h2>About Vora</h2>
+              <h4><em>Vora is finding the smartest way to learn. We see lots of room for improvment in how humans learn. We&#39;re running thousands of experiments on how people learn to improve the learning process for everyone.</em></h4>
               <br />
               <br />
               <br />

@@ -27,6 +27,7 @@ class Courses extends Component {
 
         <div className="row">
           <div className="col-12">
+            <br />
             <h3 className="text-center">Mini Courses are the smartest way to learn</h3>
             <br />
           </div>

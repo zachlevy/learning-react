@@ -27,12 +27,13 @@ class Courses extends Component {
 
         <div className="row">
           <div className="col-12">
-            <h1>Mini Courses</h1>
+            <h3 className="text-center">Mini Courses are the smartest way to learn</h3>
+            <br />
           </div>
         </div>
         <div className="row">
           {
-            this.props.courses && this.props.courses.map((course, index) => <CourseThumb className="col-12 col-sm-3" key={index} course={course} handleCourseClick={this.handleCourseClick.bind(this)} />)
+            this.props.courses && this.props.courses.map((course, index) => <CourseThumb className="col-12 col-sm-4" key={index} course={course} handleCourseClick={this.handleCourseClick.bind(this)} />)
           }
 
         </div>

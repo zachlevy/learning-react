@@ -19,7 +19,7 @@ const Home = props => (
           <h2>Gain Perspective. Find your passion.</h2>
           <h4>And help science while doing it</h4>
           <br />
-          <Link className="btn btn-primary" to={`/courses`}>Let's do it</Link>
+          <Link role="button" className="btn btn-outline-secondary btn-lg" to={`/courses`}>Let's do it</Link>
           <br />
           <br />
           <br />
@@ -29,31 +29,23 @@ const Home = props => (
     </div>
     <br />
     <Courses />
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-12">
-          <hr />
-        </div>
-      </div>
-    </div>
-    <div className="container">
+    <br />
+    <div className="container-fluid bg-gradient" style={gradientBackground("#34e89e", "#0f3443")}>
       <div className="row">
         <div className="col-12 col-sm-8 offset-sm-2 text-center">
           <br />
           <br />
-          <p><em>The mission of Vora Learning is to continuously improve the learning process for individuals. We see lots of room for improvment in how humans learn. We use scientific experiments to improve to make you learn more and retain more.</em></p>
+          <br />
+          <br />
+          <p><em>Vora is finding the smartest way to learn. We see lots of room for improvment in how humans learn. We&#39;re running thousands of experiments on how people learn to improve the learning process for everyone.</em></p>
+          <br />
+          <br />
           <br />
           <br />
         </div>
       </div>
     </div>
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-12">
-          <hr />
-        </div>
-      </div>
-    </div>
+    <br />
     <Footer />
   </div>
 )

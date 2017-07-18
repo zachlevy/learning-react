@@ -8,7 +8,8 @@ class WikipediaNotes extends Component {
     super()
     this.state = {
       input: "",
-      showHelp: false
+      showHelp: false,
+      feedback: ""
     }
   }
   assert() {
@@ -67,6 +68,14 @@ class WikipediaNotes extends Component {
         </li>
       )
     }
+    let feedback
+    if (this.state.feedback) {
+      feedback = (
+        <div className="wikipedia_notes-feedback">
+          <p>{this.state.feedback}</p>
+        </div>
+      )
+    }
     return (
       <div className="container">
         <div className="row">
@@ -85,6 +94,7 @@ class WikipediaNotes extends Component {
             <div className="form-group">
               <label htmlFor="notes">Your Notes</label>
               <textarea className="form-control" id="notes" rows="15" onKeyUp={this.handleKeyUp.bind(this)} placeholder="..."></textarea>
+              <p>{feedback}</p>
               <div className="row">
                 <div className="col-12">
                   <div className="float-md-right">

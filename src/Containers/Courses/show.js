@@ -20,6 +20,8 @@ class Course extends Component {
       // this.setState({course: response})
       this.props.setCourse(response)
     })
+    // scroll below navbar to give full screen effect
+    document.getElementById("course-show").scrollIntoView()
   }
 
   handleNextClick() {

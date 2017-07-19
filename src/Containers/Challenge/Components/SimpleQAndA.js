@@ -8,7 +8,9 @@ class SimpleQAndA extends Component {
     this.state = {
       input: "",
       showHelp: false,
-      feedback: ""
+      feedback: "",
+      submitButtonText: "Check Answer",
+      showSubmitButton: true
     }
   }
   assert(event) {
@@ -16,7 +18,7 @@ class SimpleQAndA extends Component {
     let answered
     answered = this.state.input === this.props.answer
     if (answered) {
-      this.setState({feedback: "Correct!"})
+      this.setState({feedback: "Correct!", submitButtonText: "Correct", showSubmitButton: false})
       this.props.handleShowNextButton()
     } else {
       this.setState({feedback: "Incorrect answer, try again!"})
@@ -54,6 +56,17 @@ class SimpleQAndA extends Component {
     this.setState({input: e.target.value, feedback: ""})
   }
 
+  handleNextClick() {
+    if (this.props.showNextButton) {
+      this.props.handleNextClick.bind(this)
+    } else {
+      this.handleShowHelp.bind(this)
+    }
+  }
+  handleShowHelp() {
+    this.setState({showHelp: true})
+  }
+
   render() {
     const remainingCharacters = this.props.max_length - this.state.input.length
     let help
@@ -66,7 +79,7 @@ class SimpleQAndA extends Component {
     } else {
       help = (
         <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={e => this.setState({showHelp: true})}>help <FontAwesome name="question-circle" /></button>
+          <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
         </li>
       )
     }
@@ -95,7 +108,7 @@ class SimpleQAndA extends Component {
               </div>
             </div>
             <br />
-            <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.assert.bind(this)}>Check Answer</button>
+            <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.state.showSubmitButton ? "" : " disabled")} onClick={this.state.showSubmitButton && this.assert.bind(this)}>{this.state.submitButtonText}</button>
             <br />
             <br />
             <br />
@@ -112,7 +125,7 @@ class SimpleQAndA extends Component {
                   <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this)}>skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this) || this.assert.bind(this)}>Next</button>
+                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this) || this.handleShowHelp.bind(this) }>Next</button>
                 </li>
               </ul>
             </div>

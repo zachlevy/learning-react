@@ -112,7 +112,7 @@ class SimpleQAndA extends Component {
                   <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this)}>skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
+                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this) || this.assert.bind(this)}>Next</button>
                 </li>
               </ul>
             </div>

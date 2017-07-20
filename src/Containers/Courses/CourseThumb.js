@@ -12,12 +12,13 @@ class CourseThumb extends Component {
     return (
       <div className={this.props.className}>
         <div className="card course-thumb">
-          <div className={"card-img-top bg-gradient bg-subtle bg-subtle-" + (course.ui.subtle)} style={Object.assign({}, gradientBackground(course.ui.primaryColor, course.ui.secondaryColor), {height: "300px"})}>
+          <div className={"card-img-top bg-gradient bg-subtle bg-subtle-" + (course.ui.subtle)} style={Object.assign({}, gradientBackground(course.ui.primaryColor, course.ui.secondaryColor), {minHeight: "350px"})}>
             <div className="row">
               <div className="col-12 text-center">
                 <h1 className=""><FontAwesome name={course.ui.icon} /></h1>
                 <h5>{course.title}</h5>
                 <p>{secondsToMinutes(course.est_duration)} min</p>
+                <p>{course.description}</p>
                 <ul className="list-inline">
                 {
                   course.tags.map((tag, index) => <li key={index} className="list-inline-item"><Badge color="default">{tag}</Badge></li>)

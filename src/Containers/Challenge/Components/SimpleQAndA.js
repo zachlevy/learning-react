@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
+import Dictionary from '../../Shared/Dictionary'
+import reactStringReplace from 'react-string-replace'
 
 class SimpleQAndA extends Component {
   constructor() {
@@ -99,11 +101,18 @@ class SimpleQAndA extends Component {
         </div>
       )
     }
+    let question = this.props.question
+    this.props.dictionary.forEach((dictTerm, index) => {
+      question = reactStringReplace(this.props.question, dictTerm.term, (match, i) => {
+        return <Dictionary index={"dictionary-" + index} term={dictTerm.term} definition={dictTerm.definition} link={dictTerm.link} />
+      })
+      // question = "hihii"
+    })
     return (
       <div className="container">
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm-2 text-center">
-            <h1 className="simple_q_and_a-question">{this.props.question}</h1>
+            <h1 className="simple_q_and_a-question">{question}</h1>
             <div className="form-group">
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} />
               <div className="row">

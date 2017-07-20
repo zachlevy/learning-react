@@ -19,12 +19,26 @@ class SimpleQAndA extends Component {
     console.log()
     let answered
     console.log("this.props.answer_type", this.props.answer_type)
-    if (this.props.answer_type === "regex") {
+    if (this.props.answer_type === "regex" && Array.isArray(this.props.answer)) {
+      // regex match for array
+      this.props.answer.forEach((a) => {
+        console.log(a, this.state.input, !!this.state.input.toLowerCase().match(a.toLowerCase()))
+        if (!!this.state.input.toLowerCase().match(a.toLowerCase())) {
+          answered = true
+        }
+      })
+    } else if (this.props.answer_type === "regex") {
       // regex match
       answered = !!this.state.input.toLowerCase().match(this.props.answer.toLowerCase())
       console.log(this.state.input.toLowerCase().match(this.props.answer.toLowerCase()))
+    } else if (Array.isArray(this.props.answer)) {
+      // array exact
+      console.log("is array answer")
+      const answersLowercase = this.props.answer.map((a) => {return a.toLowerCase()})
+
+      answered = answersLowercase.includes(this.state.input.toLowerCase())
     } else {
-      // direct match
+      // exact match
       answered = this.state.input.toLowerCase() === this.props.answer.toLowerCase()
     }
     if (answered) {
@@ -102,7 +116,7 @@ class SimpleQAndA extends Component {
       )
     }
     let question = this.props.question
-    this.props.dictionary.forEach((dictTerm, index) => {
+    this.props.dictionary && this.props.dictionary.forEach((dictTerm, index) => {
       question = reactStringReplace(this.props.question, dictTerm.term, (match, i) => {
         return <Dictionary index={"dictionary-" + index} term={dictTerm.term} definition={dictTerm.definition} link={dictTerm.link} />
       })
@@ -155,7 +169,7 @@ class SimpleQAndA extends Component {
 
 SimpleQAndA.propTypes = {
   question: PropTypes.string,
-  answer: PropTypes.string,
+  answer: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   max_length: PropTypes.number,
 
   handleNextClick: PropTypes.func,

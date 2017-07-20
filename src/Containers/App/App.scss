@@ -194,3 +194,14 @@ input.form-control {
 .bg-gradient .btn-link {
   color: white;
 }
+.btn-link-inline {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid white;
+  color: inherit;
+  background: none;
+}
+.dictionary-wrapper {
+  display: inline;
+}

@@ -16,7 +16,15 @@ class SimpleQAndA extends Component {
   assert(event) {
     console.log()
     let answered
-    answered = this.state.input === this.props.answer
+    console.log("this.props.answer_type", this.props.answer_type)
+    if (this.props.answer_type === "regex") {
+      // regex match
+      answered = !!this.state.input.toLowerCase().match(this.props.answer.toLowerCase())
+      console.log(this.state.input.toLowerCase().match(this.props.answer.toLowerCase()))
+    } else {
+      // direct match
+      answered = this.state.input.toLowerCase() === this.props.answer.toLowerCase()
+    }
     if (answered) {
       this.setState({feedback: "Correct!", submitButtonText: "Correct", showSubmitButton: false})
       this.props.handleShowNextButton()

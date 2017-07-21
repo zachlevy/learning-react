@@ -120,7 +120,6 @@ class SimpleQAndA extends Component {
       question = reactStringReplace(question, dictTerm.term, (match, i) => {
         return <Dictionary index={"dictionary-" + index} term={dictTerm.term} definition={dictTerm.definition} link={dictTerm.link} />
       })
-      // question = "hihii"
     })
     return (
       <div className="container">

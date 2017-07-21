@@ -16,13 +16,11 @@ class SimpleQAndA extends Component {
     }
   }
   assert(event) {
-    console.log()
+    console.log("assert")
     let answered
-    console.log("this.props.answer_type", this.props.answer_type)
     if (this.props.answer_type === "regex" && Array.isArray(this.props.answer)) {
       // regex match for array
       this.props.answer.forEach((a) => {
-        console.log(a, this.state.input, !!this.state.input.toLowerCase().match(a.toLowerCase()))
         if (!!this.state.input.toLowerCase().match(a.toLowerCase())) {
           answered = true
         }
@@ -30,10 +28,8 @@ class SimpleQAndA extends Component {
     } else if (this.props.answer_type === "regex") {
       // regex match
       answered = !!this.state.input.toLowerCase().match(this.props.answer.toLowerCase())
-      console.log(this.state.input.toLowerCase().match(this.props.answer.toLowerCase()))
     } else if (Array.isArray(this.props.answer)) {
       // array exact
-      console.log("is array answer")
       const answersLowercase = this.props.answer.map((a) => {return a.toLowerCase()})
 
       answered = answersLowercase.includes(this.state.input.toLowerCase())
@@ -78,6 +74,10 @@ class SimpleQAndA extends Component {
 
   handleKeyUp(e) {
     this.setState({input: e.target.value, feedback: ""})
+    // check for enter key
+    if (e.keyCode === 13) {
+      this.state.showSubmitButton && this.assert()
+    }
   }
 
   handleNextClick() {

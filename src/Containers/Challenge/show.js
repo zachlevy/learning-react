@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { setChallenge } from '../../modules/challenge'
 import getChallengeComponent from './Components'
+import { updateCourseFlowChallenge } from '../../modules/course'
 
 class Challenge extends Component {
   constructor() {
@@ -37,6 +38,7 @@ class Challenge extends Component {
   }
 
   handleShowNextButton() {
+    this.props.updateCourseFlowChallenge(this.props.challenge.id, "complete")
     this.setState({showNextButton: true})
   }
 
@@ -71,7 +73,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setChallenge
+  setChallenge,
+  updateCourseFlowChallenge
 }, dispatch)
 
 export default connect(

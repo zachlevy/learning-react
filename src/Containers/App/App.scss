@@ -14,7 +14,7 @@ $color-gray: #999999;
   bottom: -2.23em;
   position: absolute;
   width: 100%;
-  background-color: rgba(255,255,255,0.4)
+  background-color: rgba(255,255,255,0.4);
 }
 iframe.wikipedia {
   min-height: 70vh;
@@ -157,10 +157,6 @@ input.form-control {
   fill: red;
   vertical-align: middle;
 }
-.btn-timeline {
-  display: inline-block;
-  position:relative;
-}
 // bootstrap button
 .btn-outline-secondary {
   color: #fff;
@@ -204,4 +200,11 @@ input.form-control {
 }
 .dictionary-wrapper {
   display: inline;
+}
+.btn-timeline {
+  display: inline-block;
+  position:relative;
+  &.completed {
+    color: #333333;
+  }
 }

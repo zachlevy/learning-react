@@ -84,7 +84,7 @@ class Course extends Component {
               </div>
               <div className="row">
                 <div className="col-12">
-                  <p className="course-title-timeline text-center">Mini Course: {this.props.course.title} ~{secondsToMinutes(this.props.course.est_duration)} min</p>
+                  <p className="course-title-timeline text-center">{this.props.course.title} {secondsToMinutes(this.props.course.est_duration)} min</p>
                 </div>
               </div>
             </div>

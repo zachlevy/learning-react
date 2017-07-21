@@ -117,7 +117,7 @@ class SimpleQAndA extends Component {
     }
     let question = this.props.question
     this.props.dictionary && this.props.dictionary.forEach((dictTerm, index) => {
-      question = reactStringReplace(this.props.question, dictTerm.term, (match, i) => {
+      question = reactStringReplace(question, dictTerm.term, (match, i) => {
         return <Dictionary index={"dictionary-" + index} term={dictTerm.term} definition={dictTerm.definition} link={dictTerm.link} />
       })
       // question = "hihii"

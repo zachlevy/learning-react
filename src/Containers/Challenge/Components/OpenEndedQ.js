@@ -4,52 +4,27 @@ import FontAwesome from 'react-fontawesome'
 import Dictionary from '../../Shared/Dictionary'
 import reactStringReplace from 'react-string-replace'
 
-class SimpleQAndA extends Component {
+class OpenEndedQ extends Component {
   constructor() {
     super()
     this.state = {
       input: "",
       showHelp: false,
       feedback: "",
-      submitButtonText: "Check Answer",
       showSubmitButton: true
     }
   }
   assert(event) {
     console.log("assert")
-    let answered
-    if (this.props.answer_type === "regex" && Array.isArray(this.props.answer)) {
-      // regex match for array
-      this.props.answer.forEach((a) => {
-        if (!!this.state.input.toLowerCase().match(a.toLowerCase())) {
-          answered = true
-        }
-      })
-    } else if (this.props.answer_type === "regex") {
-      // regex match
-      answered = !!this.state.input.toLowerCase().match(this.props.answer.toLowerCase())
-    } else if (Array.isArray(this.props.answer)) {
-      // array exact
-      const answersLowercase = this.props.answer.map((a) => {return a.toLowerCase()})
-
-      answered = answersLowercase.includes(this.state.input.toLowerCase())
-    } else {
-      // exact match
-      answered = this.state.input.toLowerCase() === this.props.answer.toLowerCase()
-    }
+    let answered = this.state.input.length > this.props.min_length
     if (answered) {
-      this.setState({feedback: "Correct!", submitButtonText: "Correct", showSubmitButton: false})
       this.props.handleShowNextButton()
-    } else {
-      this.setState({feedback: "Incorrect answer, try again!"})
     }
-
-    // check if answer is correct
-    this.submitChallengeResponse(this.state.input)
   }
 
   // submit to api for analysis
   submitChallengeResponse(inputText) {
+    console.log("submitChallengeResponse", inputText)
     fetch(`${process.env.REACT_APP_API_URL}/challenge_responses`, {
       method: 'post',
       body: JSON.stringify({
@@ -74,17 +49,16 @@ class SimpleQAndA extends Component {
 
   handleKeyUp(e) {
     this.setState({input: e.target.value, feedback: ""})
-    // check for enter key
-    if (e.keyCode === 13) {
-      this.state.showSubmitButton && this.assert()
-    }
+    this.assert()
   }
 
   handleNextClick() {
     if (this.props.showNextButton) {
-      this.props.handleNextClick(this)
+      // submit answer
+      this.submitChallengeResponse(this.state.input)
+      this.props.handleNextClick()
     } else {
-      this.handleShowHelp(this)
+      this.handleShowHelp.bind(this)
     }
   }
   handleShowHelp() {
@@ -121,13 +95,15 @@ class SimpleQAndA extends Component {
         return <Dictionary index={"dictionary-" + index} term={dictTerm.term} definition={dictTerm.definition} link={dictTerm.link} />
       })
     })
+    const textareaRows = this.props.textareaRows || 4
     return (
       <div className="container">
         <div className="row">
           <div className="col-12 col-sm-8 offset-sm-2 text-center">
             <h1 className="simple_q_and_a-question">{question}</h1>
             <div className="form-group">
-              <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} />
+              <textarea className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} rows={textareaRows}></textarea>
+              {this.state.input}
               <div className="row">
                 <div className="col-12 col-sm-6">
                   {feedback}
@@ -137,12 +113,6 @@ class SimpleQAndA extends Component {
                 </div>
               </div>
             </div>
-            <br />
-            <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.state.showSubmitButton ? "" : " disabled")} onClick={this.state.showSubmitButton && this.assert.bind(this)}>{this.state.submitButtonText}</button>
-            <br />
-            <br />
-            <br />
-            <br />
           </div>
         </div>
         <div className="row">
@@ -155,7 +125,7 @@ class SimpleQAndA extends Component {
                   <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this)}>skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
+                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.handleNextClick.bind(this) || this.handleShowHelp.bind(this) }>Next</button>
                 </li>
               </ul>
             </div>
@@ -166,10 +136,11 @@ class SimpleQAndA extends Component {
   }
 }
 
-SimpleQAndA.propTypes = {
+OpenEndedQ.propTypes = {
   question: PropTypes.string,
-  answer: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   max_length: PropTypes.number,
+  min_length: PropTypes.number,
+  textareaRows: PropTypes.number,
 
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,
@@ -179,4 +150,4 @@ SimpleQAndA.propTypes = {
   challengeDescription: PropTypes.string
 }
 
-export default SimpleQAndA
+export default OpenEndedQ

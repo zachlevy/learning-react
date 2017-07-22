@@ -56,8 +56,10 @@ iframe.wikipedia {
 .bg-subtle-swirls:before {
   background-image: url("/swirls-subtle.png");
 }
-input.form-control {
+input.form-control,
+textarea.form-control {
   color: white;
+  background: none;
   &:focus {
     color: white;
   }
@@ -78,6 +80,10 @@ input.form-control {
 }
 .bg-gradient input.form-control {
   background: none;
+  border-bottom-color: white;
+}
+.bg-gradient textarea.form-control {
+  background: rgba(255, 255, 255, 0.1);
   border-bottom-color: white;
 }
 .course-show {

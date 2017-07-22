@@ -17,7 +17,6 @@ class Dictionary extends Component {
     });
   }
   render() {
-    console.log("dictionary key", this.props.key)
     let link
     if (this.props.link) {
       link = (

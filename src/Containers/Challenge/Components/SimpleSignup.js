@@ -17,6 +17,9 @@ class SimpleSignup extends Component {
 
   // submit to api for analysis
   submitSignup(inputEmail) {
+    if (inputEmail.length === 0) {
+      this.setState({showHelp: true})
+    }
     fetch(`${process.env.REACT_APP_API_URL}/feedbacks`, {
       method: 'post',
       body: JSON.stringify({
@@ -32,6 +35,7 @@ class SimpleSignup extends Component {
         "Content-Type": "application/json"
       }
     }).then((res) => {
+      this.props.handleShowNextButton()
       return res.json()
     }).then((response) => {
       console.log(response)
@@ -67,7 +71,7 @@ class SimpleSignup extends Component {
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} placeholder="email@example.com" />
             </div>
             <br />
-            <button className="btn btn-outline-secondary btn-lg" onClick={this.assert.bind(this)}>{this.props.buttonText}</button>
+            <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.assert.bind(this)}>{this.props.buttonText}</button>
           </div>
         </div>
         <div className="row">

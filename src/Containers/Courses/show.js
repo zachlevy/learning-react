@@ -33,7 +33,9 @@ class Course extends Component {
     if (currentChallengeIndex < this.props.course.flow.length - 1) {
       nextChallengeIndex = currentChallengeIndex + 1
     } else {
-      nextChallengeIndex = 0
+      // nextChallengeIndex = 0
+      this.props.GoToFeedbackPage()
+      return
     }
     // get the next challenge id from the array
     const nextChallengeId = this.props.course.flow[nextChallengeIndex].id
@@ -101,7 +103,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   setCourse,
-  changeCourseChallenge: (courseId, challengeId) => push(`/courses/${courseId}/challenges/${challengeId}`)
+  changeCourseChallenge: (courseId, challengeId) => push(`/courses/${courseId}/challenges/${challengeId}`),
+  GoToFeedbackPage: () => push(`/feedback`)
 }, dispatch)
 
 export default connect(

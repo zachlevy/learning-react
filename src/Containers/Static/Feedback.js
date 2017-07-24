@@ -60,6 +60,10 @@ class Feedback extends Component {
               {alert}
               <Form>
                 <FormGroup>
+                  <Label for="message">Message</Label>
+                  <Input onKeyUp={this.handleKeyUp.bind(this, "text")} type="textarea" name="message" id="message" rows="5" />
+                </FormGroup>
+                <FormGroup>
                   <Label for="email">Email</Label>
                   <Input onKeyUp={this.handleKeyUp.bind(this, "source")} type="email" name="email" id="email" placeholder="" />
                 </FormGroup>
@@ -67,14 +71,10 @@ class Feedback extends Component {
                   <Label for="name">Name</Label>
                   <Input onKeyUp={this.handleKeyUp.bind(this, "name")} type="text" name="name" id="name" placeholder="" />
                 </FormGroup>
-                <FormGroup>
-                  <Label for="message">Message</Label>
-                  <Input onKeyUp={this.handleKeyUp.bind(this, "text")} type="textarea" name="message" id="message" />
-                </FormGroup>
                 <FormGroup check>
                   <Label check>
                     <Input onChange={this.handleKeyUp.bind(this, "respond")} type="checkbox" />{' '}
-                    I would like a response
+                    Would you like us to respond?
                   </Label>
                 </FormGroup>
 

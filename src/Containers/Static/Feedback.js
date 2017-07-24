@@ -3,6 +3,7 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Form, FormGroup, Label, Input, Alert } from 'reactstrap'
+import { track } from '../../modules/analytics'
 
 class Feedback extends Component {
   constructor() {
@@ -15,8 +16,14 @@ class Feedback extends Component {
       respond: false
     }
   }
-  handleFormSubmit() {
+  handleFormSubmit(e) {
+    e.preventDefault()
     console.log("handleFormSubmit")
+    track("Submit Feedback", {
+      name: "Feedback",
+      action: "Submit",
+      data: this.state
+    })
     fetch(`${process.env.REACT_APP_API_URL}/feedbacks`, {
       method: 'post',
       body: JSON.stringify({
@@ -40,10 +47,27 @@ class Feedback extends Component {
     })
   }
   handleKeyUp(field, e) {
-    console.log(field, e)
-    console.log(this.state)
     this.setState({[field]: e.target.checked})
   }
+
+  handleOnBlur(e) {
+    track("Blur Feedback", {
+      name: "Feedback",
+      action: "Blur",
+      name: e.target.name,
+      input: e.target.name
+    })
+  }
+
+  handleOnFocus(e) {
+    track("Focus Feedback", {
+      name: "Feedback",
+      action: "Focus",
+      name: e.target.name,
+      input: e.target.name
+    })
+  }
+
   render(){
     let alert
     if (this.state.alert) {
@@ -61,15 +85,15 @@ class Feedback extends Component {
               <Form>
                 <FormGroup>
                   <Label for="message">Message</Label>
-                  <Input onKeyUp={this.handleKeyUp.bind(this, "text")} type="textarea" name="message" id="message" rows="5" />
+                  <Input onFocus={this.handleOnFocus.bind(this)} onBlur={this.handleOnBlur.bind(this)} onKeyUp={this.handleKeyUp.bind(this, "text")} type="textarea" name="message" id="message" rows="5" />
                 </FormGroup>
                 <FormGroup>
                   <Label for="email">Email</Label>
-                  <Input onKeyUp={this.handleKeyUp.bind(this, "source")} type="email" name="email" id="email" placeholder="" />
+                  <Input onFocus={this.handleOnFocus.bind(this)} onBlur={this.handleOnBlur.bind(this)} onKeyUp={this.handleKeyUp.bind(this, "source")} type="email" name="email" id="email" placeholder="" />
                 </FormGroup>
                 <FormGroup>
                   <Label for="name">Name</Label>
-                  <Input onKeyUp={this.handleKeyUp.bind(this, "name")} type="text" name="name" id="name" placeholder="" />
+                  <Input onFocus={this.handleOnFocus.bind(this)} onBlur={this.handleOnBlur.bind(this)} onKeyUp={this.handleKeyUp.bind(this, "name")} type="text" name="name" id="name" placeholder="" />
                 </FormGroup>
                 <FormGroup check>
                   <Label check>

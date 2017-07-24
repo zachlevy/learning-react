@@ -72,7 +72,7 @@ class YoutubeVideo extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-12 col-sm-8 offset-sm-2">
+          <div className="col-12 col-lg-8 offset-lg-2">
             <div className="embed-responsive embed-responsive-16by9">
               <YouTube
                 videoId={content.youtube_id}

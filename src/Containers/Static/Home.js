@@ -58,7 +58,7 @@ class Home extends Component {
         <br />
         <div className="container-fluid bg-gradient bg-subtle bg-subtle-hex" style={gradientBackground("#AA076B", "#61045F")}>
           <div className="row">
-            <div className="col-12 col-sm-8 offset-sm-2 text-center">
+            <div className="col-12 col-lg-8 offset-lg-2 text-center">
               <br />
               <br />
               <br />

@@ -92,7 +92,14 @@ class WikipediaNotes extends Component {
           </div>
           <div className="col-12 col-sm-6">
             <div className="form-group">
-              <label htmlFor="notes">Your Notes</label>
+              <ol className="">
+                {
+                  content.instructions.map((instruction, index) => {
+                    return <li className="" key={index}>{instruction}</li>
+                  })
+                }
+              </ol>
+              <label htmlFor="notes">Notes</label>
               <textarea className="form-control border-bottom" id="notes" rows="15" onKeyUp={this.handleKeyUp.bind(this)} placeholder="..."></textarea>
               <p>{feedback}</p>
               <div className="row">
@@ -124,6 +131,7 @@ WikipediaNotes.propTypes = {
   title: PropTypes.string,
   est_duration: PropTypes.number,
   max_length: PropTypes.number,
+  instructions: PropTypes.array,
 
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,

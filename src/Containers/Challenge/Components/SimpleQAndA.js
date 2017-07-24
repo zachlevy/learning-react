@@ -124,8 +124,8 @@ class SimpleQAndA extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-12 col-sm-8 offset-sm-2 text-center">
-            <h1 className="simple_q_and_a-question">{question}</h1>
+          <div className="col-12 col-lg-8 offset-lg-2 text-center">
+            <h2 className="simple_q_and_a-question">{question}</h2>
             <div className="form-group">
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} />
               <div className="row">
@@ -139,9 +139,6 @@ class SimpleQAndA extends Component {
             </div>
             <br />
             <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.state.showSubmitButton ? "" : " disabled")} onClick={this.state.showSubmitButton && this.assert.bind(this)}>{this.state.submitButtonText}</button>
-            <br />
-            <br />
-            <br />
             <br />
           </div>
         </div>

@@ -99,8 +99,8 @@ class OpenEndedQ extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-12 col-sm-8 offset-sm-2 text-center">
-            <h1 className="simple_q_and_a-question">{question}</h1>
+          <div className="col-12 col-lg-8 offset-lg-2 text-center">
+            <h2 className="simple_q_and_a-question">{question}</h2>
             <div className="form-group">
               <textarea className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} rows={textareaRows}></textarea>
               {this.state.input}

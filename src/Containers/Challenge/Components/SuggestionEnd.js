@@ -39,7 +39,7 @@ class SuggestionEnd extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-12 col-sm-8 offset-sm-2">
+          <div className="col-12 col-lg-8 offset-lg-2">
             <br />
             <h3 className="text-center">Recommended Mini Courses</h3>
             <br />

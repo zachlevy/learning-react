@@ -26,6 +26,8 @@ class CourseThumb extends Component {
                 </ul>
                 <br />
                 <Link className="btn btn-outline-secondary btn-lg" to={`/courses/${course.id}/challenges/${course.flow[0].id}`}>Start</Link>
+                <br />
+                &nbsp;
               </div>
             </div>
           </div>

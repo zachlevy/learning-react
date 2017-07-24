@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
+import { track } from '../../../modules/analytics'
 
 class SimpleSignup extends Component {
   constructor() {
@@ -49,6 +50,16 @@ class SimpleSignup extends Component {
     this.setState({email: e.target.value})
   }
 
+  handleShowHelp(e) {
+    track("Show Help", {
+      name: "Help",
+      action: "Show",
+      challengeId: this.props.challengeId,
+      content: this.props
+    })
+    this.setState({showHelp: true})
+  }
+
   render() {
     let help
     if (this.state.showHelp) {
@@ -60,7 +71,7 @@ class SimpleSignup extends Component {
     } else {
       help = (
         <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={e => this.setState({showHelp: true})}>help <FontAwesome name="question-circle" /></button>
+          <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
         </li>
       )
     }

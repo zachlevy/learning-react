@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
 import Dictionary from '../../Shared/Dictionary'
 import reactStringReplace from 'react-string-replace'
+import { track } from '../../../modules/analytics'
 
 class SimpleQAndA extends Component {
   constructor() {
@@ -88,6 +89,12 @@ class SimpleQAndA extends Component {
     }
   }
   handleShowHelp() {
+    track("Show Help", {
+      name: "Help",
+      action: "Show",
+      challengeId: this.props.challengeId,
+      content: this.props
+    })
     this.setState({showHelp: true})
   }
 

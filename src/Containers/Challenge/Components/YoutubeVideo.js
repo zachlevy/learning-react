@@ -58,8 +58,17 @@ class YoutubeVideo extends Component {
     })
   }
 
+  handleShowHelp(e) {
+    track("Show Help", {
+      name: "Help",
+      action: "Show",
+      challengeId: this.props.challengeId,
+      content: this.props
+    })
+    this.setState({showHelp: true})
+  }
+
   render() {
-    console.log("ok")
     const content = this.props
     let help
     if (this.state.showHelp) {
@@ -71,7 +80,7 @@ class YoutubeVideo extends Component {
     } else {
       help = (
         <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={e => this.setState({showHelp: true})}>help <FontAwesome name="question-circle" /></button>
+          <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
         </li>
       )
     }

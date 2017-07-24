@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
 import Dictionary from '../../Shared/Dictionary'
 import reactStringReplace from 'react-string-replace'
+import { track } from '../../../modules/analytics'
 
 class OpenEndedQ extends Component {
   constructor() {
@@ -62,6 +63,12 @@ class OpenEndedQ extends Component {
     }
   }
   handleShowHelp() {
+    track("Show Help", {
+      name: "Help",
+      action: "Show",
+      challengeId: this.props.challengeId,
+      content: this.props
+    })
     this.setState({showHelp: true})
   }
 
@@ -92,7 +99,7 @@ class OpenEndedQ extends Component {
     let question = this.props.question
     this.props.dictionary && this.props.dictionary.forEach((dictTerm, index) => {
       question = reactStringReplace(question, dictTerm.term, (match, i) => {
-        return <Dictionary index={"dictionary-" + index} term={dictTerm.term} definition={dictTerm.definition} link={dictTerm.link} />
+        return <Dictionary key={index} index={"dictionary-" + index} term={dictTerm.term} definition={dictTerm.definition} link={dictTerm.link} />
       })
     })
     const textareaRows = this.props.textareaRows || 4

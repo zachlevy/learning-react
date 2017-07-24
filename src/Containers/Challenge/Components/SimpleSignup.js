@@ -7,7 +7,8 @@ class SimpleSignup extends Component {
     super()
     this.state = {
       email: "",
-      showHelp: false
+      showHelp: false,
+      feedback: ""
     }
   }
   assert(event) {
@@ -36,9 +37,11 @@ class SimpleSignup extends Component {
       }
     }).then((res) => {
       this.props.handleShowNextButton()
+      this.setState({feedback: "Success!"})
       return res.json()
     }).then((response) => {
       console.log(response)
+      this.setState({feedback: "Something went wrong."})
     })
   }
 
@@ -61,6 +64,14 @@ class SimpleSignup extends Component {
         </li>
       )
     }
+    let feedback
+    if (this.state.feedback) {
+      feedback = (
+        <div className="simple_q_and_a-feedback">
+          <p>{this.state.feedback}</p>
+        </div>
+      )
+    }
     return (
       <div className="container">
         <div className="row">
@@ -69,6 +80,11 @@ class SimpleSignup extends Component {
             <br />
             <div className="form-group">
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} placeholder="email@example.com" />
+              <div className="row">
+                <div className="col-12 col-sm-6">
+                  {feedback}
+                </div>
+              </div>
             </div>
             <br />
             <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.assert.bind(this)}>{this.props.buttonText}</button>

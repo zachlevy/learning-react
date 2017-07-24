@@ -76,6 +76,7 @@ class WikipediaNotes extends Component {
         </div>
       )
     }
+    const remainingCharacters = this.props.max_length - this.state.input.length
     return (
       <div className="container">
         <div className="row">
@@ -101,7 +102,14 @@ class WikipediaNotes extends Component {
               </ol>
               <label htmlFor="notes">Notes</label>
               <textarea className="form-control border-bottom" id="notes" rows="15" onKeyUp={this.handleKeyUp.bind(this)} placeholder="..."></textarea>
-              <p>{feedback}</p>
+              <div className="row">
+                <div className="col-12 col-sm-6">
+                  {feedback}
+                </div>
+                <div className="col-12 col-sm-6">
+                  <span className={"pull-right" + (remainingCharacters < 0 ? " color-red" : "")}>{remainingCharacters}</span>
+                </div>
+              </div>
               <div className="row">
                 <div className="col-12">
                   <div className="float-md-right">

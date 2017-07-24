@@ -56,23 +56,25 @@ iframe.wikipedia {
 .bg-subtle-swirls:before {
   background-image: url("/swirls-subtle.png");
 }
-input.form-control,
-textarea.form-control {
-  color: white;
-  background: none;
-  &:focus {
+.bg-gradient {
+  input.form-control,
+  textarea.form-control {
     color: white;
-  }
-  &.border-bottom {
-    border-top: 0;
-    border-right: 0;
-    border-left: 0;
-    border-radius: 0;
-    border-bottom-width: 2px;
-  }
-  &::placeholder {
-    color: white;
-    opacity: 0.5;
+    background: none;
+    &:focus {
+      color: white;
+    }
+    &.border-bottom {
+      border-top: 0;
+      border-right: 0;
+      border-left: 0;
+      border-radius: 0;
+      border-bottom-width: 2px;
+    }
+    &::placeholder {
+      color: white;
+      opacity: 0.5;
+    }
   }
 }
 .color-red {
@@ -210,7 +212,14 @@ textarea.form-control {
 .btn-timeline {
   display: inline-block;
   position:relative;
-  &.completed {
+  &.skipped {
     color: #333333;
+    &.active {
+      color: inherit;
+    }
+  }
+  &.btn.disabled,
+  &.btn:disabled {
+    opacity: 0.2;
   }
 }

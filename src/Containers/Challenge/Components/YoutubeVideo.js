@@ -10,7 +10,8 @@ class YoutubeVideo extends Component {
     super()
     this.state = {
       showHelp: false,
-      playbackRate: 1
+      playbackRate: 1,
+
     }
     this.videoPlayer
   }
@@ -42,8 +43,19 @@ class YoutubeVideo extends Component {
   }
 
   handleOnPlaybackRateChange(e) {
-    (e) => {track("PlaybackRateChange YouTube Video", {name: "YouTube Video", action: "PlaybackRateChange", challengeId: this.props.challengeId, content: this.props, data: e.data})}
+    track("PlaybackRateChange YouTube Video", {name: "YouTube Video", action: "PlaybackRateChange", challengeId: this.props.challengeId, content: this.props, data: e.data})
     this.setState({playbackRate: e.target.getPlaybackRate()})
+  }
+
+  handleOnEnd(e) {
+    this.props.handleShowNextButton()
+    track("End YouTube Video", {
+      name: "YouTube Video",
+      action: "End",
+      challengeId: this.props.challengeId,
+      content: this.props,
+      data: e.data
+    })
   }
 
   render() {
@@ -90,7 +102,7 @@ class YoutubeVideo extends Component {
                 onReady={this.handleOnReady.bind(this)}
                 onPlay={(e) => {track("Play YouTube Video", {name: "YouTube Video", action: "Play", challengeId: this.props.challengeId, content: content, data: e.data})}}
                 onPause={(e) => {track("Pause YouTube Video", {name: "YouTube Video", action: "Pause", challengeId: this.props.challengeId, content: content, data: e.data})}}
-                onEnd={(e) => {track("End YouTube Video", {name: "YouTube Video", action: "End", challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onEnd={this.handleOnEnd.bind(this)}
                 onError={(e) => {track("Error YouTube Video", {name: "YouTube Video", action: "Error", challengeId: this.props.challengeId, content: content, data: e.data})}}
                 onStateChange={(e) => {console.log("onStateChange")}}
                 onPlaybackRateChange={this.handleOnPlaybackRateChange.bind(this)}
@@ -126,7 +138,7 @@ class YoutubeVideo extends Component {
                   <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this)}>Skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.props.handleNextClick.bind(this)}>Next</button>
+                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
                 </li>
               </ul>
             </div>

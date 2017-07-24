@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
 import Dictionary from '../../Shared/Dictionary'
 import reactStringReplace from 'react-string-replace'
+import { track } from '../../../modules/analytics'
 
 class OpenEndedQ extends Component {
   constructor() {
@@ -53,6 +54,16 @@ class OpenEndedQ extends Component {
   }
 
   handleNextClick() {
+    track("Attempt Next", {
+      name: "Next",
+      action: "Attempt",
+      challengeId: this.props.challengeId,
+      content: this.props,
+      showHelp: this.state.showHelp,
+      showNextButton: this.props.showNextButton,
+      eventLabel: "showNextButton",
+      eventValue: this.props.showNextButton ? 1 : 0
+    })
     if (this.props.showNextButton) {
       // submit answer
       this.submitChallengeResponse(this.state.input)
@@ -62,6 +73,12 @@ class OpenEndedQ extends Component {
     }
   }
   handleShowHelp() {
+    track("Show Help", {
+      name: "Help",
+      action: "Show",
+      challengeId: this.props.challengeId,
+      content: this.props
+    })
     this.setState({showHelp: true})
   }
 
@@ -92,7 +109,7 @@ class OpenEndedQ extends Component {
     let question = this.props.question
     this.props.dictionary && this.props.dictionary.forEach((dictTerm, index) => {
       question = reactStringReplace(question, dictTerm.term, (match, i) => {
-        return <Dictionary index={"dictionary-" + index} term={dictTerm.term} definition={dictTerm.definition} link={dictTerm.link} />
+        return <Dictionary key={index} index={"dictionary-" + index} term={dictTerm.term} definition={dictTerm.definition} link={dictTerm.link} />
       })
     })
     const textareaRows = this.props.textareaRows || 4
@@ -121,10 +138,10 @@ class OpenEndedQ extends Component {
               <ul className="list-inline">
                 {help}
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this)}>skip</button>
+                  <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.handleNextClick.bind(this) || this.handleShowHelp.bind(this) }>Next</button>
+                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
                 </li>
               </ul>
             </div>

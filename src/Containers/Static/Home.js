@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { gradientBackground } from '../../modules/styles'
 import { setCourses } from '../../modules/courses'
 import CourseList from '../Courses/list'
+import { track } from '../../modules/analytics'
 
 class Home extends Component {
   componentDidMount() {
@@ -18,6 +19,16 @@ class Home extends Component {
       console.log(response)
       this.setState({courses: response})
       this.props.setCourses(response)
+    })
+  }
+
+  handleCallToActionClick(e) {
+    console.log("handleCallToActionClick")
+    track("Click CTA", {
+      name: "CTA",
+      action: "Click",
+      text: e.target.innerHTML,
+      eventLabel: e.target.innerHTML
     })
   }
 
@@ -34,7 +45,7 @@ class Home extends Component {
               <h2>Gain Perspective. Find your passion.</h2>
               <h4>And help science while doing it</h4>
               <br />
-              <Link className="btn btn-outline-secondary btn-lg" to={`/courses`}>Let's do it</Link>
+              <Link className="btn btn-outline-secondary btn-lg" onClick={this.handleCallToActionClick.bind(this)} to={`/courses`}>Let's do it</Link>
               <br />
               <br />
               <br />

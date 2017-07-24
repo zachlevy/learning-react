@@ -9,6 +9,7 @@ import FontAwesome from 'react-fontawesome'
 import { getIcon } from '../../modules/icons'
 import { gradientBackground } from '../../modules/styles'
 import { secondsToMinutes } from '../../modules/time'
+import { track } from '../../modules/analytics'
 
 class Course extends Component {
   componentDidMount() {
@@ -43,8 +44,9 @@ class Course extends Component {
     this.props.changeCourseChallenge(this.props.course.id, nextChallengeId)
   }
 
-  handleSkipClick() {
+  handleSkipClick(challengeId, shownHelp) {
     console.log("handleSkipClick")
+    track("Skip Challenge", {name: "Challenge", action: "Skip", challengeId: challengeId, showHelp: shownHelp})
     this.handleNextClick()
   }
 

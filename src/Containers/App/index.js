@@ -8,6 +8,7 @@ import Feedback from '../Static/Feedback'
 import Course from '../Courses/show'
 import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Collapse } from 'reactstrap'
 import Logo from '../../vora_logo_20170717.svg'
+import { track } from '../../modules/analytics'
 
 class App extends Component {
   constructor() {
@@ -18,6 +19,15 @@ class App extends Component {
   }
   toggle() {
     this.setState({isOpen: !this.state.isOpen})
+  }
+
+  handleCallToActionClick(e) {
+    track("Click CTA", {
+      name: "CTA",
+      action: "Click",
+      text: e.target.innerHTML,
+      eventLabel: e.target.innerHTML
+    })
   }
   render() {
     return (
@@ -34,10 +44,10 @@ class App extends Component {
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <NavItem>
-                    <NavLink tag={Link} to="/courses">Mini Courses</NavLink>
+                    <NavLink tag={Link} to="/courses" onClick={this.handleCallToActionClick.bind(this)}>Mini Courses</NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink tag={Link} to="/feedback">Feedback</NavLink>
+                    <NavLink tag={Link} to="/feedback" onClick={this.handleCallToActionClick.bind(this)}>Feedback</NavLink>
                   </NavItem>
                 </Nav>
               </Collapse>

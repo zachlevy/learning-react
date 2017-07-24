@@ -54,6 +54,16 @@ class OpenEndedQ extends Component {
   }
 
   handleNextClick() {
+    track("Attempt Next", {
+      name: "Next",
+      action: "Attempt",
+      challengeId: this.props.challengeId,
+      content: this.props,
+      showHelp: this.state.showHelp,
+      showNextButton: this.props.showNextButton,
+      eventLabel: "showNextButton",
+      eventValue: this.props.showNextButton ? 1 : 0
+    })
     if (this.props.showNextButton) {
       // submit answer
       this.submitChallengeResponse(this.state.input)
@@ -131,7 +141,7 @@ class OpenEndedQ extends Component {
                   <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.handleNextClick.bind(this) || this.handleShowHelp.bind(this) }>Next</button>
+                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
                 </li>
               </ul>
             </div>

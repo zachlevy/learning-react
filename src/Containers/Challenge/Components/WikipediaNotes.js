@@ -62,6 +62,24 @@ class WikipediaNotes extends Component {
     this.setState({showHelp: true})
   }
 
+  handleNextClick(e) {
+    track("Attempt Next", {
+      name: "Next",
+      action: "Attempt",
+      challengeId: this.props.challengeId,
+      content: this.props,
+      showHelp: this.state.showHelp,
+      showNextButton: this.props.showNextButton,
+      eventLabel: "showNextButton",
+      eventValue: this.props.showNextButton ? 1 : 0
+    })
+    if (this.props.showNextButton) {
+      this.props.handleNextClick()
+    } else {
+      this.setState({showHelp: true})
+    }
+  }
+
   render() {
     const content = this.props
     let help
@@ -130,7 +148,7 @@ class WikipediaNotes extends Component {
                         <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>Skip</button>
                       </li>
                       <li className="list-inline-item">
-                        <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.handleNextClick.bind(this)}>Next</button>
+                        <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
                       </li>
                     </ul>
                   </div>

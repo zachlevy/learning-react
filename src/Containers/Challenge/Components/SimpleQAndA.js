@@ -82,6 +82,16 @@ class SimpleQAndA extends Component {
   }
 
   handleNextClick() {
+    track("Attempt Next", {
+      name: "Next",
+      action: "Attempt",
+      challengeId: this.props.challengeId,
+      content: this.props,
+      showHelp: this.state.showHelp,
+      showNextButton: this.props.showNextButton,
+      eventLabel: "showNextButton",
+      eventValue: this.props.showNextButton ? 1 : 0
+    })
     if (this.props.showNextButton) {
       this.props.handleNextClick(this)
     } else {
@@ -125,7 +135,7 @@ class SimpleQAndA extends Component {
     let question = this.props.question
     this.props.dictionary && this.props.dictionary.forEach((dictTerm, index) => {
       question = reactStringReplace(question, dictTerm.term, (match, i) => {
-        return <Dictionary index={"dictionary-" + index} term={dictTerm.term} definition={dictTerm.definition} link={dictTerm.link} />
+        return <Dictionary key={index} index={"dictionary-" + index} term={dictTerm.term} definition={dictTerm.definition} link={dictTerm.link} />
       })
     })
     return (

@@ -115,11 +115,6 @@ class WikipediaNotes extends Component {
         </div>
         <div className="row">
           <div className="col-12 col-sm-6">
-            <div className="">
-              <iframe className="wikipedia wikpedia-notes" src={content.embed_url} frameBorder="0" allowFullScreen></iframe>
-            </div>
-          </div>
-          <div className="col-12 col-sm-6">
             <div className="form-group">
               <ol className="">
                 {
@@ -154,6 +149,11 @@ class WikipediaNotes extends Component {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="col-12 col-sm-6">
+            <div className="">
+              <iframe className="wikipedia wikpedia-notes" src={content.embed_url} frameBorder="0" allowFullScreen></iframe>
             </div>
           </div>
         </div>

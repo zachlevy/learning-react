@@ -18,7 +18,7 @@ class SimpleStart extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-12 col-lg-8 offset-sm-2">
+          <div className="col-12">
             <div className="simple_start-start text-center">
               <br />
               <h1>{this.props.course.title}</h1>

@@ -14,7 +14,7 @@ class CourseList extends Component {
               <div className="row" key={index}>
                 {
                   row.map((course, index) => {
-                    return <CourseThumb className="col-12 col-sm-4" key={index} course={course} />
+                    return <CourseThumb className="col-12 col-md-6 col-lg-4" key={index} course={course} />
                   })
                 }
               </div>

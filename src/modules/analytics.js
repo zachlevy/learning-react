@@ -9,4 +9,24 @@ export const track = (name, properties) => {
     eventLabel: properties.label, // Useful for categorizing events (e.g. 'Fall Campaign')
     eventValue: properties.value // A numeric value associated with the event (e.g. 42)
   });
+
+  fetch(`${process.env.REACT_APP_API_URL}/events`, {
+    method: 'post',
+    body: JSON.stringify({
+      event: {
+        relations: {
+          challenge_id: properties.challengeId,
+          user_id: 1
+        },
+        context: Object.assign(properties, {name: name})
+      }
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then((res) => {
+    return res.json()
+  }).then((response) => {
+    console.log(response)
+  })
 }

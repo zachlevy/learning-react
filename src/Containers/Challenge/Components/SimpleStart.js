@@ -29,9 +29,10 @@ class SimpleStart extends Component {
           </div>
         </div>
         <div className="row">
-          <div className="col-12 text-center">
+          <div className="col-12 col-md-6 offset-md-3 text-center">
             <br />
             <br />
+            <p>{this.props.course.description}</p>
             <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.props.handleNextClick.bind(this)}>Start</button>
           </div>
         </div>

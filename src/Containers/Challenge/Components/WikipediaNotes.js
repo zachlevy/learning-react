@@ -108,13 +108,8 @@ class WikipediaNotes extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-12">
-            <h2 className="text-center">{content.title}</h2>
-            <p className="text-center">{secondsToMinutes(content.est_duration)} min</p>
-          </div>
-        </div>
-        <div className="row">
           <div className="col-12 col-sm-6">
+            <br />
             <div className="form-group">
               <ol className="">
                 {
@@ -138,6 +133,9 @@ class WikipediaNotes extends Component {
                   <div className="float-md-right">
                     <br />
                     <ul className="list-inline">
+                      <li className="list-inline-item">
+                        <span className="btn">{secondsToMinutes(content.est_duration)} min</span>
+                      </li>
                       {help}
                       <li className="list-inline-item">
                         <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>Skip</button>
@@ -152,6 +150,7 @@ class WikipediaNotes extends Component {
             </div>
           </div>
           <div className="col-12 col-sm-6">
+            <br />
             <div className="">
               <iframe className="wikipedia wikpedia-notes" src={content.embed_url} frameBorder="0" allowFullScreen></iframe>
             </div>

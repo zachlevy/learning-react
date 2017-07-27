@@ -106,13 +106,8 @@ class YoutubeVideo extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-12">
-            <h2 className="text-center">{content.title}</h2>
-            <p className="text-center">{secondsToMinutes(content.est_duration)} min</p>
-          </div>
-        </div>
-        <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2">
+            <br />
             <div className="embed-responsive embed-responsive-16by9">
               <YouTube
                 videoId={content.youtube_id}
@@ -161,6 +156,9 @@ class YoutubeVideo extends Component {
             <div className="float-md-right">
               <br />
               <ul className="list-inline">
+                <li className="list-inline-item">
+                  <span className="btn">{secondsToMinutes(content.est_duration)} min</span>
+                </li>
                 {help}
                 <li className="list-inline-item">
                   <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>Skip</button>

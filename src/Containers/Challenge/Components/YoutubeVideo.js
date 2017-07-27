@@ -4,6 +4,7 @@ import { secondsToMinutes } from '../../../modules/time'
 import YouTube from 'react-youtube'
 import { track } from '../../../modules/analytics'
 import FontAwesome from 'react-fontawesome'
+import { getYouTubeVideoDuration, secondsToHalfMinutes } from '../../../modules/time'
 
 class YoutubeVideo extends Component {
   constructor() {
@@ -11,9 +12,15 @@ class YoutubeVideo extends Component {
     this.state = {
       showHelp: false,
       playbackRate: 1,
-
+      videoDuration: 0,
+      currentTime: 0,
     }
     this.videoPlayer
+  }
+
+  componentWillUnmount() {
+    console.log("componentWillUnmount")
+    clearInterval(this.state.playbackInterval);
   }
 
   assert(event) {
@@ -41,6 +48,10 @@ class YoutubeVideo extends Component {
   handleOnReady(e) {
     track("Ready YouTube Video", {name: "YouTube Video", action: "Ready", challengeId: this.props.challengeId, content: this.props})
     this.videoPlayer = e.target
+    const duration = this.videoPlayer.getDuration()
+    console.log(duration)
+    this.setState({videoDuration: getYouTubeVideoDuration(duration, this.props.start_seconds, this.props.end_seconds)})
+    this.setState({playbackInterval: setInterval(() => { this.setState({currentTime: this.videoPlayer.getCurrentTime()}) }, 1000)})
   }
 
   handleOnPlaybackRateChange(e) {
@@ -117,7 +128,7 @@ class YoutubeVideo extends Component {
                   autoplay: 0,
                   modestbranding: 1,
                   showinfo: 0,
-                  controls: 0,
+                  // controls: 0,
                   iv_load_policy: 3,
                   start: content.start_seconds,
                   end: content.end_seconds
@@ -157,7 +168,7 @@ class YoutubeVideo extends Component {
               <br />
               <ul className="list-inline">
                 <li className="list-inline-item">
-                  <span className="btn">{secondsToMinutes(content.est_duration)} min</span>
+                  <span className="btn">{secondsToHalfMinutes(this.state.videoDuration - Math.round(this.state.currentTime))} min remaining</span>
                 </li>
                 {help}
                 <li className="list-inline-item">

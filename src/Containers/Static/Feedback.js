@@ -9,7 +9,7 @@ class Feedback extends Component {
   constructor() {
     super()
     this.state = {
-      source: "",
+      email: "",
       alert: "",
       name: "",
       text: "",
@@ -31,9 +31,10 @@ class Feedback extends Component {
           body: {
             name: this.state.name,
             text: this.state.text,
-            respond: this.state.respond
+            respond: this.state.respond,
+            email: this.state.email
           },
-          source: this.state.source
+          source: "feedback_form"
         }
       }),
       headers: {
@@ -47,7 +48,11 @@ class Feedback extends Component {
     })
   }
   handleKeyUp(field, e) {
-    this.setState({[field]: e.target.checked})
+    if(e.target.checked) {
+      this.setState({[field]: e.target.checked})
+    } else {
+      this.setState({[field]: e.target.value})
+    }
   }
 
   handleOnBlur(e) {
@@ -89,7 +94,7 @@ class Feedback extends Component {
                 </FormGroup>
                 <FormGroup>
                   <Label for="email">Email</Label>
-                  <Input onFocus={this.handleOnFocus.bind(this)} onBlur={this.handleOnBlur.bind(this)} onKeyUp={this.handleKeyUp.bind(this, "source")} type="email" name="email" id="email" placeholder="" />
+                  <Input onFocus={this.handleOnFocus.bind(this)} onBlur={this.handleOnBlur.bind(this)} onKeyUp={this.handleKeyUp.bind(this, "email")} type="email" name="email" id="email" placeholder="" />
                 </FormGroup>
                 <FormGroup>
                   <Label for="name">Name</Label>

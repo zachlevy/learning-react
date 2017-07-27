@@ -26,11 +26,14 @@ class SimpleSignup extends Component {
       method: 'post',
       body: JSON.stringify({
         feedback: {
-          input: {
-            email: inputEmail
+          body: {
+            input: {
+              email: inputEmail
+            },
+            challenge_id: this.props.challengeId,
+            user_id: 1
           },
-          challenge_id: this.props.challengeId,
-          user_id: 1
+          source: "simple_signup"
         }
       }),
       headers: {

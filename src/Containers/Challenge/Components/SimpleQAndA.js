@@ -95,7 +95,8 @@ class SimpleQAndA extends Component {
     if (this.props.showNextButton) {
       this.props.handleNextClick(this)
     } else {
-      this.handleShowHelp(this)
+      this.assert()
+      this.handleShowHelp()
     }
   }
   handleShowHelp() {

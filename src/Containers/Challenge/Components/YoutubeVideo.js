@@ -166,20 +166,23 @@ class YoutubeVideo extends Component {
             </div>
             <div className="float-md-right">
               <br />
-              <ul className="list-inline">
-                <li className="list-inline-item">
-                  <span className="btn">{secondsToHalfMinutes(this.state.videoDuration - Math.round(this.state.currentTime))} min remaining</span>
-                </li>
-                {help}
-                <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>Skip</button>
-                </li>
-                <li className="list-inline-item">
-                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
-                </li>
-              </ul>
+              <p className="challenge-description">{this.props.challengeDescription}</p>
             </div>
           </div>
+        </div>
+        <div className="col-12 col-md-8 offset-md-2">
+          <ul className="list-inline float-md-right">
+            <li className="list-inline-item">
+              <span className="btn">{secondsToHalfMinutes(this.state.videoDuration - Math.round(this.state.currentTime))} min remaining</span>
+            </li>
+            {help}
+            <li className="list-inline-item">
+              <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>Skip</button>
+            </li>
+            <li className="list-inline-item">
+              <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
+            </li>
+          </ul>
         </div>
       </div>
     )

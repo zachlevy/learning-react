@@ -62,7 +62,7 @@ var highlightWikipedia = function(highlightSection) {
   }
 }
 
-// do it
+// run highlights
 JSON.parse(urlParams.highlights).forEach(function(sectionHighlight) {
   highlightWikipedia(sectionHighlight)
 })

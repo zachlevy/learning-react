@@ -5,8 +5,10 @@ import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
 
 class SimpleStart extends Component {
-  componentDidMount() {
-    this.props.handleShowNextButton()
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.course.flow && nextProps.course.flow) {
+      this.props.handleShowNextButton()
+    }
   }
   render() {
     const content = this.props

@@ -152,7 +152,7 @@ class WikipediaNotes extends Component {
           <div className="col-12 col-sm-6">
             <br />
             <div className="">
-              <iframe className="wikipedia wikpedia-notes" src={content.embed_url} frameBorder="0" allowFullScreen></iframe>
+              <iframe className="wikipedia wikpedia-notes" src={content.embed_url + "?highlights=" + encodeURIComponent(JSON.stringify(content.highlights))} frameBorder="0" allowFullScreen></iframe>
             </div>
           </div>
         </div>

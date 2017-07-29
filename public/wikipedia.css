@@ -1,4 +1,4 @@
-p:before {
+.vora-logo:before {
   content: url(http://localhost:3000/vora_logo_20170717.svg);
   display: inline-block;
   width: 1em;

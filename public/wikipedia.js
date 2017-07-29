@@ -1,11 +1,7 @@
 // this file modifies wikipedia when adding it to the head tag
 // jquery not available in this file
 
-console.log("window.location.href", window.location.href)
-
-// console.log("params", window.location.href.split("?"))
-
-
+// get params from url after ?
 var urlParams = (function(a) {
     if (a == "") return {};
     var b = {};
@@ -20,9 +16,14 @@ var urlParams = (function(a) {
     return b;
 })(window.location.search.substr(1).split('&'));
 
-
-
-console.log("getUrlParams", JSON.parse(urlParams.highlights))
+// goes through wikipedia mobile and collapses all headings
+var collapseHeadings = function() {
+  var collapsibleHeadings = document.getElementsByClassName("collapsible-heading")
+  for (var i = 0; i < collapsibleHeadings.length; i++) {
+    collapsibleHeadings[i].className = collapsibleHeadings[i].className.replace("open-block", "")
+    collapsibleHeadings[i].nextSibling.className = collapsibleHeadings[i].nextSibling.className.replace("open-block", "")
+  }
+}
 
 // expecting a wikipedia url with a key called highlights. highlights a url encoded and JSON stringified array with objects having keys of the section title and an array of children to highlight
 // [
@@ -32,25 +33,27 @@ console.log("getUrlParams", JSON.parse(urlParams.highlights))
 //   }
 // ]
 var highlightWikipedia = function(highlightSection) {
-  var sectionTitleText = highlightSection.title
-  var sectionTitleId = sectionTitleText.replace(" ", "_")
 
-  // console.log("sectionTitleText", sectionTitleText)
-  // console.log("sectionTitleId", sectionTitleId)
+  var sectionTitleText = highlightSection.title
+  var sectionTitleId = sectionTitleText.replace(/ /g, "_")
 
   // get the sections by id
   var sectionTitle = document.getElementById(sectionTitleId).parentElement
   var sectionBody = sectionTitle.nextSibling
 
-  // console.log("sectionTitle", sectionTitle)
-  // console.log("sectionBody", sectionBody)
+  // collapse headings
+  // wait until after wikipedia headings js runs
+  setTimeout(collapseHeadings, 500)
 
-  // open the blocks
-  sectionTitle.className += " open-block"
-  sectionBody.className += " open-block"
+  // wait until collapseHeadings headings js runs
+  setTimeout(function() {
+    // open the blocks
+    sectionTitle.className += " open-block"
+    sectionBody.className += " open-block"
+    // scroll
+    document.getElementById(sectionTitleId).scrollIntoView()
+  }, 1000)
 
-  // scroll to the section
-  document.getElementById(sectionTitleId).scrollIntoView()
 
   // console.log("sectionBody.children", sectionBody.children)
 

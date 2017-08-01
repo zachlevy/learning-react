@@ -1,5 +1,6 @@
 import React from 'react'
 import reactStringReplace from 'react-string-replace'
+import Logo from '../vora_logo_20170717.svg'
 
 // converts a machine name
 export const snakeCaseToPascalCase = (snakeCase) => {
@@ -7,7 +8,15 @@ export const snakeCaseToPascalCase = (snakeCase) => {
 }
 
 export const simpleMarkdown = (string) => {
-  return reactStringReplace(string, /\_\_([\s\S]+?)\_\_(?!_)/g, (match) => {
+  string = reactStringReplace(string, /\_\_([\s\S]+?)\_\_(?!_)/g, (match) => {
     return <strong>{match}</strong>
   })
+  string = reactStringReplace(string, /vora_logo/g, (match) => {
+    return (
+      <svg className="wikipedia-vora-logo">
+        <use xlinkHref={Logo + "#logo-layer"}></use>
+      </svg>
+    )
+  })
+  return string
 }

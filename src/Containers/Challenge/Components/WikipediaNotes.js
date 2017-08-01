@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { secondsToMinutes } from '../../../modules/time'
 import FontAwesome from 'react-fontawesome'
 import { track } from '../../../modules/analytics'
+import { simpleMarkdown } from '../../../modules/strings'
 
 class WikipediaNotes extends Component {
   constructor() {
@@ -114,6 +115,7 @@ class WikipediaNotes extends Component {
               <ol className="">
                 {
                   content.instructions.map((instruction, index) => {
+                    instruction = simpleMarkdown(instruction)
                     return <li className="" key={index}>{instruction}</li>
                   })
                 }

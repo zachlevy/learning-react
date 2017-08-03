@@ -128,7 +128,7 @@ class YoutubeVideo extends Component {
                   autoplay: 0,
                   modestbranding: 1,
                   showinfo: 0,
-                  // controls: 0,
+                  controls: 0,
                   iv_load_policy: 3,
                   start: content.start_seconds,
                   end: content.end_seconds

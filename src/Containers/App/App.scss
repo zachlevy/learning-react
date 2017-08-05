@@ -10,14 +10,8 @@ $color-gray: #999999;
   width: 100%;
   height: auto;
 }
-.course-timeline {
-  bottom: -2.23em;
-  position: absolute;
-  width: 100%;
-  background-color: rgba(255,255,255,0.4);
-}
 iframe.wikipedia {
-  min-height: 70vh;
+  min-height: 80vh;
   width: 100%;
 }
 .bg-gradient {
@@ -99,6 +93,46 @@ iframe.wikipedia {
 .card-img-top {
   padding: 0 0.5em;
 }
+.course-progress-vertical {
+  position: fixed;
+  top: 57px; /* matches navbar top */
+  right: 24px;
+  margin-top: 2em;
+
+  .progress-bar-vertical {
+    width: 20px;
+    height: 80vh;
+    display: flex;
+    align-items: flex-end;
+    background-color: rgba(255,255,255,0.4);
+  }
+
+  .progress-bar-vertical .progress-bar {
+    width: 100%;
+    // height: 0;
+    -webkit-transition: height 0.6s ease;
+    -o-transition: height 0.6s ease;
+    transition: height 0.6s ease;
+  }
+
+  .timeline-buttons-vertical {
+    position: fixed;
+    top: 57px;
+    margin-top: 2em;
+    right: 10px;
+
+  }
+
+  .btn-link {
+    color: black;
+  }
+  .progress-bar {
+    background-color: #aaaaaa;
+  }
+  .timeline-icon {
+    
+  }
+}
 .course-progress {
   position: fixed;
   bottom: 0;
@@ -158,10 +192,6 @@ iframe.wikipedia {
 .course-show .course-title {
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-}
-.course-title-timeline {
-  margin: 0.2em;
-  opacity: 0.6;
 }
 .navbar-logo {
   max-height: 1.6em;

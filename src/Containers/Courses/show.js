@@ -56,6 +56,7 @@ class Course extends Component {
       challengeWidth = Math.floor(10000 / this.props.course.flow.length) / 100
     }
     const challengeIndex = this.props.course.flow && this.props.course.flow.findIndex((challenge) => {return this.props.challenge.id === challenge.id})
+    const reversedChallengeIndex = this.props.course.flow && this.props.course.flow.length - (challengeIndex + 1)
     const progressWidth = challengeIndex * challengeWidth + "%"
     return (
       <div id="course-show" className="course-show bg-gradient" style={gradientBackground(this.props.course.ui && this.props.course.ui.primaryColor, this.props.course.ui && this.props.course.ui.secondaryColor)}>
@@ -64,33 +65,22 @@ class Course extends Component {
             <Switch>
               <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleSkipClick={this.handleSkipClick.bind(this)} handleNextClick={this.handleNextClick.bind(this)} />}} />
             </Switch>
-            <div className="course-progress">
-              <div className="row">
-                <div className="col-12">
-                  <div className="progress course-timeline">
-                    <div className="progress-bar progress-bar-striped" role="progressbar" style={{width: progressWidth}}></div>
+          </div>
+        </div>
+        <div className="course-progress-vertical">
+          <div className="progress progress-bar-vertical">
+            <div className="progress-bar progress-bar-striped" role="progressbar" style={{height: progressWidth}}></div>
+          </div>
+          <div className="timeline-buttons-vertical">
+            {
+              this.props.course.flow && this.props.course.flow.slice().reverse().map((challenge, index) => {
+                return (
+                  <div key={index} style={{height: challengeWidth + "%"}} className="text-center timeline-icon">
+                    <Link className={"btn btn-timeline btn-link" + (index < reversedChallengeIndex ? " disabled" : "") + (index === reversedChallengeIndex ? " active" : "") + (!challenge.completionStatus ? " skipped" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
                   </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-12">
-                  {
-                    this.props.course.flow && this.props.course.flow.map((challenge, index) => {
-                      return (
-                        <div key={index} style={{width: challengeWidth + "%"}} className="text-center timeline-icon">
-                          <Link className={"btn btn-timeline btn-link" + (index > challengeIndex ? " disabled" : "") + (index === challengeIndex ? " active" : "") + (!challenge.completionStatus ? " skipped" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
-                        </div>
-                      )
-                    })
-                  }
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-12">
-                  <p className="course-title-timeline text-center">{this.props.course.title} {secondsToMinutes(this.props.course.est_duration)} min</p>
-                </div>
-              </div>
-            </div>
+                )
+              })
+            }
           </div>
         </div>
       </div>

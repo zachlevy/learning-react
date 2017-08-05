@@ -60,7 +60,7 @@ class SentimentQAndA extends Component {
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button role="button" className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>Skip</button>
+              <button role="button" className="btn btn-outline-secondary" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
               &nbsp;
               <button role="button" className={"btn btn-secondary" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.showNextButton && this.props.handleNextClick.bind(this)}>Next</button>
             </div>

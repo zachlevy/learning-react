@@ -21,6 +21,7 @@ class SimpleSignup extends Component {
   submitSignup(inputEmail) {
     if (inputEmail.length === 0) {
       this.setState({showHelp: true})
+      return
     }
     fetch(`${process.env.REACT_APP_API_URL}/feedbacks`, {
       method: 'post',

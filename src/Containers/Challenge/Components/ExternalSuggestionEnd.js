@@ -4,13 +4,62 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import FontAwesome from 'react-fontawesome'
+import { track } from '../../../modules/analytics'
 
 class ExternalSuggestionEnd extends Component {
-  handleExternalContentClick(url) {
+  constructor() {
+    super()
+    this.state = {
+      showHelp: false
+    }
+  }
+  handleExternalContentClick(content) {
     console.log("handleButtonClick")
-    window.open(url, '_blank')
+    track("Click External Content", {
+      name: "External Content",
+      action: "Click",
+      challengeId: this.props.challengeId,
+      content: content
+    })
+    window.open(content.external_url, '_blank')
+  }
+  handleNextClick() {
+    track("Attempt Next", {
+      name: "Next",
+      action: "Attempt",
+      challengeId: this.props.challengeId,
+      content: this.props,
+      showHelp: this.state.showHelp,
+      showNextButton: this.props.showNextButton,
+      eventLabel: "showNextButton",
+      eventValue: this.props.showNextButton ? 1 : 0
+    })
+    this.props.handleNextClick(this)
+  }
+  handleShowHelp() {
+    track("Show Help", {
+      name: "Help",
+      action: "Show",
+      challengeId: this.props.challengeId,
+      content: this.props
+    })
+    this.setState({showHelp: true})
   }
   render() {
+    let help
+    if (this.state.showHelp) {
+      help = (
+        <li className="list-inline-item">
+          <p className="challenge-description">{this.props.challengeDescription}</p>
+        </li>
+      )
+    } else {
+      help = (
+        <li className="list-inline-item">
+          <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+        </li>
+      )
+    }
     return (
       <div className="container">
         <div className="row">
@@ -25,7 +74,7 @@ class ExternalSuggestionEnd extends Component {
             this.props.external_contents && this.props.external_contents.map((content, index) => {
               return (
                 <div className="col-4 text-center">
-                  <button className="btn btn-outline-secondary btn-block btn-pointer" onClick={this.handleExternalContentClick.bind(this, content.external_url)}>
+                  <button className="btn btn-outline-secondary btn-block btn-pointer" onClick={this.handleExternalContentClick.bind(this, content)}>
                     <br />
                     <br />
                     <h1><FontAwesome name={content.icon} /></h1>
@@ -37,6 +86,22 @@ class ExternalSuggestionEnd extends Component {
               )
             })
           }
+        </div>
+        <div className="row">
+          <div className="col-12 col-md-10">
+            <div className="float-md-right">
+              <br />
+              <ul className="list-inline">
+                {help}
+                <li className="list-inline-item">
+                  <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
+                </li>
+                <li className="list-inline-item">
+                  <button role="button" className={"btn btn-outline-secondary btn-lg"} onClick={this.handleNextClick.bind(this)}>Next</button>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     )

@@ -130,7 +130,9 @@ iframe.wikipedia {
     background-color: #aaaaaa;
   }
   .timeline-icon {
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 .course-progress {

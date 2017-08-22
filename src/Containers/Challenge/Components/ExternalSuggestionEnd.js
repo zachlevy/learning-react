@@ -82,6 +82,7 @@ class ExternalSuggestionEnd extends Component {
                     <br />
                     <br />
                   </button>
+                  <br />
                 </div>
               )
             })

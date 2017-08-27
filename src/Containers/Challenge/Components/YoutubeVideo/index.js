@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { secondsToMinutes } from '../../../modules/time'
+import { secondsToMinutes } from '../../../../modules/time'
 import YouTube from 'react-youtube'
-import { track } from '../../../modules/analytics'
+import { track } from '../../../../modules/analytics'
 import FontAwesome from 'react-fontawesome'
-import { getYouTubeVideoDuration, secondsToHalfMinutes } from '../../../modules/time'
+import { getYouTubeVideoDuration, secondsToHalfMinutes } from '../../../../modules/time'
+import YoutubeCaptions from './Captions'
 
 class YoutubeVideo extends Component {
   constructor() {
@@ -16,6 +17,11 @@ class YoutubeVideo extends Component {
       currentTime: 0,
     }
     this.videoPlayer
+  }
+
+  componentDidMount() {
+    console.log("componentDidMount")
+    console.log("this.props.captions", this.props.captions)
   }
 
   componentWillUnmount() {
@@ -51,7 +57,7 @@ class YoutubeVideo extends Component {
     const duration = this.videoPlayer.getDuration()
     console.log(duration)
     this.setState({videoDuration: getYouTubeVideoDuration(duration, this.props.start_seconds, this.props.end_seconds)})
-    this.setState({playbackInterval: setInterval(() => { this.setState({currentTime: this.videoPlayer.getCurrentTime()}) }, 1000)})
+    this.setState({playbackInterval: setInterval(() => { this.setState({currentTime: this.videoPlayer.getCurrentTime()}) }, 500)})
   }
 
   handleOnPlaybackRateChange(e) {
@@ -114,6 +120,16 @@ class YoutubeVideo extends Component {
         </li>
       )
     }
+    let captions
+    if (this.props.load_captions) {
+      captions = (
+        <div className="row">
+          <div className="col-12 col-lg-8 offset-lg-2">
+            <YoutubeCaptions captions={this.props.captions} currentTime={this.state.currentTime} />
+          </div>
+        </div>
+      )
+    }
     return (
       <div className="container">
         <div className="row">
@@ -128,7 +144,7 @@ class YoutubeVideo extends Component {
                   autoplay: 0,
                   modestbranding: 1,
                   showinfo: 0,
-                  controls: 0,
+                  // controls: 0,
                   rel: 0,
                   iv_load_policy: 3,
                   start: content.start_seconds,
@@ -146,6 +162,7 @@ class YoutubeVideo extends Component {
             </div>
           </div>
         </div>
+        {captions}
         <div className="row">
           <div className="col-12 col-md-8 offset-md-2">
             <div className="float-md-left">
@@ -196,6 +213,8 @@ YoutubeVideo.propTypes = {
   est_duration: PropTypes.number,
   start_seconds: PropTypes.number,
   end_seconds: PropTypes.number,
+  load_captions: PropTypes.bool,
+  captions: PropTypes.array,
 
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,

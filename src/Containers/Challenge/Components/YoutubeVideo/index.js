@@ -35,7 +35,13 @@ class YoutubeVideo extends Component {
 
   handleSeek(seekTime) {
     const currentTime = this.videoPlayer.getCurrentTime()
-    this.videoPlayer.seekTo(currentTime + seekTime)
+    let seekToTime = currentTime + seekTime
+    if (seekToTime < this.props.start_seconds) {
+      seekToTime = this.props.start_seconds
+    } else if (seekToTime > this.props.end_seconds) {
+      seekToTime = this.props.end_seconds
+    }
+    this.videoPlayer.seekTo(seekToTime)
     track("Seek YouTube Video", {name: "YouTube Video", action: "Seek", challengeId: this.props.challengeId, content: this.props, seekTo: currentTime + seekTime})
   }
 
@@ -169,16 +175,16 @@ class YoutubeVideo extends Component {
               <br />
               <ul className="list-inline">
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handleSeek.bind(this, -30)}><FontAwesome name="undo" /> <span>30s</span></button>
+                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handleSeek.bind(this, -10)}><FontAwesome name="undo" /> <span>10s</span></button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate - 0.5)}><FontAwesome name="fast-backward" /></button>
+                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate - 0.5)}><FontAwesome name="backward" /></button>
                 </li>
                 <li className="list-inline-item">
-                  <button className="btn btn-outline-secondary btn-sm disabled">{this.state.playbackRate}x</button>
+                  <button className="btn btn-sm disabled">{this.state.playbackRate}x</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate + 0.5)}><FontAwesome name="fast-forward" /></button>
+                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate + 0.5)}><FontAwesome name="forward" /></button>
                 </li>
               </ul>
             </div>
@@ -194,6 +200,9 @@ class YoutubeVideo extends Component {
               <span className="btn">{secondsToHalfMinutes(this.state.videoDuration - Math.round(this.state.currentTime))} min remaining</span>
             </li>
             {help}
+            <li className="list-inline-item">
+              <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
+            </li>
             <li className="list-inline-item">
               <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
             </li>
@@ -216,6 +225,7 @@ YoutubeVideo.propTypes = {
   load_captions: PropTypes.bool,
   captions: PropTypes.array,
 
+  handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,
   showNextButton: PropTypes.bool,

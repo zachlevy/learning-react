@@ -131,6 +131,9 @@ class SimpleSignup extends Component {
               <ul className="list-inline">
                 {help}
                 <li className="list-inline-item">
+                  <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
+                </li>
+                <li className="list-inline-item">
                   <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
                 </li>
                 <li className="list-inline-item">
@@ -149,6 +152,7 @@ SimpleSignup.propTypes = {
   callToActionText: PropTypes.string,
   buttonText: PropTypes.string,
 
+  handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,
   showNextButton: PropTypes.bool,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { push } from 'react-router-redux'
+import { push, goBack } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { setCourse } from '../../modules/course'
@@ -50,6 +50,21 @@ class Course extends Component {
     this.handleNextClick()
   }
 
+  handleBackButton() {
+    console.log("handleBackButton")
+    // find the current index in flow
+    const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
+    // get the next challenge index in the course flow array
+    let prevChallengeIndex
+    if (currentChallengeIndex > 0) {
+      prevChallengeIndex = currentChallengeIndex - 1
+    }
+    // get the last challenge id from the array
+    const prevChallengeId = this.props.course.flow[prevChallengeIndex].id
+    // redirect
+    this.props.changeCourseChallenge(this.props.course.id, prevChallengeId)
+  }
+
   render() {
     let challengeWidth
     if (this.props.course.flow) {
@@ -63,7 +78,7 @@ class Course extends Component {
         <div className={"full-height bg-subtle" + (this.props.course.ui && this.props.course.ui.subtle ? " bg-subtle-" + this.props.course.ui.subtle : "bg-subtle-diamond")}>
           <div className="container full-height">
             <Switch>
-              <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleSkipClick={this.handleSkipClick.bind(this)} handleNextClick={this.handleNextClick.bind(this)} />}} />
+              <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleBackButton={this.handleBackButton.bind(this)} handleSkipClick={this.handleSkipClick.bind(this)} handleNextClick={this.handleNextClick.bind(this)} />}} />
             </Switch>
           </div>
         </div>

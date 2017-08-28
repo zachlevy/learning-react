@@ -49,6 +49,7 @@ const mapStateToProps = state => ({
 
 SimpleStart.propTypes = {
 
+  handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,
   showNextButton: PropTypes.bool,

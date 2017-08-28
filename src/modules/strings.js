@@ -20,3 +20,24 @@ export const simpleMarkdown = (string) => {
   })
   return string
 }
+
+export const define = (word) => {
+  
+  const escapedWord = encodeURI(word.toLowerCase())
+
+  console.log(escapedWord)
+
+  return fetch(`${process.env.REACT_APP_API_URL}/definitions`, {
+    method: 'post',
+    body: JSON.stringify({
+      definition: {
+        word: escapedWord
+      }
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }).then((res) => {
+    return res.json()
+  })
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { define } from '../../../../modules/strings'
 
 class Captions extends Component {
   constructor() {
@@ -11,6 +12,9 @@ class Captions extends Component {
 
   handleWordClick(e) {
     console.log("handleWordClick", e.target.textContent)
+    define(e.target.textContent).then((response) => {
+      console.log(response)
+    })
   }
 
   render() {

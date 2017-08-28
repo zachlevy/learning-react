@@ -175,7 +175,7 @@ class YoutubeVideo extends Component {
               <br />
               <ul className="list-inline">
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handleSeek.bind(this, -10)}><FontAwesome name="undo" /> <span>10s</span></button>
+                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handleSeek.bind(this, -10)}><FontAwesome name="undo" /> <span>go back 10s</span></button>
                 </li>
                 <li className="list-inline-item">
                   <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate - 0.5)}><FontAwesome name="backward" /></button>

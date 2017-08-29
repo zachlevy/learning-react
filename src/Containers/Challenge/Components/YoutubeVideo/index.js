@@ -110,6 +110,16 @@ class YoutubeVideo extends Component {
     }
   }
 
+  handleOnMouseEnter(e) {
+    console.log("handleOnMouseEnter")
+    this.videoPlayer.pauseVideo()
+  }
+
+  handleOnMouseLeave(e) {
+    console.log("handleOnMouseLeave")
+    this.videoPlayer.playVideo()
+  }
+
   render() {
     const content = this.props
     let help
@@ -131,7 +141,12 @@ class YoutubeVideo extends Component {
       captions = (
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2">
-            <YoutubeCaptions captions={this.props.captions} currentTime={this.state.currentTime} />
+            <YoutubeCaptions
+              captions={this.props.captions}
+              currentTime={this.state.currentTime}
+              handleOnMouseEnter={this.handleOnMouseEnter.bind(this)}
+              handleOnMouseLeave={this.handleOnMouseLeave.bind(this)}
+            />
           </div>
         </div>
       )

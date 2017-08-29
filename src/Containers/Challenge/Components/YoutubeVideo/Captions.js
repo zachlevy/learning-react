@@ -14,11 +14,21 @@ class Captions extends Component {
   handleWordClick(e) {
     console.log("handleWordClick", e.target.textContent)
     const word = e.target.textContent.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
+    console.log(word)
+  }
+
+  handleOnMouseEnter(e) {
+    this.props.handleOnMouseEnter()
+    const word = e.target.textContent.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
     this.setState({definedWord: word, definitions: []})
     define(word).then((response) => {
       console.log(response)
       this.setState({definitions: response.definitions})
     })
+  }
+
+  handleOnMouseLeave(e) {
+    this.props.handleOnMouseLeave()
   }
 
   render() {
@@ -48,7 +58,7 @@ class Captions extends Component {
                 this.props.captions && this.props.captions.map((caption, index) => {
                   if (this.props.currentTime > caption.start && this.props.currentTime < caption.end) {
                     const words = caption.text.split(" ").map((word) => {
-                      return (<span><a className="btn-pointer" onClick={this.handleWordClick.bind(this)}>{word}</a> </span>)
+                      return (<span><a className="btn-pointer" onMouseEnter={this.handleOnMouseEnter.bind(this)} onMouseLeave={this.handleOnMouseLeave.bind(this)} onClick={this.handleWordClick.bind(this)}>{word}</a> </span>)
                     })
                     return <p key={index}>{words}</p>
                   }
@@ -66,6 +76,8 @@ class Captions extends Component {
 Captions.propTypes = {
   currentTime: PropTypes.number,
   captions: PropTypes.array,
+  handleOnMouseEnter: PropTypes.func,
+  handleOnMouseLeave: PropTypes.func
 }
 
 export default Captions

@@ -7,16 +7,17 @@ class Captions extends Component {
     super()
     this.state = {
       definedWord: null,
-      definitions: null
+      definitions: []
     }
   }
 
   handleWordClick(e) {
     console.log("handleWordClick", e.target.textContent)
-    const word = e.target.textContent
+    const word = e.target.textContent.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
+    this.setState({definedWord: word, definitions: []})
     define(word).then((response) => {
       console.log(response)
-      this.setState({definitions: response.definitions, definedWord: word})
+      this.setState({definitions: response.definitions})
     })
   }
 

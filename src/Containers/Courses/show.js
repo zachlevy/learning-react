@@ -65,12 +65,26 @@ class Course extends Component {
     this.props.changeCourseChallenge(this.props.course.id, prevChallengeId)
   }
 
-  handleInsertDependencies() {
-    console.log("handleInsertChallenge")
+  // inserts challenges into the flow if the user answers wrong
+  // takes an input (from user) to match against only_inputs optional whitelist array.
+  handleInsertDependencies(input) {
+    console.log("handleInsertChallenge", input)
     // find the current index in flow
     const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
+    // check for only_inputs
+    const insertDependencies = []
+    this.props.challenge.dependencies.forEach((dependency) => {
+      if (!dependency.only_inputs) {
+        insertDependencies.push(dependency)
+        return
+      }
+      if (dependency.only_inputs && dependency.only_inputs.includes(input)) {
+        insertDependencies.push(dependency)
+        return
+      }
+    })
     // insert the dependencies
-    this.props.insertCourseFlowChallenges(currentChallengeIndex + 1, this.props.challenge.dependencies)
+    this.props.insertCourseFlowChallenges(currentChallengeIndex + 1, insertDependencies)
   }
 
   render() {

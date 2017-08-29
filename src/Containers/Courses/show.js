@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { push, goBack } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { setCourse } from '../../modules/course'
+import { setCourse, insertCourseFlowChallenges } from '../../modules/course'
 import { Switch, Route, Link } from 'react-router-dom'
 import Challenge from '../Challenge/show'
 import FontAwesome from 'react-fontawesome'
@@ -65,6 +65,14 @@ class Course extends Component {
     this.props.changeCourseChallenge(this.props.course.id, prevChallengeId)
   }
 
+  handleInsertDependencies() {
+    console.log("handleInsertChallenge")
+    // find the current index in flow
+    const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
+    // insert the dependencies
+    this.props.insertCourseFlowChallenges(currentChallengeIndex + 1, this.props.challenge.dependencies)
+  }
+
   render() {
     let challengeWidth
     if (this.props.course.flow) {
@@ -78,7 +86,7 @@ class Course extends Component {
         <div className={"full-height bg-subtle" + (this.props.course.ui && this.props.course.ui.subtle ? " bg-subtle-" + this.props.course.ui.subtle : "bg-subtle-diamond")}>
           <div className="container full-height">
             <Switch>
-              <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleBackButton={this.handleBackButton.bind(this)} handleSkipClick={this.handleSkipClick.bind(this)} handleNextClick={this.handleNextClick.bind(this)} />}} />
+              <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleInsertDependencies={this.handleInsertDependencies.bind(this)} handleBackButton={this.handleBackButton.bind(this)} handleSkipClick={this.handleSkipClick.bind(this)} handleNextClick={this.handleNextClick.bind(this)} />}} />
             </Switch>
           </div>
         </div>
@@ -110,6 +118,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   setCourse,
+  insertCourseFlowChallenges,
   changeCourseChallenge: (courseId, challengeId) => push(`/courses/${courseId}/challenges/${challengeId}`),
   GoToFeedbackPage: () => push(`/feedback`)
 }, dispatch)

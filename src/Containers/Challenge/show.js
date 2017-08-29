@@ -54,6 +54,7 @@ class Challenge extends Component {
                 {},
                 challenge.body,
                 {
+                  handleInsertDependencies: this.props.handleInsertDependencies.bind(this),
                   handleBackButton: this.props.handleBackButton.bind(this),
                   handleNextClick: this.props.handleNextClick.bind(this),
                   handleSkipClick: this.props.handleSkipClick.bind(this),

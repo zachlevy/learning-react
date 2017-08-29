@@ -1,6 +1,7 @@
 export const SET_COURSE = 'course/SET_COURSE'
 export const CLEAR_COURSE = 'course/CLEAR_COURSE'
 export const UPDATE_COURSE_FLOW_CHALLENGE = 'course/UPDATE_COURSE_FLOW_CHALLENGE'
+export const INSERT_COURSE_FLOW_CHALLENGES = 'course/INSERT_COURSE_FLOW_CHALLENGES'
 
 const initialState = {}
 
@@ -21,6 +22,12 @@ export default (state = initialState, action) => {
       newState.flow[challengeIndex] = Object.assign(newState.flow[challengeIndex], {completionStatus: action.completionStatus})
       return newState
 
+    case INSERT_COURSE_FLOW_CHALLENGES:
+      console.log("INSERT_COURSE_FLOW_CHALLENGES", action.afterChallengeId, action.challengeFlowObjects)
+      const newCourseState = Object.assign({}, state)
+      newCourseState.flow.splice(action.afterChallengeId, 0, ...action.challengeFlowObjects)
+      return newCourseState
+
     default:
       return state
   }
@@ -31,6 +38,16 @@ export const setCourse = (newCourse) => {
     dispatch({
       type: SET_COURSE,
       newCourse
+    })
+  }
+}
+
+export const insertCourseFlowChallenges = (afterChallengeId, challengeFlowObjects) => {
+  return dispatch => {
+    dispatch({
+      type: INSERT_COURSE_FLOW_CHALLENGES,
+      afterChallengeId,
+      challengeFlowObjects
     })
   }
 }

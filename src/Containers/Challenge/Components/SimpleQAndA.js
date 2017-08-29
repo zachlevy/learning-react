@@ -43,6 +43,7 @@ class SimpleQAndA extends Component {
       this.props.handleShowNextButton()
     } else {
       this.setState({feedback: "Incorrect answer, try again!"})
+      this.props.handleInsertDependencies()
     }
 
     // check if answer is correct
@@ -189,6 +190,7 @@ SimpleQAndA.propTypes = {
   answer: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   max_length: PropTypes.number,
 
+  handleInsertDependencies: PropTypes.func,
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,

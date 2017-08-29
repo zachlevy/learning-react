@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { define } from '../../../../modules/strings'
+import { define, removePunctuation } from '../../../../modules/strings'
 
 class Captions extends Component {
   constructor() {
@@ -13,13 +13,13 @@ class Captions extends Component {
 
   handleWordClick(e) {
     console.log("handleWordClick", e.target.textContent)
-    const word = e.target.textContent.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
+    const word = removePunctuation(e.target.textContent)
     console.log(word)
   }
 
   handleOnMouseEnter(e) {
     this.props.handleOnMouseEnter()
-    const word = e.target.textContent.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
+    const word = removePunctuation(e.target.textContent)
     this.setState({definedWord: word, definitions: []})
     define(word).then((response) => {
       console.log(response)

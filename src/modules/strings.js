@@ -7,8 +7,9 @@ export const snakeCaseToPascalCase = (snakeCase) => {
   return snakeCase.split("_").map((word) => {return word.charAt(0).toUpperCase() + word.slice(1)}).join("")
 }
 
+// simple markdown currently used for instructions
 export const simpleMarkdown = (string) => {
-  string = reactStringReplace(string, /\_\_([\s\S]+?)\_\_(?!_)/g, (match) => {
+  string = reactStringReplace(string, /__([\s\S]+?)__(?!_)/g, (match) => {
     return <strong>{match}</strong>
   })
   string = reactStringReplace(string, /vora_logo/g, (match) => {
@@ -21,8 +22,9 @@ export const simpleMarkdown = (string) => {
   return string
 }
 
+// get the definition of a word from api
 export const define = (word) => {
-  
+
   const escapedWord = encodeURI(word.toLowerCase())
 
   console.log(escapedWord)
@@ -40,4 +42,8 @@ export const define = (word) => {
   }).then((res) => {
     return res.json()
   })
+}
+
+export const removePunctuation = (string) => {
+  return string.replace(/[.,\/#!$%\^&\*;:{}=\_`~()]/g,"")
 }

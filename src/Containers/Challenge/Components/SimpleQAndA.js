@@ -167,6 +167,9 @@ class SimpleQAndA extends Component {
               <ul className="list-inline">
                 {help}
                 <li className="list-inline-item">
+                  <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
+                </li>
+                <li className="list-inline-item">
                   <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
                 </li>
                 <li className="list-inline-item">
@@ -186,6 +189,7 @@ SimpleQAndA.propTypes = {
   answer: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   max_length: PropTypes.number,
 
+  handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,
   showNextButton: PropTypes.bool,

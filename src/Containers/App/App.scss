@@ -156,11 +156,13 @@ iframe.wikipedia {
 .challenge-description {
   padding-right: 1em;
 }
-.simple_q_and_a-question {
+.simple_q_and_a-question,
+.multiple_choice-question {
   margin-top: 25vh;
 }
 .simple_q_and_a-feedback,
-.wikipedia_notes-feedback {
+.wikipedia_notes-feedback,
+.multiple_choice-feedback {
   text-align: left;
   background-color: white;
   padding: 0.5em 1em;

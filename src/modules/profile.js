@@ -24,7 +24,9 @@ export default (state = initialState, action) => {
     case ADD_PROFILE_DICTIONARY_WORD:
       // only adds if not already in the array
       const newProfileState = Object.assign({}, state)
-      newProfileState.dictionary.indexOf(action.newDictionaryWord) === -1 ? newProfileState.dictionary.push(action.newDictionaryWord) : false
+      if (newProfileState.dictionary.indexOf(action.newDictionaryWord) === -1) {
+        newProfileState.dictionary.push(action.newDictionaryWord)
+      }
       return newProfileState
 
     default:

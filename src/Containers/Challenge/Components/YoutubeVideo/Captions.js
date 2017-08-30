@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { define, removePunctuation } from '../../../../modules/strings'
 import { addProfileDictionaryWord } from '../../../../modules/profile'
+import ProfileDictionaryList from '../../../Shared/ProfileDictionaryList' // probable a better place to add this
 
 class Captions extends Component {
   constructor() {
@@ -61,8 +62,8 @@ class Captions extends Component {
               {
                 this.props.captions && this.props.captions.map((caption, index) => {
                   if (this.props.currentTime > caption.start && this.props.currentTime < caption.end) {
-                    const words = caption.text.split(" ").map((word) => {
-                      return (<span><a className="btn-pointer" onMouseEnter={this.handleOnMouseEnter.bind(this)} onMouseLeave={this.handleOnMouseLeave.bind(this)} onClick={this.handleWordClick.bind(this)}>{word}</a> </span>)
+                    const words = caption.text.split(" ").map((word, index) => {
+                      return (<span index={index}><a className="btn-pointer" onMouseEnter={this.handleOnMouseEnter.bind(this)} onMouseLeave={this.handleOnMouseLeave.bind(this)} onClick={this.handleWordClick.bind(this)}>{word}</a> </span>)
                     })
                     return <p key={index}>{words}</p>
                   }
@@ -72,6 +73,7 @@ class Captions extends Component {
           </div>
         </div>
         {definitions}
+        <ProfileDictionaryList />
       </div>
     )
   }
@@ -86,7 +88,6 @@ Captions.propTypes = {
 
 
 const mapStateToProps = state => ({
-  profile: state.profile
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

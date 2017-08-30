@@ -42,7 +42,7 @@ class Captions extends Component {
       definitions = (
         <div className="row">
           <div className="col-12">
-            <div className="captions-text">
+            <div className="definition-text">
               <h4>{this.state.definedWord}</h4>
               {
                 this.state.definitions.map((definition, index) => {

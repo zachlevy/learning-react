@@ -271,8 +271,13 @@ iframe.wikipedia {
   cursor: pointer;
 }
 .captions-text {
-  color: white;
+  // color: white;
   margin-top: 0.5em;
+}
+.definition-text {
+  background-color: white;
+  padding: 1em;
+  color: black;
 }
 .profile-dictionary-list {
   position: fixed;
@@ -280,4 +285,7 @@ iframe.wikipedia {
   bottom: 0;
   margin-bottom: 20px;
   margin-left: 1em;
+  padding: 0.5em;
+  border: 1px solid white;
+  border-radius: 3px;
 }

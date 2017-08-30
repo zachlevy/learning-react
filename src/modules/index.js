@@ -3,10 +3,12 @@ import { routerReducer } from 'react-router-redux'
 import course from './course'
 import courses from './courses'
 import challenge from './challenge'
+import profile from './profile'
 
 export default combineReducers({
   routing: routerReducer,
   course,
   courses,
-  challenge
+  challenge,
+  profile
 })

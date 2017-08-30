@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { define, removePunctuation } from '../../../../modules/strings'
+import { addProfileDictionaryWord } from '../../../../modules/profile'
 
 class Captions extends Component {
   constructor() {
@@ -15,6 +18,7 @@ class Captions extends Component {
     console.log("handleWordClick", e.target.textContent)
     const word = removePunctuation(e.target.textContent)
     console.log(word)
+    this.props.addProfileDictionaryWord(word)
   }
 
   handleOnMouseEnter(e) {
@@ -80,4 +84,16 @@ Captions.propTypes = {
   handleOnMouseLeave: PropTypes.func
 }
 
-export default Captions
+
+const mapStateToProps = state => ({
+  profile: state.profile
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  addProfileDictionaryWord
+}, dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Captions)

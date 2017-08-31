@@ -22,8 +22,7 @@ class Captions extends Component {
     this.props.addProfileDictionaryWord(word)
   }
 
-  handleOnMouseEnter(e) {
-    this.props.handleOnMouseEnter()
+  handleWordOnMouseEnter(e) {
     const word = removePunctuation(e.target.textContent)
     this.setState({definedWord: word, definitions: []})
     define(word).then((response) => {
@@ -32,7 +31,13 @@ class Captions extends Component {
     })
   }
 
-  handleOnMouseLeave(e) {
+  handleCaptionsOnMouseEnter(e) {
+    // pause video
+    this.props.handleOnMouseEnter()
+  }
+
+  handleCaptionsOnMouseLeave(e) {
+    // play video
     this.props.handleOnMouseLeave()
   }
 
@@ -58,12 +63,12 @@ class Captions extends Component {
       <div>
         <div className="row">
           <div className="col-12">
-            <div className="captions-text text-center">
+            <div className="captions-text text-center" onMouseEnter={this.handleCaptionsOnMouseEnter.bind(this)} onMouseLeave={this.handleCaptionsOnMouseLeave.bind(this)} >
               {
                 this.props.captions && this.props.captions.map((caption, index) => {
                   if (this.props.currentTime > caption.start && this.props.currentTime < caption.end) {
                     const words = caption.text.split(" ").map((word, index) => {
-                      return (<span index={index}><a className="btn-pointer" onMouseEnter={this.handleOnMouseEnter.bind(this)} onMouseLeave={this.handleOnMouseLeave.bind(this)} onClick={this.handleWordClick.bind(this)}>{word}</a> </span>)
+                      return (<span index={index}><a className="btn-pointer" onMouseEnter={this.handleWordOnMouseEnter.bind(this)} onClick={this.handleWordClick.bind(this)}>{word}</a> </span>)
                     })
                     return <p key={index}>{words}</p>
                   }

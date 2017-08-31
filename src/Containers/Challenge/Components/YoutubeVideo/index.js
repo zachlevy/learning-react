@@ -42,7 +42,7 @@ class YoutubeVideo extends Component {
       seekToTime = this.props.end_seconds
     }
     this.videoPlayer.seekTo(seekToTime)
-    track("Seek YouTube Video", {name: "YouTube Video", action: "Seek", challengeId: this.props.challengeId, content: this.props, seekTo: currentTime + seekTime})
+    track("Seek YouTube Video", {name: "YouTube Video", action: "Seek", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined}), seekTo: currentTime + seekTime})
   }
 
   handlePlaybackChange(newRate) {
@@ -58,7 +58,7 @@ class YoutubeVideo extends Component {
   }
 
   handleOnReady(e) {
-    track("Ready YouTube Video", {name: "YouTube Video", action: "Ready", challengeId: this.props.challengeId, content: this.props})
+    track("Ready YouTube Video", {name: "YouTube Video", action: "Ready", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined})})
     this.videoPlayer = e.target
     const duration = this.videoPlayer.getDuration()
     console.log(duration)
@@ -67,7 +67,7 @@ class YoutubeVideo extends Component {
   }
 
   handleOnPlaybackRateChange(e) {
-    track("PlaybackRateChange YouTube Video", {name: "YouTube Video", action: "PlaybackRateChange", challengeId: this.props.challengeId, content: this.props, data: e.data})
+    track("PlaybackRateChange YouTube Video", {name: "YouTube Video", action: "PlaybackRateChange", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined}), data: e.data})
     this.setState({playbackRate: e.target.getPlaybackRate()})
   }
 
@@ -77,7 +77,7 @@ class YoutubeVideo extends Component {
       name: "YouTube Video",
       action: "End",
       challengeId: this.props.challengeId,
-      content: this.props,
+      content: Object.assign({}, this.props, {captions: undefined}),
       data: e.data
     })
   }
@@ -87,7 +87,7 @@ class YoutubeVideo extends Component {
       name: "Help",
       action: "Show",
       challengeId: this.props.challengeId,
-      content: this.props
+      content: Object.assign({}, this.props, {captions: undefined})
     })
     this.setState({showHelp: true})
   }
@@ -97,7 +97,7 @@ class YoutubeVideo extends Component {
       name: "Next",
       action: "Attempt",
       challengeId: this.props.challengeId,
-      content: this.props,
+      content: Object.assign({}, this.props, {captions: undefined}),
       showHelp: this.state.showHelp,
       showNextButton: this.props.showNextButton,
       eventLabel: "showNextButton",
@@ -172,13 +172,13 @@ class YoutubeVideo extends Component {
                   end: content.end_seconds
                 }}}
                 onReady={this.handleOnReady.bind(this)}
-                onPlay={(e) => {track("Play YouTube Video", {name: "YouTube Video", action: "Play", challengeId: this.props.challengeId, content: content, data: e.data})}}
-                onPause={(e) => {track("Pause YouTube Video", {name: "YouTube Video", action: "Pause", challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onPlay={(e) => {track("Play YouTube Video", {name: "YouTube Video", action: "Play", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined}), data: e.data})}}
+                onPause={(e) => {track("Pause YouTube Video", {name: "YouTube Video", action: "Pause", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined}), data: e.data})}}
                 onEnd={this.handleOnEnd.bind(this)}
-                onError={(e) => {track("Error YouTube Video", {name: "YouTube Video", action: "Error", challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onError={(e) => {track("Error YouTube Video", {name: "YouTube Video", action: "Error", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined}), data: e.data})}}
                 onStateChange={(e) => {console.log("onStateChange")}}
                 onPlaybackRateChange={this.handleOnPlaybackRateChange.bind(this)}
-                onPlaybackQualityChange={(e) => {track("PlaybackQualityChange YouTube Video", {name: "YouTube Video", action: "PlaybackQualityChange", challengeId: this.props.challengeId, content: content, data: e.data})}}
+                onPlaybackQualityChange={(e) => {track("PlaybackQualityChange YouTube Video", {name: "YouTube Video", action: "PlaybackQualityChange", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined}), data: e.data})}}
               />
             </div>
           </div>

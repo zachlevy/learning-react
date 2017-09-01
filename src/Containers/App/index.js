@@ -9,6 +9,7 @@ import Course from '../Courses/show'
 import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Collapse } from 'reactstrap'
 import Logo from '../../vora_logo_20170717.svg'
 import { track } from '../../modules/analytics'
+import FeedbackModal from '../Shared/FeedbackModal'
 
 class App extends Component {
   constructor() {
@@ -61,6 +62,8 @@ class App extends Component {
           <Route exact path="/feedback" component={Feedback} />
           <Route path="/courses/:courseId" component={Course} />
         </Switch>
+
+        <FeedbackModal />
       </div>
     )
   }

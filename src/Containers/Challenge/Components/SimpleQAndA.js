@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
 import FontAwesome from 'react-fontawesome'
 import Dictionary from '../../Shared/Dictionary'
 import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
+import { setFeedbackModal, setFeedbackContext } from '../../../modules/feedback'
 
 class SimpleQAndA extends Component {
   constructor() {
@@ -110,6 +114,12 @@ class SimpleQAndA extends Component {
     this.setState({showHelp: true})
   }
 
+  handleDisagreeOnClick(e) {
+    console.log("handleDisagreeOnClick")
+    this.props.setFeedbackModal(true)
+    this.props.setFeedbackContext(this.props)
+  }
+
   render() {
     const remainingCharacters = this.props.max_length - this.state.input.length
     let help
@@ -130,7 +140,7 @@ class SimpleQAndA extends Component {
     if (this.state.feedback) {
       feedback = (
         <div className="simple_q_and_a-feedback">
-          <p>{this.state.feedback}</p>
+          <p>{this.state.feedback}  <button className="btn btn-secondary btn-sm" onClick={this.handleDisagreeOnClick.bind(this)}>Disagree?</button></p>
         </div>
       )
     }
@@ -200,4 +210,16 @@ SimpleQAndA.propTypes = {
   challengeDescription: PropTypes.string
 }
 
-export default SimpleQAndA
+const mapStateToProps = state => ({
+  feedback: state.feedback
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  setFeedbackModal,
+  setFeedbackContext
+}, dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SimpleQAndA)

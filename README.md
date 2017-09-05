@@ -36,9 +36,13 @@ The course `flow` is an array of `Challenge` objects with `id` and `type`. `type
 Challenges are displayed to the user as part of a Course.
 The `Course flow` determines what order the user sees the challenges in. At the end of the challenges in the Course flow, a user has completed the course.
 
+#### Challenge Types
 * Content may be watching a YouTube video, reading Wikipedia, etc.
 * Assessment may be being asked a short answer question, or multiple choice.
 * Challenges may also be used as introduction or ending slides.
+
+#### Adding a Challenge Type
+When adding a challenge type on the `learning-api`, you'll need to add a corresponding Challenge Component in `src/Containers/Challenge/Components`. Make sure also to add the machine name to `src/Containers/Challenge/Components/index.js`. This helps load the right component based on the machine name in `learning-api`.
 
 ### Profile
 Profile is used to store any information related to the user beyond authentication.
@@ -50,6 +54,11 @@ Note: The term `feedback` is also used by the platform for giving `feedback` to 
 
 ## Modularization
 `src/modules` is used for reusable functions that do not particularly relate with anything. For shared React components like navbars, footers, generic components used in many Containers, etc. there is the `src/Containers/Shared` folder.
+
+## Stores and Redux
+Redux is included in the project. Anything ephemeral or mostly contained within components is stored in the Component states atm. Redux is used mostly for everything outside of Challenges. This is a possible refactor.
+
+When adding a reducer for redux in `src/modules/redux` make sure to include it in the index.
 
 ## Testing
 There is currently no automated testing.

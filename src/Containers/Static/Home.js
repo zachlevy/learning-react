@@ -13,7 +13,7 @@ import { track } from '../../modules/analytics'
 class Home extends Component {
   componentDidMount() {
     console.log("componentDidMount")
-    fetch(`${process.env.REACT_APP_API_URL}/courses`).then((res) => {
+    fetch(`${process.env.REACT_APP_API_URL}/courses?ids=1,2,6,7`).then((res) => {
       return res.json()
     }).then((response) => {
       console.log(response)

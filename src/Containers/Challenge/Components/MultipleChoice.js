@@ -133,7 +133,7 @@ class MultipleChoice extends Component {
                   this.props.options.map((option, index) => {
                     return (
                       <div key={index} className="col-6">
-                        <button className={"btn btn-outline-secondary btn-block" + (this.state.input === option ? " active" : "")} onClick={this.handleOptionClick.bind(this)}>{option}</button>
+                        <button role="button" className={"btn btn-outline-secondary btn-mc btn-block" + (this.state.input === option ? " active" : "")} onClick={this.handleOptionClick.bind(this)}>{option}</button>
                         <br />
                       </div>
                     )

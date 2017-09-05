@@ -6,6 +6,7 @@ import { secondsToMinutes } from '../../modules/time'
 import { gradientBackground } from '../../modules/styles'
 import FontAwesome from 'react-fontawesome'
 
+// used to render the course thumbnails in course lists
 class CourseThumb extends Component {
   render() {
     const course = this.props.course

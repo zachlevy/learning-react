@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { setCourses } from '../../modules/courses'
+import { setCourses } from '../../modules/redux/courses'
 import { gradientBackground } from '../../modules/styles'
 import CourseList from './list'
 
@@ -12,8 +12,8 @@ class Courses extends Component {
     fetch(`${process.env.REACT_APP_API_URL}/courses`).then((res) => {
       return res.json()
     }).then((response) => {
-      console.log(response)
-      this.setState({courses: response})
+      console.log("response", response)
+      // this.setState({courses: response})
       this.props.setCourses(response)
     })
   }
@@ -23,6 +23,7 @@ class Courses extends Component {
   }
 
   render() {
+    console.log("render", this.props.courses)
     return (
       <div className="courses-index container-fluid">
         <div className="container">

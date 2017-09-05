@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { setChallenge } from '../../modules/challenge'
+import { setChallenge } from '../../modules/redux/challenge'
 import getChallengeComponent from './Components'
-import { updateCourseFlowChallenge } from '../../modules/course'
+import { updateCourseFlowChallenge } from '../../modules/redux/course'
 
 class Challenge extends Component {
   constructor() {

@@ -6,7 +6,7 @@ import Courses from '../Courses'
 import Footer from '../Footer'
 import { Link } from 'react-router-dom'
 import { gradientBackground } from '../../modules/styles'
-import { setCourses } from '../../modules/courses'
+import { setCourses } from '../../modules/redux/courses'
 import CourseList from '../Courses/list'
 import { track } from '../../modules/analytics'
 

@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Form, FormGroup, Label, Input, Alert, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
 import { track } from '../../modules/analytics'
-import { setFeedback, clearFeedback, setFeedbackModal } from '../../modules/feedback'
+import { setFeedback, clearFeedback, setFeedbackModal } from '../../modules/redux/feedback'
 
 class FeedbackModal extends Component {
   constructor() {

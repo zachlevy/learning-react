@@ -136,11 +136,15 @@ class SimpleQAndA extends Component {
         </li>
       )
     }
+    let disagreeButton // only display when answer is incorrect
+    if (!this.props.showNextButton) {
+      disagreeButton = <button className="btn btn-secondary btn-sm" onClick={this.handleDisagreeOnClick.bind(this)}>Disagree?</button>
+    }
     let feedback
     if (this.state.feedback) {
       feedback = (
         <div className="simple_q_and_a-feedback">
-          <p>{this.state.feedback}  <button className="btn btn-secondary btn-sm" onClick={this.handleDisagreeOnClick.bind(this)}>Disagree?</button></p>
+          <p>{this.state.feedback}  {disagreeButton}</p>
         </div>
       )
     }

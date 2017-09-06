@@ -53,12 +53,12 @@ Feedback is used for the user providing feedback to the platform owners.
 Note: The term `feedback` is also used by the platform for giving `feedback` to the users when they are doing an assessment.
 
 ## Modularization
-`src/modules` is used for reusable functions that do not particularly relate with anything. For shared React components like navbars, footers, generic components used in many Containers, etc. there is the `src/Containers/Shared` folder.
+`src/modules/` is used for reusable functions that do not particularly relate with anything. For shared React components like navbars, footers, generic components used in many Containers, etc. there is the `src/Containers/Shared/` folder.
 
 ## Stores and Redux
 Redux is included in the project. Anything ephemeral or mostly contained within components is stored in the Component states atm. Redux is used mostly for everything outside of Challenges. This is a possible refactor.
 
-When adding a reducer for redux in `src/modules/redux` make sure to include it in the index.
+When adding a reducer for redux in `src/modules/redux/` make sure to include it in the index.
 
 ## Testing
 There is currently no automated testing.
@@ -66,7 +66,10 @@ There is currently no automated testing.
 ## User Experience / Design / UI
 
 ### Palette
-The site has no strict palette. It uses many subtle patterns on gradient backgrounds. [uigradients.com](uigradients.com) is a good source for new gradient backgrounds. Patterns are made manually in photoshop, possible inspiration from [subtlepatterns](https://www.toptal.com/designers/subtlepatterns/).
+The site has no strict palette. It uses many subtle patterns on gradient backgrounds. [uigradients.com](uigradients.com) is a good source for new gradient backgrounds. Patterns are used in addition to gradients.
+
+### Subtle Patterns
+Patterns are made manually in photoshop, possible inspiration from [subtlepatterns](https://www.toptal.com/designers/subtlepatterns/). They are `.png` files in `public/subtle_patterns/`.
 
 ## Wikipedia Proxy
 The wikipedia proxy is set with the environment variable `REACT_APP_WIKIPEDIA_URL`. It is a proxy layer between the user and the Wikipedia embeds so that we can insert some javascript into the page to manipulate and track the user's interactions.

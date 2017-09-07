@@ -2,18 +2,16 @@ import React, { Component } from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { setCourses } from '../../modules/courses'
+import { setCourses } from '../../modules/redux/courses'
 import { gradientBackground } from '../../modules/styles'
 import CourseList from './list'
 
+// courses page
 class Courses extends Component {
   componentDidMount() {
-    console.log("componentDidMount")
     fetch(`${process.env.REACT_APP_API_URL}/courses`).then((res) => {
       return res.json()
     }).then((response) => {
-      console.log(response)
-      this.setState({courses: response})
       this.props.setCourses(response)
     })
   }

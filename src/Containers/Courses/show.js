@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { push, goBack } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { setCourse, insertCourseFlowChallenges } from '../../modules/course'
+import { setCourse, insertCourseFlowChallenges } from '../../modules/redux/course'
 import { Switch, Route, Link } from 'react-router-dom'
 import Challenge from '../Challenge/show'
 import FontAwesome from 'react-fontawesome'
@@ -11,48 +11,48 @@ import { gradientBackground } from '../../modules/styles'
 import { secondsToMinutes } from '../../modules/time'
 import { track } from '../../modules/analytics'
 
+// wrapper for a course
+// contains common methods to move the course form challenge to chalenge
 class Course extends Component {
   componentDidMount() {
-    console.log("componentDidMount")
     fetch(`${process.env.REACT_APP_API_URL}/courses/${this.props.match.params.courseId}`).then((res) => {
       return res.json()
     }).then((response) => {
-      console.log(response)
-      // this.setState({course: response})
       this.props.setCourse(response)
     })
     // scroll below navbar to give full screen effect
     document.getElementById("course-show").scrollIntoView()
   }
 
+  // next challenge
   handleNextClick() {
-    console.log("handleNextClick")
-    // find the current index in flow
+    // find the current index in the course flow
     const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
     // get the next challenge index in the course flow array
     let nextChallengeIndex
     if (currentChallengeIndex < this.props.course.flow.length - 1) {
       nextChallengeIndex = currentChallengeIndex + 1
     } else {
-      // nextChallengeIndex = 0
+      // go to feedback page at the end of the course challenges
       this.props.GoToFeedbackPage()
       return
     }
     // get the next challenge id from the array
     const nextChallengeId = this.props.course.flow[nextChallengeIndex].id
-    // redirect
+    // redirect to the next challenge
     this.props.changeCourseChallenge(this.props.course.id, nextChallengeId)
   }
 
+  // skip to next challenges
+  // used for analytics and UX
   handleSkipClick(challengeId, shownHelp) {
-    console.log("handleSkipClick")
     track("Skip Challenge", {name: "Challenge", action: "Skip", challengeId: challengeId, showHelp: shownHelp})
     this.handleNextClick()
   }
 
+  // go back 1 challenge in the course flow
   handleBackButton() {
-    console.log("handleBackButton")
-    // find the current index in flow
+    // find the current index in course flow
     const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
     // get the next challenge index in the course flow array
     let prevChallengeIndex
@@ -61,12 +61,12 @@ class Course extends Component {
     }
     // get the last challenge id from the array
     const prevChallengeId = this.props.course.flow[prevChallengeIndex].id
-    // redirect
+    // redirect to the previous challenge
     this.props.changeCourseChallenge(this.props.course.id, prevChallengeId)
   }
 
   // inserts challenges into the flow if the user answers wrong
-  // takes an input (from user) to match against only_inputs optional whitelist array.
+  // takes an input (from user) to match against only_inputs optional whitelist array. see the learning-api docs for more information on data formats
   handleInsertDependencies(input) {
     console.log("handleInsertChallenge", input)
     // find the current index in flow
@@ -74,20 +74,23 @@ class Course extends Component {
     // check for only_inputs
     const insertDependencies = []
     this.props.challenge.dependencies.forEach((dependency) => {
+      // default add, whitelist is optional
       if (!dependency.only_inputs) {
         insertDependencies.push(dependency)
         return
       }
+      // optional whitelist
       if (dependency.only_inputs && dependency.only_inputs.includes(input)) {
         insertDependencies.push(dependency)
         return
       }
     })
-    // insert the dependencies
+    // insert the dependencies into the course flow
     this.props.insertCourseFlowChallenges(currentChallengeIndex + 1, insertDependencies)
   }
 
   render() {
+    // used to calculate the progress bar
     let challengeWidth
     if (this.props.course.flow) {
       challengeWidth = Math.floor(10000 / this.props.course.flow.length) / 100
@@ -95,6 +98,7 @@ class Course extends Component {
     const challengeIndex = this.props.course.flow && this.props.course.flow.findIndex((challenge) => {return this.props.challenge.id === challenge.id})
     const reversedChallengeIndex = this.props.course.flow && this.props.course.flow.length - (challengeIndex + 1)
     const progressWidth = challengeIndex * challengeWidth + "%"
+    
     return (
       <div id="course-show" className="course-show bg-gradient" style={gradientBackground(this.props.course.ui && this.props.course.ui.primaryColor, this.props.course.ui && this.props.course.ui.secondaryColor)}>
         <div className={"full-height bg-subtle" + (this.props.course.ui && this.props.course.ui.subtle ? " bg-subtle-" + this.props.course.ui.subtle : "bg-subtle-diamond")}>

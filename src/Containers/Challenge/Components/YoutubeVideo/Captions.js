@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { define, removePunctuation } from '../../../../modules/strings'
-import { addProfileDictionaryWord } from '../../../../modules/profile'
+import { addProfileDictionaryWord } from '../../../../modules/redux/profile'
 import ProfileDictionaryList from '../../../Shared/ProfileDictionaryList' // probable a better place to add this
 
 class Captions extends Component {

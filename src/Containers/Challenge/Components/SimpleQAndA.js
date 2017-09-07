@@ -7,7 +7,7 @@ import FontAwesome from 'react-fontawesome'
 import Dictionary from '../../Shared/Dictionary'
 import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
-import { setFeedbackModal, setFeedbackContext } from '../../../modules/feedback'
+import { setFeedbackModal, setFeedbackContext } from '../../../modules/redux/feedback'
 
 class SimpleQAndA extends Component {
   constructor() {

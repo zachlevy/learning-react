@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import CourseThumb from './CourseThumb'
 import { arrayChunk } from '../../modules/styles'
 
-// builds the rows and columns for the coursel list
+// builds the rows and columns for the course list
 class CourseList extends Component {
   render() {
     return (

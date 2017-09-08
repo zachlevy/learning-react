@@ -21,7 +21,8 @@ Use `track` method from the `analytics` module as a wrapper for analytics librar
 ## Environment Variables
 Set environment variables when you run in `packages.json` for development.
 
-* `REACT_APP_API_URL` http://api.voralearning.com
+* `REACT_APP_API_URL` /api
+* `PROX_API_URL` http://api.voralearning.com
 * `REACT_APP_GA_ID` Google Analytics
 * `REACT_APP_MIXPANEL_TOKEN` Mixpanel Analytics
 * `REACT_APP_WIKIPEDIA_URL` https://en.m.wikipedia.org or proxy server

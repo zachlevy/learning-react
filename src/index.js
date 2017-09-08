@@ -9,6 +9,11 @@ import registerServiceWorker from './registerServiceWorker'
 
 import './index.css'
 
+import {initReactDevise} from 'react-devise'
+const getConfig = initReactDevise({
+  apiResourceName: 'api/auth'
+})
+
 const target = document.getElementById('root')
 
 render(

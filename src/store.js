@@ -3,6 +3,7 @@ import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import rootReducer from './modules/redux'
+import { configure } from "redux-auth"
 
 export const history = createHistory()
 
@@ -31,5 +32,14 @@ const store = createStore(
   initialState,
   composedEnhancers
 )
+
+// redux-auth
+store.dispatch(configure(
+  {apiUrl: "/api"},
+  {serverSideRendering: true, cleanSession: true}
+)).then(() => {
+  // your store should now have the current user. now render your
+  // app to the DOM. see the demo app for a more complete example.
+});
 
 export default store

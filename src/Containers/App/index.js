@@ -6,6 +6,7 @@ import Home from '../Static/Home'
 import Courses from '../Courses'
 import Feedback from '../Static/Feedback'
 import Course from '../Courses/show'
+import Users from '../Users'
 import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Collapse } from 'reactstrap'
 import Logo from '../../vora_logo_20170717.svg'
 import { track } from '../../modules/analytics'
@@ -59,6 +60,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/courses" component={Courses} />
+          <Route path="/users" component={Users} />
           <Route exact path="/feedback" component={Feedback} />
           <Route path="/courses/:courseId" component={Course} />
         </Switch>

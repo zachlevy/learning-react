@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import UserForm from './UserForm'
+import LoginForm from './LoginForm'
 import { SubmissionError } from 'redux-form'
+import { setJwt } from '../../modules/redux/user'
 
-class New extends Component {
+class Login extends Component {
 
   handleSubmit(userValues) {
     console.log("handleSubmit", userValues)
-    fetch(`${process.env.REACT_APP_API_URL}/users`, {
+    fetch(`${process.env.REACT_APP_API_URL}/user_token`, {
       method: 'post',
       body: JSON.stringify({
-        user: {
+        auth: {
           email: userValues.email,
           password: userValues.password,
-          password_confirmation: userValues.password_confirmation
         }
       }),
       headers: {
@@ -24,7 +24,7 @@ class New extends Component {
       console.log("res.status", res.status)
       if (res.status !== 201) {
         res.json().then((response) => {
-          console.log("!201", response)
+          console.log("422", response)
           throw new SubmissionError(response)
         }).catch((errors) => {
           console.log("errors", errors)
@@ -32,6 +32,7 @@ class New extends Component {
       } else {
         res.json().then((response) => {
           console.log("else", response)
+          this.props.setJwt(response.jwt)
         })
       }
     })
@@ -44,7 +45,7 @@ class New extends Component {
           <div className="col-12 col-sm-4 offset-sm-4">
             <br />
             <h4>Register</h4>
-            <UserForm onSubmit={this.handleSubmit}/>
+            <LoginForm onSubmit={this.handleSubmit.bind(this)}/>
           </div>
         </div>
       </div>
@@ -57,10 +58,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+  setJwt
 }, dispatch)
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(New)
+)(Login)

@@ -7,6 +7,7 @@ import courses from './courses'
 import challenge from './challenge'
 import profile from './profile'
 import feedback from './feedback'
+import user from './user'
 
 export default combineReducers({
   routing: routerReducer,
@@ -15,5 +16,6 @@ export default combineReducers({
   courses,
   challenge,
   profile,
-  feedback
+  feedback,
+  user
 })

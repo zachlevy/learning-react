@@ -1,0 +1,49 @@
+export const SET_USER = 'user/SET_USER'
+export const CLEAR_USER = 'user/CLEAR_USER'
+export const SET_JWT= 'user/SET_JWT'
+
+const initialState = {
+}
+
+export default (state = initialState, action) => {
+  switch (action.type) {
+
+    case SET_USER:
+      return action.newUser
+
+    case SET_JWT:
+      return Object.assign({}, state, {jwt: action.jwt})
+
+    case CLEAR_USER:
+      return {}
+
+    default:
+      return state
+  }
+}
+
+export const setUser = (newUser) => {
+  return dispatch => {
+    dispatch({
+      type: SET_USER,
+      newUser
+    })
+  }
+}
+
+export const setJwt = (jwt) => {
+  return dispatch => {
+    dispatch({
+      type: SET_JWT,
+      jwt
+    })
+  }
+}
+
+export const clearUser = () => {
+  return dispatch => {
+    dispatch({
+      type: CLEAR_USER
+    })
+  }
+}

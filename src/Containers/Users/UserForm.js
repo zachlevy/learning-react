@@ -18,7 +18,7 @@ class UserForm extends Component {
           </div>
           <div className="form-group">
             <label>Password Confirmation</label>
-            <Field className="form-control" name="passwordConfirmation" component="input" type="password" />
+            <Field className="form-control" name="password_confirmation" component="input" type="password" />
           </div>
           <button className="btn btn-primary btn-block" type="submit">Submit</button>
         </form>

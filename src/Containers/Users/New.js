@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UserForm from './UserForm'
+import { SubmissionError } from 'redux-form'
 
 class New extends Component {
 
@@ -13,16 +14,26 @@ class New extends Component {
         user: {
           email: userValues.email,
           password: userValues.password,
-          password_confirmation: userValues.passwordConfirmation
+          password_confirmation: userValues.password_confirmation
         }
       }),
       headers: {
         "Content-Type": "application/json"
       }
     }).then((res) => {
-      return res.json()
-    }).then((response) => {
-      console.log(response)
+      console.log("res.status", res.status)
+      if (res.status === 422) {
+        res.json().then((response) => {
+          console.log("422", response)
+          throw new SubmissionError({email: "not great"})
+        }).catch((errors) => {
+          console.log("errors", errors)
+        })
+      } else {
+        res.json().then((response) => {
+          console.log("else", response)
+        })
+      }
     })
   }
 

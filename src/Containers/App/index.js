@@ -10,6 +10,7 @@ import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Collapse } f
 import Logo from '../../vora_logo_20170717.svg'
 import { track } from '../../modules/analytics'
 import FeedbackModal from '../Shared/FeedbackModal'
+import NewUserForm from '../Users/New'
 
 class App extends Component {
   constructor() {
@@ -61,6 +62,7 @@ class App extends Component {
           <Route exact path="/courses" component={Courses} />
           <Route exact path="/feedback" component={Feedback} />
           <Route path="/courses/:courseId" component={Course} />
+          <Route path="/users/new" component={NewUserForm} />
         </Switch>
 
         <FeedbackModal />

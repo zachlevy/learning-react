@@ -1,11 +1,28 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+
 import LoginForm from './LoginForm'
 import { SubmissionError } from 'redux-form'
-import { setJwt } from '../../modules/redux/user'
+import { setJwt, setCurrentUser } from '../../modules/redux/user'
 
 class Login extends Component {
+
+  getCurrentUser(jwt) {
+    console.log("getCurrentUser")
+    fetch(`${process.env.REACT_APP_API_URL}/users/me`, {
+      method: 'get',
+      headers: {
+        "Authorization": `Bearer ${jwt}`
+      }
+    }).then((res) => {
+      res.json().then((response) => {
+        console.log("user", response)
+        this.props.setCurrentUser(response)
+      })
+    })
+  }
 
   handleSubmit(userValues) {
     console.log("handleSubmit", userValues)
@@ -33,6 +50,8 @@ class Login extends Component {
         res.json().then((response) => {
           console.log("else", response)
           this.props.setJwt(response.jwt)
+          this.getCurrentUser(response.jwt)
+          this.props.changePage("/courses")
         })
       }
     })
@@ -44,7 +63,7 @@ class Login extends Component {
         <div className="row">
           <div className="col-12 col-sm-4 offset-sm-4">
             <br />
-            <h4>Register</h4>
+            <h4>Login</h4>
             <LoginForm onSubmit={this.handleSubmit.bind(this)}/>
           </div>
         </div>
@@ -58,7 +77,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setJwt
+  changePage: (url) => push(url),
+  setJwt,
+  setCurrentUser
 }, dispatch)
 
 export default connect(

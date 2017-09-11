@@ -1,4 +1,8 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
+
 import { Switch, Route, Link } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
@@ -12,6 +16,8 @@ import { track } from '../../modules/analytics'
 import FeedbackModal from '../Shared/FeedbackModal'
 import NewUser from '../Users/New'
 import Login from '../Users/Login'
+import { clearUser } from '../../modules/redux/user'
+import User from '../Users/show'
 
 class App extends Component {
   constructor() {
@@ -32,7 +38,38 @@ class App extends Component {
       eventLabel: e.target.innerHTML
     })
   }
+
+  handleLogout() {
+    console.log("handleLogout")
+    this.props.clearUser()
+    this.props.changePage("/")
+  }
+
   render() {
+    let userNavs
+    if (this.props.user.email) {
+      userNavs = (
+        <div style={{display: 'flex'}}>
+          <NavItem>
+            <NavLink tag={Link} to={`/users/${this.props.user.id}`}>{this.props.user.email}</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink onClick={this.handleLogout.bind(this)}>Logout</NavLink>
+          </NavItem>
+        </div>
+      )
+    } else {
+      userNavs = (
+        <div style={{display: 'flex'}}>
+          <NavItem>
+            <NavLink tag={Link} to="/login" onClick={this.handleCallToActionClick.bind(this)}>Login</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink tag={Link} to="/users/new" onClick={this.handleCallToActionClick.bind(this)}>Sign Up</NavLink>
+          </NavItem>
+        </div>
+      )
+    }
     return (
       <div>
         <div className="bg-white navbar-wrapper">
@@ -52,12 +89,7 @@ class App extends Component {
                   <NavItem>
                     <NavLink tag={Link} to="/feedback" onClick={this.handleCallToActionClick.bind(this)}>Feedback</NavLink>
                   </NavItem>
-                  <NavItem>
-                    <NavLink tag={Link} to="/login" onClick={this.handleCallToActionClick.bind(this)}>Login</NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink tag={Link} to="/users/new" onClick={this.handleCallToActionClick.bind(this)}>Sign Up</NavLink>
-                  </NavItem>
+                  {userNavs}
                 </Nav>
               </Collapse>
             </Navbar>
@@ -70,6 +102,7 @@ class App extends Component {
           <Route exact path="/feedback" component={Feedback} />
           <Route path="/courses/:courseId" component={Course} />
           <Route path="/users/new" component={NewUser} />
+          <Route path="/users/:userId" component={User} />
           <Route path="/login" component={Login} />
         </Switch>
 
@@ -78,4 +111,17 @@ class App extends Component {
     )
   }
 }
-export default App
+
+const mapStateToProps = state => ({
+  changePage: (url) => push(url),
+  user: state.user
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+  clearUser
+}, dispatch)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)

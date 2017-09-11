@@ -3,11 +3,14 @@ import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import rootReducer from './modules/redux'
+import {persistStore, autoRehydrate} from 'redux-persist'
 
 export const history = createHistory()
 
 const initialState = {}
-const enhancers = []
+const enhancers = [
+  autoRehydrate()
+]
 const middleware = [
   thunk,
   routerMiddleware(history)
@@ -31,5 +34,8 @@ const store = createStore(
   initialState,
   composedEnhancers
 )
+
+// begin periodically persisting the store
+persistStore(store)
 
 export default store

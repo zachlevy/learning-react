@@ -6,6 +6,12 @@ import { SubmissionError } from 'redux-form'
 import { push } from 'react-router-redux'
 
 class New extends Component {
+  constructor() {
+    super()
+    this.state = {
+      errors: null
+    }
+  }
 
   handleSubmit(userValues) {
     console.log("handleSubmit", userValues)
@@ -27,6 +33,7 @@ class New extends Component {
       if (res.status !== 201) {
         res.json().then((response) => {
           console.log("!201", response)
+          this.setState({errors: response})
           throw new SubmissionError(response)
         }).catch((errors) => {
           console.log("errors", errors)
@@ -47,7 +54,7 @@ class New extends Component {
           <div className="col-12 col-sm-4 offset-sm-4">
             <br />
             <h4>Register</h4>
-            <UserForm onSubmit={this.handleSubmit.bind(this)}/>
+            <UserForm onSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}/>
           </div>
         </div>
       </div>

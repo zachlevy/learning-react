@@ -1,12 +1,27 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
-
+import { parseApiErrors } from '../../modules/strings'
 
 class LoginForm extends Component {
 
   render() {
+    const errors = parseApiErrors(this.props.errors)
+    let errorsList
+    if (errors.length > 0) {
+      errorsList = (
+        <ul>
+          {
+            errors.map((error, index) => {
+              return <li key={index}>{error}</li>
+            })
+          }
+        </ul>
+      )
+    }
+
     return (
       <div>
+        {errorsList}
         <form onSubmit={ this.props.handleSubmit }>
           <div className="form-group">
             <label>Email</label>

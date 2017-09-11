@@ -2,6 +2,19 @@ import React from 'react'
 import reactStringReplace from 'react-string-replace'
 import Logo from '../vora_logo_20170717.svg'
 
+// converts rails api errors object to array strings
+export const parseApiErrors = (errorsObj) => {
+  let errors = []
+  if (errorsObj) {
+    Object.keys(errorsObj).forEach((field, index) => {
+      errorsObj[field].forEach((error, index) => {
+        errors.push(`${field} ${error}`)
+      })
+    })
+  }
+  return errors
+}
+
 // converts a machine name
 export const snakeCaseToPascalCase = (snakeCase) => {
   return snakeCase.split("_").map((word) => {return word.charAt(0).toUpperCase() + word.slice(1)}).join("")

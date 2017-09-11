@@ -8,6 +8,12 @@ import { SubmissionError } from 'redux-form'
 import { setJwt, setCurrentUser } from '../../modules/redux/user'
 
 class Login extends Component {
+  constructor() {
+    super()
+    this.state = {
+      errors: null
+    }
+  }
 
   getCurrentUser(jwt) {
     console.log("getCurrentUser")
@@ -40,8 +46,10 @@ class Login extends Component {
     }).then((res) => {
       console.log("res.status", res.status)
       if (res.status !== 201) {
-        res.json().then((response) => {
-          console.log("422", response)
+        this.setState({errors: {email: [" not found or password doesn't match"]}})
+        // no json errors for this route
+        res.text().then((response) => {
+          console.log("!201", response)
           throw new SubmissionError(response)
         }).catch((errors) => {
           console.log("errors", errors)
@@ -64,7 +72,7 @@ class Login extends Component {
           <div className="col-12 col-sm-4 offset-sm-4">
             <br />
             <h4>Login</h4>
-            <LoginForm onSubmit={this.handleSubmit.bind(this)}/>
+            <LoginForm onSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}/>
           </div>
         </div>
       </div>

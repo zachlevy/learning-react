@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
-import { Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route, Link, withRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
 import Home from '../Static/Home'
@@ -121,7 +121,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   clearUser
 }, dispatch)
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(App)
+)(App))

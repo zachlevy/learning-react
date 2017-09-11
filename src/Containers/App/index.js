@@ -52,6 +52,12 @@ class App extends Component {
                   <NavItem>
                     <NavLink tag={Link} to="/feedback" onClick={this.handleCallToActionClick.bind(this)}>Feedback</NavLink>
                   </NavItem>
+                  <NavItem>
+                    <NavLink tag={Link} to="/login" onClick={this.handleCallToActionClick.bind(this)}>Login</NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink tag={Link} to="/users/new" onClick={this.handleCallToActionClick.bind(this)}>Sign Up</NavLink>
+                  </NavItem>
                 </Nav>
               </Collapse>
             </Navbar>

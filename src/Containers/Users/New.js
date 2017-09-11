@@ -3,11 +3,13 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UserForm from './UserForm'
 import { SubmissionError } from 'redux-form'
+import { push } from 'react-router-redux'
 
 class New extends Component {
 
   handleSubmit(userValues) {
     console.log("handleSubmit", userValues)
+    // create user
     fetch(`${process.env.REACT_APP_API_URL}/users`, {
       method: 'post',
       body: JSON.stringify({
@@ -31,7 +33,8 @@ class New extends Component {
         })
       } else {
         res.json().then((response) => {
-          console.log("else", response)
+          console.log("user", response)
+          this.props.changePage("/login")
         })
       }
     })
@@ -44,7 +47,7 @@ class New extends Component {
           <div className="col-12 col-sm-4 offset-sm-4">
             <br />
             <h4>Register</h4>
-            <UserForm onSubmit={this.handleSubmit}/>
+            <UserForm onSubmit={this.handleSubmit.bind(this)}/>
           </div>
         </div>
       </div>
@@ -57,7 +60,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+  changePage: (url) => push(url)
 }, dispatch)
 
 export default connect(

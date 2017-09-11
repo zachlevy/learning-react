@@ -17,7 +17,7 @@ import FeedbackModal from '../Shared/FeedbackModal'
 import NewUser from '../Users/New'
 import Login from '../Users/Login'
 import { clearUser } from '../../modules/redux/user'
-import User from '../Users/show'
+import User from '../Users/Show'
 
 class App extends Component {
   constructor() {

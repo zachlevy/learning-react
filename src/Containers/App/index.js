@@ -101,9 +101,9 @@ class App extends Component {
           <Route exact path="/courses" component={Courses} />
           <Route exact path="/feedback" component={Feedback} />
           <Route path="/courses/:courseId" component={Course} />
-          <Route path="/users/new" component={NewUser} />
+          <Route exact path="/users/new" component={NewUser} />
           <Route path="/users/:userId" component={User} />
-          <Route path="/login" component={Login} />
+          <Route exact path="/login" component={Login} />
         </Switch>
 
         <FeedbackModal />

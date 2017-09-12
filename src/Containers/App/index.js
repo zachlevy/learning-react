@@ -10,6 +10,7 @@ import Home from '../Static/Home'
 import Courses from '../Courses'
 import Feedback from '../Static/Feedback'
 import Course from '../Courses/show'
+import Admin from '../Admin'
 import { Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Collapse } from 'reactstrap'
 import Logo from '../../vora_logo_20170717.svg'
 import { track } from '../../modules/analytics'
@@ -104,6 +105,7 @@ class App extends Component {
           <Route exact path="/users/new" component={NewUser} />
           <Route path="/users/:userId" component={User} />
           <Route exact path="/login" component={Login} />
+          <Route path="/admin" component={Admin} />
         </Switch>
 
         <FeedbackModal />

@@ -45,6 +45,14 @@ The `Course flow` determines what order the user sees the challenges in. At the 
 #### Adding a Challenge Type
 When adding a challenge type on the `learning-api`, you'll need to add a corresponding Challenge Component in `src/Containers/Challenge/Components`. Make sure also to add the machine name to `src/Containers/Challenge/Components/index.js`. This helps load the right component based on the machine name in `learning-api`.
 
+### User
+The user model is quite simple, just a user `id`, which is used for all relations, and `email`. Everything else should be stored in `profile`.
+
+#### Authentication
+Authentication is handled with JWT. A user logs in which returns a jwt. The jwt is currently stored in the `user` Redux store. This should be moved to something more secure like a http cookie to avoid h4x0rs.
+
+Authentication with the server is done through a `Authorization Bearer token` in the header of a request. The `apiRequest` function in `src/modules/data.js` adds the header to all requests to the API once a user is logged in.
+
 ### Profile
 Profile is used to store any information related to the user beyond authentication.
 

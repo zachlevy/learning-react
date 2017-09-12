@@ -113,11 +113,11 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  changePage: (url) => push(url),
   user: state.user
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
+  changePage: (url) => push(url),
   clearUser
 }, dispatch)
 

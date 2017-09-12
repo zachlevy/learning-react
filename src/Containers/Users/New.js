@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import UserForm from './UserForm'
 import { SubmissionError } from 'redux-form'
 import { push } from 'react-router-redux'
+import { apiRequest, getCurrentUser } from '../../modules/data'
+import { setCurrentUser, setJwt } from '../../modules/redux/user'
 
 class New extends Component {
   constructor() {
@@ -16,7 +18,7 @@ class New extends Component {
   handleSubmit(userValues) {
     console.log("handleSubmit", userValues)
     // create user
-    fetch(`${process.env.REACT_APP_API_URL}/users`, {
+    apiRequest("/users", {
       method: 'post',
       body: JSON.stringify({
         user: {
@@ -24,25 +26,31 @@ class New extends Component {
           password: userValues.password,
           password_confirmation: userValues.password_confirmation
         }
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((res) => {
-      console.log("res.status", res.status)
-      if (res.status !== 201) {
-        res.json().then((response) => {
-          console.log("!201", response)
-          this.setState({errors: response})
-          throw new SubmissionError(response)
-        }).catch((errors) => {
-          console.log("errors", errors)
+      })
+    }, (response, status) => {
+      if (status === 201) {
+        // authenticate
+        apiRequest("/user_token", {
+          method: "post",
+          body: JSON.stringify({
+            auth: {
+              email: userValues.email,
+              password: userValues.password
+            }
+          })
+        }, (response, status) => {
+          this.props.setJwt(response.jwt)
+          if (status === 201) {
+            // get user self
+            getCurrentUser(response.jwt, (user) => {
+              this.props.setCurrentUser(user)
+              this.props.changePage(`/users/${user.id}`)
+            })
+          }
         })
+
       } else {
-        res.json().then((response) => {
-          console.log("user", response)
-          this.props.changePage("/login")
-        })
+        this.setState({errors: response})
       }
     })
   }
@@ -67,7 +75,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  changePage: (url) => push(url)
+  changePage: (url) => push(url),
+  setJwt,
+  setCurrentUser
 }, dispatch)
 
 export default connect(

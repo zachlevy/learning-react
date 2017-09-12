@@ -54,7 +54,7 @@ class App extends Component {
             <NavLink tag={Link} to={`/users/${this.props.user.id}`}>{this.props.user.email}</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink onClick={this.handleLogout.bind(this)}>Logout</NavLink>
+            <a className="nav-link btn-pointer" onClick={this.handleLogout.bind(this)}>Logout</a>
           </NavItem>
         </div>
       )

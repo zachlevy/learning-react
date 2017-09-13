@@ -1,15 +1,23 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { capitalizeWords, camelCaseToSpaceCase } from './strings'
+import { parseApiErrors } from './strings'
 
-export const buildForm = (formJson, blacklistKeys) => {
-  return (
-    <div>
+export const buildFormErrors = (apiErrors) => {
+  const errors = parseApiErrors(apiErrors)
+  if (!(errors.length > 0)) {
+    return
+  }
+  const errorsList = (
+    <ul>
       {
-        buildFormFields(formJson, blacklistKeys)
+        errors.map((error, index) => {
+          return <li key={index}>{error}</li>
+        })
       }
-    </div>
+    </ul>
   )
+  return errorsList
 }
 
 // takes in a json based on a template of a same course

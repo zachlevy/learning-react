@@ -19,16 +19,14 @@ class New extends Component {
   handleSubmit(courseValues) {
     console.log("handleSubmit", courseValues)
     // create course
-    // apiRequest("/courses", {
-    //   method: 'post',
-    //   body: JSON.stringify({
-    //     course: {
-    //
-    //     }
-    //   })
-    // }, (response, status) => {
-    //
-    // })
+    apiRequest("/courses", {
+      method: 'post',
+      body: JSON.stringify({
+        course: courseValues
+      })
+    }, (response, status) => {
+
+    })
   }
 
   render() {

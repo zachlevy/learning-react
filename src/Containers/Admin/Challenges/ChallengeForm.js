@@ -4,6 +4,7 @@ import { parseApiErrors } from '../../../modules/strings'
 import { defaultChallenge } from '../../../modules/defaults'
 import { apiRequest } from '../../../modules/data'
 import { buildFormFields, buildFormErrors } from '../../../modules/forms'
+import { snakeCaseToSpaceCase, capitalizeWords } from '../../../modules/strings'
 
 class ChallengeForm extends Component {
   constructor() {
@@ -45,7 +46,14 @@ class ChallengeForm extends Component {
         <form onSubmit={ this.props.handleSubmit }>
           <div className="form-group">
             <label>Challenge Type Id</label>
-            <Field onChange={this.handleChallengeTypeChange.bind(this)} className="form-control" name="challenge_type_id" component="input" type="text" />
+            <Field onChange={this.handleChallengeTypeChange.bind(this)} className="form-control" name="challenge_type_id" component="select" type="text">
+              <option value=""></option>
+              {
+                this.state.challengeTypes.map((challengeType, index) => {
+                  return <option key={index} value={challengeType.id}>{capitalizeWords(snakeCaseToSpaceCase(challengeType.name))}</option>
+                })
+              }
+            </Field>
             {
               buildFormFields(mergedChallengeBody, blacklistKeys)
             }

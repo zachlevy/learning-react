@@ -62,14 +62,3 @@ export const buildFormFields = (formJson, blacklistKeys) => {
     </div>
   )
 }
-
-
-// Object.keys(formJson[key]).filter((subKey) => {return !blacklistKeys.includes(`${key}.${subKey}`)}).map((subKey) => {
-//   if (typeof formJson[key][subKey] === "string") {
-//     return (
-//       <div>
-//         <label>{key} {subKey}</label>
-//         <Field className="form-control" name={`${key}.${subKey}`} component="input" type="text" />
-//       </div>
-//     )
-//   }

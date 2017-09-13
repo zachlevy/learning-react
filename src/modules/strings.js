@@ -9,6 +9,9 @@ export const capitalizeWords = (str) => {
 export const camelCaseToSpaceCase = (str) => {
   return str.replace( /([A-Z])/g, " $1" );
 }
+export const snakeCaseToSpaceCase = (str) => {
+  return str.replace( /_/g, " " );
+}
 
 // converts rails api errors object to array strings
 export const parseApiErrors = (errorsObj) => {

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import { capitalizeWords, camelCaseToSpaceCase } from './strings'
-import { parseApiErrors } from './strings'
+import { parseApiErrors, snakeCaseToSpaceCase, capitalizeWords, camelCaseToSpaceCase } from './strings'
 
 export const buildFormErrors = (apiErrors) => {
   const errors = parseApiErrors(apiErrors)
@@ -27,7 +26,7 @@ export const buildFormFields = (formJson, blacklistKeys) => {
     <div key={"fields-wrapper"}>
       {
         Object.keys(formJson).filter((key) => {return !blacklistKeys.includes(key)}).map((key, index) => {
-          const label = capitalizeWords(camelCaseToSpaceCase(key.replace(".", " ")))
+          const label = capitalizeWords(snakeCaseToSpaceCase(camelCaseToSpaceCase(key.replace(".", " "))))
           if (typeof formJson[key] === "string") {
             return (
               <div key={index}>

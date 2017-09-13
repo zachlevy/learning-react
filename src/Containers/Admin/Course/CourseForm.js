@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm, FieldArray } from 'redux-form'
 import { parseApiErrors } from '../../../modules/strings'
+import { defaultCourse } from '../../../modules/defaults'
 
 class CourseForm extends Component {
   render() {
@@ -17,28 +18,50 @@ class CourseForm extends Component {
         </ul>
       )
     }
-
+    const blacklistKeys = ["est_duration", "flow"]
     return (
       <div>
         {errorsList}
         <form onSubmit={ this.props.handleSubmit }>
           <div className="form-group">
-            <label>Title</label>
-            <Field className="form-control" name="title" component="input" type="text" />
-            <label>Description</label>
-            <Field className="form-control" name="description" component="input" type="text" />
-            <label>Tags</label>
-            <Field normalize={(value) => {return value && value.split(",")}} className="form-control" name="tags" component="input" type="text" />
-            <fieldset>
-              <label>UI Icon</label>
-              <Field className="form-control" name="ui.icon" component="input" type="text" />
-              <label>UI Primary Color</label>
-              <Field className="form-control" name="ui.primaryColor" component="input" type="text" />
-              <label>UI Secondary Color</label>
-              <Field className="form-control" name="ui.secondaryColor" component="input" type="text" />
-              <label>UI Subtle</label>
-              <Field className="form-control" name="ui.subtle" component="input" type="text" />
-            </fieldset>
+            {
+              Object.keys(defaultCourse).filter((key) => {return !blacklistKeys.includes(key)}).map((key) => {
+                if (typeof defaultCourse[key] === "string") {
+                  return (
+                    <div>
+                      <label>{key}</label>
+                      <Field className="form-control" name={key} component="input" type="text" />
+                    </div>
+                  )
+                } else if (typeof defaultCourse[key] === "number") {
+                  return (
+                    <div>
+                      <label>{key}</label>
+                      <Field className="form-control" name={key} component="input" type="number" />
+                    </div>
+                  )
+                } else if (typeof defaultCourse[key] === "object" && defaultCourse[key].length >= 0 && typeof defaultCourse[key][0] === "string") {
+                  return (
+                    <div>
+                      <label>{key}</label>
+                      <Field normalize={(value) => {return value && value.split(",")}} className="form-control" name={key} component="input" type="text" />
+                    </div>
+                  )
+                } else {
+                  // recursive refactor
+                  return Object.keys(defaultCourse[key]).filter((subKey) => {return !blacklistKeys.includes(`${key}.${subKey}`)}).map((subKey) => {
+                    if (typeof defaultCourse[key][subKey] === "string") {
+                      return (
+                        <div>
+                          <label>{key} {subKey}</label>
+                          <Field className="form-control" name={`${key}.${subKey}`} component="input" type="text" />
+                        </div>
+                      )
+                    }
+                  })
+                }
+              })
+            }
           </div>
           <button className="btn btn-primary btn-block" type="submit">Submit</button>
         </form>

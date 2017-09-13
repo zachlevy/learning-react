@@ -16,7 +16,6 @@ class ChallengeForm extends Component {
   }
 
   componentDidMount() {
-    console.log("componentDidMount")
     apiRequest(`/challenge_types`, {
     }, (response, status) => {
       console.log("challenge_types", response)
@@ -25,7 +24,6 @@ class ChallengeForm extends Component {
   }
 
   handleChallengeTypeChange(e) {
-    console.log("handleChallengeTypeChange", e.target.value)
     const selectedChallengeType = this.state.challengeTypes.find((challengeType) => {return challengeType.id == e.target.value})
     this.setState({selectedChallengeType: selectedChallengeType})
   }
@@ -42,7 +40,6 @@ class ChallengeForm extends Component {
     return (
       <div>
         {errors}
-        <pre>{JSON.stringify(mergedChallengeBody)}</pre>
         <form onSubmit={ this.props.handleSubmit }>
           <div className="form-group">
             <label>Challenge Type Id</label>

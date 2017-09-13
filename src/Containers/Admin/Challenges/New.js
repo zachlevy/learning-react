@@ -21,7 +21,7 @@ class New extends Component {
     apiRequest("/challenges", {
       method: 'post',
       body: JSON.stringify({
-        course: challengeValues
+        challenge: challengeValues
       })
     }, (response, status) => {
 

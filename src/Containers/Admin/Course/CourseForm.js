@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm, FieldArray } from 'redux-form'
 import { parseApiErrors } from '../../../modules/strings'
 import { defaultCourse } from '../../../modules/defaults'
+import { buildFormFields } from '../../../modules/forms'
 
 class CourseForm extends Component {
   render() {
@@ -25,42 +26,7 @@ class CourseForm extends Component {
         <form onSubmit={ this.props.handleSubmit }>
           <div className="form-group">
             {
-              Object.keys(defaultCourse).filter((key) => {return !blacklistKeys.includes(key)}).map((key) => {
-                if (typeof defaultCourse[key] === "string") {
-                  return (
-                    <div>
-                      <label>{key}</label>
-                      <Field className="form-control" name={key} component="input" type="text" />
-                    </div>
-                  )
-                } else if (typeof defaultCourse[key] === "number") {
-                  return (
-                    <div>
-                      <label>{key}</label>
-                      <Field className="form-control" name={key} component="input" type="number" />
-                    </div>
-                  )
-                } else if (typeof defaultCourse[key] === "object" && defaultCourse[key].length >= 0 && typeof defaultCourse[key][0] === "string") {
-                  return (
-                    <div>
-                      <label>{key}</label>
-                      <Field normalize={(value) => {return value && value.split(",")}} className="form-control" name={key} component="input" type="text" />
-                    </div>
-                  )
-                } else {
-                  // recursive refactor
-                  return Object.keys(defaultCourse[key]).filter((subKey) => {return !blacklistKeys.includes(`${key}.${subKey}`)}).map((subKey) => {
-                    if (typeof defaultCourse[key][subKey] === "string") {
-                      return (
-                        <div>
-                          <label>{key} {subKey}</label>
-                          <Field className="form-control" name={`${key}.${subKey}`} component="input" type="text" />
-                        </div>
-                      )
-                    }
-                  })
-                }
-              })
+              buildFormFields(defaultCourse, blacklistKeys)
             }
           </div>
           <button className="btn btn-primary btn-block" type="submit">Submit</button>

@@ -14,10 +14,14 @@ export const camelCaseToSpaceCase = (str) => {
 export const parseApiErrors = (errorsObj) => {
   let errors = []
   if (errorsObj) {
+    // iterate over attributes
     Object.keys(errorsObj).forEach((field, index) => {
-      errorsObj[field].forEach((error, index) => {
-        errors.push(`${field} ${error}`)
-      })
+      // make sure it's an array
+      if (typeof errorsObj[field] === "object" && errorsObj[field].length > 0) {
+        errorsObj[field].forEach((error, index) => {
+          errors.push(`${field} ${error}`)
+        })
+      }
     })
   }
   return errors

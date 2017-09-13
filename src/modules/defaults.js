@@ -15,3 +15,8 @@ export const defaultCourse = {
     }
   ]
 }
+
+export const defaultChallenge = {
+  description: "Challenge description placeholder",
+  tags: ["Tag1", "Tag2"]
+}

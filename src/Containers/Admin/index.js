@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Switch, Route, Link } from 'react-router-dom'
 import NewCourse from './Courses/New'
+import NewChallenge from './Challenges/New'
 
 // courses page
 class Admin extends Component {
@@ -19,6 +20,7 @@ class Admin extends Component {
               <h1>Admin</h1>
               <Switch>
                 <Route path="/admin/courses/new" component={NewCourse} />
+                <Route path="/admin/challenges/new" component={NewChallenge} />
               </Switch>
             </div>
           </div>

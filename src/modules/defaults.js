@@ -1,6 +1,7 @@
 export const defaultCourse = {
-  description: "Course description placeholder",
   title: "Title Placeholder",
+  description: "Course description placeholder",
+  tags: ["Tag1", "Tag2"],
   ui: {
     icon: "rocket",
     primaryColor: "#000000",
@@ -12,6 +13,5 @@ export const defaultCourse = {
     {
       id: 0
     }
-  ],
-  tags: ["Tag1", "Tag2"]
+  ]
 }

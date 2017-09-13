@@ -24,27 +24,27 @@ export const buildFormErrors = (apiErrors) => {
 // blacklistKeys is an array of strings. nested keys have a period between them. example: "ui.icon"
 export const buildFormFields = (formJson, blacklistKeys) => {
   return (
-    <div>
+    <div key={"fields-wrapper"}>
       {
-        Object.keys(formJson).filter((key) => {return !blacklistKeys.includes(key)}).map((key) => {
+        Object.keys(formJson).filter((key) => {return !blacklistKeys.includes(key)}).map((key, index) => {
           const label = capitalizeWords(camelCaseToSpaceCase(key.replace(".", " ")))
           if (typeof formJson[key] === "string") {
             return (
-              <div>
+              <div key={index}>
                 <label>{label}</label>
                 <Field className="form-control" name={key} component="input" type="text" />
               </div>
             )
           } else if (typeof formJson[key] === "number") {
             return (
-              <div>
+              <div key={index}>
                 <label>{label}</label>
                 <Field className="form-control" name={key} component="input" type="number" />
               </div>
             )
           } else if (typeof formJson[key] === "object" && formJson[key].length >= 0 && typeof formJson[key][0] === "string") {
             return (
-              <div>
+              <div key={index}>
                 <label>{label}</label>
                 <Field normalize={(value) => {return value && value.split(",")}} className="form-control" name={key} component="input" type="text" />
               </div>

@@ -3,7 +3,7 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Switch, Route, Link } from 'react-router-dom'
-import NewCourse from './Course/New'
+import NewCourse from './Courses/New'
 
 // courses page
 class Admin extends Component {

@@ -71,6 +71,14 @@ class App extends Component {
         </div>
       )
     }
+    let adminNavs
+    if (this.props.user && this.props.user.admin === true) {
+      adminNavs = (
+        <NavItem>
+          <NavLink tag={Link} to="/admin">Admin</NavLink>
+        </NavItem>
+      )
+    }
     return (
       <div>
         <div className="bg-white navbar-wrapper">
@@ -90,6 +98,7 @@ class App extends Component {
                   <NavItem>
                     <NavLink tag={Link} to="/feedback" onClick={this.handleCallToActionClick.bind(this)}>Feedback</NavLink>
                   </NavItem>
+                  {adminNavs}
                   {userNavs}
                 </Nav>
               </Collapse>

@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import { Field, reduxForm, FieldArray } from 'redux-form'
 import { parseApiErrors } from '../../../modules/strings'
 import { defaultChallenge } from '../../../modules/defaults'
@@ -33,12 +35,15 @@ class ChallengeForm extends Component {
   render() {
     const errors = buildFormErrors(this.props.errors)
     const blacklistKeys = []
-    let mergedChallengeBody
+    let mergedChallenge
     if (this.state.selectedChallengeType) {
-      mergedChallengeBody = Object.assign({}, defaultChallenge, {body: this.state.selectedChallengeType.template_data})
+      mergedChallenge = Object.assign({}, defaultChallenge, {body: this.state.selectedChallengeType.template_data})
     } else {
-      mergedChallengeBody = defaultChallenge
+      mergedChallenge = defaultChallenge
     }
+    let mergedChallengeBody
+    console.log("mergedChallengeBody", mergedChallenge.body, this.props.challengeForm && this.props.challengeForm.values && this.props.challengeForm.values.body)
+    mergedChallengeBody = Object.assign({}, mergedChallenge.body, (this.props.challengeForm && this.props.challengeForm.values &&  this.props.challengeForm.values.body) || {})
     return (
       <div className="row">
         <div className="col-12 col-sm-3">
@@ -55,19 +60,20 @@ class ChallengeForm extends Component {
                 }
               </Field>
               {
-                buildFormFields(mergedChallengeBody, blacklistKeys)
+                buildFormFields(mergedChallenge, blacklistKeys)
               }
             </div>
             <button className="btn btn-primary btn-block" type="submit">Submit</button>
           </form>
         </div>
         <div className="col-12 col-sm-9 bg-gradient bg-subtle bg-subtle-diamond" style={gradientBackground("#000000", "#333333")}>
+          <pre>{JSON.stringify(mergedChallengeBody)}</pre>
           {
-            this.state.selectedChallengeType && mergedChallengeBody && getChallengeComponent(
+            this.state.selectedChallengeType && mergedChallenge && getChallengeComponent(
               this.state.selectedChallengeType.name,
               Object.assign(
                 {},
-                mergedChallengeBody.body,
+                mergedChallengeBody,
                 {
                   handleInsertDependencies: () => {},
                   handleBackButton: () => {},
@@ -87,9 +93,22 @@ class ChallengeForm extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  challengeForm: state.form.challenge
+})
+
+const mapDispatchToProps = dispatch => bindActionCreators({
+
+}, dispatch)
+
 ChallengeForm = reduxForm({
   form: 'challenge'
 })(ChallengeForm)
 
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ChallengeForm)
 
-export default ChallengeForm
+
+// export default ChallengeForm

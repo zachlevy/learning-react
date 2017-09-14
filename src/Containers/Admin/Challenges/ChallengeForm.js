@@ -5,6 +5,7 @@ import { defaultChallenge } from '../../../modules/defaults'
 import { apiRequest } from '../../../modules/data'
 import { buildFormFields, buildFormErrors } from '../../../modules/forms'
 import { snakeCaseToSpaceCase, capitalizeWords } from '../../../modules/strings'
+import getChallengeComponent from '../../Challenge/Components'
 
 class ChallengeForm extends Component {
   constructor() {
@@ -38,32 +39,55 @@ class ChallengeForm extends Component {
       mergedChallengeBody = defaultChallenge
     }
     return (
-      <div>
-        {errors}
-        <form onSubmit={ this.props.handleSubmit }>
-          <div className="form-group">
-            <label>Challenge Type Id</label>
-            <Field onChange={this.handleChallengeTypeChange.bind(this)} className="form-control" name="challenge_type_id" component="select" type="text">
-              <option value=""></option>
+      <div className="row">
+        <div className="col-12 col-sm-3">
+          {errors}
+          <form onSubmit={ this.props.handleSubmit }>
+            <div className="form-group">
+              <label>Challenge Type Id</label>
+              <Field onChange={this.handleChallengeTypeChange.bind(this)} className="form-control" name="challenge_type_id" component="select" type="text">
+                <option value=""></option>
+                {
+                  this.state.challengeTypes.map((challengeType, index) => {
+                    return <option key={index} value={challengeType.id}>{capitalizeWords(snakeCaseToSpaceCase(challengeType.name))}</option>
+                  })
+                }
+              </Field>
               {
-                this.state.challengeTypes.map((challengeType, index) => {
-                  return <option key={index} value={challengeType.id}>{capitalizeWords(snakeCaseToSpaceCase(challengeType.name))}</option>
-                })
+                buildFormFields(mergedChallengeBody, blacklistKeys)
               }
-            </Field>
-            {
-              buildFormFields(mergedChallengeBody, blacklistKeys)
-            }
-          </div>
-          <button className="btn btn-primary btn-block" type="submit">Submit</button>
-        </form>
+            </div>
+            <button className="btn btn-primary btn-block" type="submit">Submit</button>
+          </form>
+        </div>
+        <div className="col-12 col-sm-9">
+          {
+            this.state.selectedChallengeType && mergedChallengeBody && getChallengeComponent(
+              this.state.selectedChallengeType.name,
+              Object.assign(
+                {},
+                mergedChallengeBody.body,
+                {
+                  handleInsertDependencies: () => {},
+                  handleBackButton: () => {},
+                  handleNextClick: () => {},
+                  handleSkipClick: () => {},
+                  showNextButton: false,
+                  handleShowNextButton: () => {},
+                  challengeId: 0,
+                  challengeDescription: this.props.challengeForm && this.props.challengeForm.values.description
+                }
+              )
+            )
+          }
+        </div>
       </div>
     )
   }
 }
 
 ChallengeForm = reduxForm({
-  form: 'course'
+  form: 'challenge'
 })(ChallengeForm)
 
 

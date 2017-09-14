@@ -32,14 +32,9 @@ class New extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-12 col-sm-6">
-            <br />
+          <div className="col-12">
             <h4>New Challenge</h4>
             <ChallengeForm onSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}/>
-          </div>
-          <div className="col-12 col-sm-6">
-            <br />
-
           </div>
         </div>
       </div>

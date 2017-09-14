@@ -19,10 +19,6 @@ class Admin extends Component {
             <div className="col-12">
               <br />
               <h1>Admin</h1>
-              <Switch>
-                <Route path="/admin/courses/new" component={NewCourse} />
-                <Route path="/admin/challenges/new" component={NewChallenge} />
-              </Switch>
               <Nav>
                 <NavItem>
                   <NavLink tag={Link} to={`/admin/courses/new`}>New Course</NavLink>
@@ -31,6 +27,10 @@ class Admin extends Component {
                   <NavLink tag={Link} to={`/admin/challenges/new`}>New Challenge</NavLink>
                 </NavItem>
               </Nav>
+              <Switch>
+                <Route path="/admin/courses/new" component={NewCourse} />
+                <Route path="/admin/challenges/new" component={NewChallenge} />
+              </Switch>
             </div>
           </div>
         </div>

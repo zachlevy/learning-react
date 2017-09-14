@@ -6,6 +6,7 @@ import { apiRequest } from '../../../modules/data'
 import { buildFormFields, buildFormErrors } from '../../../modules/forms'
 import { snakeCaseToSpaceCase, capitalizeWords } from '../../../modules/strings'
 import getChallengeComponent from '../../Challenge/Components'
+import { gradientBackground } from '../../../modules/styles'
 
 class ChallengeForm extends Component {
   constructor() {
@@ -60,7 +61,7 @@ class ChallengeForm extends Component {
             <button className="btn btn-primary btn-block" type="submit">Submit</button>
           </form>
         </div>
-        <div className="col-12 col-sm-9">
+        <div className="col-12 col-sm-9 bg-gradient bg-subtle bg-subtle-diamond" style={gradientBackground("#000000", "#333333")}>
           {
             this.state.selectedChallengeType && mergedChallengeBody && getChallengeComponent(
               this.state.selectedChallengeType.name,

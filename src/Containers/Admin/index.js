@@ -15,8 +15,6 @@ class Admin extends Component {
       <div className="courses-index container-fluid">
         <div className="row">
           <div className="col-12">
-            <br />
-            <h1>Admin</h1>
             <Nav>
               <NavItem>
                 <NavLink tag={Link} to={`/admin/courses/new`}>New Course</NavLink>

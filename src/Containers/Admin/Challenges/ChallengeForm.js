@@ -67,7 +67,6 @@ class ChallengeForm extends Component {
           </form>
         </div>
         <div className="col-12 col-sm-9 bg-gradient bg-subtle bg-subtle-diamond" style={gradientBackground("#000000", "#333333")}>
-          <pre>{JSON.stringify(mergedChallengeBody)}</pre>
           {
             this.state.selectedChallengeType && mergedChallenge && getChallengeComponent(
               this.state.selectedChallengeType.name,

@@ -7,6 +7,7 @@ import { push } from 'react-router-redux'
 import { apiRequest } from '../../../modules/data'
 import CourseThumb from '../../Courses/CourseThumb'
 import { defaultCourse } from '../../../modules/defaults'
+import SingleTarget from './SingleTarget'
 
 class New extends Component {
   handleSubmit(flowValues) {
@@ -31,6 +32,7 @@ class New extends Component {
           <div className="col-12">
             <h1>Course Flow</h1>
             <pre>{JSON.stringify(this.props.courseForm)}</pre>
+            <SingleTarget />
           </div>
         </div>
       </div>

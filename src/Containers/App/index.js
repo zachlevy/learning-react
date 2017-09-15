@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DragDropContext } from 'react-dnd'
 
 import { Switch, Route, Link, withRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -132,7 +134,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   clearUser
 }, dispatch)
 
-export default withRouter(connect(
+export default DragDropContext(HTML5Backend)(withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(App))
+)(App)))

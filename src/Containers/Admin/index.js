@@ -3,9 +3,10 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Switch, Route, Link } from 'react-router-dom'
-import NewCourse from './Courses/New'
-import NewChallenge from './Challenges/New'
 import { Nav, NavItem, NavLink } from 'reactstrap'
+import NewCourse from './Courses/New'
+import Flow from './Courses/Flow'
+import NewChallenge from './Challenges/New'
 
 // courses page
 class Admin extends Component {
@@ -20,11 +21,15 @@ class Admin extends Component {
                 <NavLink tag={Link} to={`/admin/courses/new`}>New Course</NavLink>
               </NavItem>
               <NavItem>
+                <NavLink tag={Link} to={`/admin/courses/flow`}>Course Flow</NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink tag={Link} to={`/admin/challenges/new`}>New Challenge</NavLink>
               </NavItem>
             </Nav>
             <Switch>
               <Route path="/admin/courses/new" component={NewCourse} />
+              <Route path="/admin/courses/flow" component={Flow} />
               <Route path="/admin/challenges/new" component={NewChallenge} />
             </Switch>
           </div>

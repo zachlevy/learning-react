@@ -57,11 +57,12 @@ class Container extends Component {
 
     return connectDropTarget(
       <div style={style}>
+        <pre>{JSON.stringify(cards)}</pre>
         {cards.map(card => (
           <Card
             key={card.id}
             id={card.id}
-            text={card.type}
+            text={card.description}
             moveCard={this.moveCard}
             findCard={this.findCard}
           />

@@ -25,6 +25,11 @@ class Courses extends Component {
     this.props.changePage(`/admin/courses/${courseId}/flow`)
   }
 
+  handleNewCourse() {
+    console.log("handleNewCourse")
+    this.props.changePage(`/admin/courses/new`)
+  }
+
   render() {
     return (
       <div className="container">
@@ -35,9 +40,9 @@ class Courses extends Component {
             <table className="table">
               <thead>
                 <tr>
-                  <td>Id</td>
-                  <td>Title</td>
-                  <td>Edit Flow</td>
+                  <th>Id</th>
+                  <th>Title</th>
+                  <th>Edit Flow</th>
                 </tr>
               </thead>
               <tbody>
@@ -54,6 +59,7 @@ class Courses extends Component {
                 }
               </tbody>
             </table>
+            <button className="btn btn-primary btn-pointer" onClick={this.handleNewCourse.bind(this)}>New Course</button>
           </div>
         </div>
       </div>

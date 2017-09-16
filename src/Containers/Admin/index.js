@@ -25,9 +25,6 @@ class Admin extends Component {
                 <NavLink tag={Link} to={`/admin/courses`}>Courses</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} to={`/admin/courses/flow`}>Course Flow</NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink tag={Link} to={`/admin/challenges/new`}>New Challenge</NavLink>
               </NavItem>
             </Nav>

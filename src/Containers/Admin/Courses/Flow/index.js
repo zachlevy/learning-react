@@ -1,24 +1,23 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import CourseForm from './CourseForm'
-import { SubmissionError } from 'redux-form'
+import CourseForm from '../CourseForm'
+import { apiRequest } from '../../../../modules/data'
+import FlowSorter from './FlowSorter'
+import { setCourse } from '../../../../modules/redux/course'
+import { defaultCourse } from '../../../../modules/defaults'
 import { push } from 'react-router-redux'
-import { apiRequest } from '../../../modules/data'
-import CourseThumb from '../../Courses/CourseThumb'
-import { defaultCourse } from '../../../modules/defaults'
-import SingleTarget from './SingleTarget'
-import Sort from './Sort'
-import { setCourse } from '../../../modules/redux/course'
 
 class Flow extends Component {
   constructor() {
     super()
+    // keep the flow changes in a state until submit
     this.state = {
       flow: []
     }
   }
 
+  // load the course flow and the challenges
   componentDidMount() {
     console.log("Course Flow", this.props.match.params.courseId)
     // get course
@@ -41,15 +40,20 @@ class Flow extends Component {
     })
   }
 
+  // keep the state in this component rather than the sorter itself
+  handleCardUpdate(updatedFlow) {
+    this.setState({flow: updatedFlow.cards})
+  }
+
+  // send to the api on save
   handleSubmit() {
-    console.log("handleSubmit", this.state.flow)
     const submitFlow = this.state.flow.map((challenge) => {
       return {
-        od: challenge.id,
+        id: challenge.id,
         type: challenge.type
       }
     })
-    // create course
+    // update only the flow for the course
     apiRequest(`/courses/${this.props.match.params.courseId}`, {
       method: 'put',
       body: JSON.stringify({
@@ -63,21 +67,13 @@ class Flow extends Component {
   }
 
   render() {
-    let sortableFlow
-    if (this.state.flow.length > 0) {
-      sortableFlow = <Sort cards={this.state.flow}/>
-    }
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <h1>Course Flow</h1>
-            <pre>{JSON.stringify(this.state.flow)}</pre>
-            <button className="btn btn-primary btn-pointer" onClick={this.handleSubmit.bind(this)}>Save Flow</button>
-            {sortableFlow}
-            <button className="btn btn-primary btn-pointer" onClick={this.handleSubmit.bind(this)}>Save Flow</button>
-          </div>
-        </div>
+      <div>
+        <h3>Flow</h3>
+        <button className="btn btn-primary btn-pointer" onClick={this.handleSubmit.bind(this)}>Save Flow</button>
+        <br />
+        <br />
+        <FlowSorter handleCardUpdate={this.handleCardUpdate.bind(this)} cards={this.state.flow} />
       </div>
     )
   }

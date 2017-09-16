@@ -20,6 +20,11 @@ class Courses extends Component {
     })
   }
 
+  handleEditCourseFlow(courseId) {
+    console.log("handleEditCourseFlow")
+    this.props.changePage(`/admin/courses/${courseId}/flow`)
+  }
+
   render() {
     return (
       <div className="container">
@@ -27,11 +32,28 @@ class Courses extends Component {
           <div className="col-12">
             <br />
             <h4>Courses</h4>
-            {this.state.courses.map((course, index) => {
-              return (
-                <div className="row">{course.title}</div>
-              )
-            })}
+            <table className="table">
+              <thead>
+                <tr>
+                  <td>Id</td>
+                  <td>Title</td>
+                  <td>Edit Flow</td>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  this.state.courses.map((course, index) => {
+                    return (
+                      <tr>
+                        <td>{course.id}</td>
+                        <td>{course.title}</td>
+                        <td><button className="btn btn-primary btn-pointer btn-sm" onClick={this.handleEditCourseFlow.bind(this, course.id)}>Flow</button></td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

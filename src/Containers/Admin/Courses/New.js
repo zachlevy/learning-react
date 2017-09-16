@@ -19,16 +19,18 @@ class New extends Component {
   handleSubmit(courseValues) {
     console.log("handleSubmit", courseValues)
     // create course
-    // apiRequest("/courses", {
-    //   method: 'post',
-    //   body: JSON.stringify({
-    //     course: {
-    //
-    //     }
-    //   })
-    // }, (response, status) => {
-    //
-    // })
+    apiRequest("/courses", {
+      method: 'post',
+      body: JSON.stringify({
+        course: courseValues
+      })
+    }, (response, status) => {
+      if (status === 201) {
+        this.setState({errors: {success: ["the course has been created."]}})
+      } else {
+        this.setState({errors: response})
+      }
+    })
   }
 
   render() {

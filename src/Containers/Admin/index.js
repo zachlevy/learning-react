@@ -3,7 +3,11 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Switch, Route, Link } from 'react-router-dom'
-import NewCourse from './Course/New'
+import { Nav, NavItem, NavLink } from 'reactstrap'
+import NewCourse from './Courses/New'
+import Flow from './Courses/Flow'
+import NewChallenge from './Challenges/New'
+import Courses from './Courses'
 
 // courses page
 class Admin extends Component {
@@ -11,16 +15,25 @@ class Admin extends Component {
   render() {
     return (
       <div className="courses-index container-fluid">
-        <div className="container">
-
-          <div className="row">
-            <div className="col-12">
-              <br />
-              <h1>Admin</h1>
-              <Switch>
-                <Route path="/admin/courses/new" component={NewCourse} />
-              </Switch>
-            </div>
+        <div className="row">
+          <div className="col-12">
+            <Nav>
+              <NavItem>
+                <NavLink tag={Link} to={`/admin/courses/new`}>New Course</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to={`/admin/courses`}>Courses</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} to={`/admin/challenges/new`}>New Challenge</NavLink>
+              </NavItem>
+            </Nav>
+            <Switch>
+              <Route exact path="/admin/courses" component={Courses} />
+              <Route exact path="/admin/courses/new" component={NewCourse} />
+              <Route exact path="/admin/courses/:courseId/flow" component={Flow} />
+              <Route exact path="/admin/challenges/new" component={NewChallenge} />
+            </Switch>
           </div>
         </div>
       </div>

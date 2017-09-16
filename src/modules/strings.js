@@ -2,14 +2,29 @@ import React from 'react'
 import reactStringReplace from 'react-string-replace'
 import Logo from '../vora_logo_20170717.svg'
 
+export const capitalizeWords = (str) => {
+  return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+export const camelCaseToSpaceCase = (str) => {
+  return str.replace( /([A-Z])/g, " $1" );
+}
+export const snakeCaseToSpaceCase = (str) => {
+  return str.replace( /_/g, " " );
+}
+
 // converts rails api errors object to array strings
 export const parseApiErrors = (errorsObj) => {
   let errors = []
   if (errorsObj) {
+    // iterate over attributes
     Object.keys(errorsObj).forEach((field, index) => {
-      errorsObj[field].forEach((error, index) => {
-        errors.push(`${field} ${error}`)
-      })
+      // make sure it's an array
+      if (typeof errorsObj[field] === "object" && errorsObj[field].length > 0) {
+        errorsObj[field].forEach((error, index) => {
+          errors.push(`${field} ${error}`)
+        })
+      }
     })
   }
   return errors

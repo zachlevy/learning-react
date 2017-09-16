@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
+import HTML5Backend from 'react-dnd-html5-backend'
+import { DragDropContext } from 'react-dnd'
 
 import { Switch, Route, Link, withRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -71,6 +73,14 @@ class App extends Component {
         </div>
       )
     }
+    let adminNavs
+    if (this.props.user && this.props.user.admin === true) {
+      adminNavs = (
+        <NavItem>
+          <NavLink tag={Link} to="/admin">Admin</NavLink>
+        </NavItem>
+      )
+    }
     return (
       <div>
         <div className="bg-white navbar-wrapper">
@@ -90,6 +100,7 @@ class App extends Component {
                   <NavItem>
                     <NavLink tag={Link} to="/feedback" onClick={this.handleCallToActionClick.bind(this)}>Feedback</NavLink>
                   </NavItem>
+                  {adminNavs}
                   {userNavs}
                 </Nav>
               </Collapse>
@@ -123,7 +134,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   clearUser
 }, dispatch)
 
-export default withRouter(connect(
+export default DragDropContext(HTML5Backend)(withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(App))
+)(App)))

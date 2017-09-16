@@ -25,7 +25,11 @@ class New extends Component {
         course: courseValues
       })
     }, (response, status) => {
-
+      if (status === 201) {
+        this.setState({errors: {success: ["the course has been created."]}})
+      } else {
+        this.setState({errors: response})
+      }
     })
   }
 

@@ -24,7 +24,11 @@ class New extends Component {
         challenge: challengeValues
       })
     }, (response, status) => {
-
+      if (status === 201) {
+        this.setState({errors: {success: ["the course has been created."]}})
+      } else {
+        this.setState({errors: response})
+      }
     })
   }
 

@@ -6,6 +6,7 @@ import { apiRequest } from '../../../../modules/data'
 import FlowSorter from './FlowSorter'
 import { setCourse } from '../../../../modules/redux/course'
 import { defaultCourse } from '../../../../modules/defaults'
+import { buildFormErrors } from '../../../../modules/forms'
 import { push } from 'react-router-redux'
 
 class Flow extends Component {
@@ -13,7 +14,8 @@ class Flow extends Component {
     super()
     // keep the flow changes in a state until submit
     this.state = {
-      flow: []
+      flow: [],
+      errors: null
     }
   }
 
@@ -34,8 +36,12 @@ class Flow extends Component {
               }), flowChallenge)
             })
             this.setState({flow: flow})
+          } else {
+            this.setState({errors: challengesResponse})
           }
         })
+      } else {
+        this.setState({errors: courseResponse})
       }
     })
   }
@@ -62,14 +68,20 @@ class Flow extends Component {
         }
       })
     }, (response, status) => {
-
+      if (status === 200) {
+        this.setState({errors: {success: ["course flow updated"]}})
+      } else {
+        this.setState({errors: response})
+      }
     })
   }
 
   render() {
+    const errors = buildFormErrors(this.state.errors)
     return (
       <div>
         <h3>Flow</h3>
+        {errors}
         <button className="btn btn-primary btn-pointer" onClick={this.handleSubmit.bind(this)}>Save Flow</button>
         <br />
         <br />

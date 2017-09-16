@@ -25,28 +25,7 @@ class Container extends Component {
     this.moveCard = this.moveCard.bind(this);
     this.findCard = this.findCard.bind(this);
     this.state = {
-      cards: [{
-        id: 1,
-        text: 'Write a cool JS library',
-      }, {
-        id: 2,
-        text: 'Make it generic enough',
-      }, {
-        id: 3,
-        text: 'Write README',
-      }, {
-        id: 4,
-        text: 'Create some examples',
-      }, {
-        id: 5,
-        text: 'Spam in Twitter and IRC to promote it',
-      }, {
-        id: 6,
-        text: '???',
-      }, {
-        id: 7,
-        text: 'PROFIT',
-      }],
+      cards: this.props.cards
     };
   }
 
@@ -82,7 +61,7 @@ class Container extends Component {
           <Card
             key={card.id}
             id={card.id}
-            text={card.text}
+            text={card.type}
             moveCard={this.moveCard}
             findCard={this.findCard}
           />

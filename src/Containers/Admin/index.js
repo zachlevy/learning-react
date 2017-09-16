@@ -29,7 +29,7 @@ class Admin extends Component {
             </Nav>
             <Switch>
               <Route path="/admin/courses/new" component={NewCourse} />
-              <Route path="/admin/courses/flow" component={Flow} />
+              <Route path="/admin/courses/:courseId/flow" component={Flow} />
               <Route path="/admin/challenges/new" component={NewChallenge} />
             </Switch>
           </div>

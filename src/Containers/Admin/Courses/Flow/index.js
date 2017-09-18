@@ -76,16 +76,21 @@ class Flow extends Component {
     })
   }
 
+  handleNewChallenge() {
+    this.props.changePage(`/admin/challenges/new?course_id=${this.props.match.params.courseId}`)
+  }
+
   render() {
     const errors = buildFormErrors(this.state.errors)
     return (
       <div>
-        <h3>Flow</h3>
+        <h3>{this.props.course && this.props.course.title} Flow</h3>
         {errors}
         <button className="btn btn-primary btn-pointer" onClick={this.handleSubmit.bind(this)}>Save Flow</button>
         <br />
         <br />
         <FlowSorter handleCardUpdate={this.handleCardUpdate.bind(this)} cards={this.state.flow} />
+        <button className="btn btn-primary btn-pointer" onClick={this.handleNewChallenge.bind(this)}>New Challenge</button>
       </div>
     )
   }

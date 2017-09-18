@@ -19,13 +19,7 @@ class Admin extends Component {
           <div className="col-12">
             <Nav>
               <NavItem>
-                <NavLink tag={Link} to={`/admin/courses/new`}>New Course</NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink tag={Link} to={`/admin/courses`}>Courses</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} to={`/admin/challenges/new`}>New Challenge</NavLink>
               </NavItem>
             </Nav>
             <Switch>

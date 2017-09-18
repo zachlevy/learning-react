@@ -17,22 +17,58 @@ class New extends Component {
 
   handleSubmit(challengeValues) {
     console.log("handleSubmit", challengeValues)
+    // optional course id
+    const courseId = new URLSearchParams(this.props.location.search).get('course_id')
     // create course
     apiRequest("/challenges", {
       method: 'post',
       body: JSON.stringify({
-        challenge: challengeValues
+        challenge: Object.assign(challengeValues, {course_id: courseId})
       })
-    }, (response, status) => {
+    }, (challengeResponse, status) => {
       if (status === 201) {
+        console.log("response", challengeResponse)
         this.setState({errors: {success: ["the course has been created."]}})
+
+        // this following callback hell should be changed when we move course flow to a join table
+        // get course
+        apiRequest(`courses/${courseId}`, {}, (courseResponse, courseStatus) => {
+          if (courseStatus === 200) {
+
+            // get challengeType
+            apiRequest(`/challenge_types/${challengeResponse.challenge_type_id}`, {
+            }, (challengeTypeResponse, challengeTypeStatus) => {
+              if (challengeTypeStatus === 200) {
+                // update course
+                apiRequest(`/courses/${courseId}`, {
+                  method: 'put',
+                  body: JSON.stringify({
+                    course: {
+                      flow: courseResponse.flow.concat([{id: challengeResponse.id, type: challengeTypeResponse.name}])
+                    }
+                  })
+                }, (updateCourseResponse, updateCourseStatus) => {
+                  if (updateCourseStatus === 200) {
+                    this.props.changePage(`/admin/courses/${courseId}/flow`)
+                  }
+                })
+              }
+            })
+          }
+        })
+
+
+
+
       } else {
-        this.setState({errors: response})
+        this.setState({errors: challengeResponse})
       }
     })
   }
 
   render() {
+    // optional course_id
+
     return (
       <div className="container-fluid">
         <div className="row">

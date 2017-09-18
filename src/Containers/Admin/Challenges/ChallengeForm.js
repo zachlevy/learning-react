@@ -81,7 +81,7 @@ class ChallengeForm extends Component {
                   showNextButton: false,
                   handleShowNextButton: () => {},
                   challengeId: 0,
-                  challengeDescription: this.props.challengeForm.values.description || mergedChallenge.description
+                  challengeDescription: this.props.challengeForm.values && this.props.challengeForm.values.description || mergedChallenge.description
                 }
               )
             )

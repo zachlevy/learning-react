@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import ChallengeForm from './ChallengeForm'
-import { SubmissionError } from 'redux-form'
+import { SubmissionError, reset } from 'redux-form'
 import { push } from 'react-router-redux'
 import { apiRequest } from '../../../modules/data'
 import { defaultChallenge } from '../../../modules/defaults'
@@ -29,6 +29,7 @@ class New extends Component {
       if (status === 201) {
         console.log("response", challengeResponse)
         this.setState({errors: {success: ["the challenge has been created."]}})
+        this.props.clearChallengeForm()
 
         // this following callback hell should be changed when we move course flow to a join table
         // get course
@@ -87,7 +88,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  changePage: (url) => push(url)
+  changePage: (url) => push(url),
+  clearChallengeForm: () => reset('challenge')
 }, dispatch)
 
 export default connect(

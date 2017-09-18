@@ -84,7 +84,7 @@ class Flow extends Component {
     const errors = buildFormErrors(this.state.errors)
     return (
       <div>
-        <h3>Flow</h3>
+        <h3>{this.props.course && this.props.course.title} Flow</h3>
         {errors}
         <button className="btn btn-primary btn-pointer" onClick={this.handleSubmit.bind(this)}>Save Flow</button>
         <br />

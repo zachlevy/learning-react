@@ -8,7 +8,7 @@ export const buildFormErrors = (apiErrors) => {
     return
   }
   const errorsList = (
-    <ul>
+    <ul className="errors-list">
       {
         errors.map((error, index) => {
           return <li key={index}>{error}</li>

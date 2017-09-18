@@ -7,6 +7,7 @@ import { Nav, NavItem, NavLink } from 'reactstrap'
 import NewCourse from './Courses/New'
 import Flow from './Courses/Flow'
 import NewChallenge from './Challenges/New'
+import EditChallenge from './Challenges/Edit'
 import Courses from './Courses'
 
 // courses page
@@ -27,6 +28,7 @@ class Admin extends Component {
               <Route exact path="/admin/courses/new" component={NewCourse} />
               <Route exact path="/admin/courses/:courseId/flow" component={Flow} />
               <Route exact path="/admin/challenges/new" component={NewChallenge} />
+              <Route exact path="/admin/challenges/:challengeId/edit" component={EditChallenge} />
             </Switch>
           </div>
         </div>

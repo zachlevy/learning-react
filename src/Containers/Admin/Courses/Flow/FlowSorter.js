@@ -56,6 +56,7 @@ class FlowSorter extends Component {
       <div style={style}>
         {cards.map(card => (
           <Card
+            handleEditClick={this.props.handleEditClick.bind(this, card.id)}
             key={card.id}
             id={card.id}
             text={card.description}

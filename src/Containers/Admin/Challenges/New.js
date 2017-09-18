@@ -28,7 +28,7 @@ class New extends Component {
     }, (challengeResponse, status) => {
       if (status === 201) {
         console.log("response", challengeResponse)
-        this.setState({errors: {success: ["the course has been created."]}})
+        this.setState({errors: {success: ["the challenge has been created."]}})
 
         // this following callback hell should be changed when we move course flow to a join table
         // get course

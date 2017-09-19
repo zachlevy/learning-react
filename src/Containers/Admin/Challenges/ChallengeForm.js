@@ -25,7 +25,9 @@ class ChallengeForm extends Component {
       console.log("challenge_types", response)
       this.setState({challengeTypes: response})
       // simulate changing challenge type for editing a challenge
-      this.handleChallengeTypeChange({target: {value: this.props.initialValues.challenge_type_id}})
+      if (this.props.course) {
+        this.handleChallengeTypeChange({target: {value: this.props.initialValues.challenge_type_id}})
+      }
     })
   }
 

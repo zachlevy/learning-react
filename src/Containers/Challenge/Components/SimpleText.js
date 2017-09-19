@@ -52,8 +52,19 @@ class SimpleText extends Component {
         </li>
       )
     }
+    let image
+    if (this.props.image_url) {
+      image = (
+        <div className="row">
+          <div className="col-12 col-lg-6 offset-lg-3 text-center">
+            <img src={this.props.image_url} className="img-fluid simple_q_and_a-question-image_url" />
+          </div>
+        </div>
+      )
+    }
     return (
       <div className="container">
+        {image}
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2">
             <br />

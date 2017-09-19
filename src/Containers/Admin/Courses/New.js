@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import CourseForm from './CourseForm'
-import { SubmissionError } from 'redux-form'
+import { SubmissionError, reset } from 'redux-form'
 import { push } from 'react-router-redux'
 import { apiRequest } from '../../../modules/data'
 import CourseThumb from '../../Courses/CourseThumb'
@@ -27,6 +27,7 @@ class New extends Component {
     }, (response, status) => {
       if (status === 201) {
         this.setState({errors: {success: ["the course has been created."]}})
+        this.props.clearCourseForm()
       } else {
         this.setState({errors: response})
       }
@@ -67,7 +68,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  changePage: (url) => push(url)
+  changePage: (url) => push(url),
+  clearCourseForm: () => reset('course')
 }, dispatch)
 
 export default connect(

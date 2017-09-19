@@ -62,7 +62,7 @@ class Card extends Component {
 
     return connectDragSource(connectDropTarget(
       <div style={{ ...style, opacity }}>
-        {text}
+        {text} <button onClick={this.props.handleEditClick.bind(this)}>Edit</button>
       </div>,
     ))
   }

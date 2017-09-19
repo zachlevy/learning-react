@@ -24,6 +24,8 @@ class ChallengeForm extends Component {
     }, (response, status) => {
       console.log("challenge_types", response)
       this.setState({challengeTypes: response})
+      // simulate changing challenge type for editing a challenge
+      this.handleChallengeTypeChange({target: {value: this.props.initialValues.challenge_type_id}})
     })
   }
 
@@ -81,7 +83,7 @@ class ChallengeForm extends Component {
                   showNextButton: false,
                   handleShowNextButton: () => {},
                   challengeId: 0,
-                  challengeDescription: this.props.challengeForm.values.description || mergedChallenge.description
+                  challengeDescription: this.props.challengeForm.values && this.props.challengeForm.values.description || mergedChallenge.description
                 }
               )
             )

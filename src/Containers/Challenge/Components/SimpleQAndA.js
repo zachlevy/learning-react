@@ -164,12 +164,17 @@ class SimpleQAndA extends Component {
         </div>
       )
     }
+    let questionDetails
+    if (this.props.question_details) {
+      questionDetails = <p className={"simple_q_and_a-question_details"}>{this.props.question_details}</p>
+    }
     return (
       <div className="container">
         {image}
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2 text-center">
             <h2 className={"simple_q_and_a-question" + (this.props.image_url ? " no-margin" : "")}>{question}</h2>
+            {questionDetails}
             <div className="form-group">
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} />
               <div className="row">

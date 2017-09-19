@@ -68,7 +68,6 @@ class SimpleText extends Component {
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2">
             <br />
-            <h4>Read the text</h4>
             <div>{simpleMarkdown(this.props.text)}</div>
           </div>
         </div>

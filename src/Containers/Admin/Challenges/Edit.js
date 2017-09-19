@@ -7,7 +7,7 @@ import { push } from 'react-router-redux'
 import { apiRequest } from '../../../modules/data'
 import { defaultChallenge } from '../../../modules/defaults'
 
-class New extends Component {
+class Edit extends Component {
   constructor() {
     super()
     this.state = {
@@ -76,4 +76,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(New)
+)(Edit)

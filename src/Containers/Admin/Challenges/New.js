@@ -5,7 +5,6 @@ import ChallengeForm from './ChallengeForm'
 import { SubmissionError, reset } from 'redux-form'
 import { push } from 'react-router-redux'
 import { apiRequest } from '../../../modules/data'
-import { defaultChallenge } from '../../../modules/defaults'
 
 class New extends Component {
   constructor() {

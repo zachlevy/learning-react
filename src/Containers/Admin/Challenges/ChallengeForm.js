@@ -42,9 +42,9 @@ class ChallengeForm extends Component {
     const blacklistKeys = []
     let mergedChallenge
     if (this.state.selectedChallengeType) {
-      mergedChallenge = Object.assign({}, defaultChallenge, {body: this.state.selectedChallengeType.template_data})
+      mergedChallenge = Object.assign({}, defaultChallenge(this.state.selectedChallengeType.name))
     } else {
-      mergedChallenge = defaultChallenge
+      mergedChallenge = defaultChallenge()
     }
     let mergedChallengeBody
     console.log("mergedChallengeBody", mergedChallenge.body, this.props.challengeForm && this.props.challengeForm.values && this.props.challengeForm.values.body)

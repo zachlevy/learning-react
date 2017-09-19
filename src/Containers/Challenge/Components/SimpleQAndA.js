@@ -157,8 +157,13 @@ class SimpleQAndA extends Component {
     return (
       <div className="container">
         <div className="row">
+          <div className="col-12 col-lg-6 offset-lg-3 text-center">
+            <img src={this.props.image_url} className="img-fluid simple_q_and_a-question-image_url" />
+          </div>
+        </div>
+        <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2 text-center">
-            <h2 className="simple_q_and_a-question">{question}</h2>
+            <h2 className={"simple_q_and_a-question" + (this.props.image_url ? " no-margin" : "")}>{question}</h2>
             <div className="form-group">
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} />
               <div className="row">

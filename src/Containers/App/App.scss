@@ -159,6 +159,14 @@ iframe.wikipedia {
 .simple_q_and_a-question,
 .multiple_choice-question {
   margin-top: 25vh;
+  &.no-margin {
+    margin-top: 0;
+  }
+}
+.simple_q_and_a-question-image_url {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  max-height: 50vh;
 }
 .simple_q_and_a-feedback,
 .wikipedia_notes-feedback,

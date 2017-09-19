@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field } from 'redux-form'
 import { parseApiErrors, snakeCaseToSpaceCase, capitalizeWords, camelCaseToSpaceCase } from './strings'
+import Uploader from '../Containers/Admin/Uploader'
 
 export const buildFormErrors = (apiErrors) => {
   const errors = parseApiErrors(apiErrors)
@@ -21,13 +22,22 @@ export const buildFormErrors = (apiErrors) => {
 
 // takes in a json based on a template of a same course
 // blacklistKeys is an array of strings. nested keys have a period between them. example: "ui.icon"
-export const buildFormFields = (formJson, blacklistKeys) => {
+// manualReduxFormChange passed in because it has to be connected to dispatch properly I think
+export const buildFormFields = (formJson, blacklistKeys, manualReduxFormChange) => {
   return (
     <div key={"fields-wrapper"}>
       {
         Object.keys(formJson).filter((key) => {return !blacklistKeys.includes(key)}).map((key, index) => {
           const label = capitalizeWords(snakeCaseToSpaceCase(camelCaseToSpaceCase(key.replace(".", " "))))
-          if (typeof formJson[key] === "string") {
+          if (typeof formJson[key] === "string" && key.indexOf("image_url") !== -1) {
+            // image uploading, images are always stored as image_url
+            return (
+              <div key={index}>
+                <label>{label}</label>
+                <Uploader id="challenge-image-url-uploader" className="form-control" onChange={(url) => {manualReduxFormChange(key, url)}} type="hidden" />
+              </div>
+            )
+          } else if (typeof formJson[key] === "string") {
             return (
               <div key={index}>
                 <label>{label}</label>
@@ -54,7 +64,7 @@ export const buildFormFields = (formJson, blacklistKeys) => {
             Object.keys(formJson[key]).forEach((shortKey) => {
               nestedFormJson[`${key}.${shortKey}`] = formJson[key][shortKey]
             })
-            return buildFormFields(nestedFormJson, blacklistKeys)
+            return buildFormFields(nestedFormJson, blacklistKeys, manualReduxFormChange)
           }
         })
       }

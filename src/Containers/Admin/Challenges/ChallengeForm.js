@@ -55,8 +55,6 @@ class ChallengeForm extends Component {
           {errors}
           <form onSubmit={ this.props.handleSubmit }>
             <div className="form-group">
-              <label>Image Url</label>
-              <Uploader id="challenge-image-url-uploader" className="form-control" onChange={(url) => {this.props.change("body.image_url", url)}} type="hidden" />
               <br />
               <label>Challenge Type Id</label>
               <Field onChange={this.handleChallengeTypeChange.bind(this)} className="form-control" name="challenge_type_id" component="select" type="text">
@@ -68,7 +66,9 @@ class ChallengeForm extends Component {
                 }
               </Field>
               {
-                buildFormFields(mergedChallenge, blacklistKeys)
+                buildFormFields(mergedChallenge, blacklistKeys, (key, url) => {
+                  this.props.reduxChange("challenge", key, url)
+                })
               }
             </div>
             <button className="btn btn-primary btn-block" type="submit">Submit</button>
@@ -105,7 +105,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  change: change
+  reduxChange: change
 }, dispatch)
 
 ChallengeForm = reduxForm({

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Field, reduxForm, FieldArray } from 'redux-form'
+import { Field, reduxForm, FieldArray, change } from 'redux-form'
 import { parseApiErrors } from '../../../modules/strings'
 import { defaultChallenge } from '../../../modules/defaults'
 import { apiRequest } from '../../../modules/data'
@@ -9,6 +9,7 @@ import { buildFormFields, buildFormErrors } from '../../../modules/forms'
 import { snakeCaseToSpaceCase, capitalizeWords } from '../../../modules/strings'
 import getChallengeComponent from '../../Challenge/Components'
 import { gradientBackground } from '../../../modules/styles'
+import Uploader from '../Uploader'
 
 class ChallengeForm extends Component {
   constructor() {
@@ -54,6 +55,9 @@ class ChallengeForm extends Component {
           {errors}
           <form onSubmit={ this.props.handleSubmit }>
             <div className="form-group">
+              <label>Image Url</label>
+              <Uploader id="challenge-image-url-uploader" className="form-control" onChange={(url) => {this.props.change("body.image_url", url)}} type="hidden" />
+              <br />
               <label>Challenge Type Id</label>
               <Field onChange={this.handleChallengeTypeChange.bind(this)} className="form-control" name="challenge_type_id" component="select" type="text">
                 <option value=""></option>
@@ -101,7 +105,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+  change: change
 }, dispatch)
 
 ChallengeForm = reduxForm({

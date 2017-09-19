@@ -34,7 +34,9 @@ export const buildFormFields = (formJson, blacklistKeys, manualReduxFormChange) 
             return (
               <div key={index}>
                 <label>{label}</label>
+                <br />
                 <Uploader id="challenge-image-url-uploader" className="form-control" onChange={(url) => {manualReduxFormChange(key, url)}} type="hidden" />
+                <br />
               </div>
             )
           } else if (typeof formJson[key] === "string") {

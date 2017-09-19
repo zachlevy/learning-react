@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import FontAwesome from 'react-fontawesome'
 import { track } from '../../../modules/analytics'
 import { secondsToMinutes } from "../../../modules/time"
+import { simpleMarkdown } from '../../../modules/strings'
 
 class SimpleText extends Component {
   constructor() {
@@ -57,7 +58,7 @@ class SimpleText extends Component {
           <div className="col-12 col-lg-8 offset-lg-2">
             <br />
             <h4>Read the text</h4>
-            <p>{this.props.text}</p>
+            <div>{simpleMarkdown(this.props.text)}</div>
           </div>
         </div>
         <div className="row">

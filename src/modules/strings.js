@@ -40,6 +40,9 @@ export const simpleMarkdown = (string) => {
   string = reactStringReplace(string, /__([\s\S]+?)__(?!_)/g, (match) => {
     return <strong>{match}</strong>
   })
+  string = reactStringReplace(string, "\n", (match) => {
+    return <br />
+  })
   string = reactStringReplace(string, /vora_logo/g, (match) => {
     return (
       <svg className="wikipedia-vora-logo">

@@ -50,7 +50,7 @@ export const buildFormFields = (formJson, blacklistKeys, manualReduxFormChange) 
             return (
               <div key={index}>
                 <label>{label}</label>
-                <Field className="form-control" name={key} component="input" type="number" />
+                <Field className="form-control" name={key} component="input" type="number" normalize={(value) => Number(value)} />
               </div>
             )
           } else if (typeof formJson[key] === "object" && formJson[key].length >= 0 && typeof formJson[key][0] === "string") {

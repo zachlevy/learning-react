@@ -38,6 +38,31 @@ class ChallengeForm extends Component {
   }
 
   render() {
+    let jsonBlob
+    if (this.props.user && this.props.user.admin === true) {
+      jsonBlob = (
+        <div>
+          <label>JSON</label>
+          <Field
+            className="form-control"
+            component="textarea"
+            name="body"
+            format={(value, name) => {
+              return JSON.stringify(value)
+            }}
+            normalize={(value, previousValue) => {
+              try {
+                return JSON.parse(value)
+              }
+              catch(e) {
+                console.log("bad formatting")
+              }
+            }}
+            placeholder="Copy and paste only with strict JSON formatting"
+          />
+        </div>
+      )
+    }
     const errors = buildFormErrors(this.props.errors)
     const blacklistKeys = []
     let mergedChallenge
@@ -70,6 +95,7 @@ class ChallengeForm extends Component {
                   this.props.reduxChange("challenge", key, url)
                 })
               }
+              {jsonBlob}
             </div>
             <button className="btn btn-primary btn-block" type="submit">Submit</button>
           </form>
@@ -101,7 +127,8 @@ class ChallengeForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  challengeForm: state.form.challenge
+  challengeForm: state.form.challenge,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

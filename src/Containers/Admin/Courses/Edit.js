@@ -47,16 +47,14 @@ class New extends Component {
     let courseThumb
     let courseForm
     if (this.state.course) {
-    //handling the fact that the state is empty when the page first renders
+    // handling the fact that the state is empty when the page first renders
       if (this.props.courseForm && this.props.courseForm.values) {
-        //this is for live updating the course preview as the form is filled out
+        // this is for live updating the course preview as the form is filled out
         const mergedUI = Object.assign({}, this.state.course.ui, this.props.courseForm.values.ui)
         mergedCourse = Object.assign({}, this.state.course, this.props.courseForm.values)
         mergedCourse.ui = mergedUI
-        console.log("mergedCourse", mergedCourse)
       } else {
         mergedCourse = this.state.course
-        console.log("default course")
       }
       courseThumb = <CourseThumb course={mergedCourse} />
       courseForm = <CourseForm initialValues={this.state.course} onSubmit={this.handleSubmit.bind(this)} errors={this.state.errors} />
@@ -65,10 +63,8 @@ class New extends Component {
         const mergedUI = Object.assign({}, defaultCourse.ui, this.props.courseForm.values.ui)
         mergedCourse = Object.assign({}, defaultCourse, this.props.courseForm.values)
         mergedCourse.ui = mergedUI
-        console.log("mergedCourse", mergedCourse)
       } else {
         mergedCourse = defaultCourse
-        console.log("default course")
       }
       courseThumb = <CourseThumb course={mergedCourse} />
     }

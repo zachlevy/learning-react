@@ -12,7 +12,7 @@ class YoutubeVideo extends Component {
     super()
     this.state = {
       showHelp: false,
-      playbackRate: 1,
+      playbackRate: 1, // change it once the video loads
       videoDuration: 0,
       currentTime: 0,
     }
@@ -47,7 +47,7 @@ class YoutubeVideo extends Component {
 
   handlePlaybackChange(newRate) {
     console.log("newRate", newRate)
-    const playbackRates = [0.5, 1, 1.5, 2]
+    const playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 2]
     if (newRate < playbackRates[0]) {
       newRate = playbackRates[0]
     } else if (newRate > playbackRates[playbackRates.length - 1]) {
@@ -64,6 +64,7 @@ class YoutubeVideo extends Component {
     console.log(duration)
     this.setState({videoDuration: getYouTubeVideoDuration(duration, this.props.start_seconds, this.props.end_seconds)})
     this.setState({playbackInterval: setInterval(() => { this.setState({currentTime: this.videoPlayer.getCurrentTime()}) }, 500)})
+    this.handlePlaybackChange(this.props.playback_rate)
   }
 
   handleOnPlaybackRateChange(e) {
@@ -193,13 +194,14 @@ class YoutubeVideo extends Component {
                   <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handleSeek.bind(this, -10)}><FontAwesome name="undo" /> <span>go back 10s</span></button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate - 0.5)}><FontAwesome name="backward" /></button>
+                  {/* bug right now, can't move past 1.5 because the increment is always 0.25 */}
+                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate - 0.25)}><FontAwesome name="backward" /></button>
                 </li>
                 <li className="list-inline-item">
                   <button className="btn btn-sm disabled">{this.state.playbackRate}x</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate + 0.5)}><FontAwesome name="forward" /></button>
+                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate + 0.25)}><FontAwesome name="forward" /></button>
                 </li>
               </ul>
             </div>

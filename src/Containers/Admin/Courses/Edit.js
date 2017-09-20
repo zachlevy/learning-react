@@ -27,15 +27,14 @@ class New extends Component {
 
   handleSubmit(courseValues) {
     console.log("handleSubmit", courseValues)
-    // create course
-    apiRequest("/courses", {
-      method: 'post',
+    apiRequest(`/courses/${this.props.match.params.courseId}`, {
+      method: 'put',
       body: JSON.stringify({
         course: courseValues
       })
     }, (response, status) => {
-      if (status === 201) {
-        this.setState({errors: {success: ["the course has been created."]}})
+      if (status === 200) {
+        this.setState({errors: {success: [`course #${this.props.match.params.courseId} has been updated`]}})
         this.props.clearCourseForm()
       } else {
         this.setState({errors: response})
@@ -43,16 +42,14 @@ class New extends Component {
     })
   }
 
-    // let courseForm
-    // if (this.state.course){
-    //   courseForm = <CourseForm onSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}/>
   render() {
     let mergedCourse
     let courseThumb
     let courseForm
-
     if (this.state.course) {
+    //handling the fact that the state is empty when the page first renders
       if (this.props.courseForm && this.props.courseForm.values) {
+        //this is for live updating the course preview as the form is filled out
         const mergedUI = Object.assign({}, this.state.course.ui, this.props.courseForm.values.ui)
         mergedCourse = Object.assign({}, this.state.course, this.props.courseForm.values)
         mergedCourse.ui = mergedUI
@@ -62,7 +59,7 @@ class New extends Component {
         console.log("default course")
       }
       courseThumb = <CourseThumb course={mergedCourse} />
-      courseForm = <CourseForm onSubmit={this.handleSubmit.bind(this)} errors={this.state.errors} />
+      courseForm = <CourseForm initialValues={this.state.course} onSubmit={this.handleSubmit.bind(this)} errors={this.state.errors} />
     } else {
       if (this.props.courseForm && this.props.courseForm.values) {
         const mergedUI = Object.assign({}, defaultCourse.ui, this.props.courseForm.values.ui)

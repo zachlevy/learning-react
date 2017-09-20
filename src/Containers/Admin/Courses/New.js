@@ -35,6 +35,7 @@ class New extends Component {
   }
 
   render() {
+    {/*this is for the live update of form as users type*/}
     let mergedCourse
     if (this.props.courseForm && this.props.courseForm.values) {
       const mergedUI = Object.assign({}, defaultCourse.ui, this.props.courseForm.values.ui)
@@ -43,6 +44,7 @@ class New extends Component {
       console.log("mergedCourse", mergedCourse)
     } else {
       mergedCourse = defaultCourse
+      console.log("default course")
     }
     const courseThumb = <CourseThumb course={mergedCourse} />
     return (

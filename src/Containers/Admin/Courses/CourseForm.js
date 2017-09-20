@@ -5,6 +5,7 @@ import { defaultCourse } from '../../../modules/defaults'
 import { buildFormFields, buildFormErrors } from '../../../modules/forms'
 
 class CourseForm extends Component {
+
   render() {
     const errors = buildFormErrors(this.props.errors)
     const blacklistKeys = ["est_duration", "flow"]

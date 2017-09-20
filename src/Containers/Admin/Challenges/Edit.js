@@ -11,7 +11,7 @@ class Edit extends Component {
     super()
     this.state = {
       errors: null,
-      course: null
+      challenge: null
     }
   }
 
@@ -19,14 +19,14 @@ class Edit extends Component {
     apiRequest(`/challenges/${this.props.match.params.challengeId}`, {}, (response, status) => {
       if (status === 200) {
         console.log(response)
-        this.setState({course: response})
+        this.setState({challenge: response})
       }
     })
   }
 
   handleSubmit(challengeValues) {
     console.log("handleSubmit", challengeValues)
-    // create course
+    // update challenge
     apiRequest(`/challenges/${this.props.match.params.challengeId}`, {
       method: 'put',
       body: JSON.stringify({
@@ -44,10 +44,9 @@ class Edit extends Component {
   }
 
   render() {
-    // optional course_id
     let challengeForm
-    if (this.state.course) {
-      challengeForm = <ChallengeForm initialValues={this.state.course} onSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}/>
+    if (this.state.challenge) {
+      challengeForm = <ChallengeForm initialValues={this.state.challenge} onSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}/>
     }
 
     return (

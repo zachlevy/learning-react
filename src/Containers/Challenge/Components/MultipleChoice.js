@@ -121,11 +121,27 @@ class MultipleChoice extends Component {
         </div>
       )
     }
+    let image
+    if (this.props.image_url) {
+      image = (
+        <div className="row">
+          <div className="col-12 col-lg-6 offset-lg-3 text-center">
+            <img src={this.props.image_url} className="img-fluid simple_q_and_a-question-image_url" />
+          </div>
+        </div>
+      )
+    }
+    let questionDetails
+    if (this.props.question_details) {
+      questionDetails = <p className={"multiple_choice-question_details"}>{this.props.question_details}</p>
+    }
     return (
       <div className="container">
+        {image}
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2 text-center">
-            <h2 className="multiple_choice-question">{this.props.question}</h2>
+            <h2 className={"multiple_choice-question" + (this.props.image_url ? " no-margin" : "")}>{this.props.question}</h2>
+            {questionDetails}
             <br />
             <div className="form-group">
               <div className="row">

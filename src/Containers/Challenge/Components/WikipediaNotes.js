@@ -114,7 +114,7 @@ class WikipediaNotes extends Component {
             <div className="form-group">
               <ol className="">
                 {
-                  content.instructions.map((instruction, index) => {
+                  content.instructions && content.instructions.map((instruction, index) => {
                     instruction = simpleMarkdown(instruction)
                     return <li className="" key={index}>{instruction}</li>
                   })

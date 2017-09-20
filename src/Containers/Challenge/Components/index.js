@@ -10,6 +10,7 @@ import SimpleStart from './SimpleStart'
 import SimpleSignup from './SimpleSignup'
 import ExternalSuggestionEnd from './ExternalSuggestionEnd'
 import MultipleChoice from './MultipleChoice'
+import SimpleText from './SimpleText'
 
 // add components to the components object
 export default function getChallengeComponent (name, props) {
@@ -23,6 +24,7 @@ export default function getChallengeComponent (name, props) {
     "simple_start": (<SimpleStart {...props} />),
     "simple_signup": (<SimpleSignup {...props} />),
     "external_suggestion_end": (<ExternalSuggestionEnd {...props} />),
-    "multiple_choice": (<MultipleChoice {...props} />)
+    "multiple_choice": (<MultipleChoice {...props} />),
+    "simple_text": (<SimpleText {...props} />)
   }[name]
 }

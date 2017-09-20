@@ -42,6 +42,8 @@ The `Course flow` determines what order the user sees the challenges in. At the 
 * Assessment may be being asked a short answer question, or multiple choice.
 * Challenges may also be used as introduction or ending slides.
 
+See `src/modules/defaults.js` for the default `body` templates of Challenge Type instances.
+
 #### Adding a Challenge Type
 When adding a challenge type on the `learning-api`, you'll need to add a corresponding Challenge Component in `src/Containers/Challenge/Components`. Make sure also to add the machine name to `src/Containers/Challenge/Components/index.js`. This helps load the right component based on the machine name in `learning-api`.
 

@@ -53,10 +53,6 @@ export const defaultChallenge = (name) => {
         }, {
           text: "anddon't",
           correct: false
-        }, {
-          // default false
-          prompt: "no, try again young padawan",
-          correct: false
         }
       ],
       image_url: ""

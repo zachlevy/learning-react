@@ -26,6 +26,41 @@ export const defaultChallenge = (name) => {
   // template bodies on the model
   // each of these is associated with a ChallengeType instance on the api where the key in this object corresponds to the ChallengeType.name on the api
   const templates = {
+    'multiple_multiple_choice': {
+      question: "I speak Hebrew ____ French but Ann ____",
+      question_details: "The details about the question are here and totally optional",
+      options: [
+        [
+          "and",
+          "with",
+          "together",
+          "but"
+        ], [
+          "don't",
+          "doesn't",
+          "speaks",
+          "doesn't speaks"
+        ]
+      ],
+      feedback: [
+        {
+          text: "anddoesn't",
+          prompt: "that is correct because...",
+          correct: true,
+          // dependencies: [
+          //
+          // ]
+        }, {
+          text: "anddon't",
+          correct: false
+        }, {
+          // default false
+          prompt: "no, try again young padawan",
+          correct: false
+        }
+      ],
+      image_url: ""
+    },
     'multiple_choice': {
       question: "I speak Hebrew and French but Ann",
       question_details: "The details about the question are here and totally optional",

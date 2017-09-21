@@ -70,6 +70,12 @@ iframe.wikipedia {
       opacity: 0.5;
     }
   }
+  .border-right-white {
+    border-right: 1px solid white;
+    &:last-child {
+      border-right: none;
+    }
+  }
 }
 .color-red {
   color: red;
@@ -162,6 +168,13 @@ iframe.wikipedia {
   &.no-margin {
     margin-top: 0;
   }
+}
+.multiple-choice-option-wrapper {
+   display: flex;
+   margin-bottom: 1em;
+   .multiple-choice-option {
+     align-items: stretch;
+   }
 }
 .simple_q_and_a-question-image_url {
   margin-top: 1em;

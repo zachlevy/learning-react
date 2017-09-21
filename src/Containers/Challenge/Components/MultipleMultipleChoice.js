@@ -151,14 +151,14 @@ class MultipleMultipleChoice extends Component {
                 {
                   this.props.options.map((optionGroup, optionGroupIndex) => {
                     return (
-                      <div className="col-12 col-sm-6" key={optionGroupIndex}>
+                      <div className="col-12 col-sm-6 border-right-white" key={optionGroupIndex}>
+                        <br />
                         <div className="row">
                           {
                             optionGroup.map((option, index) => {
                               return (
-                                <div key={index} className="col-6">
-                                  <button role="button" className={"btn btn-outline-secondary btn-mc btn-block" + (this.state.input.indexOf(option) === -1 ? "" : " active")} onClick={this.handleOptionClick.bind(this, optionGroupIndex)}>{option}</button>
-                                  <br />
+                                <div key={index} className="col-6 multiple-choice-option-wrapper">
+                                  <button role="button" className={"btn btn-outline-secondary btn-mc btn-block multiple-choice-option" + (this.state.input.indexOf(option) === -1 ? "" : " active")} onClick={this.handleOptionClick.bind(this, optionGroupIndex)}>{option}</button>
                                 </div>
                               )
                             })

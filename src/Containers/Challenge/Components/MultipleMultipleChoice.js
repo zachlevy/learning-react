@@ -23,11 +23,11 @@ class MultipleMultipleChoice extends Component {
     const foundFeedback = this.props.feedback.find((feedback) => {
       return feedback.text === input
     })
-    if (foundFeedback.correct) {
+    if (foundFeedback && foundFeedback.correct) {
       this.setState({feedback: foundFeedback.prompt, submitButtonText: "Correct", showSubmitButton: false})
       this.props.handleShowNextButton()
     } else {
-      this.setState({feedback: foundFeedback.prompt || "Incorrect answer!", submitButtonText: "Incorrect"})
+      this.setState({feedback: (foundFeedback && foundFeedback.prompt) || "Incorrect answer!", submitButtonText: "Incorrect"})
       this.props.handleInsertDependencies(this.state.input)
       this.props.handleShowNextButton()
     }

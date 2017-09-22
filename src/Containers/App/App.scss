@@ -169,6 +169,12 @@ iframe.wikipedia {
     margin-top: 0;
   }
 }
+.matching-question {
+  margin-top: 15vh;
+  &.no-margin {
+    margin-top: 0;
+  }
+}
 .multiple-choice-option-wrapper {
    display: flex;
    margin-bottom: 1em;

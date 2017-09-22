@@ -11,30 +11,25 @@ class Matching extends Component {
       input: new Array(props.matchWith.length), // intialize array
       feedback: new Array(props.matchWith.length), // intialize array
       showHelp: false,
-      showSubmitButton: true,
+      showSubmitButton: false,
       submitButtonText: "Check Answer",
     }
   }
   assert(event) {
     console.log("assert")
     let answered
-    console.log("assert", this.state.input)
+    const answers = new Array(this.props.matchWith.length)
+    const newFeedbackArray = [...this.state.feedback]
+    this.state.input.forEach((answer, inputIndex) => {
+      const foundFeedback = this.props.feedback.find((feedback) => {
+        return answer === feedback.text
+      })
+      newFeedbackArray[inputIndex] = foundFeedback || {"text": answer, prompt: "Incorrect!", correct: false}
+    })
 
-    // const foundFeedback = this.props.feedback.find((feedback) => {
-    //   return feedback.text === input
-    // })
-    // if (foundFeedback && foundFeedback.correct) {
-    //   this.setState({feedback: foundFeedback.prompt, submitButtonText: "Correct", showSubmitButton: false})
-    //   this.props.handleShowNextButton()
-    // } else {
-    //   this.setState({feedback: (foundFeedback && foundFeedback.prompt) || "Incorrect answer!", submitButtonText: "Incorrect"})
-    //   this.props.handleInsertDependencies(this.state.input)
-    //   this.props.handleShowNextButton()
-    // }
-
-    // check if answer is correct
-    // this.submitChallengeResponse(this.state.input)
-    // this.setState({showSubmitButton: false})
+    this.submitChallengeResponse(this.state.input)
+    this.setState({feedback: newFeedbackArray, showSubmitButton: false})
+    this.props.handleShowNextButton()
   }
 
   // submit to api for analysis
@@ -64,8 +59,8 @@ class Matching extends Component {
   handleSelectChange(matchWith, matchWithIndex, e) {
     console.log("handleSelectChange", matchWith, e.target.value)
     const newInputArray = [...this.state.input]
-    newInputArray[matchWithIndex] = e.target.value
-    this.setState({input: newInputArray, feedback: []})
+    newInputArray[matchWithIndex] = matchWith + e.target.value
+    this.setState({input: newInputArray, showSubmitButton: true})
   }
 
   handleSubmitClick(e) {
@@ -156,7 +151,7 @@ class Matching extends Component {
                         <div className="col-12 col-sm-4 text-right">
                           <h3>{matchWith}</h3>
                         </div>
-                        <div className="col-12 col-sm-8">
+                        <div className="col-12 col-sm-4">
                           <select className="form-control" onChange={this.handleSelectChange.bind(this, matchWith, matchWidthIndex)}>
                             <option></option>
                             {
@@ -168,6 +163,15 @@ class Matching extends Component {
                             }
                           </select>
                           <br />
+                        </div>
+                        <div className="col-12 col-sm-4 text-left">
+                          <p>
+                            {
+                              this.state.feedback[matchWidthIndex] ? (this.state.feedback[matchWidthIndex].correct ? <FontAwesome name="check" /> : <FontAwesome name="times" />) : ""
+                            }
+
+                            <span> {this.state.feedback[matchWidthIndex] && this.state.feedback[matchWidthIndex].prompt}</span>
+                          </p>
                         </div>
                       </div>
                     )

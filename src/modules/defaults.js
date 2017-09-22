@@ -26,6 +26,58 @@ export const defaultChallenge = (name) => {
   // template bodies on the model
   // each of these is associated with a ChallengeType instance on the api where the key in this object corresponds to the ChallengeType.name on the api
   const templates = {
+    'matching': {
+      question: "What are the capital cities?",
+      matchWith: [
+        "UK",
+        "France",
+        "Canada",
+        "Australia",
+        "USA"
+      ],
+      options: [
+        "London",
+        "Paris",
+        "Ottawa",
+        "Canberra",
+        "Washington, D.C."
+      ],
+      feedback: [
+        {
+          text: "UKLondon",
+          prompt: "Correct!",
+          correct: true,
+          // dependencies: [
+          //
+          // ]
+        }, {
+          text: "FranceParis",
+          prompt: "Nice!",
+          correct: true
+        }, {
+          text: "CanadaOttawa",
+          prompt: "That's pretty good eh!",
+          correct: true
+        }, {
+          text: "AustraliaCanberra",
+          prompt: "Sweet. You up for beers this arvo?",
+          correct: true
+        }, {
+          text: "USAWashington, D.C.",
+          prompt: "You Did it!",
+          correct: true
+        }, {
+          text: "CanadaCanberra",
+          prompt: "Tricky one mate!",
+          correct: false
+        }, {
+          text: "AustraliaOttawa",
+          prompt: "It's not that cold there eh",
+          correct: false
+        }
+      ],
+      image_url: ""
+    },
     'multiple_multiple_choice': {
       question: "I speak Hebrew ____ French but Ann ____",
       question_details: "The details about the question are here and totally optional",

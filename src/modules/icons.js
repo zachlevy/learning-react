@@ -10,5 +10,6 @@ export const getIcon = (machineName) => {
     simple_signup: "circle",
     multiple_choice: "windows",
     open_ended_q: "question-circle",
+    matching: "bars"
   }[machineName] || "circle"
 }

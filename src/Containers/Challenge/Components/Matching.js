@@ -5,10 +5,11 @@ import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
 
 class Matching extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      input: [],
+      input: new Array(props.matchWith.length), // intialize array
+      feedback: new Array(props.matchWith.length), // intialize array
       showHelp: false,
       showSubmitButton: true,
       submitButtonText: "Check Answer",
@@ -17,7 +18,20 @@ class Matching extends Component {
   assert(event) {
     console.log("assert")
     let answered
-    console.log("assert", this.props.correct_answer, this.state.input)
+    console.log("assert", this.state.input)
+
+    // const foundFeedback = this.props.feedback.find((feedback) => {
+    //   return feedback.text === input
+    // })
+    // if (foundFeedback && foundFeedback.correct) {
+    //   this.setState({feedback: foundFeedback.prompt, submitButtonText: "Correct", showSubmitButton: false})
+    //   this.props.handleShowNextButton()
+    // } else {
+    //   this.setState({feedback: (foundFeedback && foundFeedback.prompt) || "Incorrect answer!", submitButtonText: "Incorrect"})
+    //   this.props.handleInsertDependencies(this.state.input)
+    //   this.props.handleShowNextButton()
+    // }
+
     // check if answer is correct
     // this.submitChallengeResponse(this.state.input)
     // this.setState({showSubmitButton: false})
@@ -47,9 +61,11 @@ class Matching extends Component {
     })
   }
 
-  handleOptionClick(e) {
-    console.log("handleOptionClick", e)
-    // this.setState({input: e.target.innerHTML, feedback: ""})
+  handleSelectChange(matchWith, matchWithIndex, e) {
+    console.log("handleSelectChange", matchWith, e.target.value)
+    const newInputArray = [...this.state.input]
+    newInputArray[matchWithIndex] = e.target.value
+    this.setState({input: newInputArray, feedback: []})
   }
 
   handleSubmitClick(e) {
@@ -134,14 +150,14 @@ class Matching extends Component {
             <div className="row">
               <div className="col-12">
                 {
-                  this.props.matchWith.map((matchWith, index) => {
+                  this.props.matchWith.map((matchWith, matchWidthIndex) => {
                     return (
-                      <div className="row" key={index}>
+                      <div className="row" key={matchWidthIndex}>
                         <div className="col-12 col-sm-4 text-right">
                           <h3>{matchWith}</h3>
                         </div>
                         <div className="col-12 col-sm-8">
-                          <select className="form-control">
+                          <select className="form-control" onChange={this.handleSelectChange.bind(this, matchWith, matchWidthIndex)}>
                             <option></option>
                             {
                               this.props.options.map((option, optionIndex) => {

@@ -4,11 +4,11 @@ import FontAwesome from 'react-fontawesome'
 import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
 
-class MultipleChoice extends Component {
-  constructor() {
-    super()
+class MultipleMultipleChoice extends Component {
+  constructor(props) {
+    super(props)
     this.state = {
-      input: "",
+      input: new Array(props.options.length), // intialize array
       feedback: "",
       showHelp: false,
       showSubmitButton: true,
@@ -17,16 +17,17 @@ class MultipleChoice extends Component {
   }
   assert(event) {
     console.log("assert")
+    const input = this.state.input.join("")
     let answered
-    console.log("assert", this.props.correct_answer, this.state.input)
-    if (this.props.correct_answer === this.state.input) {
-      answered = true
-    }
-    if (answered) {
-      this.setState({feedback: "Correct!", submitButtonText: "Correct", showSubmitButton: false})
+    console.log("assert", this.props.correct_answer, input)
+    const foundFeedback = this.props.feedback.find((feedback) => {
+      return feedback.text === input
+    })
+    if (foundFeedback && foundFeedback.correct) {
+      this.setState({feedback: foundFeedback.prompt, submitButtonText: "Correct", showSubmitButton: false})
       this.props.handleShowNextButton()
     } else {
-      this.setState({feedback: "Incorrect answer!", submitButtonText: "Incorrect"})
+      this.setState({feedback: (foundFeedback && foundFeedback.prompt) || "Incorrect answer!", submitButtonText: "Incorrect"})
       this.props.handleInsertDependencies(this.state.input)
       this.props.handleShowNextButton()
     }
@@ -60,9 +61,11 @@ class MultipleChoice extends Component {
     })
   }
 
-  handleOptionClick(e) {
+  handleOptionClick(optionGroupIndex, e) {
     console.log("handleOptionClick")
-    this.setState({input: e.target.innerHTML, feedback: ""})
+    const newInputArray = [...this.state.input]
+    newInputArray[optionGroupIndex] = e.target.innerHTML
+    this.setState({input: newInputArray, feedback: ""})
   }
 
   handleSubmitClick(e) {
@@ -139,18 +142,28 @@ class MultipleChoice extends Component {
       <div className="container">
         {image}
         <div className="row">
-          <div className="col-12 col-lg-8 offset-lg-2 text-center">
+          <div className="col-12 col-lg-10 offset-lg-1 text-center">
             <h2 className={"multiple_choice-question" + (this.props.image_url ? " no-margin" : "")}>{this.props.question}</h2>
             {questionDetails}
             <br />
             <div className="form-group">
               <div className="row">
                 {
-                  this.props.options.map((option, index) => {
+                  this.props.options.map((optionGroup, optionGroupIndex) => {
                     return (
-                      <div key={index} className="col-6 multiple-choice-option-wrapper">
-                        <button role="button" className={"btn btn-outline-secondary btn-mc btn-block multiple-choice-option" + (this.state.input === option ? " active" : "")} onClick={this.handleOptionClick.bind(this)}>{option}</button>
+                      <div className="col-12 col-sm-6 border-right-white" key={optionGroupIndex}>
                         <br />
+                        <div className="row">
+                          {
+                            optionGroup.map((option, index) => {
+                              return (
+                                <div key={index} className="col-6 multiple-choice-option-wrapper">
+                                  <button role="button" className={"btn btn-outline-secondary btn-mc btn-block multiple-choice-option" + (this.state.input.indexOf(option) === -1 ? "" : " active")} onClick={this.handleOptionClick.bind(this, optionGroupIndex)}>{option}</button>
+                                </div>
+                              )
+                            })
+                          }
+                        </div>
                       </div>
                     )
                   })
@@ -191,10 +204,12 @@ class MultipleChoice extends Component {
   }
 }
 
-MultipleChoice.propTypes = {
+MultipleMultipleChoice.propTypes = {
   question: PropTypes.string,
   correct_answer: PropTypes.string,
   options: PropTypes.array,
+  feedback: PropTypes.array,
+  image_url: PropTypes.string,
 
   handleInsertDependencies: PropTypes.func,
   handleBackButton: PropTypes.func,
@@ -206,4 +221,4 @@ MultipleChoice.propTypes = {
   challengeDescription: PropTypes.string
 }
 
-export default MultipleChoice
+export default MultipleMultipleChoice

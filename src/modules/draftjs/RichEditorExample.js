@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { Editor, EditorState, RichUtils } from 'draft-js'
 import { stateToMarkdown } from 'draft-js-export-markdown'
 import {stateToHTML} from 'draft-js-export-html'
+// import {stateFromMarkdown} from 'draft-js-import-markdown';
+
 import {
   INLINE_STYLES,
   InlineStyleControls,
@@ -17,6 +19,7 @@ class RichEditorExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {editorState: EditorState.createEmpty()};
+    // let contentState = stateFromMarkdown(markdown)
 
     this.focus = () => this.refs.editor.focus();
     this.onChange = (editorState) => this.setState({editorState});

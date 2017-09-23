@@ -1,6 +1,7 @@
 import React from 'react'
 import reactStringReplace from 'react-string-replace'
 import Logo from '../vora_logo_20170717.svg'
+import katex from 'katex'
 
 export const capitalizeWords = (str) => {
   return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
@@ -51,6 +52,13 @@ export const simpleMarkdown = (string) => {
     )
   })
   return string
+}
+
+export const katexToMarkdown = (string) => {
+  string = reactStringReplace(string, /<katex>(.+)<\/katex>/g, (match, i) => {
+    return katex.renderToString(match)
+  })
+  return string.toString()
 }
 
 // get the definition of a word from api

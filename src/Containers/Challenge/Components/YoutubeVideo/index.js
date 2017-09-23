@@ -128,7 +128,7 @@ class YoutubeVideo extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <p className="challenge-description">{markdownToHTML(this.props.challengeDescription)}</p>
+          <div className="challenge-description">{markdownToHTML(this.props.challengeDescription)}</div>
         </li>
       )
     } else {
@@ -208,7 +208,7 @@ class YoutubeVideo extends Component {
             </div>
             <div className="float-md-right">
               <br />
-              <p className="challenge-description">{this.props.challengeDescription}</p>
+              <div className="challenge-description">{this.props.challengeDescription}</div>
             </div>
           </div>
         </div>

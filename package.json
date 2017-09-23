@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
+    "draft-js": "^0.10.2",
     "node-sass-chokidar": "0.0.3",
     "react": "^15.6.1",
     "react-dnd": "^2.5.1",

@@ -61,9 +61,9 @@ class MultipleChoice extends Component {
     })
   }
 
-  handleOptionClick(e) {
+  handleOptionClick(option, e) {
     console.log("handleOptionClick")
-    this.setState({input: e.target.innerHTML, feedback: ""})
+    this.setState({input: option, feedback: ""})
   }
 
   handleSubmitClick(e) {
@@ -150,7 +150,7 @@ class MultipleChoice extends Component {
                   this.props.options.map((option, index) => {
                     return (
                       <div key={index} className="col-6 multiple-choice-option-wrapper">
-                        <button role="button" className={"btn btn-outline-secondary btn-mc btn-block multiple-choice-option" + (this.state.input === option ? " active" : "")} onClick={this.handleOptionClick.bind(this)}>{markdownToHTML(option)}</button>
+                        <button role="button" className={"btn btn-outline-secondary btn-mc btn-block multiple-choice-option" + (this.state.input === option ? " active" : "")} onClick={this.handleOptionClick.bind(this, option)}>{markdownToHTML(option)}</button>
                         <br />
                       </div>
                     )

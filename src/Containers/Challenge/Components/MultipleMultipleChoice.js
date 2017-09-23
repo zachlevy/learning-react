@@ -62,10 +62,10 @@ class MultipleMultipleChoice extends Component {
     })
   }
 
-  handleOptionClick(optionGroupIndex, e) {
+  handleOptionClick(optionGroupIndex, option, e) {
     console.log("handleOptionClick")
     const newInputArray = [...this.state.input]
-    newInputArray[optionGroupIndex] = e.target.innerHTML
+    newInputArray[optionGroupIndex] = option
     this.setState({input: newInputArray, feedback: ""})
   }
 
@@ -159,7 +159,7 @@ class MultipleMultipleChoice extends Component {
                             optionGroup.map((option, index) => {
                               return (
                                 <div key={index} className="col-6 multiple-choice-option-wrapper">
-                                  <button role="button" className={"btn btn-outline-secondary btn-mc btn-block multiple-choice-option" + (this.state.input.indexOf(option) === -1 ? "" : " active")} onClick={this.handleOptionClick.bind(this, optionGroupIndex)}>{markdownToHTML(option)}</button>
+                                  <button role="button" className={"btn btn-outline-secondary btn-mc btn-block multiple-choice-option" + (this.state.input.indexOf(option) === -1 ? "" : " active")} onClick={this.handleOptionClick.bind(this, optionGroupIndex, option)}>{markdownToHTML(option)}</button>
                                 </div>
                               )
                             })

@@ -4,7 +4,6 @@ import FontAwesome from 'react-fontawesome'
 import Dictionary from '../../Shared/Dictionary'
 import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
-import { markdownToHTML } from '../../../modules/strings'
 
 class OpenEndedQ extends Component {
   constructor() {
@@ -137,7 +136,6 @@ class OpenEndedQ extends Component {
             {questionDetails}
             <div className="form-group">
               <textarea className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} rows={textareaRows}></textarea>
-              {markdownToHTML(this.state.input)}
               <div className="row">
                 <div className="col-12 col-sm-6">
                   {feedback}

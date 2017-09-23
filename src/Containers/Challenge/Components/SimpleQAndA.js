@@ -127,7 +127,7 @@ class SimpleQAndA extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <p className="challenge-description">{this.props.challengeDescription}</p>
+          <p className="challenge-description">{markdownToHTML(this.props.challengeDescription)}</p>
         </li>
       )
     } else {
@@ -145,7 +145,7 @@ class SimpleQAndA extends Component {
     if (this.state.feedback) {
       feedback = (
         <div className="simple_q_and_a-feedback">
-          <p>{this.state.feedback}  {disagreeButton}</p>
+          <p>{markdownToHTML(this.state.feedback)}  {disagreeButton}</p>
         </div>
       )
     }

@@ -74,7 +74,6 @@ export const katexToHTML = (string) => {
     }
   })
   return string.toString()
-  // return katex.renderToString(string).toString()
 }
 
 // get the definition of a word from api

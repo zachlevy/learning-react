@@ -91,7 +91,7 @@ class ChallengeForm extends Component {
                 }
               </Field>
               {
-                buildFormFields(mergedChallenge, blacklistKeys, (key, url) => {
+                buildFormFields(mergedChallenge, {blacklistKeys: blacklistKeys, textareaKeys: ["body.question"]}, (key, url) => {
                   this.props.reduxChange("challenge", key, url)
                 })
               }

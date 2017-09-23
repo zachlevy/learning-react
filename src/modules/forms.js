@@ -21,13 +21,15 @@ export const buildFormErrors = (apiErrors) => {
 }
 
 // takes in a json based on a template of a same course
-// blacklistKeys is an array of strings. nested keys have a period between them. example: "ui.icon"
 // manualReduxFormChange passed in because it has to be connected to dispatch properly I think
-export const buildFormFields = (formJson, blacklistKeys, manualReduxFormChange) => {
+// options is an object with the following optional fields
+// blacklistKeys - an array of strings. nested keys have a period between them. example: "ui.icon"
+// textareaKeys - an array of strings for using textareas instead of input fields
+export const buildFormFields = (formJson, options, manualReduxFormChange) => {
   return (
     <div key={"fields-wrapper"}>
       {
-        Object.keys(formJson).filter((key) => {return !blacklistKeys.includes(key)}).map((key, index) => {
+        Object.keys(formJson).filter((key) => {return !options.blacklistKeys || !options.blacklistKeys.includes(key)}).map((key, index) => {
           const label = capitalizeWords(snakeCaseToSpaceCase(camelCaseToSpaceCase(key.replace(".", " "))))
           if (typeof formJson[key] === "string" && key.indexOf("image_url") !== -1) {
             // image uploading, images are always stored as image_url
@@ -37,6 +39,13 @@ export const buildFormFields = (formJson, blacklistKeys, manualReduxFormChange) 
                 <br />
                 <Uploader id="challenge-image-url-uploader" className="form-control" onChange={(url) => {manualReduxFormChange(key, url)}} type="hidden" />
                 <br />
+              </div>
+            )
+          } else if (typeof formJson[key] === "string" && options.textareaKeys && options.textareaKeys.includes(key)) {
+            return (
+              <div key={index}>
+                <label>{label}</label>
+                <Field className="form-control" name={key} component="textarea" type="text" />
               </div>
             )
           } else if (typeof formJson[key] === "string") {
@@ -66,7 +75,7 @@ export const buildFormFields = (formJson, blacklistKeys, manualReduxFormChange) 
             Object.keys(formJson[key]).forEach((shortKey) => {
               nestedFormJson[`${key}.${shortKey}`] = formJson[key][shortKey]
             })
-            return buildFormFields(nestedFormJson, blacklistKeys, manualReduxFormChange)
+            return buildFormFields(nestedFormJson, options, manualReduxFormChange)
           }
         })
       }

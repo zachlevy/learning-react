@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
 import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
+import { markdownToHTML } from '../../../modules/strings'
 
 class Matching extends Component {
   constructor(props) {
@@ -102,7 +103,7 @@ class Matching extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <p className="challenge-description">{this.props.challengeDescription}</p>
+          <div className="challenge-description">{markdownToHTML(this.props.challengeDescription)}</div>
         </li>
       )
     } else {
@@ -116,7 +117,7 @@ class Matching extends Component {
     if (this.state.feedback) {
       feedback = (
         <div className="multiple_choice-feedback">
-          <p>{this.state.feedback}</p>
+          <p>{markdownToHTML(this.state.feedback)}</p>
         </div>
       )
     }
@@ -139,7 +140,7 @@ class Matching extends Component {
         {image}
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2 text-center">
-            <h2 className={"matching-question" + (this.props.image_url ? " no-margin" : "")}>{this.props.question}</h2>
+            <div className={"matching-question" + (this.props.image_url ? " no-margin" : "")}>{markdownToHTML(this.props.question)}</div>
             {questionDetails}
             <br />
             <div className="row">
@@ -157,7 +158,7 @@ class Matching extends Component {
                             {
                               this.props.options.map((option, optionIndex) => {
                                 return (
-                                  <option key={optionIndex} value={option}>{option}</option>
+                                  <option key={optionIndex} value={option}>{markdownToHTML(option)}</option>
                                 )
                               })
                             }

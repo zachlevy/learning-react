@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import FontAwesome from 'react-fontawesome'
 import { track } from '../../../modules/analytics'
 import { secondsToMinutes } from "../../../modules/time"
-import { simpleMarkdown } from '../../../modules/strings'
+import { markdownToHTML } from '../../../modules/strings'
 
 class SimpleText extends Component {
   constructor() {
@@ -42,7 +42,7 @@ class SimpleText extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <p className="challenge-description">{this.props.challengeDescription}</p>
+          <div className="challenge-description">{markdownToHTML(this.props.challengeDescription)}</div>
         </li>
       )
     } else {
@@ -68,7 +68,7 @@ class SimpleText extends Component {
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2">
             <br />
-            <div>{simpleMarkdown(this.props.text)}</div>
+            <div>{markdownToHTML(this.props.text)}</div>
           </div>
         </div>
         <div className="row">

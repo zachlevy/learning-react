@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { secondsToMinutes } from '../../../modules/time'
 import FontAwesome from 'react-fontawesome'
 import { track } from '../../../modules/analytics'
-import { simpleMarkdown } from '../../../modules/strings'
+import { markdownToHTML } from '../../../modules/strings'
 
 class WikipediaNotes extends Component {
   constructor() {
@@ -87,7 +87,7 @@ class WikipediaNotes extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <p className="challenge-description">{this.props.challengeDescription}</p>
+          <div className="challenge-description">{this.props.challengeDescription}</div>
         </li>
       )
     } else {
@@ -115,7 +115,7 @@ class WikipediaNotes extends Component {
               <ol className="">
                 {
                   content.instructions && content.instructions.map((instruction, index) => {
-                    instruction = simpleMarkdown(instruction)
+                    instruction = markdownToHTML(instruction)
                     return <li className="" key={index}>{instruction}</li>
                   })
                 }

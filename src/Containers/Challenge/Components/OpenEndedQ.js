@@ -4,6 +4,7 @@ import FontAwesome from 'react-fontawesome'
 import Dictionary from '../../Shared/Dictionary'
 import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
+import { markdownToHTML } from '../../../modules/strings'
 
 class OpenEndedQ extends Component {
   constructor() {
@@ -88,7 +89,7 @@ class OpenEndedQ extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <p className="challenge-description">{this.props.challengeDescription}</p>
+          <div className="challenge-description">{markdownToHTML(this.props.challengeDescription)}</div>
         </li>
       )
     } else {
@@ -102,7 +103,7 @@ class OpenEndedQ extends Component {
     if (this.state.feedback) {
       feedback = (
         <div className="simple_q_and_a-feedback">
-          <p>{this.state.feedback}</p>
+          <p>{markdownToHTML(this.state.feedback)}</p>
         </div>
       )
     }
@@ -132,7 +133,7 @@ class OpenEndedQ extends Component {
         {image}
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2 text-center">
-            <h2 className={"simple_q_and_a-question" + (this.props.image_url ? " no-margin" : "")}>{question}</h2>
+            <div className={"simple_q_and_a-question" + (this.props.image_url ? " no-margin" : "")}>{markdownToHTML(question)}</div>
             {questionDetails}
             <div className="form-group">
               <textarea className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} rows={textareaRows}></textarea>

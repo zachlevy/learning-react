@@ -8,6 +8,7 @@ import Dictionary from '../../Shared/Dictionary'
 import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
 import { setFeedbackModal, setFeedbackContext } from '../../../modules/redux/feedback'
+import { markdownToHTML } from '../../../modules/strings'
 
 class SimpleQAndA extends Component {
   constructor() {
@@ -126,7 +127,7 @@ class SimpleQAndA extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <p className="challenge-description">{this.props.challengeDescription}</p>
+          <div className="challenge-description">{markdownToHTML(this.props.challengeDescription)}</div>
         </li>
       )
     } else {
@@ -144,7 +145,7 @@ class SimpleQAndA extends Component {
     if (this.state.feedback) {
       feedback = (
         <div className="simple_q_and_a-feedback">
-          <p>{this.state.feedback}  {disagreeButton}</p>
+          <p>{markdownToHTML(this.state.feedback)}  {disagreeButton}</p>
         </div>
       )
     }
@@ -173,7 +174,7 @@ class SimpleQAndA extends Component {
         {image}
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2 text-center">
-            <h2 className={"simple_q_and_a-question" + (this.props.image_url ? " no-margin" : "")}>{question}</h2>
+            <div className={"simple_q_and_a-question" + (this.props.image_url ? " no-margin" : "")}>{markdownToHTML(question)}</div>
             {questionDetails}
             <div className="form-group">
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} />

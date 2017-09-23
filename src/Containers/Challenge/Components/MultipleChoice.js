@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
 import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
+import { markdownToHTML } from '../../../modules/strings'
 
 class MultipleChoice extends Component {
   constructor() {
@@ -60,9 +61,9 @@ class MultipleChoice extends Component {
     })
   }
 
-  handleOptionClick(e) {
+  handleOptionClick(option, e) {
     console.log("handleOptionClick")
-    this.setState({input: e.target.innerHTML, feedback: ""})
+    this.setState({input: option, feedback: ""})
   }
 
   handleSubmitClick(e) {
@@ -103,7 +104,7 @@ class MultipleChoice extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <p className="challenge-description">{this.props.challengeDescription}</p>
+          <div className="challenge-description">{markdownToHTML(this.props.challengeDescription)}</div>
         </li>
       )
     } else {
@@ -117,7 +118,7 @@ class MultipleChoice extends Component {
     if (this.state.feedback) {
       feedback = (
         <div className="multiple_choice-feedback">
-          <p>{this.state.feedback}</p>
+          <p>{markdownToHTML(this.state.feedback)}</p>
         </div>
       )
     }
@@ -140,7 +141,7 @@ class MultipleChoice extends Component {
         {image}
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2 text-center">
-            <h2 className={"multiple_choice-question" + (this.props.image_url ? " no-margin" : "")}>{this.props.question}</h2>
+            <div className={"multiple_choice-question" + (this.props.image_url ? " no-margin" : "")}>{markdownToHTML(this.props.question)}</div>
             {questionDetails}
             <br />
             <div className="form-group">
@@ -149,7 +150,7 @@ class MultipleChoice extends Component {
                   this.props.options.map((option, index) => {
                     return (
                       <div key={index} className="col-6 multiple-choice-option-wrapper">
-                        <button role="button" className={"btn btn-outline-secondary btn-mc btn-block multiple-choice-option" + (this.state.input === option ? " active" : "")} onClick={this.handleOptionClick.bind(this)}>{option}</button>
+                        <button role="button" className={"btn btn-outline-secondary btn-mc btn-block multiple-choice-option" + (this.state.input === option ? " active" : "")} onClick={this.handleOptionClick.bind(this, option)}>{markdownToHTML(option)}</button>
                         <br />
                       </div>
                     )

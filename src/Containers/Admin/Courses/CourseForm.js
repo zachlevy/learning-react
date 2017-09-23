@@ -15,7 +15,7 @@ class CourseForm extends Component {
         <form onSubmit={ this.props.handleSubmit }>
           <div className="form-group">
             {
-              buildFormFields(defaultCourse, blacklistKeys)
+              buildFormFields(defaultCourse, {blacklistKeys: blacklistKeys})
             }
           </div>
           <button className="btn btn-primary btn-block" type="submit">Submit</button>

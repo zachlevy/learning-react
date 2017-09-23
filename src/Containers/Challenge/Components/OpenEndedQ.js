@@ -4,7 +4,7 @@ import FontAwesome from 'react-fontawesome'
 import Dictionary from '../../Shared/Dictionary'
 import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
-import ReactMarkdown from 'react-markdown'
+import katex from 'katex'
 import MarkdownIt from 'markdown-it'
 import { katexToMarkdown } from '../../../modules/strings'
 

@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Editor, EditorState, RichUtils } from 'draft-js'
+import { EditorState, RichUtils } from 'draft-js'
+import Editor from 'draft-js-plugins-editor'
 import { stateToMarkdown } from 'draft-js-export-markdown'
-import {stateToHTML} from 'draft-js-export-html'
+import { stateToHTML } from 'draft-js-export-html'
 // import {stateFromMarkdown} from 'draft-js-import-markdown';
+import createMathjaxPlugin from 'draft-js-mathjax-plugin'
+import {convertFromRaw, convertToRaw} from 'draft-js'
 
 import {
   INLINE_STYLES,
@@ -14,6 +17,12 @@ import {
   styleMap,
   getBlockStyle
 } from './StyleButton'
+
+const mathjaxPlugin = createMathjaxPlugin(/* optional configuration object */)
+const plugins = [
+  mathjaxPlugin,
+]
+
 
 class RichEditorExample extends React.Component {
   constructor(props) {
@@ -64,10 +73,30 @@ class RichEditorExample extends React.Component {
 
   handleSubmitText() {
     console.log("handleSubmitText")
+
+    let options = {
+      entityStyleFn: (entity) => {
+        const entityType = entity.get('type').toLowerCase();
+        if (entityType === 'INLINETEX') {
+          const data = entity.getData();
+          return {
+            element: 'span',
+            content: data,
+            style: {
+              // Put styles here...
+            },
+          };
+        }
+      },
+    };
+
     let markdown = stateToMarkdown(this.state.editorState.getCurrentContent())
     let html = stateToHTML(this.state.editorState.getCurrentContent())
+    let raw = JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent())) // stores tex
+    console.log(this.state.editorState.getCurrentContent())
     console.log(markdown)
     console.log(html)
+    console.log(raw)
   }
 
   render() {
@@ -104,6 +133,7 @@ class RichEditorExample extends React.Component {
             placeholder=""
             ref="editor"
             spellCheck={true}
+            plugins={plugins}
           />
         </div>
         <button className="btn btn-outline-secondary" onClick={this.handleSubmitText.bind(this)}>Submit</button>

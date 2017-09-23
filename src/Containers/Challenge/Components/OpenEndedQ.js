@@ -4,9 +4,7 @@ import FontAwesome from 'react-fontawesome'
 import Dictionary from '../../Shared/Dictionary'
 import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
-import katex from 'katex'
-import MarkdownIt from 'markdown-it'
-import { katexToMarkdown } from '../../../modules/strings'
+import { markdownToHTML } from '../../../modules/strings'
 
 class OpenEndedQ extends Component {
   constructor() {
@@ -17,9 +15,6 @@ class OpenEndedQ extends Component {
       feedback: "",
       showSubmitButton: true
     }
-    this.md = new MarkdownIt({
-      html: true
-    })
   }
   assert(event) {
     console.log("assert")
@@ -142,7 +137,7 @@ class OpenEndedQ extends Component {
             {questionDetails}
             <div className="form-group">
               <textarea className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} rows={textareaRows}></textarea>
-              <div dangerouslySetInnerHTML={{__html: this.md.render(katexToMarkdown(this.state.input))}}></div>
+              {markdownToHTML(this.state.input)}
               <div className="row">
                 <div className="col-12 col-sm-6">
                   {feedback}

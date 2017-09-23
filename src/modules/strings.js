@@ -1,6 +1,11 @@
 import React from 'react'
 import reactStringReplace from 'react-string-replace'
 import Logo from '../vora_logo_20170717.svg'
+import katex from 'katex'
+import MarkdownIt from 'markdown-it'
+const markdown = new MarkdownIt({
+  html: true
+})
 
 export const capitalizeWords = (str) => {
   return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
@@ -51,6 +56,19 @@ export const simpleMarkdown = (string) => {
     )
   })
   return string
+}
+
+// take a markdown object with katex and convert it to a react element for display
+export const markdownToHTML = (input) => {
+  return <div dangerouslySetInnerHTML={{__html: markdown.render(katexToHTML(input))}}></div>
+}
+
+// takes in a string with katex wrapped in <katex> tags, returns html in a string
+export const katexToHTML = (string) => {
+  string = reactStringReplace(string, /<katex>(.+)<\/katex>/g, (match, i) => {
+    return katex.renderToString(match)
+  })
+  return string.toString()
 }
 
 // get the definition of a word from api

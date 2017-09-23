@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Editor, EditorState, RichUtils } from 'draft-js'
+import { stateToMarkdown } from 'draft-js-export-markdown'
+import {stateToHTML} from 'draft-js-export-html'
 import {
   INLINE_STYLES,
   InlineStyleControls,
@@ -58,7 +60,11 @@ class RichEditorExample extends React.Component {
   }
 
   handleSubmitText() {
-    console.log("handleSubmitText", this.state.editorState.getCurrentContent())
+    console.log("handleSubmitText")
+    let markdown = stateToMarkdown(this.state.editorState.getCurrentContent())
+    let html = stateToHTML(this.state.editorState.getCurrentContent())
+    console.log(markdown)
+    console.log(html)
   }
 
   render() {

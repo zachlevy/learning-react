@@ -111,7 +111,6 @@ class SimpleQAndA extends Component {
   }
 
   render() {
-    const remainingCharacters = this.props.max_length - this.state.input.length
     let help
     if (this.state.showHelp) {
       help = (
@@ -171,9 +170,6 @@ class SimpleQAndA extends Component {
                 <div className="col-12 col-sm-6">
                   {feedback}
                 </div>
-                <div className="col-12 col-sm-6">
-                  <span className={"pull-right" + (remainingCharacters < 0 ? " color-red" : "")}>{remainingCharacters}</span>
-                </div>
               </div>
             </div>
             <br />
@@ -207,7 +203,6 @@ class SimpleQAndA extends Component {
 
 SimpleQAndA.propTypes = {
   question: PropTypes.string,
-  max_length: PropTypes.number,
   feedback: PropTypes.array,
   image_url: PropTypes.string,
   help: PropTypes.string,

@@ -142,7 +142,6 @@ export const defaultChallenge = (name) => {
       help: "",
       // question_details: "The details about the question are here and totally optional",
       // answer: "Answer.", // could also be an array, which any value is correct.
-      // max_length: 140,
       // answer_type: "regex", // leave null for everything else
       // dictionary: [ // leave dictionary out because i'm not sure how to handle this yet for admin ui
       //   {
@@ -169,7 +168,6 @@ export const defaultChallenge = (name) => {
       help: "",
       question_details: "The details about the question are here and totally optional",
       min_length: 10,
-      max_length: 140,
       // dictionary: [ // leave dictionary out because i'm not sure how to handle this yet for admin ui
       //   {
       //     term: "Triumvirate",
@@ -206,8 +204,7 @@ export const defaultChallenge = (name) => {
         "go to the bottom of the article",
         "take notes on the topic"
       ],
-      est_duration: 601,
-      max_length: 140
+      est_duration: 601
     },
     'suggestion_end': {
       courses: [1, 2] // id of the courses

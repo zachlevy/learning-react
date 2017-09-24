@@ -82,7 +82,6 @@ export const defaultChallenge = (name) => {
     'multiple_multiple_choice': {
       question: "I speak Hebrew ____ French but Ann ____",
       help: "",
-      // question_details: "The details about the question are here and totally optional",
       options: [
         [
           "and",
@@ -114,7 +113,6 @@ export const defaultChallenge = (name) => {
     'multiple_choice': {
       question: "I speak Hebrew and French but Ann",
       help: "",
-      // question_details: "The details about the question are here and totally optional",
       options: [
         "don't",
         "doesn't",
@@ -140,16 +138,6 @@ export const defaultChallenge = (name) => {
     'simple_q_and_a': {
       question: "Question?",
       help: "",
-      // question_details: "The details about the question are here and totally optional",
-      // answer: "Answer.", // could also be an array, which any value is correct.
-      // answer_type: "regex", // leave null for everything else
-      // dictionary: [ // leave dictionary out because i'm not sure how to handle this yet for admin ui
-      //   {
-      //     term: "Triumvirate",
-      //     definition: "A political alliance between Caesar, Pompey, and Crassus",
-      //     link: "https://en.wikipedia.org/wiki/First_Triumvirate"
-      //   }
-      // ],
       feedback: [
         {
           text: "Answer.",
@@ -166,15 +154,7 @@ export const defaultChallenge = (name) => {
     'open_ended_q': {
       question: "Question?",
       help: "",
-      // question_details: "The details about the question are here and totally optional",
       min_length: 10,
-      // dictionary: [ // leave dictionary out because i'm not sure how to handle this yet for admin ui
-      //   {
-      //     term: "Triumvirate",
-      //     definition: "A political alliance between Caesar, Pompey, and Crassus",
-      //     link: "https://en.wikipedia.org/wiki/First_Triumvirate"
-      //   }
-      // ],
       image_url: ""
     },
     'simple_text': {

@@ -19,7 +19,6 @@ class MultipleMultipleChoice extends Component {
   assert(event) {
     console.log("assert")
     const input = this.state.input.join("")
-    let answered
     const foundFeedback = this.props.feedback.find((feedback) => {
       return feedback.text === input
     })

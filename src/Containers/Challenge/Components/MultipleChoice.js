@@ -19,15 +19,14 @@ class MultipleChoice extends Component {
   assert(event) {
     console.log("assert")
     let answered
-    console.log("assert", this.props.correct_answer, this.state.input)
-    if (this.props.correct_answer === this.state.input) {
-      answered = true
-    }
-    if (answered) {
-      this.setState({feedback: "Correct!", submitButtonText: "Correct", showSubmitButton: false})
+    const foundFeedback = this.props.feedback.find((feedback) => {
+      return feedback.text === this.state.input
+    })
+    if (foundFeedback && foundFeedback.correct) {
+      this.setState({feedback: foundFeedback.prompt, submitButtonText: "Correct", showSubmitButton: false})
       this.props.handleShowNextButton()
     } else {
-      this.setState({feedback: "Incorrect answer!", submitButtonText: "Incorrect"})
+      this.setState({feedback: (foundFeedback && foundFeedback.prompt) || "Incorrect answer!", submitButtonText: "Incorrect"})
       this.props.handleInsertDependencies(this.state.input)
       this.props.handleShowNextButton()
     }
@@ -194,8 +193,9 @@ class MultipleChoice extends Component {
 
 MultipleChoice.propTypes = {
   question: PropTypes.string,
-  correct_answer: PropTypes.string,
   options: PropTypes.array,
+  feedback: PropTypes.array,
+  image_url: PropTypes.string,
 
   handleInsertDependencies: PropTypes.func,
   handleBackButton: PropTypes.func,

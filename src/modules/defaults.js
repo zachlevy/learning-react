@@ -118,7 +118,20 @@ export const defaultChallenge = (name) => {
         "speaks",
         "doesn't speaks"
       ],
-      correct_answer: "doesn't",
+      feedback: [
+        {
+          text: "doesn't",
+          prompt: "that is correct because...",
+          correct: true,
+          // dependencies: [
+          //
+          // ]
+        }, {
+          text: "don't",
+          prompt: "you chose poorly",
+          correct: false
+        }
+      ],
       image_url: ""
     },
     'simple_q_and_a': {

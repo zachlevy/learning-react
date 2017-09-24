@@ -31,15 +31,18 @@ class SimpleQAndA extends Component {
       }
     })
 
-    if (foundFeedback && foundFeedback.correct) {
-      this.setState({feedback: foundFeedback.prompt || "Correct!", submitButtonText: "Correct", showSubmitButton: false})
-      this.props.handleShowNextButton()
-    } else {
-      this.setState({feedback: foundFeedback && foundFeedback.prompt || "Incorrect answer, try again!"})
-      this.props.handleInsertDependencies()
+    if (foundFeedback) {
+      if (foundFeedback.correct) {
+        this.setState({feedback: foundFeedback.prompt || "Correct!", submitButtonText: "Correct", showSubmitButton: false})
+        this.props.handleShowNextButton()
+      } else {
+        this.setState({feedback: foundFeedback.prompt || "Incorrect answer, try again!"})
+      }
+      if (foundFeedback.insert) {
+        this.props.handleInsertChallenges(foundFeedback.insert)
+      }
     }
-
-    // check if answer is correct
+    
     this.submitChallengeResponse(this.state.input)
   }
 
@@ -195,7 +198,7 @@ SimpleQAndA.propTypes = {
   image_url: PropTypes.string,
   help: PropTypes.string,
 
-  handleInsertDependencies: PropTypes.func,
+  handleInsertChallenges: PropTypes.func,
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,

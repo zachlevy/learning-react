@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
 import { track } from '../../../modules/analytics'
+import { markdownToHTML } from '../../../modules/strings'
 
 class SimpleSignup extends Component {
   constructor() {
@@ -88,7 +89,7 @@ class SimpleSignup extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <div className="challenge-description">{this.props.challengeDescription}</div>
+          <div className="challenge-help">{markdownToHTML(this.props.help || "Signup if you'd like.")}</div>
         </li>
       )
     } else {
@@ -151,6 +152,7 @@ class SimpleSignup extends Component {
 SimpleSignup.propTypes = {
   callToActionText: PropTypes.string,
   buttonText: PropTypes.string,
+  help: PropTypes.string,
 
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,

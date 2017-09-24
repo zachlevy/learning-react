@@ -87,7 +87,7 @@ class WikipediaNotes extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <div className="challenge-description">{this.props.challengeDescription}</div>
+          <div className="challenge-help">{markdownToHTML(this.props.help || "Read the instructions then read the Wikipedia section(s)")}</div>
         </li>
       )
     } else {
@@ -172,6 +172,7 @@ WikipediaNotes.propTypes = {
   est_duration: PropTypes.number,
   max_length: PropTypes.number,
   instructions: PropTypes.array,
+  help: PropTypes.string,
 
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,

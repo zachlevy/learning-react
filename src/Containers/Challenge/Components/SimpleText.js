@@ -42,7 +42,7 @@ class SimpleText extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <div className="challenge-description">{markdownToHTML(this.props.challengeDescription)}</div>
+          <div className="challenge-help">{markdownToHTML(this.props.help || "Read the text.")}</div>
         </li>
       )
     } else {
@@ -101,6 +101,7 @@ class SimpleText extends Component {
 SimpleText.propTypes = {
   text: PropTypes.string,
   est_duration: PropTypes.number,
+  help: PropTypes.string,
 
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,

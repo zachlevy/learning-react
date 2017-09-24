@@ -103,7 +103,7 @@ class Matching extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <div className="challenge-description">{markdownToHTML(this.props.challengeDescription)}</div>
+          <div className="challenge-help">{markdownToHTML(this.props.help || "Select the matching option for each.")}</div>
         </li>
       )
     } else {
@@ -215,6 +215,7 @@ Matching.propTypes = {
   options: PropTypes.array,
   feedback: PropTypes.array,
   image_url: PropTypes.string,
+  help: PropTypes.string,
 
   handleInsertDependencies: PropTypes.func,
   handleBackButton: PropTypes.func,

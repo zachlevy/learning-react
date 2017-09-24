@@ -89,7 +89,7 @@ class OpenEndedQ extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <div className="challenge-description">{markdownToHTML(this.props.challengeDescription)}</div>
+          <div className="challenge-help">{markdownToHTML(this.props.help || "Answer the open ended question.")}</div>
         </li>
       )
     } else {
@@ -177,6 +177,7 @@ OpenEndedQ.propTypes = {
   max_length: PropTypes.number,
   min_length: PropTypes.number,
   textareaRows: PropTypes.number,
+  help: PropTypes.string,
 
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,

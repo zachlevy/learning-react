@@ -90,8 +90,8 @@ class Course extends Component {
   }
 
   // inserts challenges into the flow
-  handleInsertChallenge(challenges) {
-    console.log("handleInsertChallenge", challenges)
+  handleInsertChallenges(challenges) {
+    console.log("handleInsertChallenges", challenges)
     // find the current index in flow
     const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
     // insert the dependencies into the course flow
@@ -117,7 +117,7 @@ class Course extends Component {
                   return <Challenge
                     {...props}
                     handleInsertDependencies={this.handleInsertDependencies.bind(this)}
-                    handleInsertChallenge={this.handleInsertChallenge.bind(this)}
+                    handleInsertChallenges={this.handleInsertChallenges.bind(this)}
                     handleBackButton={this.handleBackButton.bind(this)}
                     handleSkipClick={this.handleSkipClick.bind(this)}
                     handleNextClick={this.handleNextClick.bind(this)}

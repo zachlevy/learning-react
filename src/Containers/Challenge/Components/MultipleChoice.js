@@ -21,18 +21,24 @@ class MultipleChoice extends Component {
     const foundFeedback = this.props.feedback.find((feedback) => {
       return feedback.text === this.state.input
     })
-    if (foundFeedback && foundFeedback.correct) {
-      this.setState({feedback: foundFeedback.prompt, submitButtonText: "Correct", showSubmitButton: false})
-      this.props.handleShowNextButton()
+    if (foundFeedback) {
+      if (foundFeedback.correct) {
+        this.setState({submitButtonText: "Correct", showSubmitButton: false})
+        this.props.handleShowNextButton()
+      }
+      if (foundFeedback.prompt) {
+        this.setState({feedback: foundFeedback.prompt})
+      }
+      if (foundFeedback.insert) {
+        this.props.handleInsertChallenges(foundFeedback.insert)
+      }
     } else {
-      this.setState({feedback: (foundFeedback && foundFeedback.prompt) || "Incorrect answer!", submitButtonText: "Incorrect"})
-      this.props.handleInsertDependencies(this.state.input)
-      this.props.handleShowNextButton()
+      // no feedback, assume it's wrong
+      this.setState({feedback: "Incorrect answer!"})
     }
 
     // check if answer is correct
     this.submitChallengeResponse(this.state.input)
-    this.setState({showSubmitButton: false})
   }
 
   // submit to api for analysis
@@ -192,7 +198,7 @@ MultipleChoice.propTypes = {
   image_url: PropTypes.string,
   help: PropTypes.string,
 
-  handleInsertDependencies: PropTypes.func,
+  handleInsertChallenges: PropTypes.func,
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,

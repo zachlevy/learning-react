@@ -215,6 +215,7 @@ Matching.propTypes = {
   options: PropTypes.array,
   feedback: PropTypes.array,
   image_url: PropTypes.string,
+  help: PropTypes.string,
 
   handleInsertDependencies: PropTypes.func,
   handleBackButton: PropTypes.func,

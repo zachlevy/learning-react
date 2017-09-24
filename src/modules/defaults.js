@@ -28,6 +28,7 @@ export const defaultChallenge = (name) => {
   const templates = {
     'matching': {
       question: "What are the capital cities?",
+      help: "",
       matchWith: [
         "UK",
         "France",
@@ -80,6 +81,7 @@ export const defaultChallenge = (name) => {
     },
     'multiple_multiple_choice': {
       question: "I speak Hebrew ____ French but Ann ____",
+      help: "",
       question_details: "The details about the question are here and totally optional",
       options: [
         [
@@ -111,6 +113,7 @@ export const defaultChallenge = (name) => {
     },
     'multiple_choice': {
       question: "I speak Hebrew and French but Ann",
+      help: "",
       question_details: "The details about the question are here and totally optional",
       options: [
         "don't",
@@ -136,6 +139,7 @@ export const defaultChallenge = (name) => {
     },
     'simple_q_and_a': {
       question: "Question?",
+      help: "",
       // question_details: "The details about the question are here and totally optional",
       // answer: "Answer.", // could also be an array, which any value is correct.
       // max_length: 140,
@@ -162,6 +166,7 @@ export const defaultChallenge = (name) => {
     },
     'open_ended_q': {
       question: "Question?",
+      help: "",
       question_details: "The details about the question are here and totally optional",
       min_length: 10,
       max_length: 140,
@@ -176,11 +181,13 @@ export const defaultChallenge = (name) => {
     },
     'simple_text': {
       text: "some awesome text to read\n\n\nsee?\n\n- a bullet\n- another bullet",
+      help: "",
       est_duration: 100,
       image_url: ""
     },
     'youtube_video': {
       youtube_id: "7Qtr_vA3Prw",
+      help: "",
       est_duration: 748,
       start_seconds: 1,
       end_seconds: 359,
@@ -188,6 +195,7 @@ export const defaultChallenge = (name) => {
     },
     'wikipedia_notes': {
       embed_url: "/wiki/Battle_of_Stamford_Bridge",
+      help: "",
       highlights: [
         {
           title: "Death", // this the title of a section
@@ -202,7 +210,8 @@ export const defaultChallenge = (name) => {
       max_length: 140
     },
     'suggestion_end': {
-      courses: [1, 2] // id of the courses
+      courses: [1, 2], // id of the courses
+      help: ""
     },
     'external_suggestion_end' : {
       external_contents: [
@@ -215,12 +224,14 @@ export const defaultChallenge = (name) => {
           icon: "youtube-play",
           text: "His Year: Cato (62 B.C.E.)"
         }
-      ]
+      ],
+      help: ""
     },
     'simple_start': {},
     'simple_signup': {
       callToActionText: "What's your email?",
-      buttonText: "Click Here"
+      buttonText: "Click Here",
+      help: ""
     }
   }
   const body = templates[name] || {}

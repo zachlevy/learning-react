@@ -151,6 +151,7 @@ class SimpleSignup extends Component {
 SimpleSignup.propTypes = {
   callToActionText: PropTypes.string,
   buttonText: PropTypes.string,
+  help: PropTypes.string,
 
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,

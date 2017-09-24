@@ -242,6 +242,7 @@ YoutubeVideo.propTypes = {
   end_seconds: PropTypes.number,
   load_captions: PropTypes.bool,
   captions: PropTypes.array,
+  help: PropTypes.string,
 
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,

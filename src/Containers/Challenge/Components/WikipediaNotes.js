@@ -172,6 +172,7 @@ WikipediaNotes.propTypes = {
   est_duration: PropTypes.number,
   max_length: PropTypes.number,
   instructions: PropTypes.array,
+  help: PropTypes.string,
 
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,

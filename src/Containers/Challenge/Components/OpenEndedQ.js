@@ -177,6 +177,7 @@ OpenEndedQ.propTypes = {
   max_length: PropTypes.number,
   min_length: PropTypes.number,
   textareaRows: PropTypes.number,
+  help: PropTypes.string,
 
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,

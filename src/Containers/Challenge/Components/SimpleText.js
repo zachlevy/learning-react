@@ -101,6 +101,7 @@ class SimpleText extends Component {
 SimpleText.propTypes = {
   text: PropTypes.string,
   est_duration: PropTypes.number,
+  help: PropTypes.string,
 
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,

@@ -113,6 +113,9 @@ class ExternalSuggestionEnd extends Component {
 }
 
 ExternalSuggestionEnd.propTypes = {
+  external_contents: PropTypes.array,
+  help: PropTypes.string,
+
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,

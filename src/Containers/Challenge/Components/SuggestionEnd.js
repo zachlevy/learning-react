@@ -64,6 +64,8 @@ class SuggestionEnd extends Component {
 }
 
 SuggestionEnd.propTypes = {
+  help: PropTypes.string,
+  courses: PropTypes.array,
 
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,

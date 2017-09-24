@@ -131,17 +131,12 @@ class Matching extends Component {
         </div>
       )
     }
-    let questionDetails
-    if (this.props.question_details) {
-      questionDetails = <p className={"matching-question_details"}>{this.props.question_details}</p>
-    }
     return (
       <div className="container">
         {image}
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2 text-center">
             <div className={"matching-question" + (this.props.image_url ? " no-margin" : "")}>{markdownToHTML(this.props.question)}</div>
-            {questionDetails}
             <br />
             <div className="row">
               <div className="col-12">

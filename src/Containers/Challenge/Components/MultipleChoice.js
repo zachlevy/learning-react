@@ -130,17 +130,12 @@ class MultipleChoice extends Component {
         </div>
       )
     }
-    let questionDetails
-    if (this.props.question_details) {
-      questionDetails = <p className={"multiple_choice-question_details"}>{this.props.question_details}</p>
-    }
     return (
       <div className="container">
         {image}
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2 text-center">
             <div className={"multiple_choice-question" + (this.props.image_url ? " no-margin" : "")}>{markdownToHTML(this.props.question)}</div>
-            {questionDetails}
             <br />
             <div className="form-group">
               <div className="row">

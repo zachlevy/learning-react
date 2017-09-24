@@ -116,7 +116,7 @@ class SimpleQAndA extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <div className="challenge-description">{markdownToHTML(this.props.challengeDescription)}</div>
+          <div className="challenge-help">{markdownToHTML(this.props.help || "Answer the question with some keywords.")}</div>
         </li>
       )
     } else {

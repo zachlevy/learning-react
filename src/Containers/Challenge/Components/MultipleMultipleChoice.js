@@ -105,7 +105,7 @@ class MultipleMultipleChoice extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <div className="challenge-description">{markdownToHTML(this.props.challengeDescription)}</div>
+          <div className="challenge-help">{markdownToHTML(this.props.help || `Select ${this.props.options.length} options and check the answer.`)}</div>
         </li>
       )
     } else {

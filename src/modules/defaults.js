@@ -210,8 +210,7 @@ export const defaultChallenge = (name) => {
       max_length: 140
     },
     'suggestion_end': {
-      courses: [1, 2], // id of the courses
-      help: ""
+      courses: [1, 2] // id of the courses
     },
     'external_suggestion_end' : {
       external_contents: [

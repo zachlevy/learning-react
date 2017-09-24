@@ -50,7 +50,7 @@ class ExternalSuggestionEnd extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <div className="challenge-description">{this.props.challengeDescription}</div>
+          <div className="challenge-help">{this.props.help || "Check out these relevant resources if you'd like."}</div>
         </li>
       )
     } else {

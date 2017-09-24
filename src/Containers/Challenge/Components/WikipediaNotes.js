@@ -87,7 +87,7 @@ class WikipediaNotes extends Component {
     if (this.state.showHelp) {
       help = (
         <li className="list-inline-item">
-          <div className="challenge-description">{this.props.challengeDescription}</div>
+          <div className="challenge-help">{markdownToHTML(this.props.help || "Read the instructions then read the Wikipedia section(s)")}</div>
         </li>
       )
     } else {

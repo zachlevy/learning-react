@@ -84,7 +84,6 @@ class OpenEndedQ extends Component {
   }
 
   render() {
-    const remainingCharacters = this.props.max_length - this.state.input.length
     let help
     if (this.state.showHelp) {
       help = (
@@ -141,9 +140,6 @@ class OpenEndedQ extends Component {
                 <div className="col-12 col-sm-6">
                   {feedback}
                 </div>
-                <div className="col-12 col-sm-6">
-                  <span className={"pull-right" + (remainingCharacters < 0 ? " color-red" : "")}>{remainingCharacters}</span>
-                </div>
               </div>
             </div>
           </div>
@@ -174,7 +170,6 @@ class OpenEndedQ extends Component {
 
 OpenEndedQ.propTypes = {
   question: PropTypes.string,
-  max_length: PropTypes.number,
   min_length: PropTypes.number,
   textareaRows: PropTypes.number,
   help: PropTypes.string,

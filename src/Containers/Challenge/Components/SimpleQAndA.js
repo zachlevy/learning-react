@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import FontAwesome from 'react-fontawesome'
-import Dictionary from '../../Shared/Dictionary'
 import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
 import { setFeedbackModal, setFeedbackContext } from '../../../modules/redux/feedback'
@@ -137,12 +136,6 @@ class SimpleQAndA extends Component {
         </div>
       )
     }
-    let question = this.props.question
-    this.props.dictionary && this.props.dictionary.forEach((dictTerm, index) => {
-      question = reactStringReplace(question, dictTerm.term, (match, i) => {
-        return <Dictionary key={index} index={"dictionary-" + index} term={dictTerm.term} definition={dictTerm.definition} link={dictTerm.link} />
-      })
-    })
     let image
     if (this.props.image_url) {
       image = (
@@ -158,7 +151,7 @@ class SimpleQAndA extends Component {
         {image}
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2 text-center">
-            <div className={"simple_q_and_a-question" + (this.props.image_url ? " no-margin" : "")}>{markdownToHTML(question)}</div>
+            <div className={"simple_q_and_a-question" + (this.props.image_url ? " no-margin" : "")}>{markdownToHTML(this.props.question)}</div>
             <div className="form-group">
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} />
               <div className="row">

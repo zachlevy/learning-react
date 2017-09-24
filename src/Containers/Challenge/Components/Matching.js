@@ -25,7 +25,14 @@ class Matching extends Component {
       const foundFeedback = this.props.feedback.find((feedback) => {
         return answer === feedback.text
       })
-      newFeedbackArray[inputIndex] = foundFeedback || {"text": answer, prompt: "Incorrect!", correct: false}
+      if (foundFeedback) {
+        newFeedbackArray[inputIndex] = foundFeedback
+        if (foundFeedback.insert) {
+          this.props.handleInsertChallenges(foundFeedback.insert)
+        }
+      } else {
+        newFeedbackArray[inputIndex] = {"text": answer, prompt: "Incorrect!", correct: false}
+      }
     })
 
     this.submitChallengeResponse(this.state.input)
@@ -212,7 +219,7 @@ Matching.propTypes = {
   image_url: PropTypes.string,
   help: PropTypes.string,
 
-  handleInsertDependencies: PropTypes.func,
+  handleInsertChallenges: PropTypes.func,
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,
   handleSkipClick: PropTypes.func,

@@ -67,13 +67,14 @@ export const markdownToHTML = (input) => {
 export const katexToHTML = (string) => {
   string = reactStringReplace(string, /<t>(.*)<\/t>/g, (match, i) => {
     try {
-      return katex.renderToString(match.toString())
+      return katex.renderToString(match)
     }
     catch (e) {
       return match
     }
   })
-  return string.toString()
+  string = string.join("")
+  return string
 }
 
 // get the definition of a word from api

@@ -118,15 +118,28 @@ export const defaultChallenge = (name) => {
         "speaks",
         "doesn't speaks"
       ],
-      correct_answer: "doesn't",
+      feedback: [
+        {
+          text: "doesn't",
+          prompt: "that is correct because...",
+          correct: true,
+          // dependencies: [
+          //
+          // ]
+        }, {
+          text: "don't",
+          prompt: "you chose poorly",
+          correct: false
+        }
+      ],
       image_url: ""
     },
     'simple_q_and_a': {
       question: "Question?",
-      question_details: "The details about the question are here and totally optional",
-      answer: "Answer.", // could also be an array, which any value is correct.
-      max_length: 140,
-      answer_type: "regex", // leave null for everything else
+      // question_details: "The details about the question are here and totally optional",
+      // answer: "Answer.", // could also be an array, which any value is correct.
+      // max_length: 140,
+      // answer_type: "regex", // leave null for everything else
       // dictionary: [ // leave dictionary out because i'm not sure how to handle this yet for admin ui
       //   {
       //     term: "Triumvirate",
@@ -134,6 +147,17 @@ export const defaultChallenge = (name) => {
       //     link: "https://en.wikipedia.org/wiki/First_Triumvirate"
       //   }
       // ],
+      feedback: [
+        {
+          text: "Answer.",
+          prompt: "that is correct because...",
+          correct: true,
+          answer_type: "regex"
+          // dependencies: [
+          //
+          // ]
+        }
+      ],
       image_url: ""
     },
     'open_ended_q': {

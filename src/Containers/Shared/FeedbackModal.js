@@ -63,8 +63,8 @@ class FeedbackModal extends Component {
     }
     return (
       <div>
-        <Modal isOpen={this.props.feedback.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Disagree?</ModalHeader>
+        <Modal isOpen={this.props.feedback.modal} toggle={this.toggle.bind(this)} className={this.props.className}>
+          <ModalHeader toggle={this.toggle.bind(this)}>Disagree?</ModalHeader>
           <ModalBody>
             <p>We love feedback. Our goal is to make Vora the smartest way to learn. Any suggestions for how to do this better are very welcome.</p>
             {alert}

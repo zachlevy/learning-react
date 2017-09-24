@@ -23,31 +23,20 @@ class SimpleQAndA extends Component {
   }
   assert(event) {
     console.log("assert")
-    let answered
-    if (this.props.answer_type === "regex" && Array.isArray(this.props.answer)) {
-      // regex match for array
-      this.props.answer.forEach((a) => {
-        if (!!this.state.input.toLowerCase().match(a.toLowerCase())) {
-          answered = true
-        }
-      })
-    } else if (this.props.answer_type === "regex") {
-      // regex match
-      answered = !!this.state.input.toLowerCase().match(this.props.answer.toLowerCase())
-    } else if (Array.isArray(this.props.answer)) {
-      // array exact
-      const answersLowercase = this.props.answer.map((a) => {return a.toLowerCase()})
+    console.log(this.props)
+    const foundFeedback = this.props.feedback.find((feedback) => {
+      if (feedback.answer_type === "regex") {
+        return !!this.state.input.toLowerCase().match(feedback.text.toLowerCase())
+      } else {
+        return this.state.input.toLowerCase() === feedback.text.toLowerCase()
+      }
+    })
 
-      answered = answersLowercase.includes(this.state.input.toLowerCase())
-    } else {
-      // exact match
-      answered = this.state.input.toLowerCase() === this.props.answer.toLowerCase()
-    }
-    if (answered) {
-      this.setState({feedback: "Correct!", submitButtonText: "Correct", showSubmitButton: false})
+    if (foundFeedback && foundFeedback.correct) {
+      this.setState({feedback: foundFeedback.prompt || "Correct!", submitButtonText: "Correct", showSubmitButton: false})
       this.props.handleShowNextButton()
     } else {
-      this.setState({feedback: "Incorrect answer, try again!"})
+      this.setState({feedback: foundFeedback && foundFeedback.prompt || "Incorrect answer, try again!"})
       this.props.handleInsertDependencies()
     }
 
@@ -218,8 +207,9 @@ class SimpleQAndA extends Component {
 
 SimpleQAndA.propTypes = {
   question: PropTypes.string,
-  answer: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   max_length: PropTypes.number,
+  feedback: PropTypes.array,
+  image_url: PropTypes.string,
 
   handleInsertDependencies: PropTypes.func,
   handleBackButton: PropTypes.func,
@@ -232,7 +222,7 @@ SimpleQAndA.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  feedback: state.feedback
+  
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

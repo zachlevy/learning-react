@@ -63,9 +63,9 @@ export const markdownToHTML = (input) => {
   return <div dangerouslySetInnerHTML={{__html: markdown.render(katexToHTML(input))}}></div>
 }
 
-// takes in a string with katex wrapped in <katex> tags, returns html in a string
+// takes in a string with katex wrapped in <t> tags, returns html in a string
 export const katexToHTML = (string) => {
-  string = reactStringReplace(string, /<katex>(.*)<\/katex>/g, (match, i) => {
+  string = reactStringReplace(string, /<t>(.*)<\/t>/g, (match, i) => {
     try {
       return katex.renderToString(match.toString())
     }

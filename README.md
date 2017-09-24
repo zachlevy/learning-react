@@ -76,6 +76,17 @@ There is currently no automated testing.
 
 ## User Experience / Design / UI
 
+### Math Equations
+TeX is used for displaying math equations. Wrap your TeX in `<t>` tags. Use the [TeX cheat sheet](https://www.math.brown.edu/~jhs/ReferenceCards/TeXRefCard.v1.5.pdf) and [KaTeX ](https://github.com/Khan/KaTeX/wiki/Function-Support-in-KaTeX) for reference.
+
+#### TeX Example
+`<t>\sqrt{(1+2)}</t>`
+
+KaTeX is used to render the TeX.
+
+### Markdown
+Markdown is used for display rich text. It is available in many fields. Use the [GitHub Markdown](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf) for reference.
+
 ### Palette
 The site has no strict palette. It uses many subtle patterns on gradient backgrounds. [uigradients.com](uigradients.com) is a good source for new gradient backgrounds. Patterns are used in addition to gradients.
 

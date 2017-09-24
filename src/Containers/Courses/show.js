@@ -68,7 +68,7 @@ class Course extends Component {
   // inserts challenges into the flow if the user answers wrong
   // takes an input (from user) to match against only_inputs optional whitelist array. see the learning-api docs for more information on data formats
   handleInsertDependencies(input) {
-    console.log("handleInsertChallenge", input)
+    console.log("handleInsertDependencies", input)
     // find the current index in flow
     const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
     // check for only_inputs
@@ -89,6 +89,15 @@ class Course extends Component {
     this.props.insertCourseFlowChallenges(currentChallengeIndex + 1, insertDependencies)
   }
 
+  // inserts challenges into the flow
+  handleInsertChallenges(challenges) {
+    console.log("handleInsertChallenges", challenges)
+    // find the current index in flow
+    const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
+    // insert the dependencies into the course flow
+    this.props.insertCourseFlowChallenges(currentChallengeIndex + 1, challenges)
+  }
+
   render() {
     // used to calculate the progress bar
     let challengeWidth
@@ -98,13 +107,23 @@ class Course extends Component {
     const challengeIndex = this.props.course.flow && this.props.course.flow.findIndex((challenge) => {return this.props.challenge.id === challenge.id})
     const reversedChallengeIndex = this.props.course.flow && this.props.course.flow.length - (challengeIndex + 1)
     const progressWidth = challengeIndex * challengeWidth + "%"
-    
+
     return (
       <div id="course-show" className="course-show bg-gradient" style={gradientBackground(this.props.course.ui && this.props.course.ui.primaryColor, this.props.course.ui && this.props.course.ui.secondaryColor)}>
         <div className={"full-height bg-subtle" + (this.props.course.ui && this.props.course.ui.subtle ? " bg-subtle-" + this.props.course.ui.subtle : "bg-subtle-diamond")}>
           <div className="container full-height">
             <Switch>
-              <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {return <Challenge {...props} handleInsertDependencies={this.handleInsertDependencies.bind(this)} handleBackButton={this.handleBackButton.bind(this)} handleSkipClick={this.handleSkipClick.bind(this)} handleNextClick={this.handleNextClick.bind(this)} />}} />
+              <Route path="/courses/:courseId/challenges/:challengeId" render={(props) => {
+                  return <Challenge
+                    {...props}
+                    handleInsertDependencies={this.handleInsertDependencies.bind(this)}
+                    handleInsertChallenges={this.handleInsertChallenges.bind(this)}
+                    handleBackButton={this.handleBackButton.bind(this)}
+                    handleSkipClick={this.handleSkipClick.bind(this)}
+                    handleNextClick={this.handleNextClick.bind(this)}
+                  />
+                }}
+              />
             </Switch>
           </div>
         </div>

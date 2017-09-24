@@ -48,8 +48,11 @@ export const defaultChallenge = (name) => {
           text: "UKLondon",
           prompt: "Correct!",
           correct: true,
-          // dependencies: [
-          //
+          // insert: [
+          //   {
+          //     id: 1,
+          //     type: "simple_q_and_a"
+          //   }
           // ]
         }, {
           text: "FranceParis",
@@ -100,8 +103,11 @@ export const defaultChallenge = (name) => {
           text: "anddoesn't",
           prompt: "that is correct because...",
           correct: true,
-          // dependencies: [
-          //
+          // insert: [
+          //   {
+          //     id: 1,
+          //     type: "simple_q_and_a"
+          //   }
           // ]
         }, {
           text: "anddon't",
@@ -124,8 +130,11 @@ export const defaultChallenge = (name) => {
           text: "doesn't",
           prompt: "that is correct because...",
           correct: true,
-          // dependencies: [
-          //
+          // insert: [
+          //   {
+          //     id: 1,
+          //     type: "simple_q_and_a"
+          //   }
           // ]
         }, {
           text: "don't",
@@ -143,9 +152,12 @@ export const defaultChallenge = (name) => {
           text: "Answer.",
           prompt: "that is correct because...",
           correct: true,
-          answer_type: "regex"
-          // dependencies: [
-          //
+          answer_type: "regex",
+          // insert: [
+          //   {
+          //     id: 1,
+          //     type: "simple_q_and_a"
+          //   }
           // ]
         }
       ],

@@ -86,19 +86,11 @@ class SimpleSignup extends Component {
 
   render() {
     let help
-    if (this.state.showHelp) {
-      help = (
-        <li className="list-inline-item">
-          <div className="challenge-help">{markdownToHTML(this.props.help || "Signup if you'd like.")}</div>
-        </li>
-      )
-    } else {
-      help = (
-        <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
-        </li>
-      )
-    }
+    help = (
+      <li className="list-inline-item">
+        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+      </li>
+    )
     let feedback
     if (this.state.feedback) {
       feedback = (
@@ -123,6 +115,11 @@ class SimpleSignup extends Component {
             </div>
             <br />
             <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.assert.bind(this)}>{this.props.buttonText}</button>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-lg-8 offset-lg-2">
+            {this.state.showHelp && (markdownToHTML(this.props.help) || "Signup if you'd like.")}
           </div>
         </div>
         <div className="row">

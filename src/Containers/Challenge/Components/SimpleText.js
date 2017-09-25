@@ -39,19 +39,11 @@ class SimpleText extends Component {
   }
   render() {
     let help
-    if (this.state.showHelp) {
-      help = (
-        <li className="list-inline-item">
-          <div className="challenge-help">{markdownToHTML(this.props.help || "Read the text.")}</div>
-        </li>
-      )
-    } else {
-      help = (
-        <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
-        </li>
-      )
-    }
+    help = (
+      <li className="list-inline-item">
+        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+      </li>
+    )
     let image
     if (this.props.image_url) {
       image = (
@@ -69,6 +61,11 @@ class SimpleText extends Component {
           <div className="col-12 col-lg-8 offset-lg-2">
             <br />
             <div>{markdownToHTML(this.props.text)}</div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-lg-8 offset-lg-2">
+            {this.state.showHelp && (markdownToHTML(this.props.help) || "Read the text.")}
           </div>
         </div>
         <div className="row">

@@ -148,7 +148,7 @@ class Matching extends Component {
       <div className="container">
         {image}
         <div className="row">
-          <div className="col-12 col-lg-8 offset-lg-2 text-center">
+          <div className="col-12 col-lg-8 offset-lg-2">
             <div className={"matching-question" + (this.props.image_url ? " no-margin" : "")}>{markdownToHTML(this.props.question)}</div>
             <br />
             <div className="row">

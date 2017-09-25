@@ -150,7 +150,7 @@ class MultipleMultipleChoice extends Component {
       <div className="container">
         {image}
         <div className="row">
-          <div className="col-12 col-lg-10 offset-lg-1 text-center">
+          <div className="col-12 col-lg-10 offset-lg-1">
             <div className={"multiple_choice-question" + (this.props.image_url ? " no-margin" : "")}>{markdownToHTML(this.props.question)}</div>
             <br />
             <div className="form-group">

@@ -62,6 +62,30 @@ export const buildFormFields = (formJson, options, manualReduxFormChange) => {
                 <Field className="form-control" name={key} component="input" type="number" normalize={(value) => Number(value)} />
               </div>
             )
+          } else if (typeof formJson[key] === "object" && formJson[key].length >= 0 && typeof formJson[key][0] === "object") {
+            return (
+              <div key={index}>
+                <label>{label}</label>
+                <Field
+                  format={(value, name) => {
+                    return JSON.stringify(value)
+                  }}
+                  normalize={(value, previousValue) => {
+                    try {
+                      return JSON.parse(value)
+                    }
+                    catch(e) {
+                      console.log("bad formatting")
+                    }
+                  }}
+                  className="form-control"
+                  name={key}
+                  component="textarea"
+                  type="text"
+                  placeholder="Copy and paste only with strict JSON formatting"
+                />
+              </div>
+            )
           } else if (typeof formJson[key] === "object" && formJson[key].length >= 0 && typeof formJson[key][0] === "string") {
             return (
               <div key={index}>

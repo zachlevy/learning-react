@@ -102,7 +102,7 @@ class SimpleSignup extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-12 col-lg-8 offset-lg-2 text-center">
+          <div className="col-12 col-lg-8 offset-lg-2">
             <h4 className="simple_signup-callToActionText">{this.props.callToActionText}</h4>
             <br />
             <div className="form-group">

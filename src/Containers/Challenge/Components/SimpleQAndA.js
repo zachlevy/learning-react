@@ -159,7 +159,7 @@ class SimpleQAndA extends Component {
       <div className="container">
         {image}
         <div className="row">
-          <div className="col-12 col-lg-8 offset-lg-2 text-center">
+          <div className="col-12 col-lg-8 offset-lg-2">
             <div className={"simple_q_and_a-question" + (this.props.image_url ? " no-margin" : "")}>{markdownToHTML(this.props.question)}</div>
             <div className="form-group">
               <input className="form-control border-bottom" onKeyUp={this.handleKeyUp.bind(this)} />

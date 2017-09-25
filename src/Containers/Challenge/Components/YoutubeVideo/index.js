@@ -125,19 +125,11 @@ class YoutubeVideo extends Component {
   render() {
     const content = this.props
     let help
-    if (this.state.showHelp) {
-      help = (
-        <li className="list-inline-item">
-          <div className="challenge-help">{markdownToHTML(this.props.help || "Watch the video.")}</div>
-        </li>
-      )
-    } else {
-      help = (
-        <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
-        </li>
-      )
-    }
+    help = (
+      <li className="list-inline-item">
+        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+      </li>
+    )
     let captions
     if (this.props.load_captions) {
       captions = (
@@ -206,10 +198,11 @@ class YoutubeVideo extends Component {
                 </li>
               </ul>
             </div>
-            <div className="float-md-right">
-              <br />
-              <div className="challenge-help">{markdownToHTML(this.props.help || "Watch the video.")}</div>
-            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-md-8 offset-md-2">
+            {this.state.showHelp && (markdownToHTML(this.props.help) || "Watch the video.")}
           </div>
         </div>
         <div className="col-12 col-md-8 offset-md-2">

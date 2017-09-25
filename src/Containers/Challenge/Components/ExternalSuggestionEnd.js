@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import FontAwesome from 'react-fontawesome'
 import { track } from '../../../modules/analytics'
+import { markdownToHTML } from '../../../modules/strings'
 
 class ExternalSuggestionEnd extends Component {
   constructor() {
@@ -47,19 +48,11 @@ class ExternalSuggestionEnd extends Component {
   }
   render() {
     let help
-    if (this.state.showHelp) {
-      help = (
-        <li className="list-inline-item">
-          <div className="challenge-help">{this.props.help || "Check out these relevant resources if you'd like."}</div>
-        </li>
-      )
-    } else {
-      help = (
-        <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
-        </li>
-      )
-    }
+    help = (
+      <li className="list-inline-item">
+        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+      </li>
+    )
     return (
       <div className="container">
         <div className="row">
@@ -87,6 +80,11 @@ class ExternalSuggestionEnd extends Component {
               )
             })
           }
+        </div>
+        <div className="row">
+          <div className="col-12">
+            {this.state.showHelp && (markdownToHTML(this.props.help) || "Check out these relevant resources if you'd like.")}
+          </div>
         </div>
         <div className="row">
           <div className="col-12 col-md-10">

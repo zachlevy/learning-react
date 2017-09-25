@@ -84,19 +84,11 @@ class WikipediaNotes extends Component {
   render() {
     const content = this.props
     let help
-    if (this.state.showHelp) {
-      help = (
-        <li className="list-inline-item">
-          <div className="challenge-help">{markdownToHTML(this.props.help || "Read the instructions then read the Wikipedia section(s)")}</div>
-        </li>
-      )
-    } else {
-      help = (
-        <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
-        </li>
-      )
-    }
+    help = (
+      <li className="list-inline-item">
+        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+      </li>
+    )
     let feedback
     if (this.state.feedback) {
       feedback = (
@@ -128,6 +120,11 @@ class WikipediaNotes extends Component {
                 </div>
                 <div className="col-12 col-sm-6">
                   <span className={"pull-right" + (remainingCharacters < 0 ? " color-red" : "")}>{remainingCharacters}</span>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-12">
+                  {this.state.showHelp && (markdownToHTML(this.props.help) || "Read the instructions then read the Wikipedia section(s)")}
                 </div>
               </div>
               <div className="row">

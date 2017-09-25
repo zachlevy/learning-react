@@ -90,19 +90,11 @@ class OpenEndedQ extends Component {
 
   render() {
     let help
-    if (this.state.showHelp) {
-      help = (
-        <li className="list-inline-item">
-          <div className="challenge-help">{markdownToHTML(this.props.help || "Answer the open ended question.")}</div>
-        </li>
-      )
-    } else {
-      help = (
-        <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
-        </li>
-      )
-    }
+    help = (
+      <li className="list-inline-item">
+        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+      </li>
+    )
     let feedback
     if (this.state.feedback) {
       feedback = (
@@ -149,6 +141,11 @@ class OpenEndedQ extends Component {
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2">
             {markdownToHTML(this.state.solution)}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-lg-8 offset-lg-2">
+            {this.state.showHelp && (markdownToHTML(this.props.help) || "Answer the open ended question.")}
           </div>
         </div>
         <div className="row">

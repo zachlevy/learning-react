@@ -120,19 +120,11 @@ class SimpleQAndA extends Component {
 
   render() {
     let help
-    if (this.state.showHelp) {
-      help = (
-        <li className="list-inline-item">
-          <div className="challenge-help">{markdownToHTML(this.props.help || "Answer the question with some keywords.")}</div>
-        </li>
-      )
-    } else {
-      help = (
-        <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
-        </li>
-      )
-    }
+    help = (
+      <li className="list-inline-item">
+        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+      </li>
+    )
     let disagreeButton // only display when answer is incorrect
     if (!this.props.showNextButton) {
       disagreeButton = <button className="btn btn-secondary btn-sm" onClick={this.handleDisagreeOnClick.bind(this)}>Disagree?</button>
@@ -185,6 +177,11 @@ class SimpleQAndA extends Component {
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2">
             {markdownToHTML(this.state.solution)}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-lg-8 offset-lg-2">
+            {this.state.showHelp && (markdownToHTML(this.props.help) || "Answer the question with some keywords.")}
           </div>
         </div>
         <div className="row">

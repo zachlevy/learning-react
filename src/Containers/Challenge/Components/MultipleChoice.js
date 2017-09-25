@@ -111,19 +111,11 @@ class MultipleChoice extends Component {
 
   render() {
     let help
-    if (this.state.showHelp) {
-      help = (
-        <li className="list-inline-item">
-          <div className="challenge-help">{markdownToHTML(this.props.help || "Select one option and check the answer.")}</div>
-        </li>
-      )
-    } else {
-      help = (
-        <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
-        </li>
-      )
-    }
+    help = (
+      <li className="list-inline-item">
+        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+      </li>
+    )
     let feedback
     if (this.state.feedback) {
       feedback = (
@@ -184,6 +176,11 @@ class MultipleChoice extends Component {
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2">
             {markdownToHTML(this.state.solution)}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-lg-8 offset-lg-2">
+            {this.state.showHelp && (markdownToHTML(this.props.help) || "Select one option and check the answer.")}
           </div>
         </div>
         <div className="row">

@@ -9,6 +9,7 @@ export const getIcon = (machineName) => {
     simple_start: "circle",
     simple_signup: "circle",
     multiple_choice: "windows",
+    multiple_multiple_choice: "windows",
     open_ended_q: "question-circle",
     matching: "bars"
   }[machineName] || "circle"

@@ -10,6 +10,7 @@ class OpenEndedQ extends Component {
     super()
     this.state = {
       input: "",
+      solution: "",
       showHelp: false,
       feedback: "",
       showSubmitButton: true
@@ -82,6 +83,11 @@ class OpenEndedQ extends Component {
     this.setState({showHelp: true})
   }
 
+  handleSolutionButton(e) {
+    console.log("handleSolutionButton")
+    this.setState({solution: this.props.solution})
+  }
+
   render() {
     let help
     if (this.state.showHelp) {
@@ -116,6 +122,14 @@ class OpenEndedQ extends Component {
         </div>
       )
     }
+    let solution
+    if (this.props.solution) {
+      solution = (
+        <li className="list-inline-item">
+          <button role="button" className="btn btn-link" onClick={this.handleSolutionButton.bind(this)}><span>solution</span></button>
+        </li>
+      )
+    }
     return (
       <div className="container">
         {image}
@@ -133,10 +147,16 @@ class OpenEndedQ extends Component {
           </div>
         </div>
         <div className="row">
+          <div className="col-12 col-lg-8 offset-lg-2">
+            {markdownToHTML(this.state.solution)}
+          </div>
+        </div>
+        <div className="row">
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
               <ul className="list-inline">
+                {solution}
                 {help}
                 <li className="list-inline-item">
                   <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
@@ -158,6 +178,7 @@ class OpenEndedQ extends Component {
 
 OpenEndedQ.propTypes = {
   question: PropTypes.string,
+  solution: PropTypes.string,
   min_length: PropTypes.number,
   textareaRows: PropTypes.number,
   help: PropTypes.string,

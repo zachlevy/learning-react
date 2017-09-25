@@ -10,6 +10,7 @@ class MultipleMultipleChoice extends Component {
     super(props)
     this.state = {
       input: new Array(props.options.length), // intialize array
+      solution: "",
       feedback: "",
       showHelp: false,
       showSubmitButton: true,
@@ -107,6 +108,11 @@ class MultipleMultipleChoice extends Component {
     this.setState({showHelp: true})
   }
 
+  handleSolutionButton(e) {
+    console.log("handleSolutionButton")
+    this.setState({solution: this.props.solution})
+  }
+
   render() {
     let help
     if (this.state.showHelp) {
@@ -138,6 +144,14 @@ class MultipleMultipleChoice extends Component {
             <img src={this.props.image_url} className="img-fluid simple_q_and_a-question-image_url" />
           </div>
         </div>
+      )
+    }
+    let solution
+    if (this.props.solution) {
+      solution = (
+        <li className="list-inline-item">
+          <button role="button" className="btn btn-link" onClick={this.handleSolutionButton.bind(this)}><span>solution</span></button>
+        </li>
       )
     }
     return (
@@ -182,10 +196,16 @@ class MultipleMultipleChoice extends Component {
           </div>
         </div>
         <div className="row">
+          <div className="col-12 col-lg-8 offset-lg-2">
+            {markdownToHTML(this.state.solution)}
+          </div>
+        </div>
+        <div className="row">
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
               <ul className="list-inline">
+                {solution}
                 {help}
                 <li className="list-inline-item">
                   <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
@@ -207,6 +227,7 @@ class MultipleMultipleChoice extends Component {
 
 MultipleMultipleChoice.propTypes = {
   question: PropTypes.string,
+  solution: PropTypes.string,
   options: PropTypes.array,
   feedback: PropTypes.array,
   image_url: PropTypes.string,

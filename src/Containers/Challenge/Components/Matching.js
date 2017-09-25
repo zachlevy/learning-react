@@ -10,6 +10,7 @@ class Matching extends Component {
     super(props)
     this.state = {
       input: new Array(props.matchWith.length), // intialize array
+      solution: "",
       feedback: new Array(props.matchWith.length), // intialize array
       showHelp: false,
       showSubmitButton: false,
@@ -105,6 +106,11 @@ class Matching extends Component {
     this.setState({showHelp: true})
   }
 
+  handleSolutionButton(e) {
+    console.log("handleSolutionButton")
+    this.setState({solution: this.props.solution})
+  }
+
   render() {
     let help
     if (this.state.showHelp) {
@@ -136,6 +142,14 @@ class Matching extends Component {
             <img src={this.props.image_url} className="img-fluid matching-question-image_url" />
           </div>
         </div>
+      )
+    }
+    let solution
+    if (this.props.solution) {
+      solution = (
+        <li className="list-inline-item">
+          <button role="button" className="btn btn-link" onClick={this.handleSolutionButton.bind(this)}><span>solution</span></button>
+        </li>
       )
     }
     return (
@@ -188,10 +202,16 @@ class Matching extends Component {
           </div>
         </div>
         <div className="row">
+          <div className="col-12 col-lg-8 offset-lg-2">
+            {markdownToHTML(this.state.solution)}
+          </div>
+        </div>
+        <div className="row">
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
               <ul className="list-inline">
+                {solution}
                 {help}
                 <li className="list-inline-item">
                   <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
@@ -213,6 +233,7 @@ class Matching extends Component {
 
 Matching.propTypes = {
   question: PropTypes.string,
+  solution: PropTypes.string,
   matchWith: PropTypes.array,
   options: PropTypes.array,
   feedback: PropTypes.array,

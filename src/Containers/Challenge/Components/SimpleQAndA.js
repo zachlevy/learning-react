@@ -14,6 +14,7 @@ class SimpleQAndA extends Component {
     super()
     this.state = {
       input: "",
+      solution: "",
       showHelp: false,
       feedback: "",
       submitButtonText: "Check Answer",
@@ -42,7 +43,7 @@ class SimpleQAndA extends Component {
         this.props.handleInsertChallenges(foundFeedback.insert)
       }
     }
-    
+
     this.submitChallengeResponse(this.state.input)
   }
 
@@ -112,6 +113,11 @@ class SimpleQAndA extends Component {
     this.props.setFeedbackContext(this.props)
   }
 
+  handleSolutionButton(e) {
+    console.log("handleSolutionButton")
+    this.setState({solution: this.props.solution})
+  }
+
   render() {
     let help
     if (this.state.showHelp) {
@@ -149,6 +155,14 @@ class SimpleQAndA extends Component {
         </div>
       )
     }
+    let solution
+    if (this.props.solution) {
+      solution = (
+        <li className="list-inline-item">
+          <button role="button" className="btn btn-link" onClick={this.handleSolutionButton.bind(this)}><span>solution</span></button>
+        </li>
+      )
+    }
     return (
       <div className="container">
         {image}
@@ -169,10 +183,16 @@ class SimpleQAndA extends Component {
           </div>
         </div>
         <div className="row">
+          <div className="col-12 col-lg-8 offset-lg-2">
+            {markdownToHTML(this.state.solution)}
+          </div>
+        </div>
+        <div className="row">
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
               <ul className="list-inline">
+                {solution}
                 {help}
                 <li className="list-inline-item">
                   <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
@@ -194,6 +214,7 @@ class SimpleQAndA extends Component {
 
 SimpleQAndA.propTypes = {
   question: PropTypes.string,
+  solution: PropTypes.string,
   feedback: PropTypes.array,
   image_url: PropTypes.string,
   help: PropTypes.string,

@@ -48,6 +48,10 @@ class YoutubeVideo extends Component {
 
   handlePlaybackChange(newRate) {
     console.log("newRate", newRate)
+    if (newRate === undefined) {
+      // set default
+      newRate = 1
+    }
     const playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 2]
     if (newRate < playbackRates[0]) {
       newRate = playbackRates[0]

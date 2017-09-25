@@ -28,6 +28,7 @@ export const defaultChallenge = (name) => {
   const templates = {
     'matching': {
       question: "What are the capital cities?",
+      solution: "",
       help: "",
       matchWith: [
         "UK",
@@ -84,6 +85,7 @@ export const defaultChallenge = (name) => {
     },
     'multiple_multiple_choice': {
       question: "I speak Hebrew ____ French but Ann ____",
+      solution: "",
       help: "",
       options: [
         [
@@ -118,6 +120,7 @@ export const defaultChallenge = (name) => {
     },
     'multiple_choice': {
       question: "I speak Hebrew and French but Ann",
+      solution: "",
       help: "",
       options: [
         "don't",
@@ -146,6 +149,7 @@ export const defaultChallenge = (name) => {
     },
     'simple_q_and_a': {
       question: "Question?",
+      solution: "",
       help: "",
       feedback: [
         {
@@ -165,6 +169,7 @@ export const defaultChallenge = (name) => {
     },
     'open_ended_q': {
       question: "Question?",
+      solution: "",
       help: "",
       min_length: 10,
       image_url: ""

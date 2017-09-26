@@ -10,18 +10,35 @@ import { getIcon } from '../../modules/icons'
 import { gradientBackground } from '../../modules/styles'
 import { secondsToMinutes } from '../../modules/time'
 import { track } from '../../modules/analytics'
+import Attempts from './Attempts'
+import { apiRequest } from '../../modules/data'
 
 // wrapper for a course
 // contains common methods to move the course form challenge to chalenge
 class Course extends Component {
   componentDidMount() {
-    fetch(`${process.env.REACT_APP_API_URL}/courses/${this.props.match.params.courseId}`).then((res) => {
-      return res.json()
-    }).then((response) => {
+    apiRequest(`/courses/${this.props.match.params.courseId}`, {}, (response) => {
       this.props.setCourse(response)
     })
     // scroll below navbar to give full screen effect
     document.getElementById("course-show").scrollIntoView()
+  }
+
+  // submit challeng response
+  // input is an object, jsonb in the database
+  // callback is a function that gets passed response and status as the params
+  submitChallengeResponse(input, callback) {
+    apiRequest("/challenge_responses", {
+      method: "post",
+      body: JSON.stringify({
+        challenge_response: {
+          input: input,
+          challenge_id: this.props.challenge.id,
+          course_id: this.props.course.id,
+          // authenticate to pass user_id
+        }
+      })
+    }, callback)
   }
 
   // next challenge
@@ -121,9 +138,11 @@ class Course extends Component {
                     handleBackButton={this.handleBackButton.bind(this)}
                     handleSkipClick={this.handleSkipClick.bind(this)}
                     handleNextClick={this.handleNextClick.bind(this)}
+                    submitChallengeResponse={this.submitChallengeResponse.bind(this)}
                   />
                 }}
               />
+              <Route path="/courses/:courseId/attempts" component={Attempts} />
             </Switch>
           </div>
         </div>
@@ -151,6 +170,7 @@ class Course extends Component {
 const mapStateToProps = state => ({
   course: state.course,
   challenge: state.challenge,
+  user: state.user
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

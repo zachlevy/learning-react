@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
 import { track } from '../../../modules/analytics'
 import { markdownToHTML } from '../../../modules/strings'
+import { apiRequest } from '../../../modules/data'
 
 class SimpleSignup extends Component {
   constructor() {
@@ -24,7 +25,7 @@ class SimpleSignup extends Component {
       this.setState({showHelp: true})
       return
     }
-    fetch(`${process.env.REACT_APP_API_URL}/feedbacks`, {
+    apiRequest("/feedbacks", {
       method: 'post',
       body: JSON.stringify({
         feedback: {
@@ -37,14 +38,10 @@ class SimpleSignup extends Component {
           },
           source: "simple_signup"
         }
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((res) => {
+      })
+    }, (response) => {
       this.props.handleShowNextButton()
       this.setState({feedback: "Success!"})
-      return res.json()
     })
   }
 
@@ -157,7 +154,8 @@ SimpleSignup.propTypes = {
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
   challengeId: PropTypes.number,
-  challengeDescription: PropTypes.string
+  challengeDescription: PropTypes.string,
+  submitChallengeResponse: PropTypes.func
 }
 
 export default SimpleSignup

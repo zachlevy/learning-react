@@ -3,6 +3,7 @@ import reactStringReplace from 'react-string-replace'
 import Logo from '../vora_logo_20170717.svg'
 import katex from 'katex'
 import MarkdownIt from 'markdown-it'
+import { apiRequest } from './data'
 const markdown = new MarkdownIt({
   html: true
 })
@@ -78,25 +79,20 @@ export const katexToHTML = (string) => {
 }
 
 // get the definition of a word from api
-export const define = (word) => {
+export const define = (word, callback) => {
 
   const escapedWord = encodeURI(word.toLowerCase())
 
   console.log(escapedWord)
 
-  return fetch(`${process.env.REACT_APP_API_URL}/definitions`, {
+  apiRequest("/definitions", {
     method: 'post',
     body: JSON.stringify({
       definition: {
         word: escapedWord
       }
-    }),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  }).then((res) => {
-    return res.json()
-  })
+    })
+  }, callback)
 }
 
 export const removePunctuation = (string) => {

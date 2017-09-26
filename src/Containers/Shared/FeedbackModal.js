@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { Form, FormGroup, Label, Input, Alert, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
 import { track } from '../../modules/analytics'
 import { setFeedback, clearFeedback, setFeedbackModal } from '../../modules/redux/feedback'
+import { apiRequest } from '../../modules/data'
 
 class FeedbackModal extends Component {
   constructor() {
@@ -27,7 +28,7 @@ class FeedbackModal extends Component {
       action: "Submit",
       data: this.state
     })
-    fetch(`${process.env.REACT_APP_API_URL}/feedbacks`, {
+    apiRequest("/feedbacks", {
       method: 'post',
       body: JSON.stringify({
         feedback: {
@@ -37,13 +38,8 @@ class FeedbackModal extends Component {
           },
           source: "feedback_form_modal"
         }
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((res) => {
-      return res.json()
-    }).then((response) => {
+      })
+    }, (response) => {
       console.log(response)
       this.setState({alert: "Thanks for your feedback"})
     })

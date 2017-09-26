@@ -5,13 +5,12 @@ import { connect } from 'react-redux'
 import { setCourses } from '../../modules/redux/courses'
 import { gradientBackground } from '../../modules/styles'
 import CourseList from './list'
+import { apiRequest } from '../../modules/data'
 
 // courses page
 class Courses extends Component {
   componentDidMount() {
-    fetch(`${process.env.REACT_APP_API_URL}/courses`).then((res) => {
-      return res.json()
-    }).then((response) => {
+    apiRequest(`/courses`, {}, (response) => {
       this.props.setCourses(response)
     })
   }

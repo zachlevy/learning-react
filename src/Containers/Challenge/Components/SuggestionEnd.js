@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { apiRequest } from '../../../modules/data'
 
 import CourseThumb from '../../Courses/CourseThumb'
 
@@ -14,12 +15,7 @@ class SuggestionEnd extends Component {
     }
   }
   componentDidMount() {
-    fetch(`${process.env.REACT_APP_API_URL}/courses?ids=${this.props.courses.join(",")}`, {
-      method: 'get'
-    }).then((res) => {
-      return res.json()
-    }).then((response) => {
-      console.log(response)
+    apiRequest(`${process.env.REACT_APP_API_URL}/courses?ids=${this.props.courses.join(",")}`, {}, (response) => {
       this.setState({courses: response})
     })
   }
@@ -72,7 +68,8 @@ SuggestionEnd.propTypes = {
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
   challengeId: PropTypes.number,
-  challengeDescription: PropTypes.string
+  challengeDescription: PropTypes.string,
+  submitChallengeResponse: PropTypes.func
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({

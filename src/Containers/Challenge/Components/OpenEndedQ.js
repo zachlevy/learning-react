@@ -4,6 +4,7 @@ import FontAwesome from 'react-fontawesome'
 import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
 import { markdownToHTML } from '../../../modules/strings'
+import { apiRequest } from '../../../modules/strings'
 
 class OpenEndedQ extends Component {
   constructor() {
@@ -24,31 +25,6 @@ class OpenEndedQ extends Component {
     }
   }
 
-  // submit to api for analysis
-  submitChallengeResponse(inputText) {
-    console.log("submitChallengeResponse", inputText)
-    fetch(`${process.env.REACT_APP_API_URL}/challenge_responses`, {
-      method: 'post',
-      body: JSON.stringify({
-        challenge_response: {
-          input: {
-            analysis: "none",
-            text: inputText
-          },
-          challenge_id: this.props.challengeId,
-          user_id: 1
-        }
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((res) => {
-      return res.json()
-    }).then((response) => {
-      console.log(response)
-    })
-  }
-
   handleKeyUp(e) {
     this.setState({input: e.target.value, feedback: ""})
     this.assert()
@@ -67,7 +43,10 @@ class OpenEndedQ extends Component {
     })
     if (this.props.showNextButton) {
       // submit answer
-      this.submitChallengeResponse(this.state.input)
+      this.props.submitChallengeResponse({
+        analysis: "none",
+        text: this.state.input
+      })
       this.props.handleNextClick()
     } else {
       this.handleShowHelp.bind(this)
@@ -186,7 +165,8 @@ OpenEndedQ.propTypes = {
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
   challengeId: PropTypes.number,
-  challengeDescription: PropTypes.string
+  challengeDescription: PropTypes.string,
+  submitChallengeResponse: PropTypes.func
 }
 
 export default OpenEndedQ

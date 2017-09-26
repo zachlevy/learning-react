@@ -38,8 +38,7 @@ export const apiRequest = (endpoint, options, callback) => {
     } else if (anonymousUserId) {
       defaultOptions.headers["AnonymousUser"] = anonymousUserId
     }
-    console.log("jwt", jwt, "anonymousUserId", anonymousUserId)
-    console.log("defaultOptions", defaultOptions)
+    // console.log("jwt", jwt, "anonymousUserId", anonymousUserId)
     // pseudo deep merge
     const mergedHeaders = Object.assign({}, defaultOptions.headers, options.headers)
     const mergedOptions = Object.assign({}, defaultOptions, options, {headers: mergedHeaders})
@@ -48,12 +47,12 @@ export const apiRequest = (endpoint, options, callback) => {
     fetch(`${process.env.REACT_APP_API_URL}${endpoint}`, mergedOptions).then((res) => {
       if(res.headers.get("content-type").includes("application/json")) {
         res.json().then((response) => {
-          console.log(mergedOptions.method, endpoint, res.status, response)
+          console.log(mergedOptions.method, endpoint, mergedOptions, !!jwt || !!anonymousUserId, res.status, response)
           typeof callback === 'function' && callback(response, res.status)
         })
       } else {
         res.text().then((response) => {
-          console.log(mergedOptions.method, endpoint, res.status, response)
+          console.log(mergedOptions.method, endpoint, mergedOptions, !!jwt || !!anonymousUserId, res.status, response)
           typeof callback === 'function' && callback(response, res.status)
         })
       }

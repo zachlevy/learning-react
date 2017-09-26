@@ -27,6 +27,7 @@ export const apiRequest = (endpoint, options, callback) => {
           type: SET_ANONYMOUS_USER,
           anonymousUserId: response.id
         })
+        console.log("created anonymous user", response.id)
         // try again with recursive
         apiRequest(endpoint, options, callback)
       })

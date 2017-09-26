@@ -5,39 +5,60 @@ import createHistory from 'history/createBrowserHistory'
 import rootReducer from './modules/redux'
 import {persistStore, autoRehydrate} from 'redux-persist'
 
+let exportableStore
+
 export const history = createHistory()
-
-const initialState = {}
-const enhancers = [
-  autoRehydrate()
-]
-const middleware = [
-  thunk,
-  routerMiddleware(history)
-]
-
-if (process.env.NODE_ENV === 'development') {
-  const devToolsExtension = window.devToolsExtension
-
-  if (typeof devToolsExtension === 'function') {
-    enhancers.push(devToolsExtension())
-  }
+export function getStore() {
+  return exportableStore
 }
 
-const composedEnhancers = compose(
-  applyMiddleware(...middleware),
-  ...enhancers
-)
+// https://github.com/rt2zz/redux-persist/issues/126
+// created this way to load redux persisted store before loading the rest the app
+export default function configureStore() {
+  const initialState = {}
+  const enhancers = [
+    autoRehydrate()
+  ]
+  const middleware = [
+    thunk,
+    routerMiddleware(history)
+  ]
 
-const store = createStore(
-  rootReducer,
-  initialState,
-  composedEnhancers
-)
+  if (process.env.NODE_ENV === 'development') {
+    const devToolsExtension = window.devToolsExtension
 
-// begin periodically persisting the store
-persistStore(store, {
-  whitelist: ["user"]
-})
+    if (typeof devToolsExtension === 'function') {
+      enhancers.push(devToolsExtension())
+    }
+  }
 
-export default store
+  const composedEnhancers = compose(
+    applyMiddleware(...middleware),
+    ...enhancers
+  )
+
+  return new Promise((resolve, reject) => {
+    try {
+      console.log("configureStore Promise try")
+      const store = createStore(
+        rootReducer,
+        initialState,
+        composedEnhancers
+      )
+
+      // begin periodically persisting the store
+      persistStore(
+        store, {
+          whitelist: ["user"]
+        },
+        () => {
+          exportableStore = store
+          resolve(store)
+        }
+      )
+    } catch (e) {
+      reject(e)
+    }
+  })
+
+}

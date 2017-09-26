@@ -1,4 +1,4 @@
-import store from '../store'
+import { getStore } from '../store'
 import { SET_ANONYMOUS_USER } from './redux/user'
 
 // converts rails api errors object to array strings
@@ -13,8 +13,8 @@ export const apiRequest = (endpoint, options, callback) => {
   }
 
   // get auth token
-  const jwt = store.getState().user.jwt
-  const anonymousUserId = store.getState().user.anonymous_user_id
+  const jwt = getStore().getState().user.jwt
+  const anonymousUserId = getStore().getState().user.anonymous_user_id
   if (!jwt && !anonymousUserId) {
     // nothing to authenticate with
     // create an anonymous user on the server
@@ -23,7 +23,7 @@ export const apiRequest = (endpoint, options, callback) => {
     }).then((res) => {
       res.json().then((response) => {
         // store in redux
-        store.dispatch({
+        getStore().dispatch({
           type: SET_ANONYMOUS_USER,
           anonymousUserId: response.id
         })

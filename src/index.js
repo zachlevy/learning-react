@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
-import store, { history } from './store'
+import configureStore, { history } from './store'
 import App from './Containers/App'
 import './index.css'
 import registerServiceWorker from './registerServiceWorker'
@@ -11,14 +11,34 @@ import './index.css'
 
 const target = document.getElementById('root')
 
-render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <div>
-        <App />
-      </div>
-    </ConnectedRouter>
-  </Provider>,
+class Bootloader extends Component {
+  state = {
+    store: null
+  }
+
+  async componentWillMount () {
+    console.log("Bootloader componentWillMount")
+    const store = await configureStore()
+    this.setState({ store })
+  }
+  render() {
+    if (this.state.store === null) {
+      return <p></p>
+    }
+    return (
+      <Provider store={this.state.store}>
+        <ConnectedRouter history={history}>
+          <div>
+            <App />
+          </div>
+        </ConnectedRouter>
+      </Provider>
+    )
+  }
+}
+
+render (
+  <Bootloader />,
   target
 )
 registerServiceWorker()

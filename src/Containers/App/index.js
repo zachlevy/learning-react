@@ -21,6 +21,7 @@ import NewUser from '../Users/New'
 import Login from '../Users/Login'
 import { clearUser } from '../../modules/redux/user'
 import User from '../Users/Show'
+import { apiRequest } from '../../modules/data'
 
 class App extends Component {
   constructor() {
@@ -81,6 +82,25 @@ class App extends Component {
         </NavItem>
       )
     }
+    let routes
+    // ensure there's an anonymous or logged in user
+    if (this.props.user.anonymous_user_id || this.props.user.id) {
+      routes = (
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/courses" component={Courses} />
+          <Route exact path="/feedback" component={Feedback} />
+          <Route path="/courses/:courseId" component={Course} />
+          <Route exact path="/users/new" component={NewUser} />
+          <Route path="/users/:userId" component={User} />
+          <Route exact path="/login" component={Login} />
+          <Route path="/admin" component={Admin} />
+        </Switch>
+      )
+    } else {
+      // this could be any api call, it ensures that there is a user or anonymous user from apiRequest
+      apiRequest("/users/me", {}, (response, status) => {})
+    }
     return (
       <div>
         <div className="bg-white navbar-wrapper">
@@ -108,16 +128,7 @@ class App extends Component {
           </div>
         </div>
 
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/courses" component={Courses} />
-          <Route exact path="/feedback" component={Feedback} />
-          <Route path="/courses/:courseId" component={Course} />
-          <Route exact path="/users/new" component={NewUser} />
-          <Route path="/users/:userId" component={User} />
-          <Route exact path="/login" component={Login} />
-          <Route path="/admin" component={Admin} />
-        </Switch>
+        {routes}
 
         <FeedbackModal />
       </div>

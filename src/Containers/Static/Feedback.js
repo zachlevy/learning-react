@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Form, FormGroup, Label, Input, Alert } from 'reactstrap'
 import { track } from '../../modules/analytics'
+import { apiRequest } from '../../modules/data'
 
 class Feedback extends Component {
   constructor() {
@@ -24,7 +25,7 @@ class Feedback extends Component {
       action: "Submit",
       data: this.state
     })
-    fetch(`${process.env.REACT_APP_API_URL}/feedbacks`, {
+    apiRequest("/feedbacks", {
       method: 'post',
       body: JSON.stringify({
         feedback: {
@@ -36,14 +37,8 @@ class Feedback extends Component {
           },
           source: "feedback_form"
         }
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((res) => {
-      return res.json()
-    }).then((response) => {
-      console.log(response)
+      })
+    }, (response) => {
       this.setState({alert: "Thanks for your feedback"})
     })
   }

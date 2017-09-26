@@ -4,6 +4,7 @@ import { secondsToMinutes } from '../../../modules/time'
 import FontAwesome from 'react-fontawesome'
 import { track } from '../../../modules/analytics'
 import { markdownToHTML } from '../../../modules/strings'
+import { apiRequest } from '../../../modules/data'
 
 class WikipediaNotes extends Component {
   constructor() {
@@ -29,26 +30,9 @@ class WikipediaNotes extends Component {
 
   // intercept next button click
   handleNextClick() {
-    // submit to api
-    fetch(`${process.env.REACT_APP_API_URL}/challenge_responses`, {
-      method: 'post',
-      body: JSON.stringify({
-        challenge_response: {
-          input: {
-            analysis: "none",
-            text: this.state.input
-          },
-          challenge_id: this.props.challengeId,
-          user_id: 1
-        }
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((res) => {
-      return res.json()
-    }).then((response) => {
-      console.log(response)
+    this.props.submitChallengeResponse({
+      analysis: "none",
+      text: this.state.input
     })
     this.props.handleNextClick()
   }
@@ -76,6 +60,10 @@ class WikipediaNotes extends Component {
     })
     if (this.props.showNextButton) {
       this.props.handleNextClick()
+      this.props.submitChallengeResponse({
+        analysis: "none",
+        text: this.state.input
+      })
     } else {
       this.setState({showHelp: true})
     }
@@ -177,7 +165,8 @@ WikipediaNotes.propTypes = {
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
   challengeId: PropTypes.number,
-  challengeDescription: PropTypes.string
+  challengeDescription: PropTypes.string,
+  submitChallengeResponse: PropTypes.func
 }
 
 export default WikipediaNotes

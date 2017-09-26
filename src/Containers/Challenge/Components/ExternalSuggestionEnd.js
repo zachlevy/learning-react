@@ -121,7 +121,8 @@ ExternalSuggestionEnd.propTypes = {
   handleShowNextButton: PropTypes.func,
   challengeId: PropTypes.number,
   challengeDescription: PropTypes.string,
-  external_contents: PropTypes.array
+  external_contents: PropTypes.array,
+  submitChallengeResponse: PropTypes.func
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators({

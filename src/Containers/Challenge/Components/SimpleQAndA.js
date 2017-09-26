@@ -42,32 +42,13 @@ class SimpleQAndA extends Component {
       if (foundFeedback.insert) {
         this.props.handleInsertChallenges(foundFeedback.insert)
       }
+    } else {
+      this.setState({feedback: "Incorrect answer, try again!"})
     }
 
-    this.submitChallengeResponse(this.state.input)
-  }
-
-  // submit to api for analysis
-  submitChallengeResponse(inputText) {
-    fetch(`${process.env.REACT_APP_API_URL}/challenge_responses`, {
-      method: 'post',
-      body: JSON.stringify({
-        challenge_response: {
-          input: {
-            analysis: "none",
-            text: inputText
-          },
-          challenge_id: this.props.challengeId,
-          user_id: 1
-        }
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((res) => {
-      return res.json()
-    }).then((response) => {
-      console.log(response)
+    this.props.submitChallengeResponse({
+      analysis: "none",
+      text: this.state.input
     })
   }
 
@@ -223,7 +204,8 @@ SimpleQAndA.propTypes = {
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
   challengeId: PropTypes.number,
-  challengeDescription: PropTypes.string
+  challengeDescription: PropTypes.string,
+  submitChallengeResponse: PropTypes.func
 }
 
 const mapStateToProps = state => ({

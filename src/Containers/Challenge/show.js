@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { setChallenge } from '../../modules/redux/challenge'
 import getChallengeComponent from './Components'
 import { updateCourseFlowChallenge } from '../../modules/redux/course'
+import { apiRequest } from '../../modules/data'
 
 class Challenge extends Component {
   constructor() {
@@ -20,10 +21,7 @@ class Challenge extends Component {
   // hits the api and updates redux with challenge data
   // the body of the challenge data changes based on the challenge type
   getChallengeData(challengeId) {
-    fetch(`${process.env.REACT_APP_API_URL}/challenges/${challengeId}?include=challenge_type`).then((res) => {
-      return res.json()
-    }).then((response) => {
-      console.log(response)
+    apiRequest(`/challenges/${challengeId}?include=challenge_type`, {}, (response) => {
       this.props.setChallenge(response)
     })
   }
@@ -64,7 +62,8 @@ class Challenge extends Component {
                     showNextButton: this.state.showNextButton,
                     handleShowNextButton: this.handleShowNextButton.bind(this),
                     challengeId: challenge.id,
-                    challengeDescription: challenge.description
+                    challengeDescription: challenge.description,
+                    submitChallengeResponse: this.props.submitChallengeResponse.bind(this)
                   }
                 )
               )

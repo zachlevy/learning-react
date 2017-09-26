@@ -25,7 +25,7 @@ class Captions extends Component {
   handleWordOnMouseEnter(e) {
     const word = removePunctuation(e.target.textContent)
     this.setState({definedWord: word, definitions: []})
-    define(word).then((response) => {
+    define(word, (response) => {
       console.log(response)
       this.setState({definitions: response.definitions})
     })

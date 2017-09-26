@@ -26,11 +26,10 @@ class MultipleMultipleChoice extends Component {
     })
     if (foundFeedback) {
       if (foundFeedback.correct) {
-        this.setState({submitButtonText: "Correct", showSubmitButton: false})
+        this.setState({feedback: foundFeedback.prompt || "Correct!", submitButtonText: "Correct", showSubmitButton: false})
         this.props.handleShowNextButton()
-      }
-      if (foundFeedback.prompt) {
-        this.setState({feedback: foundFeedback.prompt})
+      } else {
+        this.setState({feedback: foundFeedback.prompt || "Incorrect answer!"})
       }
       if (foundFeedback.insert) {
         this.props.handleInsertChallenges(foundFeedback.insert)
@@ -41,30 +40,9 @@ class MultipleMultipleChoice extends Component {
     }
 
     // check if answer is correct
-    this.submitChallengeResponse(input)
-  }
-
-  // submit to api for analysis
-  submitChallengeResponse(inputText) {
-    fetch(`${process.env.REACT_APP_API_URL}/challenge_responses`, {
-      method: 'post',
-      body: JSON.stringify({
-        challenge_response: {
-          input: {
-            analysis: "none",
-            text: inputText
-          },
-          challenge_id: this.props.challengeId,
-          user_id: 1
-        }
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((res) => {
-      return res.json()
-    }).then((response) => {
-      console.log(response)
+    this.props.submitChallengeResponse({
+      analysis: "none",
+      text: input
     })
   }
 
@@ -237,7 +215,8 @@ MultipleMultipleChoice.propTypes = {
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
   challengeId: PropTypes.number,
-  challengeDescription: PropTypes.string
+  challengeDescription: PropTypes.string,
+  submitChallengeResponse: PropTypes.func
 }
 
 export default MultipleMultipleChoice

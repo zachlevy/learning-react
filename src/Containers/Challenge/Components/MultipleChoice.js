@@ -39,30 +39,9 @@ class MultipleChoice extends Component {
     }
 
     // check if answer is correct
-    this.submitChallengeResponse(this.state.input)
-  }
-
-  // submit to api for analysis
-  submitChallengeResponse(inputText) {
-    fetch(`${process.env.REACT_APP_API_URL}/challenge_responses`, {
-      method: 'post',
-      body: JSON.stringify({
-        challenge_response: {
-          input: {
-            analysis: "none",
-            text: inputText
-          },
-          challenge_id: this.props.challengeId,
-          user_id: 1
-        }
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then((res) => {
-      return res.json()
-    }).then((response) => {
-      console.log(response)
+    this.props.submitChallengeResponse({
+      analysis: "none",
+      text: this.state.input
     })
   }
 
@@ -223,7 +202,8 @@ MultipleChoice.propTypes = {
   showNextButton: PropTypes.bool,
   handleShowNextButton: PropTypes.func,
   challengeId: PropTypes.number,
-  challengeDescription: PropTypes.string
+  challengeDescription: PropTypes.string,
+  submitChallengeResponse: PropTypes.func
 }
 
 export default MultipleChoice

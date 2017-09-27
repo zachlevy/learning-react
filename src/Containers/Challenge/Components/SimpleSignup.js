@@ -112,6 +112,8 @@ class SimpleSignup extends Component {
             </div>
             <br />
             <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.assert.bind(this)}>{this.props.buttonText}</button>
+            <br />
+            <br />
           </div>
         </div>
         <div className="row">

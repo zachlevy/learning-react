@@ -119,11 +119,6 @@ class OpenEndedQ extends Component {
         </div>
         <div className="row">
           <div className="col-12 col-lg-8 offset-lg-2">
-            {markdownToHTML(this.state.solution)}
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-lg-8 offset-lg-2">
             {this.state.showHelp && (markdownToHTML(this.props.help) || "Answer the open ended question.")}
           </div>
         </div>
@@ -145,6 +140,11 @@ class OpenEndedQ extends Component {
                 </li>
               </ul>
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-lg-8 offset-lg-2">
+            {markdownToHTML(this.state.solution)}
           </div>
         </div>
       </div>

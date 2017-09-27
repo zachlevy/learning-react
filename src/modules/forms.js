@@ -90,7 +90,7 @@ export const buildFormFields = (formJson, options, manualReduxFormChange) => {
             return (
               <div key={index}>
                 <label>{label}</label>
-                <Field normalize={(value) => {return value && value.split(",")}} className="form-control" name={key} component="input" type="text" />
+                <Field normalize={(value) => {return value && value.split(",")}} className="form-control" name={key} component="textarea" type="text" />
               </div>
             )
           } else if (typeof formJson[key] === "object" && formJson[key].length === undefined) {

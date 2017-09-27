@@ -153,11 +153,7 @@ class SimpleQAndA extends Component {
             <br />
             <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.state.showSubmitButton ? "" : " disabled")} onClick={this.state.showSubmitButton && this.assert.bind(this)}>{this.state.submitButtonText}</button>
             <br />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 col-lg-8 offset-lg-2">
-            {markdownToHTML(this.state.solution)}
+            <br />
           </div>
         </div>
         <div className="row">
@@ -183,6 +179,11 @@ class SimpleQAndA extends Component {
                 </li>
               </ul>
             </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-lg-8 offset-lg-2">
+            {markdownToHTML(this.state.solution)}
           </div>
         </div>
       </div>

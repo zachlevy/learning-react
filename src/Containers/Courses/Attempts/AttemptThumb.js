@@ -16,8 +16,13 @@ class AttemptThumb extends Component {
     return (
       <div className="row">
         <div className="col-12">
-          <p>Question: {this.props.challenge.body.question}</p>
-          <p>Answer: {inputText}</p>
+          <blockquote className="blockquote">
+            <h4>Question</h4>
+            <p>{this.props.challenge.body.question || "None"}</p>
+            <h4>Your Answer</h4>
+            <p>{inputText || "None"}</p>
+            <p>{new Date(Date.parse(this.props.created_at)).toUTCString()}</p>
+          </blockquote>
         </div>
       </div>
     )

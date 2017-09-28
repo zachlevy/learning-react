@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { apiRequest } from '../../../modules/data'
 import AttemptThumb from './AttemptThumb'
+import { setCourse } from '../../../modules/redux/course'
+import { arrayChunk } from '../../../modules/styles'
 
 class Attempts extends Component {
   constructor() {
@@ -16,6 +18,11 @@ class Attempts extends Component {
   componentDidMount() {
     apiRequest(`/challenge_responses?course_id=${this.props.match.params.courseId}&include=challenge`, {}, (response) => {
       this.setState({challengeResponses: response})
+    })
+    apiRequest(`/courses/${this.props.match.params.courseId}`, {}, (response, status) => {
+      if (status === 200) {
+        this.props.setCourse(response)
+      }
     })
   }
 
@@ -56,7 +63,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  changePage: (url) => push(url)
+  changePage: (url) => push(url),
+  setCourse
 }, dispatch)
 
 export default connect(

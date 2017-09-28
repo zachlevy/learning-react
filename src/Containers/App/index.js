@@ -22,6 +22,7 @@ import Login from '../Users/Login'
 import { clearUser } from '../../modules/redux/user'
 import User from '../Users/Show'
 import { apiRequest } from '../../modules/data'
+import Attempts from '../Courses/Attempts'
 
 class App extends Component {
   constructor() {
@@ -90,6 +91,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/courses" component={Courses} />
           <Route exact path="/feedback" component={Feedback} />
+          <Route exact path="/courses/:courseId/attempts" component={Attempts} />
           <Route path="/courses/:courseId" component={Course} />
           <Route exact path="/users/new" component={NewUser} />
           <Route path="/users/:userId" component={User} />

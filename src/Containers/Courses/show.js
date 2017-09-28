@@ -10,7 +10,6 @@ import { getIcon } from '../../modules/icons'
 import { gradientBackground } from '../../modules/styles'
 import { secondsToMinutes } from '../../modules/time'
 import { track } from '../../modules/analytics'
-import Attempts from './Attempts'
 import { apiRequest } from '../../modules/data'
 
 // wrapper for a course
@@ -142,7 +141,6 @@ class Course extends Component {
                   />
                 }}
               />
-              <Route path="/courses/:courseId/attempts" component={Attempts} />
             </Switch>
           </div>
         </div>

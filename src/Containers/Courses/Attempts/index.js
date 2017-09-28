@@ -3,6 +3,9 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { apiRequest } from '../../../modules/data'
+import AttemptThumb from './AttemptThumb'
+import { setCourse } from '../../../modules/redux/course'
+import { arrayChunk } from '../../../modules/styles'
 
 class Attempts extends Component {
   constructor() {
@@ -12,20 +15,15 @@ class Attempts extends Component {
     }
   }
 
-  getChallengeResponses(flow) {
-    const challengesString = Object.keys(flow).reduce((previous, key) => {
-      return previous += flow[key].id + ","
-    }, "").slice(0, -1)
-    console.log("challengesString", challengesString)
-    apiRequest(`/challenge_responses?challenge_ids=${challengesString}`, {}, (response) => {
+  componentDidMount() {
+    apiRequest(`/challenge_responses?course_id=${this.props.match.params.courseId}&include=challenge`, {}, (response) => {
       this.setState({challengeResponses: response})
     })
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (Object.keys(this.props.course).length === 0 && Object.keys(nextProps.course).length > 0) {
-      this.getChallengeResponses(nextProps.course.flow)
-    }
+    apiRequest(`/courses/${this.props.match.params.courseId}`, {}, (response, status) => {
+      if (status === 200) {
+        this.props.setCourse(response)
+      }
+    })
   }
 
   render() {
@@ -44,11 +42,16 @@ class Attempts extends Component {
 
           <div className="row">
             <div className="col-12">
+              <br />
               {course}
-              <pre>{JSON.stringify(this.props.course)}</pre>
-              <pre>{JSON.stringify(this.state.challengeResponses)}</pre>
+              <hr />
             </div>
           </div>
+          {
+            this.state.challengeResponses.map((challengeResponse, index) => {
+              return <AttemptThumb key={index} {...challengeResponse} />
+            })
+          }
         </div>
       </div>
     )
@@ -60,7 +63,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  changePage: (url) => push(url)
+  changePage: (url) => push(url),
+  setCourse
 }, dispatch)
 
 export default connect(

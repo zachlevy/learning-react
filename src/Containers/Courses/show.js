@@ -144,7 +144,7 @@ class Course extends Component {
             </Switch>
           </div>
         </div>
-        <div className="course-progress-vertical">
+        <div className="course-progress-vertical hidden-xs-down">
           <div className="progress progress-bar-vertical">
             <div className="progress-bar progress-bar-striped" role="progressbar" style={{height: progressWidth}}></div>
           </div>

@@ -114,6 +114,7 @@ class ChallengeForm extends Component {
                   handleSkipClick: () => {},
                   showNextButton: false,
                   handleShowNextButton: () => {},
+                  submitChallengeResponse: () => {},
                   challengeId: 0,
                   challengeDescription: this.props.challengeForm.values && this.props.challengeForm.values.description || mergedChallenge.description
                 }

@@ -167,6 +167,30 @@ export const defaultChallenge = (name) => {
       ],
       image_url: ""
     },
+    'profile_simple_q_and_a': {
+      update_profile: {
+        profile_key: "demographic",
+        attribute_name: "age",
+      },
+      question: "Question?",
+      solution: "",
+      help: "",
+      feedback: [
+        {
+          text: "Answer.",
+          prompt: "that is correct because...",
+          correct: true,
+          answer_type: "regex",
+          // insert: [
+          //   {
+          //     id: 1,
+          //     type: "simple_q_and_a"
+          //   }
+          // ]
+        }
+      ],
+      image_url: ""
+    },
     'open_ended_q': {
       question: "Question?",
       solution: "",

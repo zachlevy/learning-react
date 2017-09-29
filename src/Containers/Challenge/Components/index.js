@@ -19,6 +19,7 @@ export default function getChallengeComponent (name, props) {
   props.key = props.challengeId // clears the state for next component of the same type
   return {
     "simple_q_and_a": (<SimpleQAndA {...props} />),
+    "profile_simple_q_and_a": (<SimpleQAndA {...props} />),
     "open_ended_q": (<OpenEndedQ {...props} />),
     "youtube_video": (<YoutubeVideo {...props} />),
     "wikipedia_notes": (<WikipediaNotes {...props} />),

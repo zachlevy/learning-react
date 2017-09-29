@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { define, removePunctuation } from '../../../../modules/strings'
-import { addProfileDictionaryWord } from '../../../../modules/redux/profile'
-import ProfileDictionaryList from '../../../Shared/ProfileDictionaryList' // probable a better place to add this
+import { addDictionaryWord } from '../../../../modules/redux/dictionary'
+import DictionaryList from '../../../Shared/DictionaryList' // probable a better place to add this
 
 class Captions extends Component {
   constructor() {
@@ -19,7 +19,7 @@ class Captions extends Component {
     console.log("handleWordClick", e.target.textContent)
     const word = removePunctuation(e.target.textContent)
     console.log(word)
-    this.props.addProfileDictionaryWord(word)
+    this.props.addDictionaryWord(word)
   }
 
   handleWordOnMouseEnter(e) {
@@ -78,7 +78,7 @@ class Captions extends Component {
           </div>
         </div>
         {definitions}
-        <ProfileDictionaryList />
+        <DictionaryList />
       </div>
     )
   }
@@ -96,7 +96,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  addProfileDictionaryWord
+  addDictionaryWord
 }, dispatch)
 
 export default connect(

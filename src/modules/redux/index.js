@@ -8,6 +8,7 @@ import challenge from './challenge'
 import profile from './profile'
 import feedback from './feedback'
 import user from './user'
+import dictionary from './dictionary'
 
 export default combineReducers({
   routing: routerReducer,
@@ -17,5 +18,6 @@ export default combineReducers({
   challenge,
   profile,
   feedback,
-  user
+  user,
+  dictionary
 })

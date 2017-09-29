@@ -62,6 +62,12 @@ export const apiRequest = (endpoint, options, callback) => {
   }
 }
 
+export const getCurrentProfile = (jwt, callback) => {
+  apiRequest("/profiles/me", {}, (response, status) => {
+    callback(response)
+  })
+}
+
 export const getCurrentUser = (jwt, callback) => {
   apiRequest("/users/me", {}, (response, status) => {
     callback(response)

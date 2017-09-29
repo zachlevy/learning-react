@@ -53,7 +53,7 @@ class UserSignup extends Component {
           this.props.setJwt(response.jwt)
           if (status === 201) {
             // get user self
-            getCurrentUser(response.jwt, (user) => {
+            getCurrentUser((user) => {
               this.props.setCurrentUser(user)
               // go to next challenge
               this.props.handleNextClick()

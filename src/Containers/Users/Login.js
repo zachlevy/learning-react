@@ -31,10 +31,10 @@ class Login extends Component {
       if (status === 201) {
         this.props.setJwt(response.jwt)
         // get the user
-        getCurrentUser(response.jwt, (userResponse) => {
+        getCurrentUser((userResponse) => {
           this.props.setCurrentUser(userResponse)
           // get the user profile
-          getCurrentProfile(response.jwt, (profileResponse) => {
+          getCurrentProfile((profileResponse) => {
             this.props.setProfile(profileResponse)
             this.props.changePage(`/users/${userResponse.id}`)
           })

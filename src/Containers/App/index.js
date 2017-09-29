@@ -21,9 +21,10 @@ import NewUser from '../Users/New'
 import Login from '../Users/Login'
 import { clearUser } from '../../modules/redux/user'
 import User from '../Users/Show'
-import { apiRequest } from '../../modules/data'
+import { apiRequest, getCurrentProfile } from '../../modules/data'
 import Attempts from '../Courses/Attempts'
 import Collection from '../Collections/show'
+import { setProfile, clearProfile } from '../../modules/redux/profile'
 
 class App extends Component {
   constructor() {
@@ -48,7 +49,18 @@ class App extends Component {
   handleLogout() {
     console.log("handleLogout")
     this.props.clearUser()
+    this.props.clearProfile()
     this.props.changePage("/")
+  }
+
+  componentDidMount() {
+    // load profile when the app loads
+    // there is probably some redundency here
+    getCurrentProfile((profile, status) => {
+      if (status === 200) {
+        this.props.setProfile(profile)
+      }
+    })
   }
 
   render() {
@@ -146,7 +158,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: (url) => push(url),
-  clearUser
+  clearUser,
+  setProfile,
+  clearProfile
 }, dispatch)
 
 export default DragDropContext(HTML5Backend)(withRouter(connect(

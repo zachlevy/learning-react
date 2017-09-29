@@ -6,7 +6,7 @@ import FontAwesome from 'react-fontawesome'
 import { track } from '../../../modules/analytics'
 import { markdownToHTML } from '../../../modules/strings'
 import UserForm from '../../Users/UserForm'
-import { apiRequest, getCurrentUser } from '../../../modules/data'
+import { apiRequest, getCurrentUser, getCurrentProfile } from '../../../modules/data'
 import { setCurrentUser, setJwt } from '../../../modules/redux/user'
 
 class UserSignup extends Component {
@@ -55,8 +55,12 @@ class UserSignup extends Component {
             // get user self
             getCurrentUser((user) => {
               this.props.setCurrentUser(user)
-              // go to next challenge
-              this.props.handleNextClick()
+              // get the user profile
+              getCurrentProfile((profile) => {
+                this.props.setProfile(profile)
+                // go to next challenge
+                this.props.handleNextClick()
+              })
             })
           }
         })

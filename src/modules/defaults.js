@@ -249,6 +249,10 @@ export const defaultChallenge = (name) => {
       callToActionText: "What's your email?",
       buttonText: "Click Here",
       help: ""
+    },
+    'user_signup': {
+      help: "something helpful",
+      messaging: "## Signup for free learning" // markdown
     }
   }
   const body = templates[name] || {}

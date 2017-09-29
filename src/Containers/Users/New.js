@@ -61,8 +61,13 @@ class New extends Component {
         <div className="row">
           <div className="col-12 col-sm-4 offset-sm-4">
             <br />
-            <h4>Register</h4>
-            <UserForm onSubmit={this.handleSubmit.bind(this)} errors={this.state.errors}/>
+            <h4>Signup</h4>
+            <UserForm
+              onSubmit={this.handleSubmit.bind(this)}
+              errors={this.state.errors}
+              submitButtonText="Signup"
+              submitButtonClass="btn btn-primary btn-block"
+            />
           </div>
         </div>
       </div>

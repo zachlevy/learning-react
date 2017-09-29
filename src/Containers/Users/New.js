@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import UserForm from './UserForm'
 import { SubmissionError } from 'redux-form'
 import { push } from 'react-router-redux'
-import { apiRequest, getCurrentUser } from '../../modules/data'
+import { apiRequest, getCurrentUser, getCurrentProfile } from '../../modules/data'
 import { setCurrentUser, setJwt } from '../../modules/redux/user'
+import { setProfile } from '../../modules/redux/profile'
 
 class New extends Component {
   constructor() {
@@ -44,7 +45,28 @@ class New extends Component {
             // get user self
             getCurrentUser((user) => {
               this.props.setCurrentUser(user)
-              this.props.changePage(`/users/${user.id}`)
+
+              // get old anonymous profile
+              const oldProfile = this.props.profile
+
+              // get the new user profile
+              getCurrentProfile((newProfile) => {
+                // combined the new profile with the old profile
+                delete oldProfile.user_id // remove old user_id which will be nil
+                const combinedProfile = Object.assign({}, newProfile, oldProfile)
+                combinedProfile.details.previous_anonymous_user_id = oldProfile.anonymous_user_id
+                // update profile on server
+                apiRequest(`/profiles/${newProfile.id}`, {
+                  method: "put",
+                  body: JSON.stringify({profile: combinedProfile}),
+                }, (updatedProfileResponse, updatedProfileStatus) => {
+                  if (updatedProfileStatus === 200) {
+                    this.props.setProfile(updatedProfileResponse)
+                    // redirect to user profile
+                    this.props.changePage(`/users/${user.id}`)
+                  }
+                })
+              })
             })
           }
         })
@@ -76,13 +98,14 @@ class New extends Component {
 }
 
 const mapStateToProps = state => ({
-
+  profile: state.profile
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: (url) => push(url),
   setJwt,
-  setCurrentUser
+  setCurrentUser,
+  setProfile
 }, dispatch)
 
 export default connect(

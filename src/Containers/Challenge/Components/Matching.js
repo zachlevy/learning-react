@@ -137,7 +137,7 @@ class Matching extends Component {
                     return (
                       <div className="row" key={matchWidthIndex}>
                         <div className="col-12 col-sm-4 text-right">
-                          <h3>{markdownToHTML(matchWith)}</h3>
+                          <div className="matching-match-with">{markdownToHTML(matchWith)}</div>
                         </div>
                         <div className="col-12 col-sm-4">
                           <select className="form-control" onChange={this.handleSelectChange.bind(this, matchWith, matchWidthIndex)}>

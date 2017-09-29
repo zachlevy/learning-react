@@ -10,6 +10,10 @@ import FontAwesome from 'react-fontawesome'
 class CourseThumb extends Component {
   render() {
     const course = this.props.course
+    let link
+    if (course.flow[0]) {
+      link = <Link className="btn btn-outline-secondary btn-lg" to={`/courses/${course.id}/challenges/${course.flow[0].id}`}>Start</Link>
+    }
     return (
       <div className={this.props.className}>
         <div className="card course-thumb">
@@ -26,7 +30,7 @@ class CourseThumb extends Component {
                 }
                 </ul>
                 <br />
-                <Link className="btn btn-outline-secondary btn-lg" to={`/courses/${course.id}/challenges/${course.flow[0].id}`}>Start</Link>
+                {link}
                 <br />
                 &nbsp;
               </div>

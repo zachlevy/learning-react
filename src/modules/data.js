@@ -1,5 +1,6 @@
 import { getStore } from '../store'
-import { SET_ANONYMOUS_USER } from './redux/user'
+import { SET_ANONYMOUS_USER, CLEAR_USER } from './redux/user'
+import { CLEAR_PROFILE } from './redux/profile'
 
 // converts rails api errors object to array strings
 // options is the same as a fetch
@@ -46,6 +47,15 @@ export const apiRequest = (endpoint, options, callback) => {
 
     // request
     fetch(`${process.env.REACT_APP_API_URL}${endpoint}`, mergedOptions).then((res) => {
+      if (jwt && res.status === 401) {
+        // logout if a bad/expired token
+        getStore().dispatch({
+          type: CLEAR_USER
+        })
+        getStore().dispatch({
+          type: CLEAR_PROFILE
+        })
+      }
       if(res.headers.get("content-type").includes("application/json")) {
         res.json().then((response) => {
           console.log(mergedOptions.method, endpoint, mergedOptions, !!jwt || !!anonymousUserId, res.status, response)

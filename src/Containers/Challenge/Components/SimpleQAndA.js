@@ -8,6 +8,7 @@ import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
 import { setFeedbackModal, setFeedbackContext } from '../../../modules/redux/feedback'
 import { markdownToHTML } from '../../../modules/strings'
+import { apiRequest } from '../../../modules/data'
 
 class SimpleQAndA extends Component {
   constructor() {
@@ -50,6 +51,30 @@ class SimpleQAndA extends Component {
       analysis: "none",
       text: this.state.input
     })
+
+    // gross, i don't like this approach at all. not happy.
+    // expecting this.props.submitToProfile to be an object like {"key": "demographic", "attributeName": "age"}
+    if (this.props.update_profile && typeof this.props.update_profile === "object") {
+
+      apiRequest(`/profiles/${this.props.profile.id}`, {
+        method: "put",
+        body: JSON.stringify(Object.assign(
+          {},
+          this.state.profile,
+          {
+            [this.props.update_profile.profile_key]: {
+              [this.props.update_profile.attribute_name]: this.state.input
+            }
+          }
+        ))
+      }, (response, status) => {
+        if (status === 200) {
+          console.log("updated")
+        } else {
+          console.log("not updated")
+        }
+      })
+    }
   }
 
   handleKeyUp(e) {
@@ -197,6 +222,7 @@ SimpleQAndA.propTypes = {
   feedback: PropTypes.array,
   image_url: PropTypes.string,
   help: PropTypes.string,
+  update_profile: PropTypes.object,
 
   handleInsertChallenges: PropTypes.func,
   handleBackButton: PropTypes.func,
@@ -210,7 +236,7 @@ SimpleQAndA.propTypes = {
 }
 
 const mapStateToProps = state => ({
-
+  profile: state.profile
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({

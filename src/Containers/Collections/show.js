@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { apiRequest } from '../../modules/data'
 import { arrayChunk } from '../../modules/styles'
 import CourseThumb from '../Courses/CourseThumb'
+import PromoHero from '../Shared/PromoHero'
 
 // wrapper for a course
 // contains common methods to move the course form challenge to chalenge
@@ -43,8 +44,17 @@ class Collection extends Component {
               <p>{this.state.collection.description}</p>
             </div>
           </div>
+        </div>
+        <PromoHero
+          messaging="### Signup to get Midterm 2 Prep for free!"
+          subtlePattern="diamond"
+          callToActionText="Signup"
+          callToActionUrl="/users/new"
+        />
+        <div className="container">
           <div className="row">
             <div className="col-12">
+              <br />
               {
                 arrayChunk(this.state.courses, 3).map((row, index) => {
                   return (

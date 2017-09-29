@@ -23,6 +23,7 @@ import { clearUser } from '../../modules/redux/user'
 import User from '../Users/Show'
 import { apiRequest } from '../../modules/data'
 import Attempts from '../Courses/Attempts'
+import Collection from '../Collections/show'
 
 class App extends Component {
   constructor() {
@@ -89,6 +90,7 @@ class App extends Component {
       routes = (
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/collections/:collectionId" component={Collection} />
           <Route exact path="/courses" component={Courses} />
           <Route exact path="/feedback" component={Feedback} />
           <Route exact path="/courses/:courseId/attempts" component={Attempts} />

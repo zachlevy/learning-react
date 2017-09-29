@@ -8,6 +8,7 @@ import { markdownToHTML } from '../../../modules/strings'
 import UserForm from '../../Users/UserForm'
 import { apiRequest, getCurrentUser, getCurrentProfile } from '../../../modules/data'
 import { setCurrentUser, setJwt } from '../../../modules/redux/user'
+import { setProfile } from '../../../modules/redux/profile'
 
 class UserSignup extends Component {
   constructor() {
@@ -55,11 +56,27 @@ class UserSignup extends Component {
             // get user self
             getCurrentUser((user) => {
               this.props.setCurrentUser(user)
-              // get the user profile
-              getCurrentProfile((profile) => {
-                this.props.setProfile(profile)
-                // go to next challenge
-                this.props.handleNextClick()
+
+              // get old anonymous profile
+              const oldProfile = this.props.profile
+
+              // get the new user profile
+              getCurrentProfile((newProfile) => {
+                // combined the new profile with the old profile
+                delete oldProfile.user_id // remove old user_id which will be nil
+                const combinedProfile = Object.assign({}, newProfile, oldProfile)
+                combinedProfile.details.previous_anonymous_user_id = oldProfile.anonymous_user_id
+                // update profile on server
+                apiRequest(`/profiles/${newProfile.id}`, {
+                  method: "put",
+                  body: JSON.stringify({profile: combinedProfile}),
+                }, (updatedProfileResponse, updatedProfileStatus) => {
+                  if (updatedProfileStatus === 200) {
+                    this.props.setProfile(updatedProfileResponse)
+                    // go to next challenge
+                    this.props.handleNextClick()
+                  }
+                })
               })
             })
           }
@@ -163,7 +180,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   setJwt,
-  setCurrentUser
+  setCurrentUser,
+  setProfile
 }, dispatch)
 
 

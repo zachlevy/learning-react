@@ -1,9 +1,7 @@
 export const SET_PROFILE = 'profile/SET_PROFILE'
 export const CLEAR_PROFILE = 'profile/CLEAR_PROFILE'
 
-const initialState = {
-  dictionary: []
-}
+const initialState = {}
 
 export default (state = initialState, action) => {
   switch (action.type) {

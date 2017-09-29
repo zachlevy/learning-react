@@ -14,14 +14,15 @@ class UserSignup extends Component {
     super()
     this.state = {
       showHelp: false,
-      feedback: "",
-      signupSuccess: false
+      errors: []
     }
   }
 
   componentDidMount() {
+    // if user already signed in
     if (this.props.user.id) {
-      this.setState({signupSuccess: true})
+      // go to next challenge
+      this.props.handleNextClick()
     }
   }
 
@@ -54,8 +55,8 @@ class UserSignup extends Component {
             // get user self
             getCurrentUser(response.jwt, (user) => {
               this.props.setCurrentUser(user)
-              this.setState({signupSuccess: true})
-              this.props.handleShowNextButton()
+              // go to next challenge
+              this.props.handleNextClick()
             })
           }
         })
@@ -101,8 +102,8 @@ class UserSignup extends Component {
             <UserForm
               onSubmit={this.handleSubmit.bind(this)}
               errors={this.state.errors}
-              submitButtonClass={this.state.signupSuccess ? "btn btn-outline-secondary btn-block btn-lg disabled" : "btn btn-outline-secondary btn-block btn-lg"}
-              submitButtonText={this.state.signupSuccess ? "Thanks for signing up!" : "Signup"}
+              submitButtonClass="btn btn-outline-secondary btn-block btn-lg"
+              submitButtonText="Signup"
             />
             <br />
             <br />
@@ -126,7 +127,7 @@ class UserSignup extends Component {
                   <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.props.handleNextClick.bind(this)}>Next</button>
+                  <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.props.handleNextClick.bind(this)}>Next</button>
                 </li>
               </ul>
             </div>

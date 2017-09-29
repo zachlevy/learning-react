@@ -6,7 +6,8 @@ import { push } from 'react-router-redux'
 import LoginForm from './LoginForm'
 import { SubmissionError } from 'redux-form'
 import { setJwt, setCurrentUser } from '../../modules/redux/user'
-import { apiRequest, getCurrentUser } from '../../modules/data'
+import { apiRequest, getCurrentUser, getCurrentProfile } from '../../modules/data'
+import { setProfile } from '../../modules/redux/profile'
 
 class Login extends Component {
   constructor() {
@@ -29,10 +30,16 @@ class Login extends Component {
     }, (response, status) => {
       if (status === 201) {
         this.props.setJwt(response.jwt)
-        getCurrentUser(response.jwt, (response) => {
-          this.props.setCurrentUser(response)
-          this.props.changePage(`/users/${response.id}`)
+        // get the user
+        getCurrentUser(response.jwt, (userResponse) => {
+          this.props.setCurrentUser(userResponse)
+          // get the user profile
+          getCurrentProfile(response.jwt, (profileResponse) => {
+            this.props.setProfile(profileResponse)
+            this.props.changePage(`/users/${userResponse.id}`)
+          })
         })
+
       } else {
         // no json errors for this route
         this.setState({errors: {email: [" not found or password doesn't match"]}})
@@ -62,7 +69,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: (url) => push(url),
   setJwt,
-  setCurrentUser
+  setCurrentUser,
+  setProfile
 }, dispatch)
 
 export default connect(

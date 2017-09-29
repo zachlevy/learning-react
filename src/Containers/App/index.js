@@ -52,29 +52,29 @@ class App extends Component {
   }
 
   render() {
-    let userNavs
+    let userNavs = []
     if (this.props.user.email) {
-      userNavs = (
-        <div style={{display: 'flex'}}>
-          <NavItem>
-            <NavLink tag={Link} to={`/users/${this.props.user.id}`}>{this.props.user.email}</NavLink>
-          </NavItem>
-          <NavItem>
-            <a className="nav-link btn-pointer" onClick={this.handleLogout.bind(this)}>Logout</a>
-          </NavItem>
-        </div>
-      )
+      userNavs.push((
+        <NavItem>
+          <NavLink tag={Link} to={`/users/${this.props.user.id}`}>{this.props.user.email}</NavLink>
+        </NavItem>
+      ))
+      userNavs.push((
+        <NavItem>
+          <a className="nav-link btn-pointer" onClick={this.handleLogout.bind(this)}>Logout</a>
+        </NavItem>
+      ))
     } else {
-      userNavs = (
-        <div style={{display: 'flex'}}>
-          <NavItem>
-            <NavLink tag={Link} to="/login" onClick={this.handleCallToActionClick.bind(this)}>Login</NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink tag={Link} to="/users/new" onClick={this.handleCallToActionClick.bind(this)}>Sign Up</NavLink>
-          </NavItem>
-        </div>
-      )
+      userNavs.push((
+        <NavItem>
+          <NavLink tag={Link} to="/login" onClick={this.handleCallToActionClick.bind(this)}>Login</NavLink>
+        </NavItem>
+      ))
+      userNavs.push((
+        <NavItem>
+          <NavLink tag={Link} to="/users/new" onClick={this.handleCallToActionClick.bind(this)}>Sign Up</NavLink>
+        </NavItem>
+      ))
     }
     let adminNavs
     if (this.props.user && this.props.user.admin === true) {

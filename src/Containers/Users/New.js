@@ -42,7 +42,7 @@ class New extends Component {
           this.props.setJwt(response.jwt)
           if (status === 201) {
             // get user self
-            getCurrentUser(response.jwt, (user) => {
+            getCurrentUser((user) => {
               this.props.setCurrentUser(user)
               this.props.changePage(`/users/${user.id}`)
             })

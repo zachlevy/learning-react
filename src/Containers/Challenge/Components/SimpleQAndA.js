@@ -9,6 +9,7 @@ import { track } from '../../../modules/analytics'
 import { setFeedbackModal, setFeedbackContext } from '../../../modules/redux/feedback'
 import { markdownToHTML } from '../../../modules/strings'
 import { apiRequest } from '../../../modules/data'
+import { setProfile } from '../../../modules/redux/profile'
 
 class SimpleQAndA extends Component {
   constructor() {
@@ -22,6 +23,21 @@ class SimpleQAndA extends Component {
       showSubmitButton: true
     }
   }
+
+  componentDidMount() {
+    // gross, i don't like this approach at all. not happy.
+    // expecting this.props.submitToProfile to be an object like {"key": "demographic", "attributeName": "age"}
+    if (this.props.update_profile && typeof this.props.update_profile === "object") {
+
+      // ensure profile object is up to date
+      apiRequest(`/profiles/me`, {}, (response, status) => {
+        if (status === 200) {
+          this.props.setProfile(response)
+        }
+      })
+    }
+  }
+
   assert(event) {
     console.log("assert")
     console.log(this.props)
@@ -69,9 +85,7 @@ class SimpleQAndA extends Component {
         ))
       }, (response, status) => {
         if (status === 200) {
-          console.log("updated")
-        } else {
-          console.log("not updated")
+          this.props.setProfile(response)
         }
       })
     }
@@ -241,7 +255,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   setFeedbackModal,
-  setFeedbackContext
+  setFeedbackContext,
+  setProfile
 }, dispatch)
 
 export default connect(

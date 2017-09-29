@@ -13,6 +13,7 @@ import MultipleChoice from './MultipleChoice'
 import MultipleMultipleChoice from './MultipleMultipleChoice'
 import SimpleText from './SimpleText'
 import Matching from './Matching'
+import UserSignup from './UserSignup'
 
 // add components to the components object
 export default function getChallengeComponent (name, props) {
@@ -30,6 +31,7 @@ export default function getChallengeComponent (name, props) {
     "multiple_choice": (<MultipleChoice {...props} />),
     "simple_text": (<SimpleText {...props} />),
     "multiple_multiple_choice": (<MultipleMultipleChoice {...props} />),
-    "matching": (<Matching {...props} />)
+    "matching": (<Matching {...props} />),
+    "user_signup": (<UserSignup {...props} />)
   }[name]
 }

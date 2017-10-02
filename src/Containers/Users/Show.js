@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 
 class User extends Component {
+
+  componentDidMount() {
+    // temporary until user section is built
+    this.props.changePage('/')
+  }
 
   render() {
     return (
@@ -23,7 +29,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-
+  changePage: (url) => push(url)
 }, dispatch)
 
 export default connect(

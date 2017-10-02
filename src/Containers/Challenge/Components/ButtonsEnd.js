@@ -4,6 +4,7 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { markdownToHTML } from '../../../modules/strings'
+import SocialSharing from '../../Shared/SocialSharing'
 
 class ButtonsEnd extends Component {
   render() {
@@ -24,6 +25,7 @@ class ButtonsEnd extends Component {
                   })
                 }
               </ul>
+              <SocialSharing />
             </div>
           </div>
         </div>

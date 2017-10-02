@@ -264,7 +264,10 @@ export const defaultChallenge = (name) => {
           text: "Next Mini Course",
           url: "/courses/1"
         }
-      ]
+      ],
+      socialSharingCallToAction: "Share with your friends", // markdown
+      socialSharingMessage: "PHY 131 Midterm 1 Test Prep",
+      socialSharingUrl: "http://www.voralearning.com/collections/phy-131"
     }
   }
   const body = templates[name] || {}

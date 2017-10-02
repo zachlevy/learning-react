@@ -25,7 +25,7 @@ class ButtonsEnd extends Component {
                   })
                 }
               </ul>
-              <SocialSharing />
+              <SocialSharing callToAction={this.props.socialSharingCallToAction} message={this.props.socialSharingMessage} socialSharingUrl={this.props.socialSharingUrl} />
             </div>
           </div>
         </div>
@@ -37,6 +37,9 @@ class ButtonsEnd extends Component {
 ButtonsEnd.propTypes = {
   messaging: PropTypes.string,
   buttons: PropTypes.array,
+  socialSharingUrl: PropTypes.string,
+  socialSharingMessage: PropTypes.string,
+  socialSharingCallToAction: PropTypes.string,
 
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,

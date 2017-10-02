@@ -14,7 +14,7 @@ import { apiRequest } from '../../modules/data'
 class Home extends Component {
   componentDidMount() {
     console.log("componentDidMount")
-    apiRequest("/courses?ids=1,2,6,7", {}, (response) => {
+    apiRequest("/courses?ids=8,14,10,11,12,13", {}, (response) => {
       this.setState({courses: response})
       this.props.setCourses(response)
     })

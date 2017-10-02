@@ -41,7 +41,7 @@ class Home extends Component {
               <br />
               <br />
               <br />
-              <h2>Vora Phy 131 Midterm #1 Prep</h2>
+              <h2>Vora PHY 131 Midterm #1 Prep</h2>
               <h4>The smartest way to learn</h4>
               <br />
               <Link className="btn btn-outline-secondary btn-lg" onClick={this.handleCallToActionClick.bind(this)} to={"/collections/physics-131"}>Get Started</Link>

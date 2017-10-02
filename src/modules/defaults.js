@@ -253,6 +253,18 @@ export const defaultChallenge = (name) => {
     'user_signup': {
       help: "something helpful",
       messaging: "## Signup for free learning" // markdown
+    },
+    'buttons_end': {
+      messaging: "## Thanks for learning", // markdown
+      buttons: [
+        {
+          text: "Back to collection",
+          url: "/collections/phy-131"
+        },{
+          text: "Next Mini Course",
+          url: "/courses/1"
+        }
+      ]
     }
   }
   const body = templates[name] || {}

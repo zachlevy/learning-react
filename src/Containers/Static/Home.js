@@ -15,8 +15,9 @@ class Home extends Component {
   componentDidMount() {
     console.log("componentDidMount")
     apiRequest("/courses?ids=8,14,10,11,12,13", {}, (response) => {
-      this.setState({courses: response})
-      this.props.setCourses(response)
+      const courseResponse = response.filter((course) => course) // filter out null courses
+      this.setState({courses: courseResponse})
+      this.props.setCourses(courseResponse)
     })
   }
 

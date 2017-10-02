@@ -131,7 +131,7 @@ class App extends Component {
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <NavItem>
-                    <NavLink tag={Link} to="/collections/phy-131" onClick={this.handleCallToActionClick.bind(this)}>Phy 131</NavLink>
+                    <NavLink tag={Link} to="/collections/physics-131" onClick={this.handleCallToActionClick.bind(this)}>PHY 131</NavLink>
                   </NavItem>
                   <NavItem>
                     <NavLink tag={Link} to="/courses" onClick={this.handleCallToActionClick.bind(this)}>Mini Courses</NavLink>

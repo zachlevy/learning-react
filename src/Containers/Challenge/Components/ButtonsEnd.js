@@ -4,6 +4,7 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { markdownToHTML } from '../../../modules/strings'
+import SocialSharing from '../../Shared/SocialSharing'
 
 class ButtonsEnd extends Component {
   render() {
@@ -24,6 +25,7 @@ class ButtonsEnd extends Component {
                   })
                 }
               </ul>
+              <SocialSharing callToAction={this.props.socialSharingCallToAction} message={this.props.socialSharingMessage} socialSharingUrl={this.props.socialSharingUrl} />
             </div>
           </div>
         </div>
@@ -35,6 +37,9 @@ class ButtonsEnd extends Component {
 ButtonsEnd.propTypes = {
   messaging: PropTypes.string,
   buttons: PropTypes.array,
+  socialSharingUrl: PropTypes.string,
+  socialSharingMessage: PropTypes.string,
+  socialSharingCallToAction: PropTypes.string,
 
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,

@@ -68,6 +68,8 @@ class Captions extends Component {
                       return (<span index={index}><a className="btn-pointer" onMouseEnter={this.handleWordOnMouseEnter.bind(this)} onClick={this.handleWordClick.bind(this)}>{word}</a> </span>)
                     })
                     return <p key={index}>{words}</p>
+                  } else {
+                    return null
                   }
                 })
               }

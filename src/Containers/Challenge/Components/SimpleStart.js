@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
@@ -35,7 +34,7 @@ class SimpleStart extends Component {
             <br />
             <br />
             <p>{this.props.course.description}</p>
-            <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.props.handleNextClick.bind(this)}>Start</button>
+            <button className="btn btn-outline-secondary btn-lg btn-pointer" onClick={this.props.handleNextClick.bind(this)}>Start</button>
           </div>
         </div>
       </div>

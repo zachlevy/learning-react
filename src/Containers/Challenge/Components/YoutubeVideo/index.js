@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { secondsToMinutes } from '../../../../modules/time'
 import YouTube from 'react-youtube'
 import { track } from '../../../../modules/analytics'
 import FontAwesome from 'react-fontawesome'
@@ -17,7 +16,7 @@ class YoutubeVideo extends Component {
       videoDuration: 0,
       currentTime: 0,
     }
-    this.videoPlayer
+    this.videoPlayer = undefined
   }
 
   componentDidMount() {
@@ -122,7 +121,7 @@ class YoutubeVideo extends Component {
     let help
     help = (
       <li className="list-inline-item">
-        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+        <button className="btn btn-link btn-pointer" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
       </li>
     )
     let captions
@@ -179,17 +178,17 @@ class YoutubeVideo extends Component {
               <br />
               <ul className="list-inline">
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handleSeek.bind(this, -10)}><FontAwesome name="undo" /> <span>go back 10s</span></button>
+                  <button className="btn btn-outline-secondary btn-sm btn-pointer" onClick={this.handleSeek.bind(this, -10)}><FontAwesome name="undo" /> <span>go back 10s</span></button>
                 </li>
                 <li className="list-inline-item">
                   {/* bug right now, can't move past 1.5 because the increment is always 0.25 */}
-                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate - 0.25)}><FontAwesome name="backward" /></button>
+                  <button className="btn btn-outline-secondary btn-sm btn-pointer" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate - 0.25)}><FontAwesome name="backward" /></button>
                 </li>
                 <li className="list-inline-item">
                   <button className="btn btn-sm disabled">{this.state.playbackRate}x</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate + 0.25)}><FontAwesome name="forward" /></button>
+                  <button className="btn btn-outline-secondary btn-sm btn-pointer" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate + 0.25)}><FontAwesome name="forward" /></button>
                 </li>
               </ul>
             </div>
@@ -207,13 +206,13 @@ class YoutubeVideo extends Component {
             </li>
             {help}
             <li className="list-inline-item">
-              <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
+              <button className="btn btn-link bnt-pointer" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
             </li>
             <li className="list-inline-item">
-              <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
+              <button className="btn btn-link bnt-pointer" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
             </li>
             <li className="list-inline-item">
-              <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
+              <button className={"btn btn-outline-secondary btn-lg bnt-pointer" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
             </li>
           </ul>
         </div>

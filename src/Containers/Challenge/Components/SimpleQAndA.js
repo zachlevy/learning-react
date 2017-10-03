@@ -157,7 +157,7 @@ class SimpleQAndA extends Component {
       image = (
         <div className="row">
           <div className="col-12 col-lg-6 offset-lg-3 text-center">
-            <img src={this.props.image_url} className="img-fluid simple_q_and_a-question-image_url" />
+            <img src={this.props.image_url} className="img-fluid simple_q_and_a-question-image_url" alt="" />
           </div>
         </div>
       )

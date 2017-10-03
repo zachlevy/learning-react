@@ -22,7 +22,6 @@ class FeedbackModal extends Component {
 
   handleFormSubmit(e) {
     e.preventDefault()
-    console.log("handleFormSubmit")
     track("Submit Feedback", {
       name: "Feedback",
       action: "Submit",
@@ -40,7 +39,6 @@ class FeedbackModal extends Component {
         }
       })
     }, (response) => {
-      console.log(response)
       this.setState({alert: "Thanks for your feedback"})
     })
   }

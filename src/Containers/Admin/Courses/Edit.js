@@ -26,7 +26,6 @@ class New extends Component {
   }
 
   handleSubmit(courseValues) {
-    console.log("handleSubmit", courseValues)
     apiRequest(`/courses/${this.props.match.params.courseId}`, {
       method: 'put',
       body: JSON.stringify({

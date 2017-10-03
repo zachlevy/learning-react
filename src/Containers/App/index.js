@@ -46,7 +46,6 @@ class App extends Component {
   }
 
   handleLogout() {
-    console.log("handleLogout")
     logout()
     this.props.changePage("/")
   }

@@ -16,9 +16,7 @@ class Captions extends Component {
   }
 
   handleWordClick(e) {
-    console.log("handleWordClick", e.target.textContent)
     const word = removePunctuation(e.target.textContent)
-    console.log(word)
     this.props.addDictionaryWord(word)
   }
 
@@ -26,7 +24,6 @@ class Captions extends Component {
     const word = removePunctuation(e.target.textContent)
     this.setState({definedWord: word, definitions: []})
     define(word, (response) => {
-      console.log(response)
       this.setState({definitions: response.definitions})
     })
   }

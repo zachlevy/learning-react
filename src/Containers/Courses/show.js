@@ -84,7 +84,6 @@ class Course extends Component {
   // inserts challenges into the flow if the user answers wrong
   // takes an input (from user) to match against only_inputs optional whitelist array. see the learning-api docs for more information on data formats
   handleInsertDependencies(input) {
-    console.log("handleInsertDependencies", input)
     // find the current index in flow
     const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
     // check for only_inputs
@@ -107,7 +106,6 @@ class Course extends Component {
 
   // inserts challenges into the flow
   handleInsertChallenges(challenges) {
-    console.log("handleInsertChallenges", challenges)
     // find the current index in flow
     const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
     // insert the dependencies into the course flow

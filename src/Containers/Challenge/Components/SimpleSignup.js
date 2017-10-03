@@ -15,7 +15,6 @@ class SimpleSignup extends Component {
     }
   }
   assert(event) {
-    console.log()
     this.submitSignup(this.state.email)
   }
 

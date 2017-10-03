@@ -18,7 +18,6 @@ class MultipleChoice extends Component {
     }
   }
   assert(event) {
-    console.log("assert")
     const foundFeedback = this.props.feedback.find((feedback) => {
       return feedback.text === this.state.input
     })
@@ -46,12 +45,10 @@ class MultipleChoice extends Component {
   }
 
   handleOptionClick(option, e) {
-    console.log("handleOptionClick")
     this.setState({input: option, feedback: ""})
   }
 
   handleSubmitClick(e) {
-    console.log("handleSubmitClick")
     this.state.showSubmitButton && this.assert()
   }
 
@@ -84,7 +81,6 @@ class MultipleChoice extends Component {
   }
 
   handleSolutionButton(e) {
-    console.log("handleSolutionButton")
     this.setState({solution: this.props.solution})
   }
 

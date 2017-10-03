@@ -15,7 +15,6 @@ class ExternalSuggestionEnd extends Component {
     }
   }
   handleExternalContentClick(content) {
-    console.log("handleButtonClick")
     track("Click External Content", {
       name: "External Content",
       action: "Click",

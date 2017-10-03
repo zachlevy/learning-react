@@ -16,8 +16,6 @@ class WikipediaNotes extends Component {
     }
   }
   assert() {
-    console.log("assert")
-    console.log(this.state.input)
     if (this.state.input && this.state.input.length >= 10) {
       this.props.handleShowNextButton()
     }

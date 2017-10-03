@@ -39,8 +39,6 @@ class SimpleQAndA extends Component {
   }
 
   assert(event) {
-    console.log("assert")
-    console.log(this.props)
     const foundFeedback = this.props.feedback.find((feedback) => {
       if (feedback.answer_type === "regex") {
         return !!this.state.input.toLowerCase().match(feedback.text.toLowerCase())
@@ -128,13 +126,11 @@ class SimpleQAndA extends Component {
   }
 
   handleDisagreeOnClick(e) {
-    console.log("handleDisagreeOnClick")
     this.props.setFeedbackModal(true)
     this.props.setFeedbackContext(this.props)
   }
 
   handleSolutionButton(e) {
-    console.log("handleSolutionButton")
     this.setState({solution: this.props.solution})
   }
 

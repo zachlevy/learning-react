@@ -17,7 +17,6 @@ class New extends Component {
   }
 
   handleSubmit(userValues) {
-    console.log("handleSubmit", userValues)
     // create user
     apiRequest("/users", {
       method: 'post',

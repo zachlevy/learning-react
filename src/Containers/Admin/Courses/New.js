@@ -17,7 +17,6 @@ class New extends Component {
   }
 
   handleSubmit(courseValues) {
-    console.log("handleSubmit", courseValues)
     // create course
     apiRequest("/courses", {
       method: 'post',
@@ -41,10 +40,8 @@ class New extends Component {
       const mergedUI = Object.assign({}, defaultCourse.ui, this.props.courseForm.values.ui)
       mergedCourse = Object.assign({}, defaultCourse, this.props.courseForm.values)
       mergedCourse.ui = mergedUI
-      console.log("mergedCourse", mergedCourse)
     } else {
       mergedCourse = defaultCourse
-      console.log("default course")
     }
     const courseThumb = <CourseThumb course={mergedCourse} />
     return (

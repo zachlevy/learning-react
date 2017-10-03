@@ -19,7 +19,6 @@ class Feedback extends Component {
   }
   handleFormSubmit(e) {
     e.preventDefault()
-    console.log("handleFormSubmit")
     track("Submit Feedback", {
       name: "Feedback",
       action: "Submit",

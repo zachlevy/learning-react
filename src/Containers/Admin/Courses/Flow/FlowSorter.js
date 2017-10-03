@@ -27,7 +27,6 @@ class FlowSorter extends Component {
 
   moveCard(id, atIndex) {
     const { card, index } = this.findCard(id)
-    console.log("moveCard", card)
     this.props.handleCardUpdate(update(this.props, {
       cards: {
         $splice: [

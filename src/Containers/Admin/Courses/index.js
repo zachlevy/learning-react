@@ -21,17 +21,14 @@ class Courses extends Component {
   }
 
   handleEditCourseFlow(courseId) {
-    console.log("handleEditCourseFlow")
     this.props.changePage(`/admin/courses/${courseId}/flow`)
   }
 
   handleEditCourse(courseId) {
-    console.log("handleEditCourse");
     this.props.changePage(`/admin/courses/${courseId}/edit`)
   }
 
   handleNewCourse() {
-    console.log("handleNewCourse")
     this.props.changePage(`/admin/courses/new`)
   }
 

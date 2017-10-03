@@ -18,7 +18,6 @@ class Matching extends Component {
     }
   }
   assert(event) {
-    console.log("assert")
     let answered
     const answers = new Array(this.props.matchWith.length)
     const newFeedbackArray = [...this.state.feedback]
@@ -45,14 +44,12 @@ class Matching extends Component {
   }
 
   handleSelectChange(matchWith, matchWithIndex, e) {
-    console.log("handleSelectChange", matchWith, e.target.value)
     const newInputArray = [...this.state.input]
     newInputArray[matchWithIndex] = matchWith + e.target.value
     this.setState({input: newInputArray, showSubmitButton: true})
   }
 
   handleSubmitClick(e) {
-    console.log("handleSubmitClick")
     this.state.showSubmitButton && this.assert()
   }
 
@@ -86,7 +83,6 @@ class Matching extends Component {
   }
 
   handleSolutionButton(e) {
-    console.log("handleSolutionButton")
     this.setState({solution: this.props.solution})
   }
 

@@ -15,7 +15,6 @@ class New extends Component {
   }
 
   handleSubmit(challengeValues) {
-    console.log("handleSubmit", challengeValues)
     // optional course id
     const courseId = new URLSearchParams(this.props.location.search).get('course_id')
     // create course
@@ -26,7 +25,6 @@ class New extends Component {
       })
     }, (challengeResponse, status) => {
       if (status === 201) {
-        console.log("response", challengeResponse)
         this.setState({errors: {success: ["the challenge has been created."]}})
         this.props.clearChallengeForm()
 

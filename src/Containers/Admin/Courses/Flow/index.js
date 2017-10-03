@@ -21,7 +21,6 @@ class Flow extends Component {
 
   // load the course flow and the challenges
   componentDidMount() {
-    console.log("Course Flow", this.props.match.params.courseId)
     // get course
     apiRequest(`/courses/${this.props.match.params.courseId}`, {}, (courseResponse, status) => {
       if (status === 200) {

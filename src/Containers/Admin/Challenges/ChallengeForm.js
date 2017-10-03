@@ -23,7 +23,6 @@ class ChallengeForm extends Component {
   componentDidMount() {
     apiRequest(`/challenge_types`, {
     }, (response, status) => {
-      console.log("challenge_types", response)
       this.setState({challengeTypes: response})
       // simulate changing challenge type for editing a challenge
       if (this.props.initialValues) {
@@ -72,7 +71,6 @@ class ChallengeForm extends Component {
       mergedChallenge = defaultChallenge()
     }
     let mergedChallengeBody
-    console.log("mergedChallengeBody", mergedChallenge.body, this.props.challengeForm && this.props.challengeForm.values && this.props.challengeForm.values.body)
     mergedChallengeBody = Object.assign({}, mergedChallenge.body, (this.props.challengeForm && this.props.challengeForm.values &&  this.props.challengeForm.values.body) || {})
     return (
       <div className="row">

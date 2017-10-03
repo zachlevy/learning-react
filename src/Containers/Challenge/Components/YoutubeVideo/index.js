@@ -21,17 +21,13 @@ class YoutubeVideo extends Component {
   }
 
   componentDidMount() {
-    console.log("componentDidMount")
-    console.log("this.props.captions", this.props.captions)
   }
 
   componentWillUnmount() {
-    console.log("componentWillUnmount")
     clearInterval(this.state.playbackInterval);
   }
 
   assert(event) {
-    console.log("assert")
   }
 
   handleSeek(seekTime) {
@@ -47,7 +43,6 @@ class YoutubeVideo extends Component {
   }
 
   handlePlaybackChange(newRate) {
-    console.log("newRate", newRate)
     if (newRate === undefined) {
       // set default
       newRate = 1
@@ -58,7 +53,6 @@ class YoutubeVideo extends Component {
     } else if (newRate > playbackRates[playbackRates.length - 1]) {
       newRate = playbackRates[playbackRates.length - 1]
     }
-    console.log("newRate", newRate)
     this.videoPlayer.setPlaybackRate(newRate)
   }
 
@@ -66,7 +60,6 @@ class YoutubeVideo extends Component {
     track("Ready YouTube Video", {name: "YouTube Video", action: "Ready", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined})})
     this.videoPlayer = e.target
     const duration = this.videoPlayer.getDuration()
-    console.log(duration)
     this.setState({videoDuration: getYouTubeVideoDuration(duration, this.props.start_seconds, this.props.end_seconds)})
     this.setState({playbackInterval: setInterval(() => { this.setState({currentTime: this.videoPlayer.getCurrentTime()}) }, 500)})
     this.handlePlaybackChange(this.props.playback_rate)
@@ -117,12 +110,10 @@ class YoutubeVideo extends Component {
   }
 
   handleOnMouseEnter(e) {
-    console.log("handleOnMouseEnter")
     this.videoPlayer.pauseVideo()
   }
 
   handleOnMouseLeave(e) {
-    console.log("handleOnMouseLeave")
     this.videoPlayer.playVideo()
   }
 

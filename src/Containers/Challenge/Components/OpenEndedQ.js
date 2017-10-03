@@ -18,7 +18,6 @@ class OpenEndedQ extends Component {
     }
   }
   assert(event) {
-    console.log("assert")
     let answered = this.state.input.length > this.props.min_length
     if (answered) {
       this.props.handleShowNextButton()
@@ -63,7 +62,6 @@ class OpenEndedQ extends Component {
   }
 
   handleSolutionButton(e) {
-    console.log("handleSolutionButton")
     this.setState({solution: this.props.solution})
   }
 

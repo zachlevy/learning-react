@@ -40,7 +40,6 @@ export const apiRequest = (endpoint, options, callback) => {
     } else if (anonymousUserId) {
       defaultOptions.headers["AnonymousUser"] = anonymousUserId
     }
-    // console.log("jwt", jwt, "anonymousUserId", anonymousUserId)
     // pseudo deep merge
     const mergedHeaders = Object.assign({}, defaultOptions.headers, options.headers)
     const mergedOptions = Object.assign({}, defaultOptions, options, {headers: mergedHeaders})

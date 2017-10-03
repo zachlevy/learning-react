@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 
 class DictionaryList extends Component {
   handleWordClick(e) {
-    console.log("handleWordClick", e.target.textContent)
   }
 
   render() {

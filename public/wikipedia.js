@@ -55,8 +55,6 @@ var highlightWikipedia = function(highlightSection) {
   }, 1000)
 
 
-  // console.log("sectionBody.children", sectionBody.children)
-
   var sectionChildren = []
   for (var i = 0; i < sectionBody.children.length; i++) {
     if (highlightSection.children === "all" || highlightSection.children.includes(i)) {

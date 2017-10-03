@@ -18,7 +18,6 @@ class Login extends Component {
   }
 
   handleSubmit(userValues) {
-    console.log("handleSubmit", userValues)
     apiRequest("/user_token", {
       method: 'post',
       body: JSON.stringify({

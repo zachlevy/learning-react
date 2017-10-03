@@ -19,7 +19,6 @@ class MultipleMultipleChoice extends Component {
   }
 
   assert(event) {
-    console.log("assert")
     const input = this.state.input.join("")
     const foundFeedback = this.props.feedback.find((feedback) => {
       return feedback.text === input
@@ -47,14 +46,12 @@ class MultipleMultipleChoice extends Component {
   }
 
   handleOptionClick(optionGroupIndex, option, e) {
-    console.log("handleOptionClick")
     const newInputArray = [...this.state.input]
     newInputArray[optionGroupIndex] = option
     this.setState({input: newInputArray, feedback: ""})
   }
 
   handleSubmitClick(e) {
-    console.log("handleSubmitClick")
     this.state.showSubmitButton && this.assert()
   }
 
@@ -87,7 +84,6 @@ class MultipleMultipleChoice extends Component {
   }
 
   handleSolutionButton(e) {
-    console.log("handleSolutionButton")
     this.setState({solution: this.props.solution})
   }
 

@@ -18,14 +18,12 @@ class Edit extends Component {
   componentDidMount() {
     apiRequest(`/challenges/${this.props.match.params.challengeId}`, {}, (response, status) => {
       if (status === 200) {
-        console.log(response)
         this.setState({challenge: response})
       }
     })
   }
 
   handleSubmit(challengeValues) {
-    console.log("handleSubmit", challengeValues)
     // update challenge
     apiRequest(`/challenges/${this.props.match.params.challengeId}`, {
       method: 'put',
@@ -34,7 +32,6 @@ class Edit extends Component {
       })
     }, (challengeResponse, status) => {
       if (status === 200) {
-        console.log("response", challengeResponse)
         this.setState({errors: {success: ["the challenge has been updated."]}})
         this.props.clearChallengeForm()
       } else {

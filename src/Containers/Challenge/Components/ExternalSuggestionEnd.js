@@ -34,6 +34,7 @@ class ExternalSuggestionEnd extends Component {
       eventLabel: "showNextButton",
       eventValue: this.props.showNextButton ? 1 : 0
     })
+    this.props.submitChallengeResponse(null, "complete")
     this.props.handleNextClick(this)
   }
   handleShowHelp() {
@@ -65,7 +66,7 @@ class ExternalSuggestionEnd extends Component {
           {
             this.props.external_contents && this.props.external_contents.map((content, index) => {
               return (
-                <div className="col-4 text-center">
+                <div key={index} className="col-4 text-center">
                   <button className="btn btn-outline-secondary btn-block btn-pointer" onClick={this.handleExternalContentClick.bind(this, content)}>
                     <br />
                     <br />

@@ -26,6 +26,7 @@ class SimpleText extends Component {
       eventLabel: "showNextButton",
       eventValue: this.props.showNextButton ? 1 : 0
     })
+    this.props.submitChallengeResponse(null, "complete")
     this.props.handleNextClick(this)
   }
   handleShowHelp() {

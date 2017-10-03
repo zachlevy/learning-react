@@ -74,6 +74,7 @@ class SimpleSignup extends Component {
       eventValue: this.props.showNextButton ? 1 : 0
     })
     if (this.props.showNextButton) {
+      this.props.submitChallengeResponse(null, "complete")
       this.props.handleNextClick()
     } else {
       this.setState({showHelp: true})

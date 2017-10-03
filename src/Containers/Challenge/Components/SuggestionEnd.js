@@ -23,6 +23,7 @@ class SuggestionEnd extends Component {
     this.props.changePage(`/courses/${this.props.course.id}`)
   }
   handleFinishClick() {
+    this.props.submitChallengeResponse(null, "complete")
     this.props.changePage(`/courses`)
   }
   render() {

@@ -44,7 +44,10 @@ class Course extends Component {
           // authenticate to pass user_id
         }
       })
-    }, callback)
+    }, (response, status) => {
+      this.props.updateCourseFlowChallenge(response.challenge_id, response.status)
+      typeof callback === 'function' && callback(response, status)
+    })
   }
 
   // next challenge

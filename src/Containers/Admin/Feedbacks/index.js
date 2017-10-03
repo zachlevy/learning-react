@@ -33,20 +33,95 @@ class Courses extends Component {
               <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Title</th>
-                  <th>Edit Flow</th>
-                  <th>Edit Course</th>
+                  <th>Feedback</th>
+                  <th>User_id</th>
+                  <th>Challenge Id</th>
+                  <th>Feedback Source</th>
+                  <th>Created At</th>
                 </tr>
               </thead>
               <tbody>
                 {
-                  this.state.courses.map((feedback, index) => {
-                    return (
-                      <tr>
-                        <td>{feedback.id}</td>
-                        <td>{feedback.title}</td>
-                      </tr>
-                    )
+                  this.state.feedbacks.map((feedback, index) => {
+                    //simple signup feedback source
+                    if(feedback.source === 'simple_signup' && feedback.body.user_id){
+                      return (
+                        <tr>
+                          <td>{feedback.id}</td>
+                          <td>{feedback.body.input.email}</td>
+                          <td>{feedback.body.user_id}</td>
+                          <td>{feedback.body.challenge_id}</td>
+                          <td>{feedback.source}</td>
+                          <td>{feedback.created_at}</td>
+                        </tr>
+                      )
+                    } else if(feedback.source === 'simple_signup' && feedback.body.anonymous_user_id){
+                      return (
+                        <tr>
+                          <td>{feedback.id}</td>
+                          <td>{feedback.body.input.email}</td>
+                          <td>[a]{feedback.body.anonymous_user_id}</td>
+                          <td>{feedback.body.challenge_id}</td>
+                          <td>{feedback.source}</td>
+                          <td>{feedback.created_at}</td>
+                        </tr>
+                      )
+                    } else if(feedback.source === 'feedback_form_modal' && feedback.body.user_id){
+                      return (
+                        <tr>
+                          <td>{feedback.id}</td>
+                          <td>{feedback.body.text}</td>
+                          <td>{feedback.body.user_id}</td>
+                          <td>{feedback.body.challenge_id}</td>
+                          <td>{feedback.source}</td>
+                          <td>{feedback.created_at}</td>
+                        </tr>
+                      )
+                    } else if(feedback.source === 'feedback_form_modal' && feedback.body.anonymous_user_id) {
+                      return (
+                        <tr>
+                          <td>{feedback.id}</td>
+                          <td>{feedback.body.text}</td>
+                          <td>[a]{feedback.body.anonymous_user_id}</td>
+                          <td>{feedback.body.challenge_id}</td>
+                          <td>{feedback.source}</td>
+                          <td>{feedback.created_at}</td>
+                        </tr>
+                      )
+                    } else if(feedback.source === 'feedback_form' && feedback.body.user_id) {
+                      return (
+                        <tr>
+                          <td>{feedback.id}</td>
+                          <td>{feedback.body.text}</td>
+                          <td>{feedback.body.user_id}</td>
+                          <td>{feedback.body.challenge_id}</td>
+                          <td>{feedback.source}</td>
+                          <td>{feedback.created_at}</td>
+                        </tr>
+                      )
+                    } else if(feedback.source === 'feedback_form' && feedback.body.anonymous_user_id) {
+                      return (
+                        <tr>
+                          <td>{feedback.id}</td>
+                          <td>{feedback.body.text}</td>
+                          <td>[a]{feedback.body.anonymous_user_id}</td>
+                          <td>{feedback.body.challenge_id}</td>
+                          <td>{feedback.source}</td>
+                          <td>{feedback.created_at}</td>
+                        </tr>
+                      )
+                    } else {
+                      return(
+                        <tr>
+                          <td>{feedback.id}</td>
+                          <td>{feedback.body.text}</td>
+                          <td>[a]{feedback.body.user_id}</td>
+                          <td>{feedback.body.challenge_id}</td>
+                          <td>{feedback.source}</td>
+                          <td>{feedback.created_at}</td>
+                        </tr>
+                      )
+                    }
                   })
                 }
               </tbody>

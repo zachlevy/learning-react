@@ -53,7 +53,7 @@ export const insertCourseFlowChallenges = (afterChallengeId, challengeFlowObject
 
 // update the flow array
 // pass in id
-// pass in the challenge completion status
+// pass in the challenge completion status. complete, attempt, skip
 export const updateCourseFlowChallenge = (challengeId, completionStatus) => {
   return dispatch => {
     dispatch({

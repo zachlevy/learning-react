@@ -43,7 +43,7 @@ class OpenEndedQ extends Component {
       this.props.submitChallengeResponse({
         analysis: "none",
         text: this.state.input
-      })
+      }, "complete")
       this.props.handleNextClick()
     } else {
       this.handleShowHelp.bind(this)

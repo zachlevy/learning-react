@@ -20,10 +20,12 @@ class MultipleChoice extends Component {
     const foundFeedback = this.props.feedback.find((feedback) => {
       return feedback.text === this.state.input
     })
+    let status = "attempt"
     if (foundFeedback) {
       if (foundFeedback.correct) {
         this.setState({submitButtonText: "Correct", showSubmitButton: false})
         this.props.handleShowNextButton()
+        status = "complete"
       }
       if (foundFeedback.prompt) {
         this.setState({feedback: foundFeedback.prompt})
@@ -40,7 +42,7 @@ class MultipleChoice extends Component {
     this.props.submitChallengeResponse({
       analysis: "none",
       text: this.state.input
-    })
+    }, status)
   }
 
   handleOptionClick(option, e) {

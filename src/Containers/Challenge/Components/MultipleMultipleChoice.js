@@ -22,10 +22,12 @@ class MultipleMultipleChoice extends Component {
     const foundFeedback = this.props.feedback.find((feedback) => {
       return feedback.text === input
     })
+    let status = "attempt"
     if (foundFeedback) {
       if (foundFeedback.correct) {
         this.setState({feedback: foundFeedback.prompt || "Correct!", submitButtonText: "Correct", showSubmitButton: false})
         this.props.handleShowNextButton()
+        status = "complete"
       } else {
         this.setState({feedback: foundFeedback.prompt || "Incorrect answer!"})
       }
@@ -41,7 +43,7 @@ class MultipleMultipleChoice extends Component {
     this.props.submitChallengeResponse({
       analysis: "none",
       text: input
-    })
+    }, status)
   }
 
   handleOptionClick(optionGroupIndex, option, e) {

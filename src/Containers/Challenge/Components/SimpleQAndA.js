@@ -46,10 +46,12 @@ class SimpleQAndA extends Component {
       }
     })
 
+    let status = "attempt"
     if (foundFeedback) {
       if (foundFeedback.correct) {
         this.setState({feedback: foundFeedback.prompt || "Correct!", submitButtonText: "Correct", showSubmitButton: false})
         this.props.handleShowNextButton()
+        status = "complete"
       } else {
         this.setState({feedback: foundFeedback.prompt || "Incorrect answer, try again!"})
       }
@@ -63,7 +65,7 @@ class SimpleQAndA extends Component {
     this.props.submitChallengeResponse({
       analysis: "none",
       text: this.state.input
-    })
+    }, status)
 
     // gross, i don't like this approach at all. not happy.
     // expecting this.props.submitToProfile to be an object like {"key": "demographic", "attributeName": "age"}

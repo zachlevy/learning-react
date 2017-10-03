@@ -18,6 +18,7 @@ class Matching extends Component {
   }
   assert(event) {
     const newFeedbackArray = [...this.state.feedback]
+    let status = "attempt"
     this.state.input.forEach((answer, inputIndex) => {
       const foundFeedback = this.props.feedback.find((feedback) => {
         return answer === feedback.text
@@ -32,12 +33,19 @@ class Matching extends Component {
       }
     })
 
+    // check if all correct
+    const allCorrect = newFeedbackArray.map((feedback) => feedback.correct).find((feedback) => feedback !== true) === undefined
+    if (allCorrect) {
+      status = "complete"
+    }
+
+    this.setState({feedback: newFeedbackArray, showSubmitButton: false})
+    this.props.handleShowNextButton()
+
     this.props.submitChallengeResponse({
       analysis: "none",
       text: this.state.input
-    })
-    this.setState({feedback: newFeedbackArray, showSubmitButton: false})
-    this.props.handleShowNextButton()
+    }, status)
   }
 
   handleSelectChange(matchWith, matchWithIndex, e) {

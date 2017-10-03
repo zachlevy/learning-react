@@ -51,7 +51,7 @@ class WikipediaNotes extends Component {
       this.props.submitChallengeResponse({
         analysis: "none",
         text: this.state.input
-      })
+      }, "complete")
     } else {
       this.setState({showHelp: true})
     }

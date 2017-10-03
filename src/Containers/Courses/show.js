@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { setCourse, insertCourseFlowChallenges } from '../../modules/redux/course'
+import { setCourse, insertCourseFlowChallenges, updateCourseFlowChallenge } from '../../modules/redux/course'
 import { Switch, Route, Link } from 'react-router-dom'
 import Challenge from '../Challenge/show'
 import FontAwesome from 'react-fontawesome'
@@ -15,8 +15,15 @@ import { apiRequest } from '../../modules/data'
 // contains common methods to move the course form challenge to chalenge
 class Course extends Component {
   componentDidMount() {
-    apiRequest(`/courses/${this.props.match.params.courseId}`, {}, (response) => {
-      this.props.setCourse(response)
+    apiRequest(`/courses/${this.props.match.params.courseId}`, {}, (courseResponse) => {
+      this.props.setCourse(courseResponse)
+      apiRequest(`/challenge_responses?course_id=${courseResponse.id}`, {}, (challengeResponsesResponse, status) => {
+        if (status === 200) {
+          challengeResponsesResponse.forEach((challengeResponse) => {
+            this.props.updateCourseFlowChallenge(challengeResponse.challenge_id, "complete")
+          })
+        }
+      })
     })
     // scroll below navbar to give full screen effect
     document.getElementById("course-show").scrollIntoView()
@@ -25,7 +32,7 @@ class Course extends Component {
   // submit challeng response
   // input is an object, jsonb in the database
   // callback is a function that gets passed response and status as the params
-  submitChallengeResponse(input, callback) {
+  submitChallengeResponse(input, status, callback) {
     apiRequest("/challenge_responses", {
       method: "post",
       body: JSON.stringify({
@@ -33,6 +40,7 @@ class Course extends Component {
           input: input,
           challenge_id: this.props.challenge.id,
           course_id: this.props.course.id,
+          status: status || "complete" // complete, attempt, or skip
           // authenticate to pass user_id
         }
       })
@@ -171,6 +179,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   setCourse,
   insertCourseFlowChallenges,
+  updateCourseFlowChallenge,
   changeCourseChallenge: (courseId, challengeId) => push(`/courses/${courseId}/challenges/${challengeId}`),
   GoToFeedbackPage: () => push(`/feedback`)
 }, dispatch)

@@ -98,20 +98,25 @@ class App extends Component {
     }
     let routes
     // ensure there's an anonymous or logged in user
-    if (this.props.user.anonymous_user_id || this.props.user.id) {
-      routes = (
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/collections/:collectionId" component={Collection} />
-          <Route exact path="/courses" component={Courses} />
-          <Route exact path="/feedback" component={Feedback} />
-          <Route exact path="/courses/:courseId/attempts" component={Attempts} />
-          <Route path="/courses/:courseId" component={Course} />
-          <Route exact path="/users/new" component={NewUser} />
-          <Route path="/users/:userId" component={User} />
-          <Route exact path="/login" component={Login} />
-          <Route path="/admin" component={Admin} />
-        </Switch>
+    // ensure there's an anonymous or logged in user
+      let adminRoutes
+      if (this.props.user.anonymous_user_id || this.props.user.id) {
+        if (this.props.user.admin === true) {
+          adminRoutes = <Route path="/admin" component={Admin} />
+        }
+        routes = (
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/collections/:collectionId" component={Collection} />
+            <Route exact path="/courses" component={Courses} />
+            <Route exact path="/feedback" component={Feedback} />
+            <Route exact path="/courses/:courseId/attempts" component={Attempts} />
+            <Route path="/courses/:courseId" component={Course} />
+            <Route exact path="/users/new" component={NewUser} />
+            <Route path="/users/:userId" component={User} />
+            <Route exact path="/login" component={Login} />
+            {adminRoutes}
+          </Switch>
       )
     } else {
       // this could be any api call, it ensures that there is a user or anonymous user from apiRequest

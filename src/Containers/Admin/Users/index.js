@@ -34,7 +34,7 @@ class Courses extends Component {
                 <tr>
                   <th>Id</th>
                   <th>Email</th>
-                  <th>Sign-up</th>
+                  <th>User Since</th>
                   <th>Admin</th>
                 </tr>
               </thead>

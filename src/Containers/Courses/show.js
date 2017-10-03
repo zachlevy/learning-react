@@ -158,7 +158,7 @@ class Course extends Component {
               this.props.course.flow && this.props.course.flow.slice().reverse().map((challenge, index) => {
                 return (
                   <div key={index} style={{height: challengeWidth + "%"}} className="text-center timeline-icon">
-                    <Link className={"btn btn-timeline btn-link" + (index < reversedChallengeIndex && !challenge.completionStatus ? " disabled" : "") + (index === reversedChallengeIndex ? " active" : "") + (!challenge.completionStatus ? " skip" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
+                    <Link className={"btn btn-timeline btn-link" + (index === reversedChallengeIndex ? " active" : "") + (!challenge.completionStatus ? " skip" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
                   </div>
                 )
               })

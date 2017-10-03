@@ -37,20 +37,20 @@ class ExternalSuggestionEnd extends Component {
     this.props.submitChallengeResponse(null, "complete")
     this.props.handleNextClick(this)
   }
-  handleShowHelp() {
-    track("Show Help", {
+  toggleShowHelp() {
+    track("Toggle Help", {
       name: "Help",
-      action: "Show",
+      action: "Toggle",
       challengeId: this.props.challengeId,
       content: this.props
     })
-    this.setState({showHelp: true})
+    this.setState({showHelp: !this.state.showHelp})
   }
   render() {
     let help
     help = (
       <li className="list-inline-item">
-        <button className="btn btn-link btn-pointer" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+        <button className="btn btn-link btn-pointer" onClick={this.toggleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
       </li>
     )
     return (

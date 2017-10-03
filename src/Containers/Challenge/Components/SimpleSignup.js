@@ -52,14 +52,14 @@ class SimpleSignup extends Component {
     }
   }
 
-  handleShowHelp(e) {
-    track("Show Help", {
+  toggleHelp(e) {
+    track("Toggle Help", {
       name: "Help",
-      action: "Show",
+      action: "Toggle",
       challengeId: this.props.challengeId,
       content: this.props
     })
-    this.setState({showHelp: true})
+    this.setState({showHelp: !this.state.showHelp})
   }
 
   handleNextClick(e) {
@@ -85,7 +85,7 @@ class SimpleSignup extends Component {
     let help
     help = (
       <li className="list-inline-item">
-        <button className="btn btn-link btn-pointer" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+        <button className="btn btn-link btn-pointer" onClick={this.toggleHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
       </li>
     )
     let feedback

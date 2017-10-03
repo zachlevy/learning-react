@@ -82,7 +82,7 @@ export const katexToHTML = (string) => {
 export const define = (word, callback) => {
 
   const escapedWord = encodeURI(word.toLowerCase())
-  
+
   apiRequest("/definitions", {
     method: 'post',
     body: JSON.stringify({
@@ -94,5 +94,5 @@ export const define = (word, callback) => {
 }
 
 export const removePunctuation = (string) => {
-  return string.replace(/[.,\/#!$%\^&\*;:{}=\_`~()]/g,"")
+  return string.replace(/[.,/#!$%^&*;:{}=_`~()]/g,"")
 }

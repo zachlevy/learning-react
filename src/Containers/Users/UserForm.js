@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
-import { parseApiErrors } from '../../modules/strings'
 import { buildFormErrors } from '../../modules/forms'
 
 class UserForm extends Component {

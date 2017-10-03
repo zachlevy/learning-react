@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import CourseForm from './CourseForm'
-import { SubmissionError, reset } from 'redux-form'
+import { reset } from 'redux-form'
 import { push } from 'react-router-redux'
 import { apiRequest } from '../../../modules/data'
 import CourseThumb from '../../Courses/CourseThumb'
@@ -34,7 +34,7 @@ class New extends Component {
   }
 
   render() {
-    {/*this is for the live update of form as users type*/}
+    // this is for the live update of form as users type
     let mergedCourse
     if (this.props.courseForm && this.props.courseForm.values) {
       const mergedUI = Object.assign({}, defaultCourse.ui, this.props.courseForm.values.ui)

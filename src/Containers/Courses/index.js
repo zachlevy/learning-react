@@ -3,7 +3,6 @@ import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { setCourses } from '../../modules/redux/courses'
-import { gradientBackground } from '../../modules/styles'
 import CourseList from './list'
 import { apiRequest } from '../../modules/data'
 

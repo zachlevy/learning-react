@@ -51,7 +51,6 @@ class Feedback extends Component {
 
   handleOnBlur(e) {
     track("Blur Feedback", {
-      name: "Feedback",
       action: "Blur",
       name: e.target.name,
       input: e.target.name
@@ -60,7 +59,6 @@ class Feedback extends Component {
 
   handleOnFocus(e) {
     track("Focus Feedback", {
-      name: "Feedback",
       action: "Focus",
       name: e.target.name,
       input: e.target.name
@@ -101,7 +99,7 @@ class Feedback extends Component {
                   </Label>
                 </FormGroup>
 
-                <button role="button" className="btn btn-primary" onClick={this.handleFormSubmit.bind(this)}>Submit</button>
+                <button className="btn btn-primary btn-pointer" onClick={this.handleFormSubmit.bind(this)}>Submit</button>
               </Form>
             </div>
           </div>

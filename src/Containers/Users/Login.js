@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 import LoginForm from './LoginForm'
-import { SubmissionError } from 'redux-form'
 import { setJwt, setCurrentUser } from '../../modules/redux/user'
 import { apiRequest, getCurrentUser, getCurrentProfile } from '../../modules/data'
 import { setProfile } from '../../modules/redux/profile'

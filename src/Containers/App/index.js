@@ -20,7 +20,7 @@ import FeedbackModal from '../Shared/FeedbackModal'
 import NewUser from '../Users/New'
 import Login from '../Users/Login'
 import User from '../Users/Show'
-import { apiRequest, getCurrentProfile, logout } from '../../modules/data'
+import { apiRequest, logout } from '../../modules/data'
 import Attempts from '../Courses/Attempts'
 import Collection from '../Collections/show'
 import { setProfile, getAndSetProfileFromApi } from '../../modules/redux/profile'
@@ -60,23 +60,23 @@ class App extends Component {
     let userNavs = []
     if (this.props.user.email) {
       userNavs.push((
-        <NavItem>
+        <NavItem key="user">
           <NavLink tag={Link} to={`/users/${this.props.user.id}`}>{this.props.user.email}</NavLink>
         </NavItem>
       ))
       userNavs.push((
-        <NavItem>
+        <NavItem key="logout">
           <a className="nav-link btn-pointer" onClick={this.handleLogout.bind(this)}>Logout</a>
         </NavItem>
       ))
     } else {
       userNavs.push((
-        <NavItem>
+        <NavItem key="login">
           <NavLink tag={Link} to="/login" onClick={this.handleCallToActionClick.bind(this)}>Login</NavLink>
         </NavItem>
       ))
       userNavs.push((
-        <NavItem>
+        <NavItem key="new-user">
           <NavLink tag={Link} to="/users/new" onClick={this.handleCallToActionClick.bind(this)}>Sign Up</NavLink>
         </NavItem>
       ))
@@ -84,7 +84,7 @@ class App extends Component {
     let adminNavs
     if (this.props.user && this.props.user.admin === true) {
       adminNavs = (
-        <NavItem>
+        <NavItem key="admin">
           <NavLink tag={Link} to="/admin">Admin</NavLink>
         </NavItem>
       )
@@ -123,13 +123,13 @@ class App extends Component {
               </NavbarBrand>
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
-                  <NavItem>
+                  <NavItem key="physics">
                     <NavLink tag={Link} to="/collections/phy-131" onClick={this.handleCallToActionClick.bind(this)}>PHY 131</NavLink>
                   </NavItem>
-                  <NavItem>
+                  <NavItem key="mini-courses">
                     <NavLink tag={Link} to="/courses" onClick={this.handleCallToActionClick.bind(this)}>Mini Courses</NavLink>
                   </NavItem>
-                  <NavItem>
+                  <NavItem key="feedback">
                     <NavLink tag={Link} to="/feedback" onClick={this.handleCallToActionClick.bind(this)}>Feedback</NavLink>
                   </NavItem>
                   {adminNavs}

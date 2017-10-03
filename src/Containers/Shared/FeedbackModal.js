@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Form, FormGroup, Label, Input, Alert, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
+import { Form, FormGroup, Label, Input, Alert, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { track } from '../../modules/analytics'
 import { setFeedback, clearFeedback, setFeedbackModal } from '../../modules/redux/feedback'
 import { apiRequest } from '../../modules/data'
@@ -70,8 +70,8 @@ class FeedbackModal extends Component {
             </Form>
           </ModalBody>
           <ModalFooter>
-            <button role="button" className="btn btn-primary" onClick={this.handleFormSubmit.bind(this)}>Submit</button>
-            <button role="button" className="btn btn-secondary" onClick={this.toggle.bind(this)}>Cancel</button>
+            <button className="btn btn-primary btn-pointer" onClick={this.handleFormSubmit.bind(this)}>Submit</button>
+            <button className="btn btn-secondary btn-pointer" onClick={this.toggle.bind(this)}>Cancel</button>
           </ModalFooter>
         </Modal>
       </div>

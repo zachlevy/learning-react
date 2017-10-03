@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { Field, reduxForm, FieldArray } from 'redux-form'
-import { parseApiErrors } from '../../../modules/strings'
+import { reduxForm } from 'redux-form'
 import { defaultCourse } from '../../../modules/defaults'
 import { buildFormFields, buildFormErrors } from '../../../modules/forms'
 

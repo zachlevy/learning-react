@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Field, reduxForm, FieldArray, change } from 'redux-form'
-import { parseApiErrors } from '../../../modules/strings'
+import { Field, reduxForm, change } from 'redux-form'
 import { defaultChallenge } from '../../../modules/defaults'
 import { apiRequest } from '../../../modules/data'
 import { buildFormFields, buildFormErrors } from '../../../modules/forms'
 import { snakeCaseToSpaceCase, capitalizeWords } from '../../../modules/strings'
 import getChallengeComponent from '../../Challenge/Components'
 import { gradientBackground } from '../../../modules/styles'
-import Uploader from '../Uploader'
 
 class ChallengeForm extends Component {
   constructor() {
@@ -114,7 +112,7 @@ class ChallengeForm extends Component {
                   handleShowNextButton: () => {},
                   submitChallengeResponse: () => {},
                   challengeId: 0,
-                  challengeDescription: this.props.challengeForm.values && this.props.challengeForm.values.description || mergedChallenge.description
+                  challengeDescription: (this.props.challengeForm.values && this.props.challengeForm.values.description) || mergedChallenge.description
                 }
               )
             )

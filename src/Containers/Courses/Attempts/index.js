@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import { apiRequest } from '../../../modules/data'
 import AttemptThumb from './AttemptThumb'
 import { setCourse } from '../../../modules/redux/course'
-import { arrayChunk } from '../../../modules/styles'
 
 class Attempts extends Component {
   constructor() {

@@ -331,3 +331,9 @@ iframe.wikipedia {
   color: white;
   list-style: none;
 }
+
+.list-inline-item {
+  .nav-link {
+    display: inline;
+  }
+}

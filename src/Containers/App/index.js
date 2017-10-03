@@ -19,12 +19,11 @@ import { track } from '../../modules/analytics'
 import FeedbackModal from '../Shared/FeedbackModal'
 import NewUser from '../Users/New'
 import Login from '../Users/Login'
-import { clearUser } from '../../modules/redux/user'
 import User from '../Users/Show'
-import { apiRequest, getCurrentProfile } from '../../modules/data'
+import { apiRequest, getCurrentProfile, logout } from '../../modules/data'
 import Attempts from '../Courses/Attempts'
 import Collection from '../Collections/show'
-import { setProfile, clearProfile } from '../../modules/redux/profile'
+import { setProfile, getAndSetProfileFromApi } from '../../modules/redux/profile'
 
 class App extends Component {
   constructor() {
@@ -48,19 +47,14 @@ class App extends Component {
 
   handleLogout() {
     console.log("handleLogout")
-    this.props.clearUser()
-    this.props.clearProfile()
+    logout()
     this.props.changePage("/")
   }
 
   componentDidMount() {
     // load profile when the app loads
     // there is probably some redundency here
-    getCurrentProfile((profile, status) => {
-      if (status === 200) {
-        this.props.setProfile(profile)
-      }
-    })
+    this.props.getAndSetProfileFromApi()
   }
 
   render() {
@@ -161,9 +155,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: (url) => push(url),
-  clearUser,
   setProfile,
-  clearProfile
+  getAndSetProfileFromApi
 }, dispatch)
 
 export default DragDropContext(HTML5Backend)(withRouter(connect(

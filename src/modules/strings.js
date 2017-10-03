@@ -82,9 +82,7 @@ export const katexToHTML = (string) => {
 export const define = (word, callback) => {
 
   const escapedWord = encodeURI(word.toLowerCase())
-
-  console.log(escapedWord)
-
+  
   apiRequest("/definitions", {
     method: 'post',
     body: JSON.stringify({

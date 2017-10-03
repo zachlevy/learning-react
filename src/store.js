@@ -39,7 +39,6 @@ export default function configureStore() {
 
   return new Promise((resolve, reject) => {
     try {
-      console.log("configureStore Promise try")
       const store = createStore(
         rootReducer,
         initialState,

@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { push, goBack } from 'react-router-redux'
+import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { setCourse, insertCourseFlowChallenges } from '../../modules/redux/course'
+import { setCourse, insertCourseFlowChallenges, updateCourseFlowChallenge } from '../../modules/redux/course'
 import { Switch, Route, Link } from 'react-router-dom'
 import Challenge from '../Challenge/show'
 import FontAwesome from 'react-fontawesome'
 import { getIcon } from '../../modules/icons'
 import { gradientBackground } from '../../modules/styles'
-import { secondsToMinutes } from '../../modules/time'
 import { track } from '../../modules/analytics'
 import { apiRequest } from '../../modules/data'
 
@@ -16,8 +15,15 @@ import { apiRequest } from '../../modules/data'
 // contains common methods to move the course form challenge to chalenge
 class Course extends Component {
   componentDidMount() {
-    apiRequest(`/courses/${this.props.match.params.courseId}`, {}, (response) => {
-      this.props.setCourse(response)
+    apiRequest(`/courses/${this.props.match.params.courseId}`, {}, (courseResponse) => {
+      this.props.setCourse(courseResponse)
+      apiRequest(`/challenge_responses?course_id=${courseResponse.id}`, {}, (challengeResponsesResponse, status) => {
+        if (status === 200) {
+          challengeResponsesResponse.forEach((challengeResponse) => {
+            this.props.updateCourseFlowChallenge(challengeResponse.challenge_id, challengeResponse.status)
+          })
+        }
+      })
     })
     // scroll below navbar to give full screen effect
     document.getElementById("course-show").scrollIntoView()
@@ -26,7 +32,7 @@ class Course extends Component {
   // submit challeng response
   // input is an object, jsonb in the database
   // callback is a function that gets passed response and status as the params
-  submitChallengeResponse(input, callback) {
+  submitChallengeResponse(input, status, callback) {
     apiRequest("/challenge_responses", {
       method: "post",
       body: JSON.stringify({
@@ -34,10 +40,14 @@ class Course extends Component {
           input: input,
           challenge_id: this.props.challenge.id,
           course_id: this.props.course.id,
+          status: status || "complete" // complete, attempt, or skip
           // authenticate to pass user_id
         }
       })
-    }, callback)
+    }, (response, status) => {
+      this.props.updateCourseFlowChallenge(response.challenge_id, response.status)
+      typeof callback === 'function' && callback(response, status)
+    })
   }
 
   // next challenge
@@ -84,7 +94,6 @@ class Course extends Component {
   // inserts challenges into the flow if the user answers wrong
   // takes an input (from user) to match against only_inputs optional whitelist array. see the learning-api docs for more information on data formats
   handleInsertDependencies(input) {
-    console.log("handleInsertDependencies", input)
     // find the current index in flow
     const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
     // check for only_inputs
@@ -107,7 +116,6 @@ class Course extends Component {
 
   // inserts challenges into the flow
   handleInsertChallenges(challenges) {
-    console.log("handleInsertChallenges", challenges)
     // find the current index in flow
     const currentChallengeIndex = this.props.course.flow.findIndex((item) =>  this.props.challenge.id === item.id)
     // insert the dependencies into the course flow
@@ -153,7 +161,7 @@ class Course extends Component {
               this.props.course.flow && this.props.course.flow.slice().reverse().map((challenge, index) => {
                 return (
                   <div key={index} style={{height: challengeWidth + "%"}} className="text-center timeline-icon">
-                    <Link className={"btn btn-timeline btn-link" + (index < reversedChallengeIndex && !challenge.completionStatus ? " disabled" : "") + (index === reversedChallengeIndex ? " active" : "") + (!challenge.completionStatus ? " skipped" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
+                    <Link className={"btn btn-timeline btn-link" + (index === reversedChallengeIndex ? " active" : "") + (!challenge.completionStatus ? " skip" : "")} to={`/courses/${this.props.course.id}/challenges/${challenge.id}`}><FontAwesome name={getIcon(challenge.type)} /></Link>
                   </div>
                 )
               })
@@ -174,6 +182,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   setCourse,
   insertCourseFlowChallenges,
+  updateCourseFlowChallenge,
   changeCourseChallenge: (courseId, challengeId) => push(`/courses/${courseId}/challenges/${challengeId}`),
   GoToFeedbackPage: () => push(`/feedback`)
 }, dispatch)

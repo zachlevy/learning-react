@@ -23,7 +23,6 @@ export default (state = initialState, action) => {
       return newState
 
     case INSERT_COURSE_FLOW_CHALLENGES:
-      console.log("INSERT_COURSE_FLOW_CHALLENGES", action.afterChallengeId, action.challengeFlowObjects)
       const newCourseState = Object.assign({}, state)
       newCourseState.flow.splice(action.afterChallengeId, 0, ...action.challengeFlowObjects)
       return newCourseState
@@ -54,7 +53,7 @@ export const insertCourseFlowChallenges = (afterChallengeId, challengeFlowObject
 
 // update the flow array
 // pass in id
-// pass in the challenge completion status
+// pass in the challenge completion status. complete, attempt, skip
 export const updateCourseFlowChallenge = (challengeId, completionStatus) => {
   return dispatch => {
     dispatch({

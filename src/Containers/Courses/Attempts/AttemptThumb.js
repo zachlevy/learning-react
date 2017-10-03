@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import FontAwesome from 'react-fontawesome'
 
-// used to render the course thumbnails in course lists
 class AttemptThumb extends Component {
   render() {
     let inputText

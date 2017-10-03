@@ -17,7 +17,6 @@ class Bootloader extends Component {
   }
 
   async componentWillMount () {
-    console.log("Bootloader componentWillMount")
     const store = await configureStore()
     this.setState({ store })
   }

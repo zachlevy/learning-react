@@ -19,12 +19,11 @@ import { track } from '../../modules/analytics'
 import FeedbackModal from '../Shared/FeedbackModal'
 import NewUser from '../Users/New'
 import Login from '../Users/Login'
-import { clearUser } from '../../modules/redux/user'
 import User from '../Users/Show'
-import { apiRequest, getCurrentProfile } from '../../modules/data'
+import { apiRequest, logout } from '../../modules/data'
 import Attempts from '../Courses/Attempts'
 import Collection from '../Collections/show'
-import { setProfile, clearProfile } from '../../modules/redux/profile'
+import { setProfile, getAndSetProfileFromApi } from '../../modules/redux/profile'
 
 class App extends Component {
   constructor() {
@@ -47,43 +46,37 @@ class App extends Component {
   }
 
   handleLogout() {
-    console.log("handleLogout")
-    this.props.clearUser()
-    this.props.clearProfile()
+    logout()
     this.props.changePage("/")
   }
 
   componentDidMount() {
     // load profile when the app loads
     // there is probably some redundency here
-    getCurrentProfile((profile, status) => {
-      if (status === 200) {
-        this.props.setProfile(profile)
-      }
-    })
+    this.props.getAndSetProfileFromApi()
   }
 
   render() {
     let userNavs = []
     if (this.props.user.email) {
       userNavs.push((
-        <NavItem>
+        <NavItem key="user">
           <NavLink tag={Link} to={`/users/${this.props.user.id}`}>{this.props.user.email}</NavLink>
         </NavItem>
       ))
       userNavs.push((
-        <NavItem>
+        <NavItem key="logout">
           <a className="nav-link btn-pointer" onClick={this.handleLogout.bind(this)}>Logout</a>
         </NavItem>
       ))
     } else {
       userNavs.push((
-        <NavItem>
+        <NavItem key="login">
           <NavLink tag={Link} to="/login" onClick={this.handleCallToActionClick.bind(this)}>Login</NavLink>
         </NavItem>
       ))
       userNavs.push((
-        <NavItem>
+        <NavItem key="new-user">
           <NavLink tag={Link} to="/users/new" onClick={this.handleCallToActionClick.bind(this)}>Sign Up</NavLink>
         </NavItem>
       ))
@@ -91,7 +84,7 @@ class App extends Component {
     let adminNavs
     if (this.props.user && this.props.user.admin === true) {
       adminNavs = (
-        <NavItem>
+        <NavItem key="admin">
           <NavLink tag={Link} to="/admin">Admin</NavLink>
         </NavItem>
       )
@@ -130,13 +123,13 @@ class App extends Component {
               </NavbarBrand>
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
-                  <NavItem>
+                  <NavItem key="physics">
                     <NavLink tag={Link} to="/collections/phy-131" onClick={this.handleCallToActionClick.bind(this)}>PHY 131</NavLink>
                   </NavItem>
-                  <NavItem>
+                  <NavItem key="mini-courses">
                     <NavLink tag={Link} to="/courses" onClick={this.handleCallToActionClick.bind(this)}>Mini Courses</NavLink>
                   </NavItem>
-                  <NavItem>
+                  <NavItem key="feedback">
                     <NavLink tag={Link} to="/feedback" onClick={this.handleCallToActionClick.bind(this)}>Feedback</NavLink>
                   </NavItem>
                   {adminNavs}
@@ -161,9 +154,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: (url) => push(url),
-  clearUser,
   setProfile,
-  clearProfile
+  getAndSetProfileFromApi
 }, dispatch)
 
 export default DragDropContext(HTML5Backend)(withRouter(connect(

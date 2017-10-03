@@ -40,7 +40,6 @@ export const apiRequest = (endpoint, options, callback) => {
     } else if (anonymousUserId) {
       defaultOptions.headers["AnonymousUser"] = anonymousUserId
     }
-    // console.log("jwt", jwt, "anonymousUserId", anonymousUserId)
     // pseudo deep merge
     const mergedHeaders = Object.assign({}, defaultOptions.headers, options.headers)
     const mergedOptions = Object.assign({}, defaultOptions, options, {headers: mergedHeaders})
@@ -49,12 +48,7 @@ export const apiRequest = (endpoint, options, callback) => {
     fetch(`${process.env.REACT_APP_API_URL}${endpoint}`, mergedOptions).then((res) => {
       if (jwt && res.status === 401) {
         // logout if a bad/expired token
-        getStore().dispatch({
-          type: CLEAR_USER
-        })
-        getStore().dispatch({
-          type: CLEAR_PROFILE
-        })
+        logout()
       }
       if(res.headers.get("content-type").includes("application/json")) {
         res.json().then((response) => {
@@ -70,6 +64,16 @@ export const apiRequest = (endpoint, options, callback) => {
 
     })
   }
+}
+
+export const logout = () => {
+  console.log("logout")
+  getStore().dispatch({
+    type: CLEAR_USER
+  })
+  getStore().dispatch({
+    type: CLEAR_PROFILE
+  })
 }
 
 export const getCurrentProfile = (callback) => {

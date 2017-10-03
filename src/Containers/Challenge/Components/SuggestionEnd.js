@@ -23,6 +23,7 @@ class SuggestionEnd extends Component {
     this.props.changePage(`/courses/${this.props.course.id}`)
   }
   handleFinishClick() {
+    this.props.submitChallengeResponse(null, "complete")
     this.props.changePage(`/courses`)
   }
   render() {
@@ -50,7 +51,7 @@ class SuggestionEnd extends Component {
           <div className="col-12 col-md-10">
             <div className="float-md-right">
               <br />
-              <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.handleFinishClick.bind(this)}>All Mini Courses</button>
+              <button className="btn btn-outline-secondary btn-lg btn-pointer" onClick={this.handleFinishClick.bind(this)}>All Mini Courses</button>
             </div>
           </div>
         </div>

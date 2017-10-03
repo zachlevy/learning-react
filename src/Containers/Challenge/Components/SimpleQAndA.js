@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 import FontAwesome from 'react-fontawesome'
-import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
 import { setFeedbackModal, setFeedbackContext } from '../../../modules/redux/feedback'
 import { markdownToHTML } from '../../../modules/strings'
@@ -39,8 +38,6 @@ class SimpleQAndA extends Component {
   }
 
   assert(event) {
-    console.log("assert")
-    console.log(this.props)
     const foundFeedback = this.props.feedback.find((feedback) => {
       if (feedback.answer_type === "regex") {
         return !!this.state.input.toLowerCase().match(feedback.text.toLowerCase())
@@ -49,10 +46,12 @@ class SimpleQAndA extends Component {
       }
     })
 
+    let status = "attempt"
     if (foundFeedback) {
       if (foundFeedback.correct) {
         this.setState({feedback: foundFeedback.prompt || "Correct!", submitButtonText: "Correct", showSubmitButton: false})
         this.props.handleShowNextButton()
+        status = "complete"
       } else {
         this.setState({feedback: foundFeedback.prompt || "Incorrect answer, try again!"})
       }
@@ -66,7 +65,7 @@ class SimpleQAndA extends Component {
     this.props.submitChallengeResponse({
       analysis: "none",
       text: this.state.input
-    })
+    }, status)
 
     // gross, i don't like this approach at all. not happy.
     // expecting this.props.submitToProfile to be an object like {"key": "demographic", "attributeName": "age"}
@@ -128,13 +127,11 @@ class SimpleQAndA extends Component {
   }
 
   handleDisagreeOnClick(e) {
-    console.log("handleDisagreeOnClick")
     this.props.setFeedbackModal(true)
     this.props.setFeedbackContext(this.props)
   }
 
   handleSolutionButton(e) {
-    console.log("handleSolutionButton")
     this.setState({solution: this.props.solution})
   }
 
@@ -142,12 +139,12 @@ class SimpleQAndA extends Component {
     let help
     help = (
       <li className="list-inline-item">
-        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+        <button className="btn btn-link btn-pointer" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
       </li>
     )
     let disagreeButton // only display when answer is incorrect
     if (!this.props.showNextButton) {
-      disagreeButton = <button className="btn btn-secondary btn-sm" onClick={this.handleDisagreeOnClick.bind(this)}>Disagree?</button>
+      disagreeButton = <button className="btn btn-secondary btn-sm btn-pointer" onClick={this.handleDisagreeOnClick.bind(this)}>Disagree?</button>
     }
     let feedback
     if (this.state.feedback) {
@@ -162,7 +159,7 @@ class SimpleQAndA extends Component {
       image = (
         <div className="row">
           <div className="col-12 col-lg-6 offset-lg-3 text-center">
-            <img src={this.props.image_url} className="img-fluid simple_q_and_a-question-image_url" />
+            <img src={this.props.image_url} className="img-fluid simple_q_and_a-question-image_url" alt="" />
           </div>
         </div>
       )
@@ -171,7 +168,7 @@ class SimpleQAndA extends Component {
     if (this.props.solution) {
       solution = (
         <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={this.handleSolutionButton.bind(this)}><span>solution</span></button>
+          <button className="btn btn-link btn-pointer" onClick={this.handleSolutionButton.bind(this)}><span>solution</span></button>
         </li>
       )
     }
@@ -190,7 +187,7 @@ class SimpleQAndA extends Component {
               </div>
             </div>
             <br />
-            <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.state.showSubmitButton ? "" : " disabled")} onClick={this.state.showSubmitButton && this.assert.bind(this)}>{this.state.submitButtonText}</button>
+            <button className={"btn btn-outline-secondary btn-lg btn-pointer" + (this.state.showSubmitButton ? "" : " disabled")} onClick={this.state.showSubmitButton && this.assert.bind(this)}>{this.state.submitButtonText}</button>
             <br />
             <br />
           </div>
@@ -208,13 +205,13 @@ class SimpleQAndA extends Component {
                 {solution}
                 {help}
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
+                  <button className="btn btn-link btn-pointer" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
+                  <button className="btn btn-link btn-pointer" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
+                  <button className={"btn btn-outline-secondary btn-lg btn-pointer" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
                 </li>
               </ul>
             </div>

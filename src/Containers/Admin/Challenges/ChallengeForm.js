@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Field, reduxForm, FieldArray, change } from 'redux-form'
-import { parseApiErrors } from '../../../modules/strings'
+import { Field, reduxForm, change } from 'redux-form'
 import { defaultChallenge } from '../../../modules/defaults'
 import { apiRequest } from '../../../modules/data'
 import { buildFormFields, buildFormErrors } from '../../../modules/forms'
 import { snakeCaseToSpaceCase, capitalizeWords } from '../../../modules/strings'
 import getChallengeComponent from '../../Challenge/Components'
 import { gradientBackground } from '../../../modules/styles'
-import Uploader from '../Uploader'
 
 class ChallengeForm extends Component {
   constructor() {
@@ -23,7 +21,6 @@ class ChallengeForm extends Component {
   componentDidMount() {
     apiRequest(`/challenge_types`, {
     }, (response, status) => {
-      console.log("challenge_types", response)
       this.setState({challengeTypes: response})
       // simulate changing challenge type for editing a challenge
       if (this.props.initialValues) {
@@ -33,7 +30,7 @@ class ChallengeForm extends Component {
   }
 
   handleChallengeTypeChange(e) {
-    const selectedChallengeType = this.state.challengeTypes.find((challengeType) => {return challengeType.id == e.target.value})
+    const selectedChallengeType = this.state.challengeTypes.find((challengeType) => {return challengeType.id === +e.target.value})
     this.setState({selectedChallengeType: selectedChallengeType})
   }
 
@@ -72,7 +69,6 @@ class ChallengeForm extends Component {
       mergedChallenge = defaultChallenge()
     }
     let mergedChallengeBody
-    console.log("mergedChallengeBody", mergedChallenge.body, this.props.challengeForm && this.props.challengeForm.values && this.props.challengeForm.values.body)
     mergedChallengeBody = Object.assign({}, mergedChallenge.body, (this.props.challengeForm && this.props.challengeForm.values &&  this.props.challengeForm.values.body) || {})
     return (
       <div className="row">
@@ -116,7 +112,7 @@ class ChallengeForm extends Component {
                   handleShowNextButton: () => {},
                   submitChallengeResponse: () => {},
                   challengeId: 0,
-                  challengeDescription: this.props.challengeForm.values && this.props.challengeForm.values.description || mergedChallenge.description
+                  challengeDescription: (this.props.challengeForm.values && this.props.challengeForm.values.description) || mergedChallenge.description
                 }
               )
             )

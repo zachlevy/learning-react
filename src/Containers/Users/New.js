@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import UserForm from './UserForm'
-import { SubmissionError } from 'redux-form'
 import { push } from 'react-router-redux'
 import { apiRequest, getCurrentUser, getCurrentProfile } from '../../modules/data'
 import { setCurrentUser, setJwt } from '../../modules/redux/user'
@@ -17,7 +16,6 @@ class New extends Component {
   }
 
   handleSubmit(userValues) {
-    console.log("handleSubmit", userValues)
     // create user
     apiRequest("/users", {
       method: 'post',

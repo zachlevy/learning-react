@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import ChallengeForm from './ChallengeForm'
-import { SubmissionError, reset } from 'redux-form'
+import { reset } from 'redux-form'
 import { push } from 'react-router-redux'
 import { apiRequest } from '../../../modules/data'
 
@@ -15,7 +15,6 @@ class New extends Component {
   }
 
   handleSubmit(challengeValues) {
-    console.log("handleSubmit", challengeValues)
     // optional course id
     const courseId = new URLSearchParams(this.props.location.search).get('course_id')
     // create course
@@ -26,7 +25,6 @@ class New extends Component {
       })
     }, (challengeResponse, status) => {
       if (status === 201) {
-        console.log("response", challengeResponse)
         this.setState({errors: {success: ["the challenge has been created."]}})
         this.props.clearChallengeForm()
 

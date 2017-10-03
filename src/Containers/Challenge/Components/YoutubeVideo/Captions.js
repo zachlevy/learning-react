@@ -16,9 +16,7 @@ class Captions extends Component {
   }
 
   handleWordClick(e) {
-    console.log("handleWordClick", e.target.textContent)
     const word = removePunctuation(e.target.textContent)
-    console.log(word)
     this.props.addDictionaryWord(word)
   }
 
@@ -26,7 +24,6 @@ class Captions extends Component {
     const word = removePunctuation(e.target.textContent)
     this.setState({definedWord: word, definitions: []})
     define(word, (response) => {
-      console.log(response)
       this.setState({definitions: response.definitions})
     })
   }
@@ -71,6 +68,8 @@ class Captions extends Component {
                       return (<span index={index}><a className="btn-pointer" onMouseEnter={this.handleWordOnMouseEnter.bind(this)} onClick={this.handleWordClick.bind(this)}>{word}</a> </span>)
                     })
                     return <p key={index}>{words}</p>
+                  } else {
+                    return null
                   }
                 })
               }

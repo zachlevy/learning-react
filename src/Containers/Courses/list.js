@@ -9,12 +9,12 @@ class CourseList extends Component {
     return (
       <div>
         {
-          arrayChunk(this.props.courses, 3).map((row, index) => {
+          arrayChunk(this.props.courses, 3).map((row, rowIndex) => {
             return (
-              <div className="row" key={index}>
+              <div className="row" key={rowIndex}>
                 {
-                  row.map((course, index) => {
-                    return <CourseThumb className="col-12 col-md-6 col-lg-4" key={index} course={course} />
+                  row.map((course, courseIndex) => {
+                    return <CourseThumb className="col-12 col-md-6 col-lg-4" key={courseIndex} course={course} />
                   })
                 }
               </div>

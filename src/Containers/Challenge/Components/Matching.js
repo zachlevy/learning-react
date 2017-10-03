@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
-import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
 import { markdownToHTML } from '../../../modules/strings'
 
@@ -18,10 +17,8 @@ class Matching extends Component {
     }
   }
   assert(event) {
-    console.log("assert")
-    let answered
-    const answers = new Array(this.props.matchWith.length)
     const newFeedbackArray = [...this.state.feedback]
+    let status = "attempt"
     this.state.input.forEach((answer, inputIndex) => {
       const foundFeedback = this.props.feedback.find((feedback) => {
         return answer === feedback.text
@@ -36,23 +33,28 @@ class Matching extends Component {
       }
     })
 
+    // check if all correct
+    const allCorrect = newFeedbackArray.map((feedback) => feedback.correct).find((feedback) => feedback !== true) === undefined
+    if (allCorrect) {
+      status = "complete"
+    }
+
+    this.setState({feedback: newFeedbackArray, showSubmitButton: false})
+    this.props.handleShowNextButton()
+
     this.props.submitChallengeResponse({
       analysis: "none",
       text: this.state.input
-    })
-    this.setState({feedback: newFeedbackArray, showSubmitButton: false})
-    this.props.handleShowNextButton()
+    }, status)
   }
 
   handleSelectChange(matchWith, matchWithIndex, e) {
-    console.log("handleSelectChange", matchWith, e.target.value)
     const newInputArray = [...this.state.input]
     newInputArray[matchWithIndex] = matchWith + e.target.value
     this.setState({input: newInputArray, showSubmitButton: true})
   }
 
   handleSubmitClick(e) {
-    console.log("handleSubmitClick")
     this.state.showSubmitButton && this.assert()
   }
 
@@ -86,7 +88,6 @@ class Matching extends Component {
   }
 
   handleSolutionButton(e) {
-    console.log("handleSolutionButton")
     this.setState({solution: this.props.solution})
   }
 
@@ -94,23 +95,15 @@ class Matching extends Component {
     let help
     help = (
       <li className="list-inline-item">
-        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+        <button className="btn btn-link btn-pointer" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
       </li>
     )
-    let feedback
-    if (this.state.feedback) {
-      feedback = (
-        <div className="multiple_choice-feedback">
-          <p>{markdownToHTML(this.state.feedback)}</p>
-        </div>
-      )
-    }
     let image
     if (this.props.image_url) {
       image = (
         <div className="row">
           <div className="col-12 col-lg-6 offset-lg-3 text-center">
-            <img src={this.props.image_url} className="img-fluid matching-question-image_url" />
+            <img src={this.props.image_url} className="img-fluid matching-question-image_url" alt="" />
           </div>
         </div>
       )
@@ -119,7 +112,7 @@ class Matching extends Component {
     if (this.props.solution) {
       solution = (
         <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={this.handleSolutionButton.bind(this)}><span>solution</span></button>
+          <button className="btn btn-link btn-pointer" onClick={this.handleSolutionButton.bind(this)}><span>solution</span></button>
         </li>
       )
     }
@@ -168,7 +161,7 @@ class Matching extends Component {
               </div>
             </div>
             <br />
-            <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.state.showSubmitButton ? "" : " disabled")} onClick={this.state.showSubmitButton && this.handleSubmitClick.bind(this)}>{this.state.submitButtonText}</button>
+            <button className={"btn btn-outline-secondary btn-lg btn-pointer" + (this.state.showSubmitButton ? "" : " disabled")} onClick={this.state.showSubmitButton && this.handleSubmitClick.bind(this)}>{this.state.submitButtonText}</button>
             <br />
             <br />
           </div>
@@ -186,13 +179,13 @@ class Matching extends Component {
                 {solution}
                 {help}
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
+                  <button className="btn btn-link btn-pointer" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
+                  <button className="btn btn-link btn-pointer" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
+                  <button className={"btn btn-outline-secondary btn-lg btn-pointer" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
                 </li>
               </ul>
             </div>

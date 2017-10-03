@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
-import { parseApiErrors } from '../../modules/strings'
 import { buildFormErrors } from '../../modules/forms'
 
 class LoginForm extends Component {

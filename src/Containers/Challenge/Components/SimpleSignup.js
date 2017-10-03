@@ -15,7 +15,6 @@ class SimpleSignup extends Component {
     }
   }
   assert(event) {
-    console.log()
     this.submitSignup(this.state.email)
   }
 
@@ -75,6 +74,7 @@ class SimpleSignup extends Component {
       eventValue: this.props.showNextButton ? 1 : 0
     })
     if (this.props.showNextButton) {
+      this.props.submitChallengeResponse(null, "complete")
       this.props.handleNextClick()
     } else {
       this.setState({showHelp: true})
@@ -85,7 +85,7 @@ class SimpleSignup extends Component {
     let help
     help = (
       <li className="list-inline-item">
-        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+        <button className="btn btn-link btn-pointer" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
       </li>
     )
     let feedback
@@ -111,7 +111,7 @@ class SimpleSignup extends Component {
               </div>
             </div>
             <br />
-            <button role="button" className="btn btn-outline-secondary btn-lg" onClick={this.assert.bind(this)}>{this.props.buttonText}</button>
+            <button className="btn btn-outline-secondary btn-lg btn-pointer" onClick={this.assert.bind(this)}>{this.props.buttonText}</button>
             <br />
             <br />
           </div>
@@ -128,13 +128,13 @@ class SimpleSignup extends Component {
               <ul className="list-inline">
                 {help}
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
+                  <button className="btn btn-link btn-pointer" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
+                  <button className="btn btn-link btn-pointer" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
+                  <button className={"btn btn-outline-secondary btn-lg btn-pointer" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
                 </li>
               </ul>
             </div>

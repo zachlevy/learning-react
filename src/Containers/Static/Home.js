@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import Courses from '../Courses'
 import Footer from '../Shared/Footer'
 import { Link } from 'react-router-dom'
 import { gradientBackground } from '../../modules/styles'
@@ -13,7 +12,6 @@ import { apiRequest } from '../../modules/data'
 
 class Home extends Component {
   componentDidMount() {
-    console.log("componentDidMount")
     apiRequest("/courses?ids=8,14,10,11,12,13", {}, (response) => {
       const courseResponse = response.filter((course) => course) // filter out null courses
       this.setState({courses: courseResponse})
@@ -22,7 +20,6 @@ class Home extends Component {
   }
 
   handleCallToActionClick(e) {
-    console.log("handleCallToActionClick")
     track("Click CTA", {
       name: "CTA",
       action: "Click",

@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
-import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
 import { markdownToHTML } from '../../../modules/strings'
-import { apiRequest } from '../../../modules/strings'
 
 class OpenEndedQ extends Component {
   constructor() {
@@ -18,7 +16,6 @@ class OpenEndedQ extends Component {
     }
   }
   assert(event) {
-    console.log("assert")
     let answered = this.state.input.length > this.props.min_length
     if (answered) {
       this.props.handleShowNextButton()
@@ -46,7 +43,7 @@ class OpenEndedQ extends Component {
       this.props.submitChallengeResponse({
         analysis: "none",
         text: this.state.input
-      })
+      }, "complete")
       this.props.handleNextClick()
     } else {
       this.handleShowHelp.bind(this)
@@ -63,7 +60,6 @@ class OpenEndedQ extends Component {
   }
 
   handleSolutionButton(e) {
-    console.log("handleSolutionButton")
     this.setState({solution: this.props.solution})
   }
 
@@ -71,7 +67,7 @@ class OpenEndedQ extends Component {
     let help
     help = (
       <li className="list-inline-item">
-        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+        <button className="btn btn-link btn-pointer" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
       </li>
     )
     let feedback
@@ -88,7 +84,7 @@ class OpenEndedQ extends Component {
       image = (
         <div className="row">
           <div className="col-12 col-lg-6 offset-lg-3 text-center">
-            <img src={this.props.image_url} className="img-fluid simple_q_and_a-question-image_url" />
+            <img src={this.props.image_url} className="img-fluid simple_q_and_a-question-image_url" alt="" />
           </div>
         </div>
       )
@@ -97,7 +93,7 @@ class OpenEndedQ extends Component {
     if (this.props.solution) {
       solution = (
         <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={this.handleSolutionButton.bind(this)}><span>solution</span></button>
+          <button className="btn btn-link btn-pointer" onClick={this.handleSolutionButton.bind(this)}><span>solution</span></button>
         </li>
       )
     }
@@ -130,13 +126,13 @@ class OpenEndedQ extends Component {
                 {solution}
                 {help}
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
+                  <button className="btn btn-link btn-pointer" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
+                  <button className="btn btn-link btn-pointer" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
+                  <button className={"btn btn-outline-secondary btn-lg btn-pointer" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
                 </li>
               </ul>
             </div>

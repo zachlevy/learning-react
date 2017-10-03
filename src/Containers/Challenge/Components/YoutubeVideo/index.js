@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { secondsToMinutes } from '../../../../modules/time'
 import YouTube from 'react-youtube'
 import { track } from '../../../../modules/analytics'
 import FontAwesome from 'react-fontawesome'
@@ -17,21 +16,17 @@ class YoutubeVideo extends Component {
       videoDuration: 0,
       currentTime: 0,
     }
-    this.videoPlayer
+    this.videoPlayer = undefined
   }
 
   componentDidMount() {
-    console.log("componentDidMount")
-    console.log("this.props.captions", this.props.captions)
   }
 
   componentWillUnmount() {
-    console.log("componentWillUnmount")
     clearInterval(this.state.playbackInterval);
   }
 
   assert(event) {
-    console.log("assert")
   }
 
   handleSeek(seekTime) {
@@ -47,7 +42,6 @@ class YoutubeVideo extends Component {
   }
 
   handlePlaybackChange(newRate) {
-    console.log("newRate", newRate)
     if (newRate === undefined) {
       // set default
       newRate = 1
@@ -58,7 +52,6 @@ class YoutubeVideo extends Component {
     } else if (newRate > playbackRates[playbackRates.length - 1]) {
       newRate = playbackRates[playbackRates.length - 1]
     }
-    console.log("newRate", newRate)
     this.videoPlayer.setPlaybackRate(newRate)
   }
 
@@ -66,7 +59,6 @@ class YoutubeVideo extends Component {
     track("Ready YouTube Video", {name: "YouTube Video", action: "Ready", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined})})
     this.videoPlayer = e.target
     const duration = this.videoPlayer.getDuration()
-    console.log(duration)
     this.setState({videoDuration: getYouTubeVideoDuration(duration, this.props.start_seconds, this.props.end_seconds)})
     this.setState({playbackInterval: setInterval(() => { this.setState({currentTime: this.videoPlayer.getCurrentTime()}) }, 500)})
     this.handlePlaybackChange(this.props.playback_rate)
@@ -117,12 +109,10 @@ class YoutubeVideo extends Component {
   }
 
   handleOnMouseEnter(e) {
-    console.log("handleOnMouseEnter")
     this.videoPlayer.pauseVideo()
   }
 
   handleOnMouseLeave(e) {
-    console.log("handleOnMouseLeave")
     this.videoPlayer.playVideo()
   }
 
@@ -131,7 +121,7 @@ class YoutubeVideo extends Component {
     let help
     help = (
       <li className="list-inline-item">
-        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+        <button className="btn btn-link btn-pointer" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
       </li>
     )
     let captions
@@ -174,7 +164,7 @@ class YoutubeVideo extends Component {
                 onPause={(e) => {track("Pause YouTube Video", {name: "YouTube Video", action: "Pause", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined}), data: e.data})}}
                 onEnd={this.handleOnEnd.bind(this)}
                 onError={(e) => {track("Error YouTube Video", {name: "YouTube Video", action: "Error", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined}), data: e.data})}}
-                onStateChange={(e) => {console.log("onStateChange")}}
+                onStateChange={(e) => {}}
                 onPlaybackRateChange={this.handleOnPlaybackRateChange.bind(this)}
                 onPlaybackQualityChange={(e) => {track("PlaybackQualityChange YouTube Video", {name: "YouTube Video", action: "PlaybackQualityChange", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined}), data: e.data})}}
               />
@@ -188,17 +178,17 @@ class YoutubeVideo extends Component {
               <br />
               <ul className="list-inline">
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handleSeek.bind(this, -10)}><FontAwesome name="undo" /> <span>go back 10s</span></button>
+                  <button className="btn btn-outline-secondary btn-sm btn-pointer" onClick={this.handleSeek.bind(this, -10)}><FontAwesome name="undo" /> <span>go back 10s</span></button>
                 </li>
                 <li className="list-inline-item">
                   {/* bug right now, can't move past 1.5 because the increment is always 0.25 */}
-                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate - 0.25)}><FontAwesome name="backward" /></button>
+                  <button className="btn btn-outline-secondary btn-sm btn-pointer" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate - 0.25)}><FontAwesome name="backward" /></button>
                 </li>
                 <li className="list-inline-item">
                   <button className="btn btn-sm disabled">{this.state.playbackRate}x</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-outline-secondary btn-sm" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate + 0.25)}><FontAwesome name="forward" /></button>
+                  <button className="btn btn-outline-secondary btn-sm btn-pointer" onClick={this.handlePlaybackChange.bind(this, this.state.playbackRate + 0.25)}><FontAwesome name="forward" /></button>
                 </li>
               </ul>
             </div>
@@ -216,13 +206,13 @@ class YoutubeVideo extends Component {
             </li>
             {help}
             <li className="list-inline-item">
-              <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
+              <button className="btn btn-link bnt-pointer" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
             </li>
             <li className="list-inline-item">
-              <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
+              <button className="btn btn-link bnt-pointer" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
             </li>
             <li className="list-inline-item">
-              <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
+              <button className={"btn btn-outline-secondary btn-lg bnt-pointer" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
             </li>
           </ul>
         </div>

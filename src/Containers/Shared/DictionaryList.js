@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
 class DictionaryList extends Component {
   handleWordClick(e) {
-    console.log("handleWordClick", e.target.textContent)
   }
 
   render() {

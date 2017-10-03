@@ -15,7 +15,6 @@ class ExternalSuggestionEnd extends Component {
     }
   }
   handleExternalContentClick(content) {
-    console.log("handleButtonClick")
     track("Click External Content", {
       name: "External Content",
       action: "Click",
@@ -35,6 +34,7 @@ class ExternalSuggestionEnd extends Component {
       eventLabel: "showNextButton",
       eventValue: this.props.showNextButton ? 1 : 0
     })
+    this.props.submitChallengeResponse(null, "complete")
     this.props.handleNextClick(this)
   }
   handleShowHelp() {
@@ -50,7 +50,7 @@ class ExternalSuggestionEnd extends Component {
     let help
     help = (
       <li className="list-inline-item">
-        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+        <button className="btn btn-link btn-pointer" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
       </li>
     )
     return (
@@ -66,7 +66,7 @@ class ExternalSuggestionEnd extends Component {
           {
             this.props.external_contents && this.props.external_contents.map((content, index) => {
               return (
-                <div className="col-4 text-center">
+                <div key={index} className="col-4 text-center">
                   <button className="btn btn-outline-secondary btn-block btn-pointer" onClick={this.handleExternalContentClick.bind(this, content)}>
                     <br />
                     <br />
@@ -93,13 +93,13 @@ class ExternalSuggestionEnd extends Component {
               <ul className="list-inline">
                 {help}
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
+                  <button className="btn btn-link btn-pointer" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
+                  <button className="btn btn-link btn-pointer" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className={"btn btn-outline-secondary btn-lg"} onClick={this.handleNextClick.bind(this)}>Next</button>
+                  <button className={"btn btn-outline-secondary btn-lg btn-pointer"} onClick={this.handleNextClick.bind(this)}>Next</button>
                 </li>
               </ul>
             </div>
@@ -121,7 +121,6 @@ ExternalSuggestionEnd.propTypes = {
   handleShowNextButton: PropTypes.func,
   challengeId: PropTypes.number,
   challengeDescription: PropTypes.string,
-  external_contents: PropTypes.array,
   submitChallengeResponse: PropTypes.func
 }
 

@@ -100,6 +100,8 @@ export const buildFormFields = (formJson, options, manualReduxFormChange) => {
               nestedFormJson[`${key}.${shortKey}`] = formJson[key][shortKey]
             })
             return buildFormFields(nestedFormJson, options, manualReduxFormChange)
+          } else {
+            return null
           }
         })
       }

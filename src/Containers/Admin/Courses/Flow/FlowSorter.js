@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import update from 'react/lib/update'
-import { DropTarget, DragDropContext } from 'react-dnd'
+import { DropTarget } from 'react-dnd'
 import Card from './Card'
 import ItemTypes from './ItemTypes'
 
@@ -27,7 +27,6 @@ class FlowSorter extends Component {
 
   moveCard(id, atIndex) {
     const { card, index } = this.findCard(id)
-    console.log("moveCard", card)
     this.props.handleCardUpdate(update(this.props, {
       cards: {
         $splice: [

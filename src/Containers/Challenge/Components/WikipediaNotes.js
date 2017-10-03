@@ -4,7 +4,6 @@ import { secondsToMinutes } from '../../../modules/time'
 import FontAwesome from 'react-fontawesome'
 import { track } from '../../../modules/analytics'
 import { markdownToHTML } from '../../../modules/strings'
-import { apiRequest } from '../../../modules/data'
 
 class WikipediaNotes extends Component {
   constructor() {
@@ -16,8 +15,6 @@ class WikipediaNotes extends Component {
     }
   }
   assert() {
-    console.log("assert")
-    console.log(this.state.input)
     if (this.state.input && this.state.input.length >= 10) {
       this.props.handleShowNextButton()
     }
@@ -26,15 +23,6 @@ class WikipediaNotes extends Component {
   handleKeyUp(e) {
     this.setState({input: e.target.value})
     this.assert()
-  }
-
-  // intercept next button click
-  handleNextClick() {
-    this.props.submitChallengeResponse({
-      analysis: "none",
-      text: this.state.input
-    })
-    this.props.handleNextClick()
   }
 
   handleShowHelp(e) {
@@ -63,7 +51,7 @@ class WikipediaNotes extends Component {
       this.props.submitChallengeResponse({
         analysis: "none",
         text: this.state.input
-      })
+      }, "complete")
     } else {
       this.setState({showHelp: true})
     }
@@ -74,7 +62,7 @@ class WikipediaNotes extends Component {
     let help
     help = (
       <li className="list-inline-item">
-        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+        <button className="btn btn-link btn-pointer" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
       </li>
     )
     let feedback
@@ -125,13 +113,13 @@ class WikipediaNotes extends Component {
                       </li>
                       {help}
                       <li className="list-inline-item">
-                        <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
+                        <button className="btn btn-link btn-pointer" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
                       </li>
                       <li className="list-inline-item">
-                        <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
+                        <button className="btn btn-link btn-pointer" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
                       </li>
                       <li className="list-inline-item">
-                        <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
+                        <button className={"btn btn-outline-secondary btn-lg btn-pointer" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
                       </li>
                     </ul>
                   </div>
@@ -142,7 +130,7 @@ class WikipediaNotes extends Component {
           <div className="col-12 col-sm-6">
             <br />
             <div className="">
-              <iframe id="wikipedia-iframe" className="wikipedia wikpedia-notes" src={process.env.REACT_APP_WIKIPEDIA_URL + content.embed_url + "?highlights=" + encodeURIComponent(JSON.stringify(content.highlights))} frameBorder="0" allowFullScreen></iframe>
+              <iframe id="wikipedia-iframe" title="wikipedia-iframe" className="wikipedia wikpedia-notes" src={process.env.REACT_APP_WIKIPEDIA_URL + content.embed_url + "?highlights=" + encodeURIComponent(JSON.stringify(content.highlights))} frameBorder="0" allowFullScreen></iframe>
             </div>
           </div>
         </div>

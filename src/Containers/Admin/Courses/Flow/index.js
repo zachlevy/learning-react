@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import CourseForm from '../CourseForm'
 import { apiRequest } from '../../../../modules/data'
 import FlowSorter from './FlowSorter'
 import { setCourse } from '../../../../modules/redux/course'
-import { defaultCourse } from '../../../../modules/defaults'
 import { buildFormErrors } from '../../../../modules/forms'
 import { push } from 'react-router-redux'
 
@@ -21,7 +19,6 @@ class Flow extends Component {
 
   // load the course flow and the challenges
   componentDidMount() {
-    console.log("Course Flow", this.props.match.params.courseId)
     // get course
     apiRequest(`/courses/${this.props.match.params.courseId}`, {}, (courseResponse, status) => {
       if (status === 200) {

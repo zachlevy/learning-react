@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
-import reactStringReplace from 'react-string-replace'
 import { track } from '../../../modules/analytics'
 import { markdownToHTML } from '../../../modules/strings'
 
@@ -18,14 +17,15 @@ class MultipleChoice extends Component {
     }
   }
   assert(event) {
-    console.log("assert")
     const foundFeedback = this.props.feedback.find((feedback) => {
       return feedback.text === this.state.input
     })
+    let status = "attempt"
     if (foundFeedback) {
       if (foundFeedback.correct) {
         this.setState({submitButtonText: "Correct", showSubmitButton: false})
         this.props.handleShowNextButton()
+        status = "complete"
       }
       if (foundFeedback.prompt) {
         this.setState({feedback: foundFeedback.prompt})
@@ -42,16 +42,14 @@ class MultipleChoice extends Component {
     this.props.submitChallengeResponse({
       analysis: "none",
       text: this.state.input
-    })
+    }, status)
   }
 
   handleOptionClick(option, e) {
-    console.log("handleOptionClick")
     this.setState({input: option, feedback: ""})
   }
 
   handleSubmitClick(e) {
-    console.log("handleSubmitClick")
     this.state.showSubmitButton && this.assert()
   }
 
@@ -84,7 +82,6 @@ class MultipleChoice extends Component {
   }
 
   handleSolutionButton(e) {
-    console.log("handleSolutionButton")
     this.setState({solution: this.props.solution})
   }
 
@@ -92,7 +89,7 @@ class MultipleChoice extends Component {
     let help
     help = (
       <li className="list-inline-item">
-        <button role="button" className="btn btn-link" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+        <button className="btn btn-link btn-pointer" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
       </li>
     )
     let feedback
@@ -108,7 +105,7 @@ class MultipleChoice extends Component {
       image = (
         <div className="row">
           <div className="col-12 col-lg-6 offset-lg-3 text-center">
-            <img src={this.props.image_url} className="img-fluid simple_q_and_a-question-image_url" />
+            <img src={this.props.image_url} className="img-fluid simple_q_and_a-question-image_url" alt="" />
           </div>
         </div>
       )
@@ -117,7 +114,7 @@ class MultipleChoice extends Component {
     if (this.props.solution) {
       solution = (
         <li className="list-inline-item">
-          <button role="button" className="btn btn-link" onClick={this.handleSolutionButton.bind(this)}><span>solution</span></button>
+          <button className="btn btn-link btn-pointer" onClick={this.handleSolutionButton.bind(this)}><span>solution</span></button>
         </li>
       )
     }
@@ -134,7 +131,7 @@ class MultipleChoice extends Component {
                   this.props.options.map((option, index) => {
                     return (
                       <div key={index} className="col-6 multiple-choice-option-wrapper">
-                        <button role="button" className={"btn btn-outline-secondary btn-mc btn-block multiple-choice-option" + (this.state.input === option ? " active" : "")} onClick={this.handleOptionClick.bind(this, option)}>{markdownToHTML(option)}</button>
+                        <button className={"btn btn-outline-secondary btn-mc btn-block multiple-choice-option btn-pointer" + (this.state.input === option ? " active" : "")} onClick={this.handleOptionClick.bind(this, option)}>{markdownToHTML(option)}</button>
                         <br />
                       </div>
                     )
@@ -148,7 +145,7 @@ class MultipleChoice extends Component {
               </div>
             </div>
             <br />
-            <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.state.showSubmitButton ? "" : " disabled")} onClick={this.state.showSubmitButton && this.handleSubmitClick.bind(this)}>{this.state.submitButtonText}</button>
+            <button className={"btn btn-outline-secondary btn-lg btn-pointer" + (this.state.showSubmitButton ? "" : " disabled")} onClick={this.state.showSubmitButton && this.handleSubmitClick.bind(this)}>{this.state.submitButtonText}</button>
             <br />
             <br />
           </div>
@@ -166,13 +163,13 @@ class MultipleChoice extends Component {
                 {solution}
                 {help}
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
+                  <button className="btn btn-link btn-pointer" onClick={this.props.handleBackButton.bind(this)}><span>back</span></button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className="btn btn-link" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
+                  <button className="btn btn-link btn-pointer" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button role="button" className={"btn btn-outline-secondary btn-lg" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
+                  <button className={"btn btn-outline-secondary btn-lg btn-pointer" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
                 </li>
               </ul>
             </div>

@@ -30,7 +30,7 @@ class ChallengeForm extends Component {
   }
 
   handleChallengeTypeChange(e) {
-    const selectedChallengeType = this.state.challengeTypes.find((challengeType) => {return challengeType.id == e.target.value})
+    const selectedChallengeType = this.state.challengeTypes.find((challengeType) => {return challengeType.id === +e.target.value})
     this.setState({selectedChallengeType: selectedChallengeType})
   }
 

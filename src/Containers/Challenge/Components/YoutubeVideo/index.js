@@ -164,7 +164,7 @@ class YoutubeVideo extends Component {
                 onPause={(e) => {track("Pause YouTube Video", {name: "YouTube Video", action: "Pause", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined}), data: e.data})}}
                 onEnd={this.handleOnEnd.bind(this)}
                 onError={(e) => {track("Error YouTube Video", {name: "YouTube Video", action: "Error", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined}), data: e.data})}}
-                onStateChange={(e) => {console.log("onStateChange")}}
+                onStateChange={(e) => {}}
                 onPlaybackRateChange={this.handleOnPlaybackRateChange.bind(this)}
                 onPlaybackQualityChange={(e) => {track("PlaybackQualityChange YouTube Video", {name: "YouTube Video", action: "PlaybackQualityChange", challengeId: this.props.challengeId, content: Object.assign({}, this.props, {captions: undefined}), data: e.data})}}
               />

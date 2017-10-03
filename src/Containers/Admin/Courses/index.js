@@ -52,7 +52,7 @@ class Courses extends Component {
                 {
                   this.state.courses.map((course, index) => {
                     return (
-                      <tr>
+                      <tr key={index}>
                         <td>{course.id}</td>
                         <td>{course.title}</td>
                         <td><button className="btn btn-primary btn-pointer btn-sm" onClick={this.handleEditCourseFlow.bind(this, course.id)}>Flow</button></td>

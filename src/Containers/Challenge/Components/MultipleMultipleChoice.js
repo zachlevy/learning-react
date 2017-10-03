@@ -71,17 +71,17 @@ class MultipleMultipleChoice extends Component {
       this.props.handleNextClick(this)
     } else {
       this.assert()
-      this.handleShowHelp()
+      this.toggleShowHelp()
     }
   }
-  handleShowHelp() {
-    track("Show Help", {
+  toggleShowHelp() {
+    track("Toggle Help", {
       name: "Help",
-      action: "Show",
+      action: "Toggle",
       challengeId: this.props.challengeId,
       content: this.props
     })
-    this.setState({showHelp: true})
+    this.setState({showHelp: !this.state.showHelp})
   }
 
   handleSolutionButton(e) {
@@ -92,7 +92,7 @@ class MultipleMultipleChoice extends Component {
     let help
     help = (
       <li className="list-inline-item">
-        <button className="btn btn-link btn-pointer" onClick={this.handleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
+        <button className="btn btn-link btn-pointer" onClick={this.toggleShowHelp.bind(this)}>help <FontAwesome name="question-circle" /></button>
       </li>
     )
     let feedback

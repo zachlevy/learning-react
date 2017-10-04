@@ -13,7 +13,7 @@ class Courses extends Component {
   }
 
   componentDidMount() {
-    apiRequest("/feedbacks", {}, (response, status) => {
+    apiRequest("/admin/feedbacks", {}, (response, status) => {
       if (status === 200) {
         this.setState({feedbacks: response})
       }

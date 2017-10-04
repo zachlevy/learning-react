@@ -19,7 +19,7 @@ class ChallengeForm extends Component {
   }
 
   componentDidMount() {
-    apiRequest(`/challenge_types`, {
+    apiRequest(`/admin/challenge_types`, {
     }, (response, status) => {
       this.setState({challengeTypes: response})
       // simulate changing challenge type for editing a challenge

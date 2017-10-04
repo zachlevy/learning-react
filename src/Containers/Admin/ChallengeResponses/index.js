@@ -13,7 +13,7 @@ class Courses extends Component {
   }
 
   componentDidMount() {
-    apiRequest("/challenge_responses?all=true", {}, (response, status) => {
+    apiRequest("/admin/challenge_responses", {}, (response, status) => {
       if (status === 200) {
         this.setState({responses: response})
       }

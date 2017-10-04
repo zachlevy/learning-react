@@ -71,7 +71,7 @@ class SimpleQAndA extends Component {
     // expecting this.props.submitToProfile to be an object like {"key": "demographic", "attributeName": "age"}
     if (this.props.update_profile && typeof this.props.update_profile === "object") {
 
-      apiRequest(`/profiles/${this.props.profile.id}`, {
+      apiRequest(`/profiles/me`, {
         method: "put",
         body: JSON.stringify(Object.assign(
           {},

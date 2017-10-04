@@ -45,7 +45,7 @@ class Courses extends Component {
                 {
                   this.state.responses.map((response, index) => {
                     return (
-                      <tr>
+                      <tr key={index}>
                         <td>{response.id}</td>
                         <td>{response.course_id}</td>
                         <td>{response.challenge_id}</td>

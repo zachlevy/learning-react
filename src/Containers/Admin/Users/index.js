@@ -43,7 +43,7 @@ class Courses extends Component {
                   this.state.users.map((user, index) => {
                     if (user.admin){
                       return (
-                        <tr>
+                        <tr key={index}>
                           <td>{user.id}</td>
                           <td>{user.email}</td>
                           <td>{user.created_at}</td>
@@ -52,7 +52,7 @@ class Courses extends Component {
                       )
                     }
                     else return (
-                      <tr>
+                      <tr key={index}>
                         <td>{user.id}</td>
                         <td>{user.email}</td>
                         <td>{user.created_at}</td>

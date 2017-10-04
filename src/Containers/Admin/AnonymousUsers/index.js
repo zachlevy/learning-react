@@ -40,7 +40,7 @@ class Courses extends Component {
                 {
                   this.state.users.map((user, index) => {
                     return (
-                      <tr>
+                      <tr key={index}>
                         <td>{user.id}</td>
                         <td>{user.created_at}</td>
                       </tr>

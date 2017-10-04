@@ -46,7 +46,7 @@ class Courses extends Component {
                     //simple signup feedback source
                     if(feedback.source === 'simple_signup' && feedback.body.user_id){
                       return (
-                        <tr>
+                        <tr key={index}>
                           <td>{feedback.id}</td>
                           <td>{feedback.body.input.email}</td>
                           <td>{feedback.body.user_id}</td>
@@ -57,7 +57,7 @@ class Courses extends Component {
                       )
                     } else if(feedback.source === 'simple_signup' && feedback.body.anonymous_user_id){
                       return (
-                        <tr>
+                        <tr key={index}>
                           <td>{feedback.id}</td>
                           <td>{feedback.body.input.email}</td>
                           <td>[a]{feedback.body.anonymous_user_id}</td>
@@ -68,7 +68,7 @@ class Courses extends Component {
                       )
                     } else if(feedback.source === 'feedback_form_modal' && feedback.body.user_id){
                       return (
-                        <tr>
+                        <tr key={index}>
                           <td>{feedback.id}</td>
                           <td>{feedback.body.text}</td>
                           <td>{feedback.body.user_id}</td>
@@ -79,7 +79,7 @@ class Courses extends Component {
                       )
                     } else if(feedback.source === 'feedback_form_modal' && feedback.body.anonymous_user_id) {
                       return (
-                        <tr>
+                        <tr key={index}>
                           <td>{feedback.id}</td>
                           <td>{feedback.body.text}</td>
                           <td>[a]{feedback.body.anonymous_user_id}</td>
@@ -90,7 +90,7 @@ class Courses extends Component {
                       )
                     } else if(feedback.source === 'feedback_form' && feedback.body.user_id) {
                       return (
-                        <tr>
+                        <tr key={index}>
                           <td>{feedback.id}</td>
                           <td>{feedback.body.text}</td>
                           <td>{feedback.body.user_id}</td>
@@ -101,7 +101,7 @@ class Courses extends Component {
                       )
                     } else if(feedback.source === 'feedback_form' && feedback.body.anonymous_user_id) {
                       return (
-                        <tr>
+                        <tr key={index}>
                           <td>{feedback.id}</td>
                           <td>{feedback.body.text}</td>
                           <td>[a]{feedback.body.anonymous_user_id}</td>
@@ -112,7 +112,7 @@ class Courses extends Component {
                       )
                     } else {
                       return(
-                        <tr>
+                        <tr key={index}>
                           <td>{feedback.id}</td>
                           <td>{feedback.body.text}</td>
                           <td>[a]{feedback.body.user_id}</td>

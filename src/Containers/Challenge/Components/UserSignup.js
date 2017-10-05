@@ -29,6 +29,7 @@ class UserSignup extends Component {
 
   handleNextClick() {
     this.props.submitChallengeResponse(null, "complete")
+    this.props.handleNextClick()
   }
 
   handleSubmit(userValues) {

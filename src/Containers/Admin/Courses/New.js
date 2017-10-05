@@ -18,7 +18,7 @@ class New extends Component {
 
   handleSubmit(courseValues) {
     // create course
-    apiRequest("/courses", {
+    apiRequest("/admin/courses", {
       method: 'post',
       body: JSON.stringify({
         course: courseValues

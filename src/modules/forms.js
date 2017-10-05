@@ -1,8 +1,26 @@
 import React from 'react'
 import { Field } from 'redux-form'
-import { parseApiErrors, snakeCaseToSpaceCase, capitalizeWords, camelCaseToSpaceCase } from './strings'
+import { snakeCaseToSpaceCase, capitalizeWords, camelCaseToSpaceCase } from './strings'
 import Uploader from '../Containers/Admin/Uploader'
 
+// converts rails api errors object to array strings
+export const parseApiErrors = (errorsObj) => {
+  let errors = []
+  if (errorsObj) {
+    // iterate over attributes
+    Object.keys(errorsObj).forEach((field, index) => {
+      // make sure it's an array
+      if (typeof errorsObj[field] === "object" && errorsObj[field].length > 0) {
+        errorsObj[field].forEach((error, index) => {
+          errors.push(`${field} ${error}`)
+        })
+      }
+    })
+  }
+  return errors
+}
+
+// creates html from form errors
 export const buildFormErrors = (apiErrors) => {
   const errors = parseApiErrors(apiErrors)
   if (!(errors.length > 0)) {

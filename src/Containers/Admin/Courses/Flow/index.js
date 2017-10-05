@@ -20,11 +20,11 @@ class Flow extends Component {
   // load the course flow and the challenges
   componentDidMount() {
     // get course
-    apiRequest(`/courses/${this.props.match.params.courseId}`, {}, (courseResponse, status) => {
+    apiRequest(`/admin/courses/${this.props.match.params.courseId}`, {}, (courseResponse, status) => {
       if (status === 200) {
         this.props.setCourse(courseResponse)
         // get challenges in course
-        apiRequest(`/challenges?ids=${courseResponse.flow.map((c) => c.id).join(",")}`, {}, (challengesResponse, status) => {
+        apiRequest(`/admin/challenges?ids=${courseResponse.flow.map((c) => c.id).join(",")}`, {}, (challengesResponse, status) => {
           if (status === 200) {
             // set flow to the full challenge objects in order
             const flow = this.props.course.flow.map((flowChallenge) => {
@@ -57,7 +57,7 @@ class Flow extends Component {
       }
     })
     // update only the flow for the course
-    apiRequest(`/courses/${this.props.match.params.courseId}`, {
+    apiRequest(`/admin/courses/${this.props.match.params.courseId}`, {
       method: 'put',
       body: JSON.stringify({
         course: {

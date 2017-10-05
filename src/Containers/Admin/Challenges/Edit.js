@@ -16,7 +16,7 @@ class Edit extends Component {
   }
 
   componentDidMount() {
-    apiRequest(`/challenges/${this.props.match.params.challengeId}`, {}, (response, status) => {
+    apiRequest(`/admin/challenges/${this.props.match.params.challengeId}`, {}, (response, status) => {
       if (status === 200) {
         this.setState({challenge: response})
       }
@@ -25,7 +25,7 @@ class Edit extends Component {
 
   handleSubmit(challengeValues) {
     // update challenge
-    apiRequest(`/challenges/${this.props.match.params.challengeId}`, {
+    apiRequest(`/admin/challenges/${this.props.match.params.challengeId}`, {
       method: 'put',
       body: JSON.stringify({
         challenge: Object.assign(challengeValues)

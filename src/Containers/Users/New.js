@@ -54,7 +54,7 @@ class New extends Component {
                 const combinedProfile = Object.assign({}, newProfile, oldProfile)
                 combinedProfile.details.previous_anonymous_user_id = oldProfile.anonymous_user_id
                 // update profile on server
-                apiRequest(`/profiles/${newProfile.id}`, {
+                apiRequest(`/profiles/me`, {
                   method: "put",
                   body: JSON.stringify({profile: combinedProfile}),
                 }, (updatedProfileResponse, updatedProfileStatus) => {

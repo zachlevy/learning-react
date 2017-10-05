@@ -18,7 +18,7 @@ class New extends Component {
   }
 
   componentDidMount() {
-    apiRequest(`/courses/${this.props.match.params.courseId}`, {}, (response, status) => {
+    apiRequest(`/admin/courses/${this.props.match.params.courseId}`, {}, (response, status) => {
       if (status === 200) {
         this.setState({course: response})
       }
@@ -26,7 +26,7 @@ class New extends Component {
   }
 
   handleSubmit(courseValues) {
-    apiRequest(`/courses/${this.props.match.params.courseId}`, {
+    apiRequest(`/admin/courses/${this.props.match.params.courseId}`, {
       method: 'put',
       body: JSON.stringify({
         course: courseValues

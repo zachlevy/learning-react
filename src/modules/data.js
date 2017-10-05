@@ -2,7 +2,6 @@ import { getStore } from '../store'
 import { SET_ANONYMOUS_USER, CLEAR_USER } from './redux/user'
 import { CLEAR_PROFILE } from './redux/profile'
 
-// converts rails api errors object to array strings
 // options is the same as a fetch
 // headers are deep merged
 export const apiRequest = (endpoint, options, callback) => {

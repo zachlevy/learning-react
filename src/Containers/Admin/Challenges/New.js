@@ -18,7 +18,7 @@ class New extends Component {
     // optional course id
     const courseId = new URLSearchParams(this.props.location.search).get('course_id')
     // create course
-    apiRequest("/challenges", {
+    apiRequest("/admin/challenges", {
       method: 'post',
       body: JSON.stringify({
         challenge: Object.assign(challengeValues, {course_id: courseId})
@@ -30,15 +30,15 @@ class New extends Component {
 
         // this following callback hell should be changed when we move course flow to a join table
         // get course
-        apiRequest(`courses/${courseId}`, {}, (courseResponse, courseStatus) => {
+        apiRequest(`/admin/courses/${courseId}`, {}, (courseResponse, courseStatus) => {
           if (courseStatus === 200) {
 
             // get challengeType
-            apiRequest(`/challenge_types/${challengeResponse.challenge_type_id}`, {
+            apiRequest(`/admin/challenge_types/${challengeResponse.challenge_type_id}`, {
             }, (challengeTypeResponse, challengeTypeStatus) => {
               if (challengeTypeStatus === 200) {
                 // update course
-                apiRequest(`/courses/${courseId}`, {
+                apiRequest(`/admin/courses/${courseId}`, {
                   method: 'put',
                   body: JSON.stringify({
                     course: {

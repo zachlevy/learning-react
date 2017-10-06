@@ -14,7 +14,8 @@ import { apiRequest } from '../../modules/data'
 // wrapper for a course
 // contains common methods to move the course form challenge to chalenge
 class Course extends Component {
-  componentDidMount() {
+
+  loadCourseAndFirstChallenge() {
     apiRequest(`/courses/${this.props.match.params.courseId}`, {}, (courseResponse) => {
       this.props.setCourse(courseResponse)
       apiRequest(`/challenge_responses?course_id=${courseResponse.id}`, {}, (challengeResponsesResponse, status) => {
@@ -27,6 +28,16 @@ class Course extends Component {
     })
     // scroll below navbar to give full screen effect
     document.getElementById("course-show").scrollIntoView()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.match.params.courseId != this.props.course.id) {
+      // load new course
+      this.loadCourseAndFirstChallenge()
+    }
+  }
+  componentDidMount() {
+    this.loadCourseAndFirstChallenge()
   }
 
   // submit challeng response

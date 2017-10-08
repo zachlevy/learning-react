@@ -130,6 +130,14 @@ iframe.wikipedia {
     right: 10px;
     height: 80vh;
   }
+  .timeline-text {
+    margin-right: 0.7em;
+    color: white;
+    opacity: 0.4;
+    &.active {
+      opacity: 1;
+    }
+  }
 
   .btn-link {
     color: black;

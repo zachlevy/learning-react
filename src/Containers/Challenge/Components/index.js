@@ -15,6 +15,7 @@ import SimpleText from './SimpleText'
 import Matching from './Matching'
 import UserSignup from './UserSignup'
 import ButtonsEnd from './ButtonsEnd'
+import Feedback from './Feedback'
 
 // add components to the components object
 export default function getChallengeComponent (name, props) {
@@ -34,6 +35,7 @@ export default function getChallengeComponent (name, props) {
     "multiple_multiple_choice": (<MultipleMultipleChoice {...props} />),
     "matching": (<Matching {...props} />),
     "user_signup": (<UserSignup {...props} />),
-    "buttons_end": (<ButtonsEnd {...props} />)
+    "buttons_end": (<ButtonsEnd {...props} />),
+    "feedback": (<Feedback {...props} />)
   }[name]
 }

@@ -24,7 +24,6 @@ class Feedback extends Component {
 
   handleSubmit(feedbackValues) {
     // create user
-    console.log("handleSubmit", "feedbackValues", feedbackValues)
     apiRequest("/feedbacks", {
       method: 'post',
       body: JSON.stringify({

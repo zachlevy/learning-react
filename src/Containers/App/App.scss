@@ -357,14 +357,8 @@ iframe.wikipedia {
   height: 100%;
 }
 
-// react star rating
-// https://github.com/cameronroe/react-star-rating
-fieldset, label { margin: 0; padding: 0; }
-body{ margin: 20px; }
-h1 { font-size: 1.5em; margin: 10px; }
-
 /****** Style Star Rating Widget *****/
-
+// https://codepen.io/jamesbarnett/pen/vlpkh
 .rating {
   border: none;
   float: left;
@@ -398,4 +392,4 @@ h1 { font-size: 1.5em; margin: 10px; }
 .rating > input:checked + label:hover, /* hover current star when changing rating */
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  }

@@ -131,7 +131,7 @@ iframe.wikipedia {
     height: 80vh;
   }
   .timeline-text {
-    margin-right: 0.7em;
+    margin-right: -1.5em;
     color: white;
     opacity: 0.4;
     &.active {
@@ -344,4 +344,15 @@ iframe.wikipedia {
   .nav-link {
     display: inline;
   }
+}
+.timeline-text-wrapper {
+  opacity: 0;
+  z-index: 0;
+  &:hover {
+    opacity: 1;
+  }
+}
+.timeline-column {
+  display: inline-block;
+  height: 100%;
 }

@@ -91,7 +91,6 @@ class App extends Component {
     }
     let routes
     // ensure there's an anonymous or logged in user
-    // ensure there's an anonymous or logged in user
       let adminRoutes
       if (this.props.user.anonymous_user_id || this.props.user.id) {
         if (this.props.user.admin === true) {
@@ -111,9 +110,6 @@ class App extends Component {
             {adminRoutes}
           </Switch>
       )
-    } else {
-      // this could be any api call, it ensures that there is a user or anonymous user from apiRequest
-      apiRequest("/users/me", {}, (response, status) => {})
     }
     return (
       <div>

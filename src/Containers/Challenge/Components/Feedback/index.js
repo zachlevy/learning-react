@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import FontAwesome from 'react-fontawesome'
-import { track } from '../../../modules/analytics'
-import { markdownToHTML } from '../../../modules/strings'
-import { apiRequest } from '../../../modules/data'
+import { track } from '../../../../modules/analytics'
+import { markdownToHTML } from '../../../../modules/strings'
+import { apiRequest } from '../../../../modules/data'
+import FeedbackForm from './FeedbackForm'
 
 class Feedback extends Component {
   constructor() {
@@ -21,12 +22,13 @@ class Feedback extends Component {
     this.props.handleNextClick()
   }
 
-  handleSubmit(userValues) {
+  handleSubmit(feedbackValues) {
     // create user
+    console.log("handleSubmit", "feedbackValues", feedbackValues)
     apiRequest("/feedbacks", {
       method: 'post',
       body: JSON.stringify({
-        feedback: {}
+        feedback: feedbackValues
       })
     }, (response, status) => {
     })
@@ -53,7 +55,8 @@ class Feedback extends Component {
       <div className="container">
         <div className="row">
           <div className="col-12">
-          <h1>Hi</h1>
+            <br />
+            <FeedbackForm onSubmit={this.handleSubmit.bind(this)} fields={this.props.fields} blacklistKeys={[]} />
           </div>
         </div>
         <div className="row">
@@ -87,6 +90,7 @@ class Feedback extends Component {
 
 Feedback.propTypes = {
   help: PropTypes.string,
+  fields: PropTypes.array,
 
   handleBackButton: PropTypes.func,
   handleNextClick: PropTypes.func,

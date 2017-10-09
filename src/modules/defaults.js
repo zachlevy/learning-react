@@ -268,6 +268,19 @@ export const defaultChallenge = (name) => {
       socialSharingCallToAction: "Share with your friends", // markdown
       socialSharingMessage: "PHY 131 Midterm 1 Test Prep",
       socialSharingUrl: "http://www.voralearning.com/collections/phy-131"
+    },
+    'feedback': {
+      fields: [
+        {
+          question: "How was the user experience?",
+          answerType: "stars",
+          name: "userExperience"
+        }, {
+          question: "What is your fav color?",
+          answerType: "text",
+          name: "color"
+        }
+      ]
     }
   }
   const body = templates[name] || {}

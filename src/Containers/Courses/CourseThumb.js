@@ -12,7 +12,17 @@ class CourseThumb extends Component {
     const course = this.props.course
     let link
     if (course.flow[0]) {
-      link = <Link className="btn btn-outline-secondary btn-lg" to={`/courses/${course.id}/challenges/${course.flow[0].id}`}>Start</Link>
+      let text
+      if (course.attempted) {
+        text = "Continue"
+      } else {
+        text = "Start"
+      }
+      link = <Link className="btn btn-outline-secondary btn-lg" to={`/courses/${course.id}/challenges/${course.flow[0].id}`}>{text}</Link>
+    }
+    let review
+    if (course.attempted) {
+      review = <Link className="btn btn-outline-secondary btn-lg" to={`/courses/${course.id}/attempts`}>Review</Link>
     }
     return (
       <div className={this.props.className}>
@@ -30,7 +40,7 @@ class CourseThumb extends Component {
                 }
                 </ul>
                 <br />
-                {link}
+                {link} {review}
                 <br />
                 &nbsp;
               </div>

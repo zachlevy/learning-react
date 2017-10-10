@@ -272,15 +272,15 @@ export const defaultChallenge = (name) => {
     'feedback': {
       fields: [
         {
-          question: "How was the user experience?",
+          question: "How was the user experience?", // markdown
           inputType: "stars",
           name: "userExperience"
         }, {
-          question: "What is your fav color?",
+          question: "What is your fav color?", // markdown
           inputType: "input",
           name: "color"
         }, {
-          question: "Tell us your life story",
+          question: "Tell us your life story", // markdown
           inputType: "textarea",
           name: "story"
         }

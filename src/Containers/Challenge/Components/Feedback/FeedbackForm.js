@@ -27,7 +27,7 @@ class FeedbackForm extends Component {
           <div className="form-group">
             {
               this.props.fields.map((field, index) => {
-                switch (field.answerType) {
+                switch (field.inputType) {
                   case "input":
                     return (
                       <div key={index}>

@@ -273,15 +273,15 @@ export const defaultChallenge = (name) => {
       fields: [
         {
           question: "How was the user experience?",
-          answerType: "stars",
+          inputType: "stars",
           name: "userExperience"
         }, {
           question: "What is your fav color?",
-          answerType: "input",
+          inputType: "input",
           name: "color"
         }, {
           question: "Tell us your life story",
-          answerType: "textarea",
+          inputType: "textarea",
           name: "story"
         }
       ]

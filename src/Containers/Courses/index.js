@@ -9,8 +9,17 @@ import { apiRequest } from '../../modules/data'
 // courses page
 class Courses extends Component {
   componentDidMount() {
-    apiRequest(`/courses`, {}, (response) => {
-      this.props.setCourses(response)
+    apiRequest("/courses", {}, (coursesResponse) => {
+      apiRequest("/courses/attempts", {}, (attemptsResponse) => {
+        const mergedCoursesAndAttempts = coursesResponse.map((course) => {
+          if (attemptsResponse.includes(course.id)) {
+            return Object.assign(course, {attempted: true})
+          } else {
+            return course
+          }
+        })
+        this.props.setCourses(mergedCoursesAndAttempts)
+      })
     })
   }
 

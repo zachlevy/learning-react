@@ -30,7 +30,7 @@ class Attempts extends Component {
     if (this.props.course) {
       course = (
         <div>
-          <h4>Attempt at {this.props.course.title}</h4>
+          <h4>Attempts for {this.props.course.title}</h4>
           <p>{this.props.course.description}</p>
         </div>
       )

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { reduxForm } from 'redux-form'
 import { buildFormErrors } from '../../../../modules/forms'
-import { Field, Input, FieldArray } from 'redux-form'
+import { Field, FieldArray } from 'redux-form'
+import { markdownToHTML } from '../../../../modules/strings'
 
 class FeedbackForm extends Component {
 
@@ -40,14 +41,14 @@ class FeedbackForm extends Component {
                   case "input":
                     return (
                       <div key={index}>
-                        <label>{field.question}</label>
+                        <label>{markdownToHTML(field.question)}</label>
                         <Field className="form-control border-bottom" name={field.name} component="input" type="text" />
                       </div>
                     )
                   case "stars":
                     return (
                       <div key={index}>
-                        <label>{field.question}</label>
+                        <label>{markdownToHTML(field.question)}</label>
                         <br />
                         <FieldArray name={field.name} type="radio" component={this.renderStars} />
                         <br />
@@ -57,7 +58,7 @@ class FeedbackForm extends Component {
                   case "textarea":
                     return (
                       <div key={index}>
-                        <label>{field.question}</label>
+                        <label>{markdownToHTML(field.question)}</label>
                         <Field className="form-control border-bottom" name={field.name} component="textarea" type="text" rows="3" />
                       </div>
                     )

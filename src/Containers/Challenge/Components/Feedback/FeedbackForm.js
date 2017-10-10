@@ -7,14 +7,23 @@ import { Field, Input, FieldArray } from 'redux-form'
 class FeedbackForm extends Component {
 
   renderStars({fields}) {
+    const starsCount = 10
+    const stars = [...Array(starsCount).keys()] // es6 way of doing n times
     return (
-      <fieldset className="rating">
-        <Field type="radio" id="star5" name={fields.name} value="5" component="input" /><label className="full" htmlFor="star5" title="Awesome - 5 stars"></label>
-        <Field type="radio" id="star4" name={fields.name} value="4" component="input" /><label className="full" htmlFor="star4" title="Pretty good - 4 stars"></label>
-        <Field type="radio" id="star3" name={fields.name} value="3" component="input" /><label className="full" htmlFor="star3" title="Meh - 3 stars"></label>
-        <Field type="radio" id="star2" name={fields.name} value="2" component="input" /><label className="full" htmlFor="star2" title="Kinda bad - 2 stars"></label>
-        <Field type="radio" id="star1" name={fields.name} value="1" component="input" /><label className="full" htmlFor="star1" title="Sucks big time - 1 star"></label>
-      </fieldset>
+      <div className="stars-wrapper">
+        <div className="start-scale">1</div>
+        <div className="rating">
+          {
+           stars.map((e, i) => {
+             return [
+               <Field type="radio" id={`star${i}`} name={fields.name} value={`${stars.length - i}`} component="input" />,
+               <label className="full" htmlFor={`star${i}`} title={`${stars.length - i} out of ${stars.length}`}></label>
+             ]
+           })
+          }
+        </div>
+        <div className="start-scale">{stars.length}</div>
+      </div>
     )
   }
 
@@ -40,7 +49,7 @@ class FeedbackForm extends Component {
                       <div key={index}>
                         <label>{field.question}</label>
                         <br />
-                        <FieldArray name={field.name} type="radio" component={this.renderStars.bind(field.name)} />
+                        <FieldArray name={field.name} type="radio" component={this.renderStars} />
                         <br />
                         <br />
                       </div>

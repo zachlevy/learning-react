@@ -370,7 +370,7 @@ iframe.wikipedia {
   font-size: 1.25em;
   font-family: FontAwesome;
   display: inline-block;
-  content: "\f005";
+  content: "\f111";
 }
 
 .rating > .half:before {
@@ -393,3 +393,13 @@ iframe.wikipedia {
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
 .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+
+.stars-wrapper {
+  .start-scale {
+    float: left;
+    margin-top: 0.5em;
+  }
+  .end-scale {
+    margin-top: 0.5em;
+  }
+}

@@ -11,6 +11,7 @@ export const getIcon = (machineName) => {
     multiple_choice: "windows",
     multiple_multiple_choice: "windows",
     open_ended_q: "question-circle",
-    matching: "bars"
+    matching: "bars",
+    feedback: "circle"
   }[machineName] || "circle"
 }

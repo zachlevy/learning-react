@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { reduxForm } from 'redux-form'
 import { buildFormErrors } from '../../../../modules/forms'
 import { Field, Input, FieldArray } from 'redux-form'
@@ -31,7 +32,7 @@ class FeedbackForm extends Component {
                     return (
                       <div key={index}>
                         <label>{field.question}</label>
-                        <Field className="form-control" name={field.name} component="input" type="text" />
+                        <Field className="form-control border-bottom" name={field.name} component="input" type="text" />
                       </div>
                     )
                   case "stars":
@@ -48,7 +49,7 @@ class FeedbackForm extends Component {
                     return (
                       <div key={index}>
                         <label>{field.question}</label>
-                        <Field className="form-control" name={field.name} component="textarea" type="text" rows="3" />
+                        <Field className="form-control border-bottom" name={field.name} component="textarea" type="text" rows="3" />
                       </div>
                     )
                   default:
@@ -58,7 +59,7 @@ class FeedbackForm extends Component {
               })
             }
           </div>
-          <button className="btn btn-primary btn-block" type="submit">Submit</button>
+          <button className={this.props.submitButtonClass} type="submit">{this.props.submitButtonText}</button>
         </form>
       </div>
     )
@@ -69,5 +70,9 @@ FeedbackForm = reduxForm({
   form: 'feedback'
 })(FeedbackForm)
 
+FeedbackForm.propTypes = {
+  submitButtonText: PropTypes.string,
+  submitButtonClass: PropTypes.string
+}
 
 export default FeedbackForm

@@ -55,7 +55,13 @@ class Feedback extends Component {
         <div className="row">
           <div className="col-12">
             <br />
-            <FeedbackForm onSubmit={this.handleSubmit.bind(this)} fields={this.props.fields} blacklistKeys={[]} />
+            <FeedbackForm
+              onSubmit={this.handleSubmit.bind(this)}
+              errors={this.state.errors}
+              fields={this.props.fields}
+              submitButtonClass="btn btn-outline-secondary btn-lg"
+              submitButtonText="Submit"
+            />
           </div>
         </div>
         <div className="row">

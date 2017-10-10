@@ -16,8 +16,7 @@ export const track = (name, properties) => {
     body: JSON.stringify({
       event: {
         relations: {
-          challenge_id: properties.challengeId,
-          user_id: 1
+          challenge_id: properties.challengeId
         },
         context: Object.assign(properties, {name: name})
       }

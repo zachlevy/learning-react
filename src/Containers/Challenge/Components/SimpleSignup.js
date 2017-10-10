@@ -32,8 +32,7 @@ class SimpleSignup extends Component {
             input: {
               email: inputEmail
             },
-            challenge_id: this.props.challengeId,
-            user_id: 1
+            challenge_id: this.props.challengeId
           },
           source: "simple_signup"
         }

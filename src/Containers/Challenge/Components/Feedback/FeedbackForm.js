@@ -27,7 +27,7 @@ class FeedbackForm extends Component {
             {
               this.props.fields.map((field, index) => {
                 switch (field.answerType) {
-                  case "text":
+                  case "input":
                     return (
                       <div key={index}>
                         <label>{field.question}</label>
@@ -38,7 +38,17 @@ class FeedbackForm extends Component {
                     return (
                       <div key={index}>
                         <label>{field.question}</label>
+                        <br />
                         <FieldArray name={field.name} type="radio" component={this.renderStars.bind(field.name)} />
+                        <br />
+                        <br />
+                      </div>
+                    )
+                  case "textarea":
+                    return (
+                      <div key={index}>
+                        <label>{field.question}</label>
+                        <Field className="form-control" name={field.name} component="textarea" type="text" rows="3" />
                       </div>
                     )
                   default:

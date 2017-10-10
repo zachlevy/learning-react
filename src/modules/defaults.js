@@ -277,8 +277,12 @@ export const defaultChallenge = (name) => {
           name: "userExperience"
         }, {
           question: "What is your fav color?",
-          answerType: "text",
+          answerType: "input",
           name: "color"
+        }, {
+          question: "Tell us your life story",
+          answerType: "textarea",
+          name: "story"
         }
       ]
     }

@@ -7,6 +7,7 @@ import { track } from '../../../../modules/analytics'
 import { markdownToHTML } from '../../../../modules/strings'
 import { apiRequest } from '../../../../modules/data'
 import FeedbackForm from './FeedbackForm'
+import { reset } from 'redux-form'
 
 class Feedback extends Component {
   constructor() {
@@ -18,8 +19,10 @@ class Feedback extends Component {
   }
 
   handleNextClick() {
-    this.props.submitChallengeResponse(null, "complete")
-    this.props.handleNextClick()
+    if (this.props.showNextButton) {
+      this.props.submitChallengeResponse(null, "complete")
+      this.props.handleNextClick()
+    }
   }
 
   handleSubmit(feedbackValues) {
@@ -30,6 +33,13 @@ class Feedback extends Component {
         feedback: feedbackValues
       })
     }, (response, status) => {
+      if (status === 201) {
+        this.setState({errors: {success: ["Thanks for the feedback!"]}})
+        this.props.clearFeedbackForm()
+        this.props.handleShowNextButton()
+      } else {
+        this.setState({errors: response})
+      }
     })
   }
 
@@ -82,7 +92,7 @@ class Feedback extends Component {
                   <button className="btn btn-link btn-pointer" onClick={this.props.handleSkipClick.bind(this, this.props.challengeId, this.state.showHelp)}>skip</button>
                 </li>
                 <li className="list-inline-item">
-                  <button className="btn btn-outline-secondary btn-lg btn-pointer" onClick={this.handleNextClick.bind(this)}>Next</button>
+                  <button className={"btn btn-outline-secondary btn-lg btn-pointer" + (this.props.showNextButton ? "" : " disabled")} onClick={this.handleNextClick.bind(this)}>Next</button>
                 </li>
               </ul>
             </div>
@@ -111,6 +121,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
+  clearFeedbackForm: () => reset('feedback')
 }, dispatch)
 
 

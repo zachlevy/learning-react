@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
+    "change-case": "^3.0.1",
     "katex": "^0.8.3",
     "markdown-it": "^8.4.0",
     "node-sass-chokidar": "0.0.3",

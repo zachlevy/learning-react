@@ -4,6 +4,7 @@ import { reduxForm } from 'redux-form'
 import { buildFormErrors } from '../../../../modules/forms'
 import { Field, FieldArray } from 'redux-form'
 import { markdownToHTML } from '../../../../modules/strings'
+import changeCase from 'change-case'
 
 class FeedbackForm extends Component {
 
@@ -17,8 +18,8 @@ class FeedbackForm extends Component {
           {
            stars.map((e, i) => {
              return [
-               <Field type="radio" id={`star${i}`} name={fields.name} value={`${stars.length - i}`} component="input" />,
-               <label className="full" htmlFor={`star${i}`} title={`${stars.length - i} out of ${stars.length}`}></label>
+               <Field type="radio" id={`star-${changeCase.snakeCase(fields.name)}-${i}`} name={fields.name} value={`${stars.length - i}`} component="input" />,
+               <label className="full" htmlFor={`star-${changeCase.snakeCase(fields.name)}-${i}`} title={`${stars.length - i} out of ${stars.length}`}></label>
              ]
            })
           }

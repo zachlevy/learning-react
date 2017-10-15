@@ -30,7 +30,10 @@ class Feedback extends Component {
     apiRequest("/feedbacks", {
       method: 'post',
       body: JSON.stringify({
-        feedback: feedbackValues
+        feedback: {
+          source: "feedback_challenge",
+          body: Object.assign({context: this.props, challenge_id: this.props.challengeId}, feedbackValues)
+        }
       })
     }, (response, status) => {
       if (status === 201) {

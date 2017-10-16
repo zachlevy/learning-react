@@ -11,8 +11,7 @@ class FeedbackModal extends Component {
   constructor() {
     super()
     this.state = {
-      alert: "",
-      text: ""
+      alert: ""
     }
   }
 
@@ -27,12 +26,14 @@ class FeedbackModal extends Component {
       action: "Submit",
       data: this.state
     })
+    let fields = this.state
+    delete fields.alert
     apiRequest("/feedbacks", {
       method: 'post',
       body: JSON.stringify({
         feedback: {
           body: {
-            text: this.state.text,
+            fields: fields,
             context: this.props.feedback
           },
           source: "feedback_form_modal"
@@ -58,15 +59,21 @@ class FeedbackModal extends Component {
     return (
       <div>
         <Modal isOpen={this.props.feedback.modal} toggle={this.toggle.bind(this)} className={this.props.className}>
-          <ModalHeader toggle={this.toggle.bind(this)}>Disagree?</ModalHeader>
+          <ModalHeader toggle={this.toggle.bind(this)}>Got Feedback?</ModalHeader>
           <ModalBody>
             <p>We love feedback. Our goal is to make Vora the smartest way to learn. Any suggestions for how to do this better are very welcome.</p>
             {alert}
             <Form>
-              <FormGroup>
-                <Label for="message">What makes you disagree?</Label>
-                <Input onKeyUp={this.handleKeyUp.bind(this, "text")} type="textarea" name="message" id="message" rows="5" />
-              </FormGroup>
+              {
+                this.props.feedback.messaging.map((input, index) => {
+                  return (
+                    <FormGroup key={index}>
+                      <Label for="message">{input.label}</Label>
+                      <Input onKeyUp={this.handleKeyUp.bind(this, input.name)} type={input.inputType} name={input.name} id={input.name} rows="5" />
+                    </FormGroup>
+                  )
+                })
+              }
             </Form>
           </ModalBody>
           <ModalFooter>

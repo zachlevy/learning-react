@@ -24,7 +24,7 @@ import { apiRequest, logout } from '../../modules/data'
 import Attempts from '../Courses/Attempts'
 import Collection from '../Collections/show'
 import { setProfile, getAndSetProfileFromApi } from '../../modules/redux/profile'
-import { setFeedbackModal, setFeedbackContext } from '../../modules/redux/feedback'
+import { setFeedbackModal, setFeedbackContext, setFeedbackMessaging } from '../../modules/redux/feedback'
 
 class App extends Component {
   constructor() {
@@ -49,6 +49,25 @@ class App extends Component {
   handleFeedbackClick(e) {
     this.props.setFeedbackModal(true)
     this.props.setFeedbackContext(this.props)
+    this.props.setFeedbackMessaging([
+      {
+        label: "Message",
+        name: "message",
+        inputType: "textarea"
+      }, {
+        label: "Email",
+        name: "email",
+        inputType: "input"
+      }, {
+        label: "Name",
+        name: "name",
+        inputType: "input"
+      }, {
+        label: "Would you like us to respond?",
+        name: "respond",
+        inputType: "input"
+      }
+    ])
   }
 
   handleLogout() {
@@ -164,7 +183,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   setProfile,
   getAndSetProfileFromApi,
   setFeedbackModal,
-  setFeedbackContext
+  setFeedbackContext,
+  setFeedbackMessaging
 }, dispatch)
 
 export default DragDropContext(HTML5Backend)(withRouter(connect(

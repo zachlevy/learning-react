@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import FontAwesome from 'react-fontawesome'
 import { track } from '../../../modules/analytics'
-import { setFeedbackModal, setFeedbackContext } from '../../../modules/redux/feedback'
+import { setFeedbackModal, setFeedbackContext, setFeedbackMessaging } from '../../../modules/redux/feedback'
 import { markdownToHTML } from '../../../modules/strings'
 import { apiRequest } from '../../../modules/data'
 import { setProfile } from '../../../modules/redux/profile'
@@ -129,6 +129,13 @@ class SimpleQAndA extends Component {
   handleDisagreeOnClick(e) {
     this.props.setFeedbackModal(true)
     this.props.setFeedbackContext(this.props)
+    this.props.setFeedbackMessaging([
+      {
+        label: "What makes you disagree?",
+        name: "message",
+        inputType: "textarea"
+      }
+    ])
   }
 
   handleSolutionButton(e) {
@@ -253,7 +260,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   setFeedbackModal,
   setFeedbackContext,
-  setProfile
+  setProfile,
+  setFeedbackMessaging
 }, dispatch)
 
 export default connect(

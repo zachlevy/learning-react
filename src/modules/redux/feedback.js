@@ -2,9 +2,11 @@ export const SET_FEEDBACK = 'feedback/SET_FEEDBACK'
 export const SET_FEEDBACK_CONTEXT = 'feedback/SET_FEEDBACK_CONTEXT'
 export const CLEAR_FEEDBACK = 'feedback/CLEAR_FEEDBACK'
 export const SET_FEEDBACK_MODAL = 'feedback/SET_FEEDBACK_MODAL'
+export const SET_FEEDBACK_MESSAGING = 'feedback/SET_FEEDBACK_MESSAGING'
 
 const initialState = {
-  modal: false
+  modal: false,
+  messaging: []
 }
 
 export default (state = initialState, action) => {
@@ -15,6 +17,9 @@ export default (state = initialState, action) => {
 
     case SET_FEEDBACK_MODAL:
       return Object.assign({}, state, {modal: action.newFeedbackModal})
+
+    case SET_FEEDBACK_MESSAGING:
+      return Object.assign({}, state, {messaging: action.newFeedbackMessaging})
 
     case SET_FEEDBACK:
       return action.newFeedback
@@ -32,6 +37,15 @@ export const setFeedbackContext = (newFeedbackContext) => {
     dispatch({
       type: SET_FEEDBACK_CONTEXT,
       newFeedbackContext
+    })
+  }
+}
+
+export const setFeedbackMessaging = (newFeedbackMessaging) => {
+  return dispatch => {
+    dispatch({
+      type: SET_FEEDBACK_MESSAGING,
+      newFeedbackMessaging
     })
   }
 }

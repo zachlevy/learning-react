@@ -131,7 +131,7 @@ class SimpleQAndA extends Component {
     this.props.setFeedbackContext(this.props)
     this.props.setFeedbackMessaging([
       {
-        label: "What makes you disagree?",
+        question: "What makes you disagree?",
         name: "message",
         inputType: "textarea"
       }

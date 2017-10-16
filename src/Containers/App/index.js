@@ -24,6 +24,7 @@ import { apiRequest, logout } from '../../modules/data'
 import Attempts from '../Courses/Attempts'
 import Collection from '../Collections/show'
 import { setProfile, getAndSetProfileFromApi } from '../../modules/redux/profile'
+import { setFeedbackModal, setFeedbackContext } from '../../modules/redux/feedback'
 
 class App extends Component {
   constructor() {
@@ -43,6 +44,11 @@ class App extends Component {
       text: e.target.innerHTML,
       eventLabel: e.target.innerHTML
     })
+  }
+
+  handleFeedbackClick(e) {
+    this.props.setFeedbackModal(true)
+    this.props.setFeedbackContext(this.props)
   }
 
   handleLogout() {
@@ -130,8 +136,8 @@ class App extends Component {
                   <NavItem key="mini-courses">
                     <NavLink tag={Link} to="/courses" onClick={this.handleCallToActionClick.bind(this)}>Mini Courses</NavLink>
                   </NavItem>
-                  <NavItem key="feedback">
-                    <NavLink tag={Link} to="/feedback" onClick={this.handleCallToActionClick.bind(this)}>Feedback</NavLink>
+                  <NavItem key="logout">
+                    <a className="nav-link btn-pointer" onClick={this.handleFeedbackClick.bind(this)}>Feedback</a>
                   </NavItem>
                   {adminNavs}
                   {userNavs}
@@ -156,7 +162,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePage: (url) => push(url),
   setProfile,
-  getAndSetProfileFromApi
+  getAndSetProfileFromApi,
+  setFeedbackModal,
+  setFeedbackContext
 }, dispatch)
 
 export default DragDropContext(HTML5Backend)(withRouter(connect(

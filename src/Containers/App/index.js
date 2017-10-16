@@ -51,21 +51,21 @@ class App extends Component {
     this.props.setFeedbackContext(this.props)
     this.props.setFeedbackMessaging([
       {
-        label: "Message",
+        question: "Message",
         name: "message",
         inputType: "textarea"
       }, {
-        label: "Email",
+        question: "Email",
         name: "email",
         inputType: "input"
       }, {
-        label: "Name",
+        question: "Name",
         name: "name",
         inputType: "input"
       }, {
-        label: "Would you like us to respond?",
+        question: "Would you like us to respond?",
         name: "respond",
-        inputType: "input"
+        inputType: "checkbox"
       }
     ])
   }

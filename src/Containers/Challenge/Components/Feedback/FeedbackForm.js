@@ -63,6 +63,20 @@ class FeedbackForm extends Component {
                         <Field className="form-control border-bottom" name={field.name} component="textarea" type="text" rows="3" />
                       </div>
                     )
+                  case "checkbox":
+                    return (
+                      <div key={index}>
+                        <label htmlFor={field.name}>{field.question}</label>
+                        <div>
+                          <Field
+                            name={field.name}
+                            id={field.name}
+                            component="input"
+                            type="checkbox"
+                          />
+                        </div>
+                      </div>
+                    )
                   default:
                     return null
                 }

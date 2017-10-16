@@ -66,6 +66,7 @@ class FeedbackForm extends Component {
                   case "checkbox":
                     return (
                       <div key={index}>
+                        <br />
                         <label htmlFor={field.name}>{markdownToHTML(field.question)}</label>
                         <div>
                           <Field

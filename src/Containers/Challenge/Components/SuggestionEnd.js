@@ -15,7 +15,7 @@ class SuggestionEnd extends Component {
     }
   }
   componentDidMount() {
-    apiRequest(`${process.env.REACT_APP_API_URL}/courses?ids=${this.props.courses.join(",")}`, {}, (response) => {
+    apiRequest(`/courses?ids=${this.props.courses.join(",")}`, {}, (response) => {
       this.setState({courses: response})
     })
   }

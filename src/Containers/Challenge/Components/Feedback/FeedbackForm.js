@@ -42,14 +42,14 @@ class FeedbackForm extends Component {
                   case "input":
                     return (
                       <div key={index}>
-                        <label>{markdownToHTML(field.question)}</label>
+                        {markdownToHTML(field.question)}
                         <Field className="form-control border-bottom" name={field.name} component="input" type="text" />
                       </div>
                     )
                   case "stars":
                     return (
                       <div key={index}>
-                        <label>{markdownToHTML(field.question)}</label>
+                        {markdownToHTML(field.question)}
                         <br />
                         <FieldArray name={field.name} type="radio" component={this.renderStars} />
                         <br />
@@ -59,8 +59,23 @@ class FeedbackForm extends Component {
                   case "textarea":
                     return (
                       <div key={index}>
-                        <label>{markdownToHTML(field.question)}</label>
+                        {markdownToHTML(field.question)}
                         <Field className="form-control border-bottom" name={field.name} component="textarea" type="text" rows="3" />
+                      </div>
+                    )
+                  case "checkbox":
+                    return (
+                      <div key={index}>
+                        <br />
+                        <label htmlFor={field.name}>{markdownToHTML(field.question)}</label>
+                        <div>
+                          <Field
+                            name={field.name}
+                            id={field.name}
+                            component="input"
+                            type="checkbox"
+                          />
+                        </div>
                       </div>
                     )
                   default:

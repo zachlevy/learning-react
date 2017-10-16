@@ -6,13 +6,15 @@ import { Form, FormGroup, Label, Input, Alert, Modal, ModalHeader, ModalBody, Mo
 import { track } from '../../modules/analytics'
 import { setFeedback, clearFeedback, setFeedbackModal } from '../../modules/redux/feedback'
 import { apiRequest } from '../../modules/data'
+import { buildFormErrors } from '../../modules/forms'
+import { reset } from 'redux-form'
+import FeedbackForm from '../Challenge/Components/Feedback/FeedbackForm'
 
 class FeedbackModal extends Component {
   constructor() {
     super()
     this.state = {
-      alert: "",
-      text: ""
+      errors: []
     }
   }
 
@@ -20,59 +22,43 @@ class FeedbackModal extends Component {
     this.props.setFeedbackModal(!this.props.feedback.modal)
   }
 
-  handleFormSubmit(e) {
-    e.preventDefault()
-    track("Submit Feedback", {
-      name: "Feedback",
-      action: "Submit",
-      data: this.state
-    })
+  handleSubmit(feedbackValues) {
+    // create user
     apiRequest("/feedbacks", {
       method: 'post',
       body: JSON.stringify({
         feedback: {
-          body: {
-            text: this.state.text,
-            context: this.props.feedback
-          },
-          source: "feedback_form_modal"
+          source: "feedback_modal",
+          body: Object.assign({context: this.props.feedback.context}, feedbackValues)
         }
       })
-    }, (response) => {
-      this.setState({alert: "Thanks for your feedback"})
+    }, (response, status) => {
+      if (status === 201) {
+        this.setState({errors: {success: ["Thanks for the feedback!"]}})
+        this.props.clearFeedbackForm()
+      } else {
+        this.setState({errors: response})
+      }
     })
-  }
-  handleKeyUp(field, e) {
-    if(e.target.checked) {
-      this.setState({[field]: e.target.checked})
-    } else {
-      this.setState({[field]: e.target.value})
-    }
   }
 
   render(){
-    let alert
-    if (this.state.alert) {
-      alert = <Alert color="success">{this.state.alert}</Alert>
-    }
+    const errors = buildFormErrors(this.props.errors)
     return (
       <div>
         <Modal isOpen={this.props.feedback.modal} toggle={this.toggle.bind(this)} className={this.props.className}>
-          <ModalHeader toggle={this.toggle.bind(this)}>Disagree?</ModalHeader>
+          <ModalHeader toggle={this.toggle.bind(this)}>Got Feedback?</ModalHeader>
           <ModalBody>
             <p>We love feedback. Our goal is to make Vora the smartest way to learn. Any suggestions for how to do this better are very welcome.</p>
-            {alert}
-            <Form>
-              <FormGroup>
-                <Label for="message">What makes you disagree?</Label>
-                <Input onKeyUp={this.handleKeyUp.bind(this, "text")} type="textarea" name="message" id="message" rows="5" />
-              </FormGroup>
-            </Form>
+            {errors}
+            <FeedbackForm
+              onSubmit={this.handleSubmit.bind(this)}
+              errors={this.state.errors}
+              fields={this.props.feedback.messaging}
+              submitButtonClass="btn btn-primary btn-lg"
+              submitButtonText="Submit"
+            />
           </ModalBody>
-          <ModalFooter>
-            <button className="btn btn-primary btn-pointer" onClick={this.handleFormSubmit.bind(this)}>Submit</button>
-            <button className="btn btn-secondary btn-pointer" onClick={this.toggle.bind(this)}>Cancel</button>
-          </ModalFooter>
         </Modal>
       </div>
     )
@@ -80,8 +66,6 @@ class FeedbackModal extends Component {
 }
 
 FeedbackModal.propTypes = {
-  callToAction: PropTypes.string,
-  context: PropTypes.object
 }
 
 const mapStateToProps = state => ({
@@ -91,7 +75,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   setFeedback,
   clearFeedback,
-  setFeedbackModal
+  setFeedbackModal,
+  clearFeedbackForm: () => reset('feedback')
 }, dispatch)
 
 export default connect(

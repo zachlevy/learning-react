@@ -96,7 +96,7 @@ Patterns are made manually in photoshop, possible inspiration from [subtlepatter
 ## Wikipedia Proxy
 The wikipedia proxy is set with the environment variable `REACT_APP_WIKIPEDIA_URL`. It is a proxy layer between the user and the Wikipedia embeds so that we can insert some javascript into the page to manipulate and track the user's interactions.
 
-`public/wikipedia.css` and `public/wikipedia.js` are the files inserted in the Wikipedia pages.
+`public/wikipedia.css` and `public/wikipedia.js` are the files inserted in the Wikipedia pages. See [Wikipedia Proxy](https://github.com/zachlevy/learning-wikipedia-reverse-proxy).
 
 ## Create React App
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).

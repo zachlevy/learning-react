@@ -1,5 +1,5 @@
 # Learning Platform React Front End
-Used for interacting with the api app.
+Used for interacting with the [learning-api](https://github.com/zachlevy/learning-api) api app
 
 ## Getting Started (Development)
 Untested** If you follow these, update this.
